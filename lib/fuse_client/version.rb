@@ -11,5 +11,5 @@ OpenAPI Generator version: 6.2.1
 =end
 
 module FuseClient
-  VERSION = '0.3.3'
+  VERSION = '0.3.4'
 end
