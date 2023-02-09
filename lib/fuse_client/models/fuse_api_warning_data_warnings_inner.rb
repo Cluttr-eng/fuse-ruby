@@ -14,17 +14,47 @@ require 'date'
 require 'time'
 
 module FuseClient
-  class CreateSessionRequest
-    attr_accessor :supported_financial_institution_aggregators
+  class FuseApiWarningDataWarningsInner
+    attr_accessor :title
 
-    # List of products that you would like the institutions to support
-    attr_accessor :products
+    attr_accessor :details
+
+    attr_accessor :code
+
+    attr_accessor :type
+
+    attr_accessor :source
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'supported_financial_institution_aggregators' => :'supported_financial_institution_aggregators',
-        :'products' => :'products'
+        :'title' => :'title',
+        :'details' => :'details',
+        :'code' => :'code',
+        :'type' => :'type',
+        :'source' => :'source'
       }
     end
 
@@ -36,8 +66,11 @@ module FuseClient
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'supported_financial_institution_aggregators' => :'Array<Aggregator>',
-        :'products' => :'Array<Product>'
+        :'title' => :'String',
+        :'details' => :'String',
+        :'code' => :'String',
+        :'type' => :'String',
+        :'source' => :'String'
       }
     end
 
@@ -51,27 +84,35 @@ module FuseClient
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `FuseClient::CreateSessionRequest` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `FuseClient::FuseApiWarningDataWarningsInner` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `FuseClient::CreateSessionRequest`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `FuseClient::FuseApiWarningDataWarningsInner`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'supported_financial_institution_aggregators')
-        if (value = attributes[:'supported_financial_institution_aggregators']).is_a?(Array)
-          self.supported_financial_institution_aggregators = value
-        end
+      if attributes.key?(:'title')
+        self.title = attributes[:'title']
       end
 
-      if attributes.key?(:'products')
-        if (value = attributes[:'products']).is_a?(Array)
-          self.products = value
-        end
+      if attributes.key?(:'details')
+        self.details = attributes[:'details']
+      end
+
+      if attributes.key?(:'code')
+        self.code = attributes[:'code']
+      end
+
+      if attributes.key?(:'type')
+        self.type = attributes[:'type']
+      end
+
+      if attributes.key?(:'source')
+        self.source = attributes[:'source']
       end
     end
 
@@ -79,43 +120,25 @@ module FuseClient
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if !@supported_financial_institution_aggregators.nil? && @supported_financial_institution_aggregators.length < 1
-        invalid_properties.push('invalid value for "supported_financial_institution_aggregators", number of items must be greater than or equal to 1.')
-      end
-
-      if !@products.nil? && @products.length < 1
-        invalid_properties.push('invalid value for "products", number of items must be greater than or equal to 1.')
-      end
-
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if !@supported_financial_institution_aggregators.nil? && @supported_financial_institution_aggregators.length < 1
-      return false if !@products.nil? && @products.length < 1
+      source_validator = EnumAttributeValidator.new('String', ["internal", "aggregator"])
+      return false unless source_validator.valid?(@source)
       true
     end
 
-    # Custom attribute writer method with validation
-    # @param [Object] supported_financial_institution_aggregators Value to be assigned
-    def supported_financial_institution_aggregators=(supported_financial_institution_aggregators)
-      if !supported_financial_institution_aggregators.nil? && supported_financial_institution_aggregators.length < 1
-        fail ArgumentError, 'invalid value for "supported_financial_institution_aggregators", number of items must be greater than or equal to 1.'
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] source Object to be assigned
+    def source=(source)
+      validator = EnumAttributeValidator.new('String', ["internal", "aggregator"])
+      unless validator.valid?(source)
+        fail ArgumentError, "invalid value for \"source\", must be one of #{validator.allowable_values}."
       end
-
-      @supported_financial_institution_aggregators = supported_financial_institution_aggregators
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] products Value to be assigned
-    def products=(products)
-      if !products.nil? && products.length < 1
-        fail ArgumentError, 'invalid value for "products", number of items must be greater than or equal to 1.'
-      end
-
-      @products = products
+      @source = source
     end
 
     # Checks equality by comparing each attribute.
@@ -123,8 +146,11 @@ module FuseClient
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          supported_financial_institution_aggregators == o.supported_financial_institution_aggregators &&
-          products == o.products
+          title == o.title &&
+          details == o.details &&
+          code == o.code &&
+          type == o.type &&
+          source == o.source
     end
 
     # @see the `==` method
@@ -136,7 +162,7 @@ module FuseClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [supported_financial_institution_aggregators, products].hash
+      [title, details, code, type, source].hash
     end
 
     # Builds the object from hash

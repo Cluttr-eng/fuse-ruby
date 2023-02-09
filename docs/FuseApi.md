@@ -8,7 +8,7 @@ All URIs are relative to *https://sandbox-api.letsfuse.com*
 | [**create_entity**](FuseApi.md#create_entity) | **POST** /v1/entities | Create entity |
 | [**create_link_token**](FuseApi.md#create_link_token) | **POST** /v1/link/token |  |
 | [**create_session**](FuseApi.md#create_session) | **POST** /v1/session |  |
-| [**exchange_public_token**](FuseApi.md#exchange_public_token) | **POST** /v1/financial_connections/public_token/exchange |  |
+| [**exchange_financial_connections_public_token**](FuseApi.md#exchange_financial_connections_public_token) | **POST** /v1/financial_connections/public_token/exchange |  |
 | [**get_asset_report**](FuseApi.md#get_asset_report) | **POST** /v1/asset_report |  |
 | [**get_entity**](FuseApi.md#get_entity) | **GET** /v1/entities/{entity_id} | Get entity |
 | [**get_financial_connections_account_details**](FuseApi.md#get_financial_connections_account_details) | **POST** /v1/financial_connections/accounts/details | Get account details |
@@ -17,7 +17,7 @@ All URIs are relative to *https://sandbox-api.letsfuse.com*
 | [**get_financial_connections_owners**](FuseApi.md#get_financial_connections_owners) | **POST** /v1/financial_connections/owners | Get account owners |
 | [**get_financial_connections_transactions**](FuseApi.md#get_financial_connections_transactions) | **POST** /v1/financial_connections/transactions | Get transactions |
 | [**get_investment_holdings**](FuseApi.md#get_investment_holdings) | **POST** /v1/financial_connections/investments/holdings | Get investment holdings |
-| [**get_investment_transactions**](FuseApi.md#get_investment_transactions) | **POST** /v1/financial_connections/investments/transactions | Get investment holdings |
+| [**get_investment_transactions**](FuseApi.md#get_investment_transactions) | **POST** /v1/financial_connections/investments/transactions | Get investment transactions |
 | [**refresh_asset_report**](FuseApi.md#refresh_asset_report) | **POST** /v1/asset_report/refresh |  |
 | [**sync_financial_connections_data**](FuseApi.md#sync_financial_connections_data) | **POST** /v1/financial_connections/sync | Sync financial connections data |
 | [**sync_financial_connections_transactions**](FuseApi.md#sync_financial_connections_transactions) | **POST** /v1/financial_connections/transactions/sync | Sync transactions |
@@ -205,7 +205,7 @@ end
 
 api_instance = FuseClient::FuseApi.new
 opts = {
-  create_link_token_request: FuseClient::CreateLinkTokenRequest.new({user_id: 'user_id_example', session_client_secret: 'session_client_secret_example'}) # CreateLinkTokenRequest | 
+  create_link_token_request: FuseClient::CreateLinkTokenRequest.new({entity_id: 'entity_id_example', session_client_secret: 'session_client_secret_example'}) # CreateLinkTokenRequest | 
 }
 
 begin
@@ -333,9 +333,9 @@ end
 - **Accept**: application/json
 
 
-## exchange_public_token
+## exchange_financial_connections_public_token
 
-> <ExchangeFinancialConnectionsPublicTokenResponse> exchange_public_token(opts)
+> <ExchangeFinancialConnectionsPublicTokenResponse> exchange_financial_connections_public_token(opts)
 
 
 
@@ -366,28 +366,28 @@ opts = {
 
 begin
   
-  result = api_instance.exchange_public_token(opts)
+  result = api_instance.exchange_financial_connections_public_token(opts)
   p result
 rescue FuseClient::ApiError => e
-  puts "Error when calling FuseApi->exchange_public_token: #{e}"
+  puts "Error when calling FuseApi->exchange_financial_connections_public_token: #{e}"
 end
 ```
 
-#### Using the exchange_public_token_with_http_info variant
+#### Using the exchange_financial_connections_public_token_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<ExchangeFinancialConnectionsPublicTokenResponse>, Integer, Hash)> exchange_public_token_with_http_info(opts)
+> <Array(<ExchangeFinancialConnectionsPublicTokenResponse>, Integer, Hash)> exchange_financial_connections_public_token_with_http_info(opts)
 
 ```ruby
 begin
   
-  data, status_code, headers = api_instance.exchange_public_token_with_http_info(opts)
+  data, status_code, headers = api_instance.exchange_financial_connections_public_token_with_http_info(opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <ExchangeFinancialConnectionsPublicTokenResponse>
 rescue FuseClient::ApiError => e
-  puts "Error when calling FuseApi->exchange_public_token_with_http_info: #{e}"
+  puts "Error when calling FuseApi->exchange_financial_connections_public_token_with_http_info: #{e}"
 end
 ```
 
@@ -1011,7 +1011,7 @@ end
 
 > <GetInvestmentTransactionsResponse> get_investment_transactions(get_investment_transactions_request)
 
-Get investment holdings
+Get investment transactions
 
 ### Examples
 
@@ -1035,7 +1035,7 @@ api_instance = FuseClient::FuseApi.new
 get_investment_transactions_request = FuseClient::GetInvestmentTransactionsRequest.new({access_token: 'access_token_example'}) # GetInvestmentTransactionsRequest | 
 
 begin
-  # Get investment holdings
+  # Get investment transactions
   result = api_instance.get_investment_transactions(get_investment_transactions_request)
   p result
 rescue FuseClient::ApiError => e
@@ -1051,7 +1051,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Get investment holdings
+  # Get investment transactions
   data, status_code, headers = api_instance.get_investment_transactions_with_http_info(get_investment_transactions_request)
   p status_code # => 2xx
   p headers # => { ... }

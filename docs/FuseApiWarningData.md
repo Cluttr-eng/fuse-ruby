@@ -5,7 +5,7 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **aggregator** | **String** |  | [optional] |
-| **errors** | [**Array&lt;FuseApiWarning&gt;**](FuseApiWarning.md) |  | [optional] |
+| **warnings** | [**Array&lt;FuseApiWarningDataWarningsInner&gt;**](FuseApiWarningDataWarningsInner.md) |  | [optional] |
 
 ## Example
 
@@ -14,7 +14,7 @@ require 'fuse_client'
 
 instance = FuseClient::FuseApiWarningData.new(
   aggregator: null,
-  errors: null
+  warnings: null
 )
 ```
 
