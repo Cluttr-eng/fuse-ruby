@@ -14,35 +14,22 @@ require 'date'
 require 'time'
 
 module FuseClient
-  class CreateLinkTokenRequest
-    # An id that is unique for an institution.
-    attr_accessor :institution_id
+  class Entity
+    # Unique identifier for the user or business account.
+    attr_accessor :id
 
-    attr_accessor :entity
+    # Name for the user or business account.
+    attr_accessor :name
 
-    # This field is used to provide the user with a link to reconnect their financial account. It may be included in an automated email sent by Fuse to the entity's registered email address. It's important to note that the reconnection_url should be a valid URL and can only be used once to reconnect the disconnected account.
-    attr_accessor :reconnection_url
-
-    # The name of your application.
-    attr_accessor :client_name
-
-    # The session client secret created from the 'Create session client secret' endpoint
-    attr_accessor :session_client_secret
-
-    attr_accessor :mx
-
-    attr_accessor :plaid
+    # Email address associated with the user or business account.
+    attr_accessor :email
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'institution_id' => :'institution_id',
-        :'entity' => :'entity',
-        :'reconnection_url' => :'reconnection_url',
-        :'client_name' => :'client_name',
-        :'session_client_secret' => :'session_client_secret',
-        :'mx' => :'mx',
-        :'plaid' => :'plaid'
+        :'id' => :'id',
+        :'name' => :'name',
+        :'email' => :'email'
       }
     end
 
@@ -54,13 +41,9 @@ module FuseClient
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'institution_id' => :'String',
-        :'entity' => :'Entity',
-        :'reconnection_url' => :'String',
-        :'client_name' => :'String',
-        :'session_client_secret' => :'String',
-        :'mx' => :'CreateLinkTokenRequestMx',
-        :'plaid' => :'CreateLinkTokenRequestPlaid'
+        :'id' => :'String',
+        :'name' => :'String',
+        :'email' => :'String'
       }
     end
 
@@ -74,43 +57,27 @@ module FuseClient
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `FuseClient::CreateLinkTokenRequest` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `FuseClient::Entity` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `FuseClient::CreateLinkTokenRequest`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `FuseClient::Entity`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'institution_id')
-        self.institution_id = attributes[:'institution_id']
+      if attributes.key?(:'id')
+        self.id = attributes[:'id']
       end
 
-      if attributes.key?(:'entity')
-        self.entity = attributes[:'entity']
+      if attributes.key?(:'name')
+        self.name = attributes[:'name']
       end
 
-      if attributes.key?(:'reconnection_url')
-        self.reconnection_url = attributes[:'reconnection_url']
-      end
-
-      if attributes.key?(:'client_name')
-        self.client_name = attributes[:'client_name']
-      end
-
-      if attributes.key?(:'session_client_secret')
-        self.session_client_secret = attributes[:'session_client_secret']
-      end
-
-      if attributes.key?(:'mx')
-        self.mx = attributes[:'mx']
-      end
-
-      if attributes.key?(:'plaid')
-        self.plaid = attributes[:'plaid']
+      if attributes.key?(:'email')
+        self.email = attributes[:'email']
       end
     end
 
@@ -118,20 +85,8 @@ module FuseClient
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @institution_id.nil?
-        invalid_properties.push('invalid value for "institution_id", institution_id cannot be nil.')
-      end
-
-      if @entity.nil?
-        invalid_properties.push('invalid value for "entity", entity cannot be nil.')
-      end
-
-      if @client_name.nil?
-        invalid_properties.push('invalid value for "client_name", client_name cannot be nil.')
-      end
-
-      if @session_client_secret.nil?
-        invalid_properties.push('invalid value for "session_client_secret", session_client_secret cannot be nil.')
+      if @id.nil?
+        invalid_properties.push('invalid value for "id", id cannot be nil.')
       end
 
       invalid_properties
@@ -140,10 +95,7 @@ module FuseClient
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @institution_id.nil?
-      return false if @entity.nil?
-      return false if @client_name.nil?
-      return false if @session_client_secret.nil?
+      return false if @id.nil?
       true
     end
 
@@ -152,13 +104,9 @@ module FuseClient
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          institution_id == o.institution_id &&
-          entity == o.entity &&
-          reconnection_url == o.reconnection_url &&
-          client_name == o.client_name &&
-          session_client_secret == o.session_client_secret &&
-          mx == o.mx &&
-          plaid == o.plaid
+          id == o.id &&
+          name == o.name &&
+          email == o.email
     end
 
     # @see the `==` method
@@ -170,7 +118,7 @@ module FuseClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [institution_id, entity, reconnection_url, client_name, session_client_secret, mx, plaid].hash
+      [id, name, email].hash
     end
 
     # Builds the object from hash
