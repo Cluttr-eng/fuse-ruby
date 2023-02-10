@@ -205,7 +205,7 @@ end
 
 api_instance = FuseClient::FuseApi.new
 opts = {
-  create_link_token_request: FuseClient::CreateLinkTokenRequest.new({entity_id: 'entity_id_example', session_client_secret: 'session_client_secret_example'}) # CreateLinkTokenRequest | 
+  create_link_token_request: FuseClient::CreateLinkTokenRequest.new({institution_id: 'institution_id_example', entity: FuseClient::Entity.new({id: 'id_example'}), client_name: 'client_name_example', session_client_secret: 'session_client_secret_example'}) # CreateLinkTokenRequest | 
 }
 
 begin
