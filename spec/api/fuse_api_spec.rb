@@ -169,7 +169,7 @@ describe 'FuseApi' do
   # Receive metadata for a financial institution
   # @param institution_id 
   # @param [Hash] opts the optional parameters
-  # @return [FinancialInstitution]
+  # @return [GetFinancialInstitutionResponse]
   describe 'get_financial_institution test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers

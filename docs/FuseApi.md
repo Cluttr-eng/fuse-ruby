@@ -936,7 +936,7 @@ end
 
 ## get_financial_institution
 
-> <FinancialInstitution> get_financial_institution(institution_id)
+> <GetFinancialInstitutionResponse> get_financial_institution(institution_id)
 
 Get a financial institution
 
@@ -976,7 +976,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<FinancialInstitution>, Integer, Hash)> get_financial_institution_with_http_info(institution_id)
+> <Array(<GetFinancialInstitutionResponse>, Integer, Hash)> get_financial_institution_with_http_info(institution_id)
 
 ```ruby
 begin
@@ -984,7 +984,7 @@ begin
   data, status_code, headers = api_instance.get_financial_institution_with_http_info(institution_id)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <FinancialInstitution>
+  p data # => <GetFinancialInstitutionResponse>
 rescue FuseClient::ApiError => e
   puts "Error when calling FuseApi->get_financial_institution_with_http_info: #{e}"
 end
@@ -998,7 +998,7 @@ end
 
 ### Return type
 
-[**FinancialInstitution**](FinancialInstitution.md)
+[**GetFinancialInstitutionResponse**](GetFinancialInstitutionResponse.md)
 
 ### Authorization
 
