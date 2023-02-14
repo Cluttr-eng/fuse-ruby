@@ -14,16 +14,18 @@ require 'date'
 require 'time'
 
 module FuseClient
-  class GetFinancialConnectionsAccountsResponse
-    attr_accessor :accounts
+  class FinancialConnectionData
+    # The financial connection id.
+    attr_accessor :id
 
-    attr_accessor :financial_connection
+    # The Fuse Institution ID associated with the financial connection
+    attr_accessor :institution_id
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'accounts' => :'accounts',
-        :'financial_connection' => :'financial_connection'
+        :'id' => :'id',
+        :'institution_id' => :'institution_id'
       }
     end
 
@@ -35,8 +37,8 @@ module FuseClient
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'accounts' => :'Array<FinancialConnectionsAccount>',
-        :'financial_connection' => :'FinancialConnectionData'
+        :'id' => :'String',
+        :'institution_id' => :'String'
       }
     end
 
@@ -50,25 +52,23 @@ module FuseClient
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `FuseClient::GetFinancialConnectionsAccountsResponse` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `FuseClient::FinancialConnectionData` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `FuseClient::GetFinancialConnectionsAccountsResponse`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `FuseClient::FinancialConnectionData`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'accounts')
-        if (value = attributes[:'accounts']).is_a?(Array)
-          self.accounts = value
-        end
+      if attributes.key?(:'id')
+        self.id = attributes[:'id']
       end
 
-      if attributes.key?(:'financial_connection')
-        self.financial_connection = attributes[:'financial_connection']
+      if attributes.key?(:'institution_id')
+        self.institution_id = attributes[:'institution_id']
       end
     end
 
@@ -90,8 +90,8 @@ module FuseClient
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          accounts == o.accounts &&
-          financial_connection == o.financial_connection
+          id == o.id &&
+          institution_id == o.institution_id
     end
 
     # @see the `==` method
@@ -103,7 +103,7 @@ module FuseClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [accounts, financial_connection].hash
+      [id, institution_id].hash
     end
 
     # Builds the object from hash
