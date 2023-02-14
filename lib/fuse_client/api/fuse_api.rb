@@ -790,7 +790,7 @@ module FuseClient
     # Receive metadata for a financial institution
     # @param institution_id [String] 
     # @param [Hash] opts the optional parameters
-    # @return [FinancialInstitution]
+    # @return [GetFinancialInstitutionResponse]
     def get_financial_institution(institution_id, opts = {})
       data, _status_code, _headers = get_financial_institution_with_http_info(institution_id, opts)
       data
@@ -800,7 +800,7 @@ module FuseClient
     # Receive metadata for a financial institution
     # @param institution_id [String] 
     # @param [Hash] opts the optional parameters
-    # @return [Array<(FinancialInstitution, Integer, Hash)>] FinancialInstitution data, response status code and response headers
+    # @return [Array<(GetFinancialInstitutionResponse, Integer, Hash)>] GetFinancialInstitutionResponse data, response status code and response headers
     def get_financial_institution_with_http_info(institution_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: FuseApi.get_financial_institution ...'
@@ -827,7 +827,7 @@ module FuseClient
       post_body = opts[:debug_body]
 
       # return_type
-      return_type = opts[:debug_return_type] || 'FinancialInstitution'
+      return_type = opts[:debug_return_type] || 'GetFinancialInstitutionResponse'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['fuseApiKey', 'fuseClientId']
