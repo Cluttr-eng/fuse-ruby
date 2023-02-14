@@ -786,6 +786,69 @@ module FuseClient
       return data, status_code, headers
     end
 
+    # Get a financial institution
+    # Receive metadata for a financial institution
+    # @param institution_id [String] 
+    # @param [Hash] opts the optional parameters
+    # @return [FinancialInstitution]
+    def get_financial_institution(institution_id, opts = {})
+      data, _status_code, _headers = get_financial_institution_with_http_info(institution_id, opts)
+      data
+    end
+
+    # Get a financial institution
+    # Receive metadata for a financial institution
+    # @param institution_id [String] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(FinancialInstitution, Integer, Hash)>] FinancialInstitution data, response status code and response headers
+    def get_financial_institution_with_http_info(institution_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: FuseApi.get_financial_institution ...'
+      end
+      # verify the required parameter 'institution_id' is set
+      if @api_client.config.client_side_validation && institution_id.nil?
+        fail ArgumentError, "Missing the required parameter 'institution_id' when calling FuseApi.get_financial_institution"
+      end
+      # resource path
+      local_var_path = '/v1/financial_connections/institutions/{institution_id}'.sub('{' + 'institution_id' + '}', CGI.escape(institution_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'FinancialInstitution'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['fuseApiKey', 'fuseClientId']
+
+      new_options = opts.merge(
+        :operation => :"FuseApi.get_financial_institution",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: FuseApi#get_financial_institution\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Get investment holdings
     # @param get_investment_holdings_request [GetInvestmentHoldingsRequest] 
     # @param [Hash] opts the optional parameters

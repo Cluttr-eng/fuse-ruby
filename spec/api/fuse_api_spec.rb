@@ -164,6 +164,18 @@ describe 'FuseApi' do
     end
   end
 
+  # unit tests for get_financial_institution
+  # Get a financial institution
+  # Receive metadata for a financial institution
+  # @param institution_id 
+  # @param [Hash] opts the optional parameters
+  # @return [FinancialInstitution]
+  describe 'get_financial_institution test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   # unit tests for get_investment_holdings
   # Get investment holdings
   # @param get_investment_holdings_request 
