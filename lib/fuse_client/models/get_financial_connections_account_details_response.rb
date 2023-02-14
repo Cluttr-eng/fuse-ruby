@@ -17,10 +17,13 @@ module FuseClient
   class GetFinancialConnectionsAccountDetailsResponse
     attr_accessor :account_details
 
+    attr_accessor :financial_connection
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'account_details' => :'account_details'
+        :'account_details' => :'account_details',
+        :'financial_connection' => :'financial_connection'
       }
     end
 
@@ -32,7 +35,8 @@ module FuseClient
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'account_details' => :'Array<FinancialConnectionsAccountDetails>'
+        :'account_details' => :'Array<FinancialConnectionsAccountDetails>',
+        :'financial_connection' => :'FinancialConnectionData'
       }
     end
 
@@ -62,6 +66,10 @@ module FuseClient
           self.account_details = value
         end
       end
+
+      if attributes.key?(:'financial_connection')
+        self.financial_connection = attributes[:'financial_connection']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -82,7 +90,8 @@ module FuseClient
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          account_details == o.account_details
+          account_details == o.account_details &&
+          financial_connection == o.financial_connection
     end
 
     # @see the `==` method
@@ -94,7 +103,7 @@ module FuseClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_details].hash
+      [account_details, financial_connection].hash
     end
 
     # Builds the object from hash
