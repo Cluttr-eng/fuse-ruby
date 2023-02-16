@@ -14,7 +14,7 @@ require 'fuse_client'
 class FuseService
   attr_reader :client, :auth_names
 
-  def initialize(user_access_id)
+  def initialize()
     # Setup authorization
     FuseClient.configure do |config|
       config.host = ENV['FUSE_BASE_PATH']
