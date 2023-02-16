@@ -1,6 +1,12 @@
 # fuse-ruby
 
-## Example setup
+### Add to gem file
+
+```ruby
+gem 'fuse_client', "~> 1.0.6"
+```
+
+### Setup fuse client
 
 ```ruby
 require 'fuse_client'
