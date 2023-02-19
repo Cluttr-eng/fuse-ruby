@@ -14,32 +14,20 @@ require 'date'
 require 'time'
 
 module FuseClient
-  class GetEntityResponse
-    # Id of the entity
-    attr_accessor :id
+  # Data needed to query data from the various aggregators
+  class GetEntityResponseAggregatorAccessTokens
+    attr_accessor :plaid
 
-    # Email of the entity
-    attr_accessor :email
+    attr_accessor :teller
 
-    # These will force the user to connect through all of these aggregators
-    attr_accessor :aggregators
-
-    attr_accessor :institution_ids
-
-    attr_accessor :aggregator_access_tokens
-
-    # An identifier that is exclusive to the request and can serve as a means for investigating and resolving issues.
-    attr_accessor :request_id
+    attr_accessor :mx
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'id' => :'id',
-        :'email' => :'email',
-        :'aggregators' => :'aggregators',
-        :'institution_ids' => :'institution_ids',
-        :'aggregator_access_tokens' => :'aggregator_access_tokens',
-        :'request_id' => :'request_id'
+        :'plaid' => :'plaid',
+        :'teller' => :'teller',
+        :'mx' => :'mx'
       }
     end
 
@@ -51,12 +39,9 @@ module FuseClient
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'id' => :'String',
-        :'email' => :'String',
-        :'aggregators' => :'Array<Aggregator>',
-        :'institution_ids' => :'Array<String>',
-        :'aggregator_access_tokens' => :'GetEntityResponseAggregatorAccessTokens',
-        :'request_id' => :'String'
+        :'plaid' => :'GetEntityResponseAggregatorAccessTokensPlaid',
+        :'teller' => :'GetEntityResponseAggregatorAccessTokensTeller',
+        :'mx' => :'GetEntityResponseAggregatorAccessTokensMx'
       }
     end
 
@@ -70,43 +55,27 @@ module FuseClient
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `FuseClient::GetEntityResponse` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `FuseClient::GetEntityResponseAggregatorAccessTokens` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `FuseClient::GetEntityResponse`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `FuseClient::GetEntityResponseAggregatorAccessTokens`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'id')
-        self.id = attributes[:'id']
+      if attributes.key?(:'plaid')
+        self.plaid = attributes[:'plaid']
       end
 
-      if attributes.key?(:'email')
-        self.email = attributes[:'email']
+      if attributes.key?(:'teller')
+        self.teller = attributes[:'teller']
       end
 
-      if attributes.key?(:'aggregators')
-        if (value = attributes[:'aggregators']).is_a?(Array)
-          self.aggregators = value
-        end
-      end
-
-      if attributes.key?(:'institution_ids')
-        if (value = attributes[:'institution_ids']).is_a?(Array)
-          self.institution_ids = value
-        end
-      end
-
-      if attributes.key?(:'aggregator_access_tokens')
-        self.aggregator_access_tokens = attributes[:'aggregator_access_tokens']
-      end
-
-      if attributes.key?(:'request_id')
-        self.request_id = attributes[:'request_id']
+      if attributes.key?(:'mx')
+        self.mx = attributes[:'mx']
       end
     end
 
@@ -114,28 +83,13 @@ module FuseClient
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if !@aggregators.nil? && @aggregators.length < 1
-        invalid_properties.push('invalid value for "aggregators", number of items must be greater than or equal to 1.')
-      end
-
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if !@aggregators.nil? && @aggregators.length < 1
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] aggregators Value to be assigned
-    def aggregators=(aggregators)
-      if !aggregators.nil? && aggregators.length < 1
-        fail ArgumentError, 'invalid value for "aggregators", number of items must be greater than or equal to 1.'
-      end
-
-      @aggregators = aggregators
     end
 
     # Checks equality by comparing each attribute.
@@ -143,12 +97,9 @@ module FuseClient
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          id == o.id &&
-          email == o.email &&
-          aggregators == o.aggregators &&
-          institution_ids == o.institution_ids &&
-          aggregator_access_tokens == o.aggregator_access_tokens &&
-          request_id == o.request_id
+          plaid == o.plaid &&
+          teller == o.teller &&
+          mx == o.mx
     end
 
     # @see the `==` method
@@ -160,7 +111,7 @@ module FuseClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, email, aggregators, institution_ids, aggregator_access_tokens, request_id].hash
+      [plaid, teller, mx].hash
     end
 
     # Builds the object from hash
