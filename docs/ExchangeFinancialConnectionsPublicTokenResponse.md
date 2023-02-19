@@ -6,7 +6,7 @@
 | ---- | ---- | ----------- | ----- |
 | **access_token** | **String** | Token used for querying data on the user | [optional] |
 | **financial_connection_id** | **String** | The id of the new financial connection. Every webhook will be sent with this id. | [optional] |
-| **request_id** | **String** | Used for debugging purposes | [optional] |
+| **request_id** | **String** | An identifier that is exclusive to the request and can serve as a means for investigating and resolving issues. | [optional] |
 
 ## Example
 

@@ -17,10 +17,14 @@ module FuseClient
   class GetFinancialInstitutionResponse
     attr_accessor :financial_institution
 
+    # An identifier that is exclusive to the request and can serve as a means for investigating and resolving issues.
+    attr_accessor :request_id
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'financial_institution' => :'financial_institution'
+        :'financial_institution' => :'financial_institution',
+        :'request_id' => :'request_id'
       }
     end
 
@@ -32,7 +36,8 @@ module FuseClient
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'financial_institution' => :'FinancialInstitution'
+        :'financial_institution' => :'FinancialInstitution',
+        :'request_id' => :'String'
       }
     end
 
@@ -60,6 +65,10 @@ module FuseClient
       if attributes.key?(:'financial_institution')
         self.financial_institution = attributes[:'financial_institution']
       end
+
+      if attributes.key?(:'request_id')
+        self.request_id = attributes[:'request_id']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -80,7 +89,8 @@ module FuseClient
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          financial_institution == o.financial_institution
+          financial_institution == o.financial_institution &&
+          request_id == o.request_id
     end
 
     # @see the `==` method
@@ -92,7 +102,7 @@ module FuseClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [financial_institution].hash
+      [financial_institution, request_id].hash
     end
 
     # Builds the object from hash

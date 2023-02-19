@@ -18,7 +18,7 @@ module FuseClient
     # Token needed by the frontend sdk to initiate the connection
     attr_accessor :link_token
 
-    # Used for debugging purposes
+    # An identifier that is exclusive to the request and can serve as a means for investigating and resolving issues.
     attr_accessor :request_id
 
     # Attribute mapping from ruby-style variable name to JSON key.
