@@ -26,13 +26,17 @@ module FuseClient
 
     attr_accessor :institution_ids
 
+    # An identifier that is exclusive to the request and can serve as a means for investigating and resolving issues.
+    attr_accessor :request_id
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'id' => :'id',
         :'email' => :'email',
         :'aggregators' => :'aggregators',
-        :'institution_ids' => :'institution_ids'
+        :'institution_ids' => :'institution_ids',
+        :'request_id' => :'request_id'
       }
     end
 
@@ -47,7 +51,8 @@ module FuseClient
         :'id' => :'String',
         :'email' => :'String',
         :'aggregators' => :'Array<Aggregator>',
-        :'institution_ids' => :'Array<String>'
+        :'institution_ids' => :'Array<String>',
+        :'request_id' => :'String'
       }
     end
 
@@ -91,6 +96,10 @@ module FuseClient
           self.institution_ids = value
         end
       end
+
+      if attributes.key?(:'request_id')
+        self.request_id = attributes[:'request_id']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -129,7 +138,8 @@ module FuseClient
           id == o.id &&
           email == o.email &&
           aggregators == o.aggregators &&
-          institution_ids == o.institution_ids
+          institution_ids == o.institution_ids &&
+          request_id == o.request_id
     end
 
     # @see the `==` method
@@ -141,7 +151,7 @@ module FuseClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, email, aggregators, institution_ids].hash
+      [id, email, aggregators, institution_ids, request_id].hash
     end
 
     # Builds the object from hash

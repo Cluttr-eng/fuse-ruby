@@ -23,12 +23,16 @@ module FuseClient
     # Indicates if there are more pages to navigate through
     attr_accessor :has_next
 
+    # An identifier that is exclusive to the request and can serve as a means for investigating and resolving issues.
+    attr_accessor :request_id
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'data' => :'data',
         :'cursor' => :'cursor',
-        :'has_next' => :'has_next'
+        :'has_next' => :'has_next',
+        :'request_id' => :'request_id'
       }
     end
 
@@ -42,7 +46,8 @@ module FuseClient
       {
         :'data' => :'Array<GetTransactionsResponseDataInner>',
         :'cursor' => :'String',
-        :'has_next' => :'Boolean'
+        :'has_next' => :'Boolean',
+        :'request_id' => :'String'
       }
     end
 
@@ -80,6 +85,10 @@ module FuseClient
       if attributes.key?(:'has_next')
         self.has_next = attributes[:'has_next']
       end
+
+      if attributes.key?(:'request_id')
+        self.request_id = attributes[:'request_id']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -102,7 +111,8 @@ module FuseClient
       self.class == o.class &&
           data == o.data &&
           cursor == o.cursor &&
-          has_next == o.has_next
+          has_next == o.has_next &&
+          request_id == o.request_id
     end
 
     # @see the `==` method
@@ -114,7 +124,7 @@ module FuseClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [data, cursor, has_next].hash
+      [data, cursor, has_next, request_id].hash
     end
 
     # Builds the object from hash

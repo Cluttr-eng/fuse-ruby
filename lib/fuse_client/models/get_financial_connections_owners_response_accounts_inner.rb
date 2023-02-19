@@ -20,11 +20,15 @@ module FuseClient
 
     attr_accessor :owners
 
+    # An identifier that is exclusive to the request and can serve as a means for investigating and resolving issues.
+    attr_accessor :request_id
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'remote_account_id' => :'remote_account_id',
-        :'owners' => :'owners'
+        :'owners' => :'owners',
+        :'request_id' => :'request_id'
       }
     end
 
@@ -37,7 +41,8 @@ module FuseClient
     def self.openapi_types
       {
         :'remote_account_id' => :'String',
-        :'owners' => :'Array<FinancialConnectionsOwner>'
+        :'owners' => :'Array<FinancialConnectionsOwner>',
+        :'request_id' => :'String'
       }
     end
 
@@ -71,6 +76,10 @@ module FuseClient
           self.owners = value
         end
       end
+
+      if attributes.key?(:'request_id')
+        self.request_id = attributes[:'request_id']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -92,7 +101,8 @@ module FuseClient
       return true if self.equal?(o)
       self.class == o.class &&
           remote_account_id == o.remote_account_id &&
-          owners == o.owners
+          owners == o.owners &&
+          request_id == o.request_id
     end
 
     # @see the `==` method
@@ -104,7 +114,7 @@ module FuseClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [remote_account_id, owners].hash
+      [remote_account_id, owners, request_id].hash
     end
 
     # Builds the object from hash

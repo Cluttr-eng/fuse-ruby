@@ -30,6 +30,9 @@ module FuseClient
     # Represents if more than requested count of transaction updates exist. If true, the additional updates can be fetched by making an additional request with `cursor` set to `next_cursor`. If `has_next` is true, it's important to pull all available pages, to make it less likely for underlying data changes to conflict with pagination.
     attr_accessor :has_next
 
+    # An identifier that is exclusive to the request and can serve as a means for investigating and resolving issues.
+    attr_accessor :request_id
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -37,7 +40,8 @@ module FuseClient
         :'modified' => :'modified',
         :'removed' => :'removed',
         :'next_cursor' => :'next_cursor',
-        :'has_next' => :'has_next'
+        :'has_next' => :'has_next',
+        :'request_id' => :'request_id'
       }
     end
 
@@ -53,7 +57,8 @@ module FuseClient
         :'modified' => :'Array<TransactionCommonModel>',
         :'removed' => :'Array<SyncTransactionsResponseRemovedInner>',
         :'next_cursor' => :'String',
-        :'has_next' => :'Boolean'
+        :'has_next' => :'Boolean',
+        :'request_id' => :'String'
       }
     end
 
@@ -103,6 +108,10 @@ module FuseClient
       if attributes.key?(:'has_next')
         self.has_next = attributes[:'has_next']
       end
+
+      if attributes.key?(:'request_id')
+        self.request_id = attributes[:'request_id']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -127,7 +136,8 @@ module FuseClient
           modified == o.modified &&
           removed == o.removed &&
           next_cursor == o.next_cursor &&
-          has_next == o.has_next
+          has_next == o.has_next &&
+          request_id == o.request_id
     end
 
     # @see the `==` method
@@ -139,7 +149,7 @@ module FuseClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [added, modified, removed, next_cursor, has_next].hash
+      [added, modified, removed, next_cursor, has_next, request_id].hash
     end
 
     # Builds the object from hash
