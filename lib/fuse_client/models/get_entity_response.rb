@@ -26,6 +26,8 @@ module FuseClient
 
     attr_accessor :institution_ids
 
+    attr_accessor :aggregator_access_tokens
+
     # An identifier that is exclusive to the request and can serve as a means for investigating and resolving issues.
     attr_accessor :request_id
 
@@ -36,6 +38,7 @@ module FuseClient
         :'email' => :'email',
         :'aggregators' => :'aggregators',
         :'institution_ids' => :'institution_ids',
+        :'aggregator_access_tokens' => :'aggregator_access_tokens',
         :'request_id' => :'request_id'
       }
     end
@@ -52,6 +55,7 @@ module FuseClient
         :'email' => :'String',
         :'aggregators' => :'Array<Aggregator>',
         :'institution_ids' => :'Array<String>',
+        :'aggregator_access_tokens' => :'GetEntityResponseAggregatorAccessTokens',
         :'request_id' => :'String'
       }
     end
@@ -97,6 +101,10 @@ module FuseClient
         end
       end
 
+      if attributes.key?(:'aggregator_access_tokens')
+        self.aggregator_access_tokens = attributes[:'aggregator_access_tokens']
+      end
+
       if attributes.key?(:'request_id')
         self.request_id = attributes[:'request_id']
       end
@@ -139,6 +147,7 @@ module FuseClient
           email == o.email &&
           aggregators == o.aggregators &&
           institution_ids == o.institution_ids &&
+          aggregator_access_tokens == o.aggregator_access_tokens &&
           request_id == o.request_id
     end
 
@@ -151,7 +160,7 @@ module FuseClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, email, aggregators, institution_ids, request_id].hash
+      [id, email, aggregators, institution_ids, aggregator_access_tokens, request_id].hash
     end
 
     # Builds the object from hash

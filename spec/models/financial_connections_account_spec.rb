@@ -43,7 +43,7 @@ describe FuseClient::FinancialConnectionsAccount do
     end
   end
 
-  describe 'test attribute "last_four"' do
+  describe 'test attribute "mask"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
