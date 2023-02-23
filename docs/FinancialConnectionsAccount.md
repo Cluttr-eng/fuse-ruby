@@ -9,8 +9,8 @@
 | **institution** | [**FinancialConnectionsAccountInstitution**](FinancialConnectionsAccountInstitution.md) |  | [optional] |
 | **mask** | **String** | The partial account number. | [optional] |
 | **name** | **String** | The account&#39;s name, ie &#39;My Checking&#39; | [optional] |
-| **type** | **String** | The account&#39;s type e.g depository. | [optional] |
-| **subtype** | **String** | The account&#39;s subtype | [optional] |
+| **type** | [**AccountType**](AccountType.md) |  | [optional] |
+| **subtype** | [**AccountSubType**](AccountSubType.md) |  | [optional] |
 | **balance** | [**FinancialConnectionsAccountBalance**](FinancialConnectionsAccountBalance.md) |  | [optional] |
 
 ## Example
