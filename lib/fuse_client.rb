@@ -17,6 +17,8 @@ require 'fuse_client/version'
 require 'fuse_client/configuration'
 
 # Models
+require 'fuse_client/models/account_sub_type'
+require 'fuse_client/models/account_type'
 require 'fuse_client/models/aggregator'
 require 'fuse_client/models/create_asset_report_request'
 require 'fuse_client/models/create_asset_report_response'

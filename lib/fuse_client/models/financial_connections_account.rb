@@ -29,13 +29,33 @@ module FuseClient
     # The account's name, ie 'My Checking'
     attr_accessor :name
 
-    # The account's type e.g depository.
     attr_accessor :type
 
-    # The account's subtype
     attr_accessor :subtype
 
     attr_accessor :balance
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -64,8 +84,8 @@ module FuseClient
         :'institution' => :'FinancialConnectionsAccountInstitution',
         :'mask' => :'String',
         :'name' => :'String',
-        :'type' => :'String',
-        :'subtype' => :'String',
+        :'type' => :'AccountType',
+        :'subtype' => :'AccountSubType',
         :'balance' => :'FinancialConnectionsAccountBalance'
       }
     end
