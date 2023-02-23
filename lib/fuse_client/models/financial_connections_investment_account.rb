@@ -66,7 +66,7 @@ module FuseClient
         :'name' => :'String',
         :'type' => :'String',
         :'subtype' => :'String',
-        :'balance' => :'FinancialConnectionsAccountBalance'
+        :'balance' => :'FinancialConnectionsInvestmentAccountBalance'
       }
     end
 

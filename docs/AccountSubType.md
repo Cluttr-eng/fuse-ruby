@@ -1,4 +1,4 @@
-# FuseClient::AccountSubType
+# FuseClient::AccountSubtype
 
 ## Properties
 
@@ -10,6 +10,6 @@
 ```ruby
 require 'fuse_client'
 
-instance = FuseClient::AccountSubType.new()
+instance = FuseClient::AccountSubtype.new()
 ```
 
