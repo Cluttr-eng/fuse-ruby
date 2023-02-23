@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module FuseClient
-  class AccountSubType
+  class AccountSubtype
     CHECKING = "checking".freeze
     SAVINGS = "savings".freeze
     MONEY_MARKET = "money_market".freeze
@@ -171,8 +171,8 @@ module FuseClient
     # @param [String] The enum value in the form of the string
     # @return [String] The enum value
     def build_from_hash(value)
-      return value if AccountSubType.all_vars.include?(value)
-      raise "Invalid ENUM value #{value} for class #AccountSubType"
+      return value if AccountSubtype.all_vars.include?(value)
+      raise "Invalid ENUM value #{value} for class #AccountSubtype"
     end
   end
 end

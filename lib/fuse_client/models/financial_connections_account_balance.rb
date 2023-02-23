@@ -15,7 +15,10 @@ require 'time'
 
 module FuseClient
   class FinancialConnectionsAccountBalance
-    # The amount of funds available to be withdrawn from the account, as determined by the financial institution Available balance may be cached and is not guaranteed to be up-to-date in realtime unless the value was returned by /financial_connections/balances.
+    # Remote Account Id of the transaction, ie Plaid Account Id
+    attr_accessor :remote_account_id
+
+    # Amount after factoring in pending balances
     attr_accessor :available
 
     # Amount without factoring in pending balances
@@ -24,16 +27,13 @@ module FuseClient
     # The ISO-4217 currency code of the balance.
     attr_accessor :iso_currency_code
 
-    # The date of the last update to the balance.
-    attr_accessor :last_updated_date
-
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'remote_account_id' => :'remote_account_id',
         :'available' => :'available',
         :'current' => :'current',
-        :'iso_currency_code' => :'iso_currency_code',
-        :'last_updated_date' => :'last_updated_date'
+        :'iso_currency_code' => :'iso_currency_code'
       }
     end
 
@@ -45,10 +45,10 @@ module FuseClient
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'available' => :'String',
+        :'remote_account_id' => :'String',
+        :'available' => :'Float',
         :'current' => :'Float',
-        :'iso_currency_code' => :'String',
-        :'last_updated_date' => :'String'
+        :'iso_currency_code' => :'String'
       }
     end
 
@@ -73,6 +73,10 @@ module FuseClient
         h[k.to_sym] = v
       }
 
+      if attributes.key?(:'remote_account_id')
+        self.remote_account_id = attributes[:'remote_account_id']
+      end
+
       if attributes.key?(:'available')
         self.available = attributes[:'available']
       end
@@ -83,10 +87,6 @@ module FuseClient
 
       if attributes.key?(:'iso_currency_code')
         self.iso_currency_code = attributes[:'iso_currency_code']
-      end
-
-      if attributes.key?(:'last_updated_date')
-        self.last_updated_date = attributes[:'last_updated_date']
       end
     end
 
@@ -108,10 +108,10 @@ module FuseClient
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          remote_account_id == o.remote_account_id &&
           available == o.available &&
           current == o.current &&
-          iso_currency_code == o.iso_currency_code &&
-          last_updated_date == o.last_updated_date
+          iso_currency_code == o.iso_currency_code
     end
 
     # @see the `==` method
@@ -123,7 +123,7 @@ module FuseClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [available, current, iso_currency_code, last_updated_date].hash
+      [remote_account_id, available, current, iso_currency_code].hash
     end
 
     # Builds the object from hash

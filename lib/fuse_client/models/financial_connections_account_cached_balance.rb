@@ -14,60 +14,26 @@ require 'date'
 require 'time'
 
 module FuseClient
-  class FinancialConnectionsAccount
-    # Remote Id of the account, ie Plaid or Teller account id
-    attr_accessor :remote_id
+  class FinancialConnectionsAccountCachedBalance
+    # The amount of funds available to be withdrawn from the account, as determined by the financial institution Available balance may be cached and is not guaranteed to be up-to-date in realtime unless the value was returned by /financial_connections/balances.
+    attr_accessor :available
 
-    # Uniquely identifies this account across all accounts associated with your organization. See more information here: https://letsfuse.readme.io/docs/duplicate-accounts
-    attr_accessor :fingerprint
+    # Amount without factoring in pending balances
+    attr_accessor :current
 
-    attr_accessor :institution
+    # The ISO-4217 currency code of the balance.
+    attr_accessor :iso_currency_code
 
-    # The partial account number.
-    attr_accessor :mask
-
-    # The account's name, ie 'My Checking'
-    attr_accessor :name
-
-    attr_accessor :type
-
-    attr_accessor :subtype
-
-    attr_accessor :balance
-
-    class EnumAttributeValidator
-      attr_reader :datatype
-      attr_reader :allowable_values
-
-      def initialize(datatype, allowable_values)
-        @allowable_values = allowable_values.map do |value|
-          case datatype.to_s
-          when /Integer/i
-            value.to_i
-          when /Float/i
-            value.to_f
-          else
-            value
-          end
-        end
-      end
-
-      def valid?(value)
-        !value || allowable_values.include?(value)
-      end
-    end
+    # The date of the last update to the balance.
+    attr_accessor :last_updated_date
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'remote_id' => :'remote_id',
-        :'fingerprint' => :'fingerprint',
-        :'institution' => :'institution',
-        :'mask' => :'mask',
-        :'name' => :'name',
-        :'type' => :'type',
-        :'subtype' => :'subtype',
-        :'balance' => :'balance'
+        :'available' => :'available',
+        :'current' => :'current',
+        :'iso_currency_code' => :'iso_currency_code',
+        :'last_updated_date' => :'last_updated_date'
       }
     end
 
@@ -79,14 +45,10 @@ module FuseClient
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'remote_id' => :'String',
-        :'fingerprint' => :'String',
-        :'institution' => :'FinancialConnectionsAccountInstitution',
-        :'mask' => :'String',
-        :'name' => :'String',
-        :'type' => :'AccountType',
-        :'subtype' => :'AccountSubtype',
-        :'balance' => :'FinancialConnectionsAccountCachedBalance'
+        :'available' => :'String',
+        :'current' => :'Float',
+        :'iso_currency_code' => :'String',
+        :'last_updated_date' => :'String'
       }
     end
 
@@ -100,47 +62,31 @@ module FuseClient
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `FuseClient::FinancialConnectionsAccount` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `FuseClient::FinancialConnectionsAccountCachedBalance` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `FuseClient::FinancialConnectionsAccount`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `FuseClient::FinancialConnectionsAccountCachedBalance`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'remote_id')
-        self.remote_id = attributes[:'remote_id']
+      if attributes.key?(:'available')
+        self.available = attributes[:'available']
       end
 
-      if attributes.key?(:'fingerprint')
-        self.fingerprint = attributes[:'fingerprint']
+      if attributes.key?(:'current')
+        self.current = attributes[:'current']
       end
 
-      if attributes.key?(:'institution')
-        self.institution = attributes[:'institution']
+      if attributes.key?(:'iso_currency_code')
+        self.iso_currency_code = attributes[:'iso_currency_code']
       end
 
-      if attributes.key?(:'mask')
-        self.mask = attributes[:'mask']
-      end
-
-      if attributes.key?(:'name')
-        self.name = attributes[:'name']
-      end
-
-      if attributes.key?(:'type')
-        self.type = attributes[:'type']
-      end
-
-      if attributes.key?(:'subtype')
-        self.subtype = attributes[:'subtype']
-      end
-
-      if attributes.key?(:'balance')
-        self.balance = attributes[:'balance']
+      if attributes.key?(:'last_updated_date')
+        self.last_updated_date = attributes[:'last_updated_date']
       end
     end
 
@@ -162,14 +108,10 @@ module FuseClient
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          remote_id == o.remote_id &&
-          fingerprint == o.fingerprint &&
-          institution == o.institution &&
-          mask == o.mask &&
-          name == o.name &&
-          type == o.type &&
-          subtype == o.subtype &&
-          balance == o.balance
+          available == o.available &&
+          current == o.current &&
+          iso_currency_code == o.iso_currency_code &&
+          last_updated_date == o.last_updated_date
     end
 
     # @see the `==` method
@@ -181,7 +123,7 @@ module FuseClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [remote_id, fingerprint, institution, mask, name, type, subtype, balance].hash
+      [available, current, iso_currency_code, last_updated_date].hash
     end
 
     # Builds the object from hash

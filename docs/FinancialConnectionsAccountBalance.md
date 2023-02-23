@@ -4,10 +4,10 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **available** | **String** | The amount of funds available to be withdrawn from the account, as determined by the financial institution Available balance may be cached and is not guaranteed to be up-to-date in realtime unless the value was returned by /financial_connections/balances. | [optional] |
+| **remote_account_id** | **String** | Remote Account Id of the transaction, ie Plaid Account Id | [optional] |
+| **available** | **Float** | Amount after factoring in pending balances | [optional] |
 | **current** | **Float** | Amount without factoring in pending balances | [optional] |
 | **iso_currency_code** | **String** | The ISO-4217 currency code of the balance. | [optional] |
-| **last_updated_date** | **String** | The date of the last update to the balance. | [optional] |
 
 ## Example
 
@@ -15,10 +15,10 @@
 require 'fuse_client'
 
 instance = FuseClient::FinancialConnectionsAccountBalance.new(
+  remote_account_id: null,
   available: null,
   current: null,
-  iso_currency_code: null,
-  last_updated_date: null
+  iso_currency_code: null
 )
 ```
 

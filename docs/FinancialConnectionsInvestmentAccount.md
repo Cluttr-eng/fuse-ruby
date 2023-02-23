@@ -11,7 +11,7 @@
 | **name** | **String** | The account&#39;s name, ie &#39;My Checking&#39; | [optional] |
 | **type** | **String** | The account&#39;s type e.g depository. | [optional] |
 | **subtype** | **String** | The account&#39;s subtype e.g checking | [optional] |
-| **balance** | [**FinancialConnectionsAccountBalance**](FinancialConnectionsAccountBalance.md) |  | [optional] |
+| **balance** | [**FinancialConnectionsInvestmentAccountBalance**](FinancialConnectionsInvestmentAccountBalance.md) |  | [optional] |
 
 ## Example
 
