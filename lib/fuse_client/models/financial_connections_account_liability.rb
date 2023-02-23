@@ -23,8 +23,8 @@ module FuseClient
 
     attr_accessor :institution
 
-    # The last four digits of the account number.
-    attr_accessor :last_four
+    # The partial account number.
+    attr_accessor :mask
 
     # The account's name, ie 'My Checking'
     attr_accessor :name
@@ -64,7 +64,7 @@ module FuseClient
         :'remote_id' => :'remote_id',
         :'fingerprint' => :'fingerprint',
         :'institution' => :'institution',
-        :'last_four' => :'last_four',
+        :'mask' => :'mask',
         :'name' => :'name',
         :'type' => :'type',
         :'subtype' => :'subtype',
@@ -90,7 +90,7 @@ module FuseClient
         :'remote_id' => :'String',
         :'fingerprint' => :'String',
         :'institution' => :'FinancialConnectionsAccountInstitution',
-        :'last_four' => :'String',
+        :'mask' => :'String',
         :'name' => :'String',
         :'type' => :'String',
         :'subtype' => :'String',
@@ -146,8 +146,8 @@ module FuseClient
         self.institution = attributes[:'institution']
       end
 
-      if attributes.key?(:'last_four')
-        self.last_four = attributes[:'last_four']
+      if attributes.key?(:'mask')
+        self.mask = attributes[:'mask']
       end
 
       if attributes.key?(:'name')
@@ -218,7 +218,7 @@ module FuseClient
           remote_id == o.remote_id &&
           fingerprint == o.fingerprint &&
           institution == o.institution &&
-          last_four == o.last_four &&
+          mask == o.mask &&
           name == o.name &&
           type == o.type &&
           subtype == o.subtype &&
@@ -241,7 +241,7 @@ module FuseClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [remote_id, fingerprint, institution, last_four, name, type, subtype, balance, aprs, interest_rate_percentage, origination_principal_amount, next_payment_due_date, last_payment_date, last_payment_amount, minimum_payment_amount].hash
+      [remote_id, fingerprint, institution, mask, name, type, subtype, balance, aprs, interest_rate_percentage, origination_principal_amount, next_payment_due_date, last_payment_date, last_payment_amount, minimum_payment_amount].hash
     end
 
     # Builds the object from hash

@@ -14,40 +14,19 @@ require 'date'
 require 'time'
 
 module FuseClient
-  class FinancialConnectionsAccount
-    # Remote Id of the account, ie Plaid or Teller account id
-    attr_accessor :remote_id
+  # Data needed to query data from Plaid
+  class GetEntityResponseAggregatorAccessTokensPlaid
+    # Access token for Plaid
+    attr_accessor :access_token
 
-    # Uniquely identifies this account across all accounts associated with your organization. See more information here: https://letsfuse.readme.io/docs/duplicate-accounts
-    attr_accessor :fingerprint
-
-    attr_accessor :institution
-
-    # The partial account number.
-    attr_accessor :mask
-
-    # The account's name, ie 'My Checking'
-    attr_accessor :name
-
-    # The account's type e.g depository.
-    attr_accessor :type
-
-    # The account's subtype
-    attr_accessor :subtype
-
-    attr_accessor :balance
+    # ID of the item associated with the access token in Plaid
+    attr_accessor :item_id
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'remote_id' => :'remote_id',
-        :'fingerprint' => :'fingerprint',
-        :'institution' => :'institution',
-        :'mask' => :'mask',
-        :'name' => :'name',
-        :'type' => :'type',
-        :'subtype' => :'subtype',
-        :'balance' => :'balance'
+        :'access_token' => :'access_token',
+        :'item_id' => :'item_id'
       }
     end
 
@@ -59,14 +38,8 @@ module FuseClient
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'remote_id' => :'String',
-        :'fingerprint' => :'String',
-        :'institution' => :'FinancialConnectionsAccountInstitution',
-        :'mask' => :'String',
-        :'name' => :'String',
-        :'type' => :'String',
-        :'subtype' => :'String',
-        :'balance' => :'FinancialConnectionsAccountBalance'
+        :'access_token' => :'String',
+        :'item_id' => :'String'
       }
     end
 
@@ -80,47 +53,23 @@ module FuseClient
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `FuseClient::FinancialConnectionsAccount` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `FuseClient::GetEntityResponseAggregatorAccessTokensPlaid` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `FuseClient::FinancialConnectionsAccount`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `FuseClient::GetEntityResponseAggregatorAccessTokensPlaid`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'remote_id')
-        self.remote_id = attributes[:'remote_id']
+      if attributes.key?(:'access_token')
+        self.access_token = attributes[:'access_token']
       end
 
-      if attributes.key?(:'fingerprint')
-        self.fingerprint = attributes[:'fingerprint']
-      end
-
-      if attributes.key?(:'institution')
-        self.institution = attributes[:'institution']
-      end
-
-      if attributes.key?(:'mask')
-        self.mask = attributes[:'mask']
-      end
-
-      if attributes.key?(:'name')
-        self.name = attributes[:'name']
-      end
-
-      if attributes.key?(:'type')
-        self.type = attributes[:'type']
-      end
-
-      if attributes.key?(:'subtype')
-        self.subtype = attributes[:'subtype']
-      end
-
-      if attributes.key?(:'balance')
-        self.balance = attributes[:'balance']
+      if attributes.key?(:'item_id')
+        self.item_id = attributes[:'item_id']
       end
     end
 
@@ -142,14 +91,8 @@ module FuseClient
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          remote_id == o.remote_id &&
-          fingerprint == o.fingerprint &&
-          institution == o.institution &&
-          mask == o.mask &&
-          name == o.name &&
-          type == o.type &&
-          subtype == o.subtype &&
-          balance == o.balance
+          access_token == o.access_token &&
+          item_id == o.item_id
     end
 
     # @see the `==` method
@@ -161,7 +104,7 @@ module FuseClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [remote_id, fingerprint, institution, mask, name, type, subtype, balance].hash
+      [access_token, item_id].hash
     end
 
     # Builds the object from hash
