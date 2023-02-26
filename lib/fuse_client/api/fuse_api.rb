@@ -981,6 +981,72 @@ module FuseClient
       return data, status_code, headers
     end
 
+    # Migrate financial connections token
+    # @param migrate_financial_connections_token_request [MigrateFinancialConnectionsTokenRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [MigrateFinancialConnectionsTokenResponse]
+    def migrate_financial_connections_token(migrate_financial_connections_token_request, opts = {})
+      data, _status_code, _headers = migrate_financial_connections_token_with_http_info(migrate_financial_connections_token_request, opts)
+      data
+    end
+
+    # Migrate financial connections token
+    # @param migrate_financial_connections_token_request [MigrateFinancialConnectionsTokenRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(MigrateFinancialConnectionsTokenResponse, Integer, Hash)>] MigrateFinancialConnectionsTokenResponse data, response status code and response headers
+    def migrate_financial_connections_token_with_http_info(migrate_financial_connections_token_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: FuseApi.migrate_financial_connections_token ...'
+      end
+      # verify the required parameter 'migrate_financial_connections_token_request' is set
+      if @api_client.config.client_side_validation && migrate_financial_connections_token_request.nil?
+        fail ArgumentError, "Missing the required parameter 'migrate_financial_connections_token_request' when calling FuseApi.migrate_financial_connections_token"
+      end
+      # resource path
+      local_var_path = '/v1/financial_connections/migrate_token'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(migrate_financial_connections_token_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'MigrateFinancialConnectionsTokenResponse'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['fuseApiKey', 'fuseClientId']
+
+      new_options = opts.merge(
+        :operation => :"FuseApi.migrate_financial_connections_token",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: FuseApi#migrate_financial_connections_token\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Refreshes the Asset Report in JSON format.
     # @param [Hash] opts the optional parameters
     # @option opts [RefreshAssetReportRequest] :refresh_asset_report_request 

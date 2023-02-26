@@ -198,6 +198,17 @@ describe 'FuseApi' do
     end
   end
 
+  # unit tests for migrate_financial_connections_token
+  # Migrate financial connections token
+  # @param migrate_financial_connections_token_request 
+  # @param [Hash] opts the optional parameters
+  # @return [MigrateFinancialConnectionsTokenResponse]
+  describe 'migrate_financial_connections_token test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   # unit tests for refresh_asset_report
   # Refreshes the Asset Report in JSON format.
   # @param [Hash] opts the optional parameters

@@ -19,6 +19,7 @@ All URIs are relative to *https://sandbox-api.letsfuse.com*
 | [**get_financial_institution**](FuseApi.md#get_financial_institution) | **GET** /v1/financial_connections/institutions/{institution_id} | Get a financial institution |
 | [**get_investment_holdings**](FuseApi.md#get_investment_holdings) | **POST** /v1/financial_connections/investments/holdings | Get investment holdings |
 | [**get_investment_transactions**](FuseApi.md#get_investment_transactions) | **POST** /v1/financial_connections/investments/transactions | Get investment transactions |
+| [**migrate_financial_connections_token**](FuseApi.md#migrate_financial_connections_token) | **POST** /v1/financial_connections/migrate_token | Migrate financial connections token |
 | [**refresh_asset_report**](FuseApi.md#refresh_asset_report) | **POST** /v1/asset_report/refresh |  |
 | [**sync_financial_connections_data**](FuseApi.md#sync_financial_connections_data) | **POST** /v1/financial_connections/sync | Sync financial connections data |
 | [**sync_financial_connections_transactions**](FuseApi.md#sync_financial_connections_transactions) | **POST** /v1/financial_connections/transactions/sync | Sync transactions |
@@ -1147,6 +1148,80 @@ end
 ### Return type
 
 [**GetInvestmentTransactionsResponse**](GetInvestmentTransactionsResponse.md)
+
+### Authorization
+
+[fuseApiKey](../README.md#fuseApiKey), [fuseClientId](../README.md#fuseClientId)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## migrate_financial_connections_token
+
+> <MigrateFinancialConnectionsTokenResponse> migrate_financial_connections_token(migrate_financial_connections_token_request)
+
+Migrate financial connections token
+
+### Examples
+
+```ruby
+require 'time'
+require 'fuse_client'
+# setup authorization
+FuseClient.configure do |config|
+  # Configure API key authorization: fuseApiKey
+  config.api_key['fuseApiKey'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['fuseApiKey'] = 'Bearer'
+
+  # Configure API key authorization: fuseClientId
+  config.api_key['fuseClientId'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['fuseClientId'] = 'Bearer'
+end
+
+api_instance = FuseClient::FuseApi.new
+migrate_financial_connections_token_request = FuseClient::MigrateFinancialConnectionsTokenRequest.new({token: 'token_example', aggregator: 'plaid', entity: FuseClient::MigrateFinancialConnectionsTokenRequestEntity.new, fuse_products: [FuseClient::Product::ACCOUNT_DETAILS]}) # MigrateFinancialConnectionsTokenRequest | 
+
+begin
+  # Migrate financial connections token
+  result = api_instance.migrate_financial_connections_token(migrate_financial_connections_token_request)
+  p result
+rescue FuseClient::ApiError => e
+  puts "Error when calling FuseApi->migrate_financial_connections_token: #{e}"
+end
+```
+
+#### Using the migrate_financial_connections_token_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<MigrateFinancialConnectionsTokenResponse>, Integer, Hash)> migrate_financial_connections_token_with_http_info(migrate_financial_connections_token_request)
+
+```ruby
+begin
+  # Migrate financial connections token
+  data, status_code, headers = api_instance.migrate_financial_connections_token_with_http_info(migrate_financial_connections_token_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <MigrateFinancialConnectionsTokenResponse>
+rescue FuseClient::ApiError => e
+  puts "Error when calling FuseApi->migrate_financial_connections_token_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **migrate_financial_connections_token_request** | [**MigrateFinancialConnectionsTokenRequest**](MigrateFinancialConnectionsTokenRequest.md) |  |  |
+
+### Return type
+
+[**MigrateFinancialConnectionsTokenResponse**](MigrateFinancialConnectionsTokenResponse.md)
 
 ### Authorization
 
