@@ -14,21 +14,45 @@ require 'date'
 require 'time'
 
 module FuseClient
-  class CreateSessionRequest
-    attr_accessor :supported_financial_institution_aggregators
+  class MigrateFinancialConnectionsTokenRequest
+    # Token for existing connection
+    attr_accessor :token
 
-    # List of products that you would like the institutions to support
-    attr_accessor :products
+    attr_accessor :aggregator
 
-    # The fuse access token for an existing account integration. This will perform the process to reconnect an existing disconnected account.
-    attr_accessor :access_token
+    attr_accessor :entity
+
+    attr_accessor :fuse_products
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'supported_financial_institution_aggregators' => :'supported_financial_institution_aggregators',
-        :'products' => :'products',
-        :'access_token' => :'access_token'
+        :'token' => :'token',
+        :'aggregator' => :'aggregator',
+        :'entity' => :'entity',
+        :'fuse_products' => :'fuse_products'
       }
     end
 
@@ -40,9 +64,10 @@ module FuseClient
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'supported_financial_institution_aggregators' => :'Array<Aggregator>',
-        :'products' => :'Array<Product>',
-        :'access_token' => :'String'
+        :'token' => :'String',
+        :'aggregator' => :'String',
+        :'entity' => :'MigrateFinancialConnectionsTokenRequestEntity',
+        :'fuse_products' => :'Array<Product>'
       }
     end
 
@@ -56,31 +81,33 @@ module FuseClient
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `FuseClient::CreateSessionRequest` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `FuseClient::MigrateFinancialConnectionsTokenRequest` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `FuseClient::CreateSessionRequest`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `FuseClient::MigrateFinancialConnectionsTokenRequest`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'supported_financial_institution_aggregators')
-        if (value = attributes[:'supported_financial_institution_aggregators']).is_a?(Array)
-          self.supported_financial_institution_aggregators = value
-        end
+      if attributes.key?(:'token')
+        self.token = attributes[:'token']
       end
 
-      if attributes.key?(:'products')
-        if (value = attributes[:'products']).is_a?(Array)
-          self.products = value
-        end
+      if attributes.key?(:'aggregator')
+        self.aggregator = attributes[:'aggregator']
       end
 
-      if attributes.key?(:'access_token')
-        self.access_token = attributes[:'access_token']
+      if attributes.key?(:'entity')
+        self.entity = attributes[:'entity']
+      end
+
+      if attributes.key?(:'fuse_products')
+        if (value = attributes[:'fuse_products']).is_a?(Array)
+          self.fuse_products = value
+        end
       end
     end
 
@@ -88,12 +115,20 @@ module FuseClient
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if !@supported_financial_institution_aggregators.nil? && @supported_financial_institution_aggregators.length < 1
-        invalid_properties.push('invalid value for "supported_financial_institution_aggregators", number of items must be greater than or equal to 1.')
+      if @token.nil?
+        invalid_properties.push('invalid value for "token", token cannot be nil.')
       end
 
-      if !@products.nil? && @products.length < 1
-        invalid_properties.push('invalid value for "products", number of items must be greater than or equal to 1.')
+      if @aggregator.nil?
+        invalid_properties.push('invalid value for "aggregator", aggregator cannot be nil.')
+      end
+
+      if @entity.nil?
+        invalid_properties.push('invalid value for "entity", entity cannot be nil.')
+      end
+
+      if @fuse_products.nil?
+        invalid_properties.push('invalid value for "fuse_products", fuse_products cannot be nil.')
       end
 
       invalid_properties
@@ -102,29 +137,23 @@ module FuseClient
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if !@supported_financial_institution_aggregators.nil? && @supported_financial_institution_aggregators.length < 1
-      return false if !@products.nil? && @products.length < 1
+      return false if @token.nil?
+      return false if @aggregator.nil?
+      aggregator_validator = EnumAttributeValidator.new('String', ["plaid"])
+      return false unless aggregator_validator.valid?(@aggregator)
+      return false if @entity.nil?
+      return false if @fuse_products.nil?
       true
     end
 
-    # Custom attribute writer method with validation
-    # @param [Object] supported_financial_institution_aggregators Value to be assigned
-    def supported_financial_institution_aggregators=(supported_financial_institution_aggregators)
-      if !supported_financial_institution_aggregators.nil? && supported_financial_institution_aggregators.length < 1
-        fail ArgumentError, 'invalid value for "supported_financial_institution_aggregators", number of items must be greater than or equal to 1.'
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] aggregator Object to be assigned
+    def aggregator=(aggregator)
+      validator = EnumAttributeValidator.new('String', ["plaid"])
+      unless validator.valid?(aggregator)
+        fail ArgumentError, "invalid value for \"aggregator\", must be one of #{validator.allowable_values}."
       end
-
-      @supported_financial_institution_aggregators = supported_financial_institution_aggregators
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] products Value to be assigned
-    def products=(products)
-      if !products.nil? && products.length < 1
-        fail ArgumentError, 'invalid value for "products", number of items must be greater than or equal to 1.'
-      end
-
-      @products = products
+      @aggregator = aggregator
     end
 
     # Checks equality by comparing each attribute.
@@ -132,9 +161,10 @@ module FuseClient
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          supported_financial_institution_aggregators == o.supported_financial_institution_aggregators &&
-          products == o.products &&
-          access_token == o.access_token
+          token == o.token &&
+          aggregator == o.aggregator &&
+          entity == o.entity &&
+          fuse_products == o.fuse_products
     end
 
     # @see the `==` method
@@ -146,7 +176,7 @@ module FuseClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [supported_financial_institution_aggregators, products, access_token].hash
+      [token, aggregator, entity, fuse_products].hash
     end
 
     # Builds the object from hash
