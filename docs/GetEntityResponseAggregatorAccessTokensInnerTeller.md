@@ -1,4 +1,4 @@
-# FuseClient::GetEntityResponseAggregatorAccessTokensTeller
+# FuseClient::GetEntityResponseAggregatorAccessTokensInnerTeller
 
 ## Properties
 
@@ -12,7 +12,7 @@
 ```ruby
 require 'fuse_client'
 
-instance = FuseClient::GetEntityResponseAggregatorAccessTokensTeller.new(
+instance = FuseClient::GetEntityResponseAggregatorAccessTokensInnerTeller.new(
   access_token: null,
   enrollment_id: null
 )

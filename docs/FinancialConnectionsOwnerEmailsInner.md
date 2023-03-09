@@ -4,7 +4,7 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **data** | **String** | Email address | [optional] |
+| **data** | **String** | Email address |  |
 | **primary** | **Boolean** | Indicating if it is the primary email | [optional] |
 | **type** | **String** | Type of the email | [optional] |
 

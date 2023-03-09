@@ -1,4 +1,4 @@
-# FuseClient::GetEntityResponseAggregatorAccessTokensPlaid
+# FuseClient::GetEntityResponseAggregatorAccessTokensInnerPlaid
 
 ## Properties
 
@@ -12,7 +12,7 @@
 ```ruby
 require 'fuse_client'
 
-instance = FuseClient::GetEntityResponseAggregatorAccessTokensPlaid.new(
+instance = FuseClient::GetEntityResponseAggregatorAccessTokensInnerPlaid.new(
   access_token: null,
   item_id: null
 )

@@ -4,8 +4,8 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **id** | **String** | The financial connection id. | [optional] |
-| **institution_id** | **String** | The Fuse Institution ID associated with the financial connection | [optional] |
+| **id** | **String** | The financial connection id. |  |
+| **institution_id** | **String** | The Fuse Institution ID associated with the financial connection |  |
 
 ## Example
 

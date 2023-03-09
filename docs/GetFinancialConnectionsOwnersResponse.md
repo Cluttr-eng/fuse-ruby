@@ -4,7 +4,7 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **accounts** | [**Array&lt;GetFinancialConnectionsOwnersResponseAccountsInner&gt;**](GetFinancialConnectionsOwnersResponseAccountsInner.md) |  | [optional] |
+| **accounts** | [**Array&lt;GetFinancialConnectionsOwnersResponseAccountsInner&gt;**](GetFinancialConnectionsOwnersResponseAccountsInner.md) |  |  |
 
 ## Example
 
