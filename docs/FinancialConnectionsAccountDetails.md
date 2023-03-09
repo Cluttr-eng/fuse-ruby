@@ -4,8 +4,8 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **remote_id** | **String** | Remote Id of the account, ie Plaid or Teller account id | [optional] |
-| **ach** | [**FinancialConnectionsAccountDetailsAch**](FinancialConnectionsAccountDetailsAch.md) |  | [optional] |
+| **remote_id** | **String** | Remote Id of the account, ie Plaid or Teller account id |  |
+| **ach** | [**FinancialConnectionsAccountDetailsAch**](FinancialConnectionsAccountDetailsAch.md) |  |  |
 
 ## Example
 

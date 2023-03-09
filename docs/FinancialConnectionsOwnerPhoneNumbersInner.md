@@ -4,7 +4,7 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **data** | **String** | The phone number | [optional] |
+| **data** | **String** | The phone number |  |
 | **primary** | **Boolean** | Indicating if it is the primary phone number | [optional] |
 | **type** | **String** | Type of the phone number | [optional] |
 

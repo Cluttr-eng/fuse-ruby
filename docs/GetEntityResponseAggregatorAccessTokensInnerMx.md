@@ -1,4 +1,4 @@
-# FuseClient::GetEntityResponseAggregatorAccessTokensMx
+# FuseClient::GetEntityResponseAggregatorAccessTokensInnerMx
 
 ## Properties
 
@@ -12,7 +12,7 @@
 ```ruby
 require 'fuse_client'
 
-instance = FuseClient::GetEntityResponseAggregatorAccessTokensMx.new(
+instance = FuseClient::GetEntityResponseAggregatorAccessTokensInnerMx.new(
   user_guid: null,
   member_guid: null
 )

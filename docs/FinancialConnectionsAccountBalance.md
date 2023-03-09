@@ -5,8 +5,8 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **remote_account_id** | **String** | Remote Account Id of the transaction, ie Plaid Account Id | [optional] |
-| **available** | **Float** | Amount after factoring in pending balances | [optional] |
-| **current** | **Float** | Amount without factoring in pending balances | [optional] |
+| **available** | **Float** | Amount in cents after factoring in pending balances | [optional] |
+| **current** | **Float** | Amount in cents without factoring in pending balances | [optional] |
 | **iso_currency_code** | **String** | The ISO-4217 currency code of the balance. | [optional] |
 
 ## Example

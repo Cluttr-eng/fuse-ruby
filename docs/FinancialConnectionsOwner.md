@@ -4,10 +4,10 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **addresses** | [**Array&lt;FinancialConnectionsOwnerAddressesInner&gt;**](FinancialConnectionsOwnerAddressesInner.md) |  | [optional] |
-| **emails** | [**Array&lt;FinancialConnectionsOwnerEmailsInner&gt;**](FinancialConnectionsOwnerEmailsInner.md) |  | [optional] |
-| **names** | [**Array&lt;FinancialConnectionsOwnerNamesInner&gt;**](FinancialConnectionsOwnerNamesInner.md) | List of names associated with the owner | [optional] |
-| **phone_numbers** | [**Array&lt;FinancialConnectionsOwnerPhoneNumbersInner&gt;**](FinancialConnectionsOwnerPhoneNumbersInner.md) |  | [optional] |
+| **addresses** | [**Array&lt;FinancialConnectionsOwnerAddressesInner&gt;**](FinancialConnectionsOwnerAddressesInner.md) |  |  |
+| **emails** | [**Array&lt;FinancialConnectionsOwnerEmailsInner&gt;**](FinancialConnectionsOwnerEmailsInner.md) |  |  |
+| **names** | [**Array&lt;FinancialConnectionsOwnerNamesInner&gt;**](FinancialConnectionsOwnerNamesInner.md) | List of names associated with the owner |  |
+| **phone_numbers** | [**Array&lt;FinancialConnectionsOwnerPhoneNumbersInner&gt;**](FinancialConnectionsOwnerPhoneNumbersInner.md) |  |  |
 
 ## Example
 
