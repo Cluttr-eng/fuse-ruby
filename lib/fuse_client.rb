@@ -105,6 +105,8 @@ require 'fuse_client/models/sync_transactions_response_removed_inner'
 require 'fuse_client/models/transaction_common_model'
 require 'fuse_client/models/update_entity_request'
 require 'fuse_client/models/update_entity_response'
+require 'fuse_client/models/webhook_source'
+require 'fuse_client/models/webhook_type'
 
 # APIs
 require 'fuse_client/api/fuse_api'

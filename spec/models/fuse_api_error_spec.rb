@@ -40,12 +40,20 @@ describe FuseClient::FuseApiError do
   describe 'test attribute "code"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["client_error", "invalid_headers", "invalid_request_body", "internal_server_error", "organization_not_found", "entity_not_found", "session_not_found", "financial_institution_not_found", "missing_access_token", "missing_plaid_client_id_header", "missing_plaid_secret_header", "missing_mx_client_id_header", "missing_mx_api_key_header", "missing_teller_private_key_header", "missing_teller_certificate_header", "missing_teller_application_id_header", "aggregator_error", "aggregator_disconnected_error", "aggregator_connection_finished_error", "request_body_missing"])
+      # validator.allowable_values.each do |value|
+      #   expect { instance.code = value }.not_to raise_error
+      # end
     end
   end
 
   describe 'test attribute "type"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["auth_error", "not_found", "bad_request", "server_error"])
+      # validator.allowable_values.each do |value|
+      #   expect { instance.type = value }.not_to raise_error
+      # end
     end
   end
 
