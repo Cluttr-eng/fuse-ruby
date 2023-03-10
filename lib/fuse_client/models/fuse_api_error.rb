@@ -134,9 +134,33 @@ module FuseClient
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      code_validator = EnumAttributeValidator.new('String', ["client_error", "invalid_headers", "invalid_request_body", "internal_server_error", "organization_not_found", "entity_not_found", "session_not_found", "financial_institution_not_found", "missing_access_token", "missing_plaid_client_id_header", "missing_plaid_secret_header", "missing_mx_client_id_header", "missing_mx_api_key_header", "missing_teller_private_key_header", "missing_teller_certificate_header", "missing_teller_application_id_header", "aggregator_error", "aggregator_disconnected_error", "aggregator_connection_finished_error", "request_body_missing"])
+      return false unless code_validator.valid?(@code)
+      type_validator = EnumAttributeValidator.new('String', ["auth_error", "not_found", "bad_request", "server_error"])
+      return false unless type_validator.valid?(@type)
       source_validator = EnumAttributeValidator.new('String', ["internal", "aggregator"])
       return false unless source_validator.valid?(@source)
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] code Object to be assigned
+    def code=(code)
+      validator = EnumAttributeValidator.new('String', ["client_error", "invalid_headers", "invalid_request_body", "internal_server_error", "organization_not_found", "entity_not_found", "session_not_found", "financial_institution_not_found", "missing_access_token", "missing_plaid_client_id_header", "missing_plaid_secret_header", "missing_mx_client_id_header", "missing_mx_api_key_header", "missing_teller_private_key_header", "missing_teller_certificate_header", "missing_teller_application_id_header", "aggregator_error", "aggregator_disconnected_error", "aggregator_connection_finished_error", "request_body_missing"])
+      unless validator.valid?(code)
+        fail ArgumentError, "invalid value for \"code\", must be one of #{validator.allowable_values}."
+      end
+      @code = code
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] type Object to be assigned
+    def type=(type)
+      validator = EnumAttributeValidator.new('String', ["auth_error", "not_found", "bad_request", "server_error"])
+      unless validator.valid?(type)
+        fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
+      end
+      @type = type
     end
 
     # Custom attribute writer method checking allowed values (enum).

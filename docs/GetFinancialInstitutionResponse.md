@@ -4,8 +4,8 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **financial_institution** | [**FinancialInstitution**](FinancialInstitution.md) |  | [optional] |
-| **request_id** | **String** | An identifier that is exclusive to the request and can serve as a means for investigating and resolving issues. | [optional] |
+| **financial_institution** | [**FinancialInstitution**](FinancialInstitution.md) |  |  |
+| **request_id** | **String** | An identifier that is exclusive to the request and can serve as a means for investigating and resolving issues. |  |
 
 ## Example
 
