@@ -8,9 +8,11 @@ All URIs are relative to *https://sandbox-api.letsfuse.com*
 | [**create_entity**](FuseApi.md#create_entity) | **POST** /v1/entities | Create entity |
 | [**create_link_token**](FuseApi.md#create_link_token) | **POST** /v1/link/token |  |
 | [**create_session**](FuseApi.md#create_session) | **POST** /v1/session |  |
+| [**delete_financial_connection**](FuseApi.md#delete_financial_connection) | **DELETE** /v1/financial_connections/{financial_connection_id_to_delete} | Delete a financial connection |
 | [**exchange_financial_connections_public_token**](FuseApi.md#exchange_financial_connections_public_token) | **POST** /v1/financial_connections/public_token/exchange |  |
 | [**get_asset_report**](FuseApi.md#get_asset_report) | **POST** /v1/asset_report |  |
 | [**get_entity**](FuseApi.md#get_entity) | **GET** /v1/entities/{entity_id} | Get entity |
+| [**get_financial_connection**](FuseApi.md#get_financial_connection) | **GET** /v1/financial_connections/{financial_connection_id} | Get financial connection details |
 | [**get_financial_connections_account_details**](FuseApi.md#get_financial_connections_account_details) | **POST** /v1/financial_connections/accounts/details | Get account details |
 | [**get_financial_connections_accounts**](FuseApi.md#get_financial_connections_accounts) | **POST** /v1/financial_connections/accounts | Get accounts |
 | [**get_financial_connections_balances**](FuseApi.md#get_financial_connections_balances) | **POST** /v1/financial_connections/balances | Get balances |
@@ -19,7 +21,6 @@ All URIs are relative to *https://sandbox-api.letsfuse.com*
 | [**get_financial_institution**](FuseApi.md#get_financial_institution) | **GET** /v1/financial_connections/institutions/{institution_id} | Get a financial institution |
 | [**get_investment_holdings**](FuseApi.md#get_investment_holdings) | **POST** /v1/financial_connections/investments/holdings | Get investment holdings |
 | [**get_investment_transactions**](FuseApi.md#get_investment_transactions) | **POST** /v1/financial_connections/investments/transactions | Get investment transactions |
-| [**migrate_financial_connections_token**](FuseApi.md#migrate_financial_connections_token) | **POST** /v1/financial_connections/migrate_token | Migrate financial connections token |
 | [**refresh_asset_report**](FuseApi.md#refresh_asset_report) | **POST** /v1/asset_report/refresh |  |
 | [**sync_financial_connections_data**](FuseApi.md#sync_financial_connections_data) | **POST** /v1/financial_connections/sync | Sync financial connections data |
 | [**sync_financial_connections_transactions**](FuseApi.md#sync_financial_connections_transactions) | **POST** /v1/financial_connections/transactions/sync | Sync transactions |
@@ -335,6 +336,80 @@ end
 - **Accept**: application/json
 
 
+## delete_financial_connection
+
+> <DeleteFinancialConnectionResponse> delete_financial_connection(financial_connection_id_to_delete)
+
+Delete a financial connection
+
+### Examples
+
+```ruby
+require 'time'
+require 'fuse_client'
+# setup authorization
+FuseClient.configure do |config|
+  # Configure API key authorization: fuseApiKey
+  config.api_key['fuseApiKey'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['fuseApiKey'] = 'Bearer'
+
+  # Configure API key authorization: fuseClientId
+  config.api_key['fuseClientId'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['fuseClientId'] = 'Bearer'
+end
+
+api_instance = FuseClient::FuseApi.new
+financial_connection_id_to_delete = 'financial_connection_id_to_delete_example' # String | 
+
+begin
+  # Delete a financial connection
+  result = api_instance.delete_financial_connection(financial_connection_id_to_delete)
+  p result
+rescue FuseClient::ApiError => e
+  puts "Error when calling FuseApi->delete_financial_connection: #{e}"
+end
+```
+
+#### Using the delete_financial_connection_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<DeleteFinancialConnectionResponse>, Integer, Hash)> delete_financial_connection_with_http_info(financial_connection_id_to_delete)
+
+```ruby
+begin
+  # Delete a financial connection
+  data, status_code, headers = api_instance.delete_financial_connection_with_http_info(financial_connection_id_to_delete)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <DeleteFinancialConnectionResponse>
+rescue FuseClient::ApiError => e
+  puts "Error when calling FuseApi->delete_financial_connection_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **financial_connection_id_to_delete** | **String** |  |  |
+
+### Return type
+
+[**DeleteFinancialConnectionResponse**](DeleteFinancialConnectionResponse.md)
+
+### Authorization
+
+[fuseApiKey](../README.md#fuseApiKey), [fuseClientId](../README.md#fuseClientId)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
 ## exchange_financial_connections_public_token
 
 > <ExchangeFinancialConnectionsPublicTokenResponse> exchange_financial_connections_public_token(opts)
@@ -554,6 +629,80 @@ end
 ### Return type
 
 [**GetEntityResponse**](GetEntityResponse.md)
+
+### Authorization
+
+[fuseApiKey](../README.md#fuseApiKey), [fuseClientId](../README.md#fuseClientId)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_financial_connection
+
+> <GetFinancialConnectionResponse> get_financial_connection(financial_connection_id)
+
+Get financial connection details
+
+### Examples
+
+```ruby
+require 'time'
+require 'fuse_client'
+# setup authorization
+FuseClient.configure do |config|
+  # Configure API key authorization: fuseApiKey
+  config.api_key['fuseApiKey'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['fuseApiKey'] = 'Bearer'
+
+  # Configure API key authorization: fuseClientId
+  config.api_key['fuseClientId'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['fuseClientId'] = 'Bearer'
+end
+
+api_instance = FuseClient::FuseApi.new
+financial_connection_id = 'financial_connection_id_example' # String | 
+
+begin
+  # Get financial connection details
+  result = api_instance.get_financial_connection(financial_connection_id)
+  p result
+rescue FuseClient::ApiError => e
+  puts "Error when calling FuseApi->get_financial_connection: #{e}"
+end
+```
+
+#### Using the get_financial_connection_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetFinancialConnectionResponse>, Integer, Hash)> get_financial_connection_with_http_info(financial_connection_id)
+
+```ruby
+begin
+  # Get financial connection details
+  data, status_code, headers = api_instance.get_financial_connection_with_http_info(financial_connection_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetFinancialConnectionResponse>
+rescue FuseClient::ApiError => e
+  puts "Error when calling FuseApi->get_financial_connection_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **financial_connection_id** | **String** |  |  |
+
+### Return type
+
+[**GetFinancialConnectionResponse**](GetFinancialConnectionResponse.md)
 
 ### Authorization
 
@@ -886,7 +1035,7 @@ FuseClient.configure do |config|
 end
 
 api_instance = FuseClient::FuseApi.new
-get_transactions_request = FuseClient::GetTransactionsRequest.new({access_token: 'access_token_example'}) # GetTransactionsRequest | 
+get_transactions_request = FuseClient::GetTransactionsRequest.new({access_token: 'access_token_example', start_date: 'start_date_example', end_date: 'end_date_example', page: 37, records_per_page: 37}) # GetTransactionsRequest | 
 
 begin
   # Get transactions
@@ -1148,80 +1297,6 @@ end
 ### Return type
 
 [**GetInvestmentTransactionsResponse**](GetInvestmentTransactionsResponse.md)
-
-### Authorization
-
-[fuseApiKey](../README.md#fuseApiKey), [fuseClientId](../README.md#fuseClientId)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-
-## migrate_financial_connections_token
-
-> <MigrateFinancialConnectionsTokenResponse> migrate_financial_connections_token(migrate_financial_connections_token_request)
-
-Migrate financial connections token
-
-### Examples
-
-```ruby
-require 'time'
-require 'fuse_client'
-# setup authorization
-FuseClient.configure do |config|
-  # Configure API key authorization: fuseApiKey
-  config.api_key['fuseApiKey'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['fuseApiKey'] = 'Bearer'
-
-  # Configure API key authorization: fuseClientId
-  config.api_key['fuseClientId'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['fuseClientId'] = 'Bearer'
-end
-
-api_instance = FuseClient::FuseApi.new
-migrate_financial_connections_token_request = FuseClient::MigrateFinancialConnectionsTokenRequest.new({token: 'token_example', aggregator: 'plaid', entity: FuseClient::MigrateFinancialConnectionsTokenRequestEntity.new, fuse_products: [FuseClient::Product::ACCOUNT_DETAILS]}) # MigrateFinancialConnectionsTokenRequest | 
-
-begin
-  # Migrate financial connections token
-  result = api_instance.migrate_financial_connections_token(migrate_financial_connections_token_request)
-  p result
-rescue FuseClient::ApiError => e
-  puts "Error when calling FuseApi->migrate_financial_connections_token: #{e}"
-end
-```
-
-#### Using the migrate_financial_connections_token_with_http_info variant
-
-This returns an Array which contains the response data, status code and headers.
-
-> <Array(<MigrateFinancialConnectionsTokenResponse>, Integer, Hash)> migrate_financial_connections_token_with_http_info(migrate_financial_connections_token_request)
-
-```ruby
-begin
-  # Migrate financial connections token
-  data, status_code, headers = api_instance.migrate_financial_connections_token_with_http_info(migrate_financial_connections_token_request)
-  p status_code # => 2xx
-  p headers # => { ... }
-  p data # => <MigrateFinancialConnectionsTokenResponse>
-rescue FuseClient::ApiError => e
-  puts "Error when calling FuseApi->migrate_financial_connections_token_with_http_info: #{e}"
-end
-```
-
-### Parameters
-
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
-| **migrate_financial_connections_token_request** | [**MigrateFinancialConnectionsTokenRequest**](MigrateFinancialConnectionsTokenRequest.md) |  |  |
-
-### Return type
-
-[**MigrateFinancialConnectionsTokenResponse**](MigrateFinancialConnectionsTokenResponse.md)
 
 ### Authorization
 

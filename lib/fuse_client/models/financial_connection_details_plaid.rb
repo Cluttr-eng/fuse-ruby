@@ -14,19 +14,19 @@ require 'date'
 require 'time'
 
 module FuseClient
-  # Data needed to query data from MX
-  class GetEntityResponseAggregatorAccessTokensInnerMx
-    # User GUID for MX
-    attr_accessor :user_guid
+  # Data needed to query data from Plaid
+  class FinancialConnectionDetailsPlaid
+    # Access token for Plaid
+    attr_accessor :access_token
 
-    # Member GUID for MX
-    attr_accessor :member_guid
+    # ID of the item associated with the access token in Plaid
+    attr_accessor :item_id
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'user_guid' => :'user_guid',
-        :'member_guid' => :'member_guid'
+        :'access_token' => :'access_token',
+        :'item_id' => :'item_id'
       }
     end
 
@@ -38,8 +38,8 @@ module FuseClient
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'user_guid' => :'String',
-        :'member_guid' => :'String'
+        :'access_token' => :'String',
+        :'item_id' => :'String'
       }
     end
 
@@ -53,23 +53,23 @@ module FuseClient
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `FuseClient::GetEntityResponseAggregatorAccessTokensInnerMx` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `FuseClient::FinancialConnectionDetailsPlaid` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `FuseClient::GetEntityResponseAggregatorAccessTokensInnerMx`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `FuseClient::FinancialConnectionDetailsPlaid`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'user_guid')
-        self.user_guid = attributes[:'user_guid']
+      if attributes.key?(:'access_token')
+        self.access_token = attributes[:'access_token']
       end
 
-      if attributes.key?(:'member_guid')
-        self.member_guid = attributes[:'member_guid']
+      if attributes.key?(:'item_id')
+        self.item_id = attributes[:'item_id']
       end
     end
 
@@ -77,12 +77,22 @@ module FuseClient
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if @access_token.nil?
+        invalid_properties.push('invalid value for "access_token", access_token cannot be nil.')
+      end
+
+      if @item_id.nil?
+        invalid_properties.push('invalid value for "item_id", item_id cannot be nil.')
+      end
+
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if @access_token.nil?
+      return false if @item_id.nil?
       true
     end
 
@@ -91,8 +101,8 @@ module FuseClient
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          user_guid == o.user_guid &&
-          member_guid == o.member_guid
+          access_token == o.access_token &&
+          item_id == o.item_id
     end
 
     # @see the `==` method
@@ -104,7 +114,7 @@ module FuseClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [user_guid, member_guid].hash
+      [access_token, item_id].hash
     end
 
     # Builds the object from hash

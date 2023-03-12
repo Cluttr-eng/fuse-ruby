@@ -15,13 +15,10 @@ require 'time'
 
 module FuseClient
   class GetTransactionsResponse
-    attr_accessor :data
+    attr_accessor :transactions
 
-    # The cursor of the last item returned
-    attr_accessor :cursor
-
-    # Indicates if there are more pages to navigate through
-    attr_accessor :has_next
+    # The total number of transactions.
+    attr_accessor :total_transactions
 
     # An identifier that is exclusive to the request and can serve as a means for investigating and resolving issues.
     attr_accessor :request_id
@@ -29,9 +26,8 @@ module FuseClient
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'data' => :'data',
-        :'cursor' => :'cursor',
-        :'has_next' => :'has_next',
+        :'transactions' => :'transactions',
+        :'total_transactions' => :'total_transactions',
         :'request_id' => :'request_id'
       }
     end
@@ -44,9 +40,8 @@ module FuseClient
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'data' => :'Array<GetTransactionsResponseDataInner>',
-        :'cursor' => :'String',
-        :'has_next' => :'Boolean',
+        :'transactions' => :'Array<Transaction>',
+        :'total_transactions' => :'Float',
         :'request_id' => :'String'
       }
     end
@@ -72,18 +67,14 @@ module FuseClient
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'data')
-        if (value = attributes[:'data']).is_a?(Array)
-          self.data = value
+      if attributes.key?(:'transactions')
+        if (value = attributes[:'transactions']).is_a?(Array)
+          self.transactions = value
         end
       end
 
-      if attributes.key?(:'cursor')
-        self.cursor = attributes[:'cursor']
-      end
-
-      if attributes.key?(:'has_next')
-        self.has_next = attributes[:'has_next']
+      if attributes.key?(:'total_transactions')
+        self.total_transactions = attributes[:'total_transactions']
       end
 
       if attributes.key?(:'request_id')
@@ -95,12 +86,27 @@ module FuseClient
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if @transactions.nil?
+        invalid_properties.push('invalid value for "transactions", transactions cannot be nil.')
+      end
+
+      if @total_transactions.nil?
+        invalid_properties.push('invalid value for "total_transactions", total_transactions cannot be nil.')
+      end
+
+      if @request_id.nil?
+        invalid_properties.push('invalid value for "request_id", request_id cannot be nil.')
+      end
+
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if @transactions.nil?
+      return false if @total_transactions.nil?
+      return false if @request_id.nil?
       true
     end
 
@@ -109,9 +115,8 @@ module FuseClient
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          data == o.data &&
-          cursor == o.cursor &&
-          has_next == o.has_next &&
+          transactions == o.transactions &&
+          total_transactions == o.total_transactions &&
           request_id == o.request_id
     end
 
@@ -124,7 +129,7 @@ module FuseClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [data, cursor, has_next, request_id].hash
+      [transactions, total_transactions, request_id].hash
     end
 
     # Builds the object from hash

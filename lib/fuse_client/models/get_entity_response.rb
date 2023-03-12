@@ -27,7 +27,7 @@ module FuseClient
     attr_accessor :institution_ids
 
     # Data needed to query data from the various aggregators
-    attr_accessor :aggregator_access_tokens
+    attr_accessor :financial_connections
 
     # An identifier that is exclusive to the request and can serve as a means for investigating and resolving issues.
     attr_accessor :request_id
@@ -39,7 +39,7 @@ module FuseClient
         :'email' => :'email',
         :'aggregators' => :'aggregators',
         :'institution_ids' => :'institution_ids',
-        :'aggregator_access_tokens' => :'aggregator_access_tokens',
+        :'financial_connections' => :'financial_connections',
         :'request_id' => :'request_id'
       }
     end
@@ -56,7 +56,7 @@ module FuseClient
         :'email' => :'String',
         :'aggregators' => :'Array<Aggregator>',
         :'institution_ids' => :'Array<String>',
-        :'aggregator_access_tokens' => :'Array<GetEntityResponseAggregatorAccessTokensInner>',
+        :'financial_connections' => :'Array<FinancialConnectionDetails>',
         :'request_id' => :'String'
       }
     end
@@ -102,9 +102,9 @@ module FuseClient
         end
       end
 
-      if attributes.key?(:'aggregator_access_tokens')
-        if (value = attributes[:'aggregator_access_tokens']).is_a?(Array)
-          self.aggregator_access_tokens = value
+      if attributes.key?(:'financial_connections')
+        if (value = attributes[:'financial_connections']).is_a?(Array)
+          self.financial_connections = value
         end
       end
 
@@ -125,10 +125,6 @@ module FuseClient
         invalid_properties.push('invalid value for "aggregators", number of items must be greater than or equal to 1.')
       end
 
-      if @aggregator_access_tokens.nil?
-        invalid_properties.push('invalid value for "aggregator_access_tokens", aggregator_access_tokens cannot be nil.')
-      end
-
       if @request_id.nil?
         invalid_properties.push('invalid value for "request_id", request_id cannot be nil.')
       end
@@ -141,7 +137,6 @@ module FuseClient
     def valid?
       return false if @id.nil?
       return false if !@aggregators.nil? && @aggregators.length < 1
-      return false if @aggregator_access_tokens.nil?
       return false if @request_id.nil?
       true
     end
@@ -165,7 +160,7 @@ module FuseClient
           email == o.email &&
           aggregators == o.aggregators &&
           institution_ids == o.institution_ids &&
-          aggregator_access_tokens == o.aggregator_access_tokens &&
+          financial_connections == o.financial_connections &&
           request_id == o.request_id
     end
 
@@ -178,7 +173,7 @@ module FuseClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, email, aggregators, institution_ids, aggregator_access_tokens, request_id].hash
+      [id, email, aggregators, institution_ids, financial_connections, request_id].hash
     end
 
     # Builds the object from hash

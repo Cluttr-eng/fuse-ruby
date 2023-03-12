@@ -1,4 +1,4 @@
-# FuseClient::GetTransactionsResponseDataInnerMerchant
+# FuseClient::TransactionMerchant
 
 ## Properties
 
@@ -11,7 +11,7 @@
 ```ruby
 require 'fuse_client'
 
-instance = FuseClient::GetTransactionsResponseDataInnerMerchant.new(
+instance = FuseClient::TransactionMerchant.new(
   name: null
 )
 ```

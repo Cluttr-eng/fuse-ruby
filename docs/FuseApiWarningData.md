@@ -4,7 +4,7 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **aggregator** | **String** |  | [optional] |
+| **aggregator** | [**Aggregator**](Aggregator.md) |  | [optional] |
 | **warnings** | [**Array&lt;FuseApiWarningDataWarningsInner&gt;**](FuseApiWarningDataWarningsInner.md) |  | [optional] |
 
 ## Example

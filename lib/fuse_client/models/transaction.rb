@@ -14,10 +14,35 @@ require 'date'
 require 'time'
 
 module FuseClient
-  class FuseApiWarningData
-    attr_accessor :aggregator
+  class Transaction
+    # Remote Id of the transaction, ie Plaid or Teller Id
+    attr_accessor :remote_id
 
-    attr_accessor :warnings
+    # Remote Account Id of the transaction, ie Plaid Account Id
+    attr_accessor :remote_account_id
+
+    # Amount in cents associated with the transaction
+    attr_accessor :amount
+
+    # Date of the transaction
+    attr_accessor :date
+
+    # Description of the transaction
+    attr_accessor :description
+
+    # Categories of the transaction, ie Computers and Electronics
+    attr_accessor :category
+
+    attr_accessor :merchant
+
+    # The status of the transaction. This will be either posted or pending.
+    attr_accessor :status
+
+    # Type of the transaction, ie adjustment
+    attr_accessor :type
+
+    # The ISO-4217 currency code of the transaction
+    attr_accessor :iso_currency_code
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -44,8 +69,16 @@ module FuseClient
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'aggregator' => :'aggregator',
-        :'warnings' => :'warnings'
+        :'remote_id' => :'remote_id',
+        :'remote_account_id' => :'remote_account_id',
+        :'amount' => :'amount',
+        :'date' => :'date',
+        :'description' => :'description',
+        :'category' => :'category',
+        :'merchant' => :'merchant',
+        :'status' => :'status',
+        :'type' => :'type',
+        :'iso_currency_code' => :'iso_currency_code'
       }
     end
 
@@ -57,8 +90,16 @@ module FuseClient
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'aggregator' => :'Aggregator',
-        :'warnings' => :'Array<FuseApiWarningDataWarningsInner>'
+        :'remote_id' => :'String',
+        :'remote_account_id' => :'String',
+        :'amount' => :'Float',
+        :'date' => :'String',
+        :'description' => :'String',
+        :'category' => :'Array<String>',
+        :'merchant' => :'TransactionMerchant',
+        :'status' => :'String',
+        :'type' => :'String',
+        :'iso_currency_code' => :'String'
       }
     end
 
@@ -72,25 +113,57 @@ module FuseClient
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `FuseClient::FuseApiWarningData` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `FuseClient::Transaction` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `FuseClient::FuseApiWarningData`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `FuseClient::Transaction`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'aggregator')
-        self.aggregator = attributes[:'aggregator']
+      if attributes.key?(:'remote_id')
+        self.remote_id = attributes[:'remote_id']
       end
 
-      if attributes.key?(:'warnings')
-        if (value = attributes[:'warnings']).is_a?(Array)
-          self.warnings = value
+      if attributes.key?(:'remote_account_id')
+        self.remote_account_id = attributes[:'remote_account_id']
+      end
+
+      if attributes.key?(:'amount')
+        self.amount = attributes[:'amount']
+      end
+
+      if attributes.key?(:'date')
+        self.date = attributes[:'date']
+      end
+
+      if attributes.key?(:'description')
+        self.description = attributes[:'description']
+      end
+
+      if attributes.key?(:'category')
+        if (value = attributes[:'category']).is_a?(Array)
+          self.category = value
         end
+      end
+
+      if attributes.key?(:'merchant')
+        self.merchant = attributes[:'merchant']
+      end
+
+      if attributes.key?(:'status')
+        self.status = attributes[:'status']
+      end
+
+      if attributes.key?(:'type')
+        self.type = attributes[:'type']
+      end
+
+      if attributes.key?(:'iso_currency_code')
+        self.iso_currency_code = attributes[:'iso_currency_code']
       end
     end
 
@@ -98,13 +171,70 @@ module FuseClient
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if @remote_id.nil?
+        invalid_properties.push('invalid value for "remote_id", remote_id cannot be nil.')
+      end
+
+      if @remote_account_id.nil?
+        invalid_properties.push('invalid value for "remote_account_id", remote_account_id cannot be nil.')
+      end
+
+      if @amount.nil?
+        invalid_properties.push('invalid value for "amount", amount cannot be nil.')
+      end
+
+      if @date.nil?
+        invalid_properties.push('invalid value for "date", date cannot be nil.')
+      end
+
+      if @description.nil?
+        invalid_properties.push('invalid value for "description", description cannot be nil.')
+      end
+
+      if @category.nil?
+        invalid_properties.push('invalid value for "category", category cannot be nil.')
+      end
+
+      if @merchant.nil?
+        invalid_properties.push('invalid value for "merchant", merchant cannot be nil.')
+      end
+
+      if @status.nil?
+        invalid_properties.push('invalid value for "status", status cannot be nil.')
+      end
+
+      if @type.nil?
+        invalid_properties.push('invalid value for "type", type cannot be nil.')
+      end
+
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if @remote_id.nil?
+      return false if @remote_account_id.nil?
+      return false if @amount.nil?
+      return false if @date.nil?
+      return false if @description.nil?
+      return false if @category.nil?
+      return false if @merchant.nil?
+      return false if @status.nil?
+      status_validator = EnumAttributeValidator.new('String', ["pending", "posted"])
+      return false unless status_validator.valid?(@status)
+      return false if @type.nil?
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] status Object to be assigned
+    def status=(status)
+      validator = EnumAttributeValidator.new('String', ["pending", "posted"])
+      unless validator.valid?(status)
+        fail ArgumentError, "invalid value for \"status\", must be one of #{validator.allowable_values}."
+      end
+      @status = status
     end
 
     # Checks equality by comparing each attribute.
@@ -112,8 +242,16 @@ module FuseClient
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          aggregator == o.aggregator &&
-          warnings == o.warnings
+          remote_id == o.remote_id &&
+          remote_account_id == o.remote_account_id &&
+          amount == o.amount &&
+          date == o.date &&
+          description == o.description &&
+          category == o.category &&
+          merchant == o.merchant &&
+          status == o.status &&
+          type == o.type &&
+          iso_currency_code == o.iso_currency_code
     end
 
     # @see the `==` method
@@ -125,7 +263,7 @@ module FuseClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [aggregator, warnings].hash
+      [remote_id, remote_account_id, amount, date, description, category, merchant, status, type, iso_currency_code].hash
     end
 
     # Builds the object from hash

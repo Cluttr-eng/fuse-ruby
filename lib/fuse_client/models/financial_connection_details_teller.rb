@@ -14,13 +14,19 @@ require 'date'
 require 'time'
 
 module FuseClient
-  class TransactionCommonModel
-    attr_accessor :data
+  # Data needed to query data from Teller
+  class FinancialConnectionDetailsTeller
+    # Access token for Teller
+    attr_accessor :access_token
+
+    # Enrollment ID associated with the access token in Teller
+    attr_accessor :enrollment_id
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'data' => :'data'
+        :'access_token' => :'access_token',
+        :'enrollment_id' => :'enrollment_id'
       }
     end
 
@@ -32,7 +38,8 @@ module FuseClient
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'data' => :'Array<GetTransactionsResponseDataInner>'
+        :'access_token' => :'String',
+        :'enrollment_id' => :'String'
       }
     end
 
@@ -46,21 +53,23 @@ module FuseClient
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `FuseClient::TransactionCommonModel` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `FuseClient::FinancialConnectionDetailsTeller` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `FuseClient::TransactionCommonModel`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `FuseClient::FinancialConnectionDetailsTeller`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'data')
-        if (value = attributes[:'data']).is_a?(Array)
-          self.data = value
-        end
+      if attributes.key?(:'access_token')
+        self.access_token = attributes[:'access_token']
+      end
+
+      if attributes.key?(:'enrollment_id')
+        self.enrollment_id = attributes[:'enrollment_id']
       end
     end
 
@@ -68,12 +77,22 @@ module FuseClient
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if @access_token.nil?
+        invalid_properties.push('invalid value for "access_token", access_token cannot be nil.')
+      end
+
+      if @enrollment_id.nil?
+        invalid_properties.push('invalid value for "enrollment_id", enrollment_id cannot be nil.')
+      end
+
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if @access_token.nil?
+      return false if @enrollment_id.nil?
       true
     end
 
@@ -82,7 +101,8 @@ module FuseClient
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          data == o.data
+          access_token == o.access_token &&
+          enrollment_id == o.enrollment_id
     end
 
     # @see the `==` method
@@ -94,7 +114,7 @@ module FuseClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [data].hash
+      [access_token, enrollment_id].hash
     end
 
     # Builds the object from hash

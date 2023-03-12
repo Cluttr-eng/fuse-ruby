@@ -53,8 +53,8 @@ module FuseClient
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'added' => :'Array<TransactionCommonModel>',
-        :'modified' => :'Array<TransactionCommonModel>',
+        :'added' => :'Array<Transaction>',
+        :'modified' => :'Array<Transaction>',
         :'removed' => :'Array<SyncTransactionsResponseRemovedInner>',
         :'next_cursor' => :'String',
         :'has_next' => :'Boolean',

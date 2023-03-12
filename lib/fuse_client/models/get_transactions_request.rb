@@ -15,21 +15,29 @@ require 'time'
 
 module FuseClient
   class GetTransactionsRequest
-    # Access token for authentication
+    # Access token for authentication.
     attr_accessor :access_token
 
-    # Cursor for pagination
-    attr_accessor :cursor
+    # The earliest date for which data should be returned. Dates should be formatted as YYYY-MM-DD.
+    attr_accessor :start_date
 
-    # Number of items per page
-    attr_accessor :count
+    # The latest date for which data should be returned. Dates should be formatted as YYYY-MM-DD.
+    attr_accessor :end_date
+
+    # Specify current page.
+    attr_accessor :page
+
+    # Number of items per page.
+    attr_accessor :records_per_page
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'access_token' => :'access_token',
-        :'cursor' => :'cursor',
-        :'count' => :'count'
+        :'start_date' => :'start_date',
+        :'end_date' => :'end_date',
+        :'page' => :'page',
+        :'records_per_page' => :'records_per_page'
       }
     end
 
@@ -42,8 +50,10 @@ module FuseClient
     def self.openapi_types
       {
         :'access_token' => :'String',
-        :'cursor' => :'String',
-        :'count' => :'Integer'
+        :'start_date' => :'String',
+        :'end_date' => :'String',
+        :'page' => :'Integer',
+        :'records_per_page' => :'Integer'
       }
     end
 
@@ -72,12 +82,22 @@ module FuseClient
         self.access_token = attributes[:'access_token']
       end
 
-      if attributes.key?(:'cursor')
-        self.cursor = attributes[:'cursor']
+      if attributes.key?(:'start_date')
+        self.start_date = attributes[:'start_date']
       end
 
-      if attributes.key?(:'count')
-        self.count = attributes[:'count']
+      if attributes.key?(:'end_date')
+        self.end_date = attributes[:'end_date']
+      end
+
+      if attributes.key?(:'page')
+        self.page = attributes[:'page']
+      end
+
+      if attributes.key?(:'records_per_page')
+        self.records_per_page = attributes[:'records_per_page']
+      else
+        self.records_per_page = 100
       end
     end
 
@@ -89,6 +109,30 @@ module FuseClient
         invalid_properties.push('invalid value for "access_token", access_token cannot be nil.')
       end
 
+      if @start_date.nil?
+        invalid_properties.push('invalid value for "start_date", start_date cannot be nil.')
+      end
+
+      if @end_date.nil?
+        invalid_properties.push('invalid value for "end_date", end_date cannot be nil.')
+      end
+
+      if @page.nil?
+        invalid_properties.push('invalid value for "page", page cannot be nil.')
+      end
+
+      if @records_per_page.nil?
+        invalid_properties.push('invalid value for "records_per_page", records_per_page cannot be nil.')
+      end
+
+      if @records_per_page > 500
+        invalid_properties.push('invalid value for "records_per_page", must be smaller than or equal to 500.')
+      end
+
+      if @records_per_page < 1
+        invalid_properties.push('invalid value for "records_per_page", must be greater than or equal to 1.')
+      end
+
       invalid_properties
     end
 
@@ -96,7 +140,31 @@ module FuseClient
     # @return true if the model is valid
     def valid?
       return false if @access_token.nil?
+      return false if @start_date.nil?
+      return false if @end_date.nil?
+      return false if @page.nil?
+      return false if @records_per_page.nil?
+      return false if @records_per_page > 500
+      return false if @records_per_page < 1
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] records_per_page Value to be assigned
+    def records_per_page=(records_per_page)
+      if records_per_page.nil?
+        fail ArgumentError, 'records_per_page cannot be nil'
+      end
+
+      if records_per_page > 500
+        fail ArgumentError, 'invalid value for "records_per_page", must be smaller than or equal to 500.'
+      end
+
+      if records_per_page < 1
+        fail ArgumentError, 'invalid value for "records_per_page", must be greater than or equal to 1.'
+      end
+
+      @records_per_page = records_per_page
     end
 
     # Checks equality by comparing each attribute.
@@ -105,8 +173,10 @@ module FuseClient
       return true if self.equal?(o)
       self.class == o.class &&
           access_token == o.access_token &&
-          cursor == o.cursor &&
-          count == o.count
+          start_date == o.start_date &&
+          end_date == o.end_date &&
+          page == o.page &&
+          records_per_page == o.records_per_page
     end
 
     # @see the `==` method
@@ -118,7 +188,7 @@ module FuseClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [access_token, cursor, count].hash
+      [access_token, start_date, end_date, page, records_per_page].hash
     end
 
     # Builds the object from hash
