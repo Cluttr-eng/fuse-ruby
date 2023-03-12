@@ -4,9 +4,11 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **access_token** | **String** | Access token for authentication |  |
-| **cursor** | **String** | Cursor for pagination | [optional] |
-| **count** | **Integer** | Number of items per page | [optional] |
+| **access_token** | **String** | Access token for authentication. |  |
+| **start_date** | **String** | The earliest date for which data should be returned. Dates should be formatted as YYYY-MM-DD. |  |
+| **end_date** | **String** | The latest date for which data should be returned. Dates should be formatted as YYYY-MM-DD. |  |
+| **page** | **Integer** | Specify current page. |  |
+| **records_per_page** | **Integer** | Number of items per page. | [default to 100] |
 
 ## Example
 
@@ -15,8 +17,10 @@ require 'fuse_client'
 
 instance = FuseClient::GetTransactionsRequest.new(
   access_token: null,
-  cursor: null,
-  count: null
+  start_date: null,
+  end_date: null,
+  page: null,
+  records_per_page: null
 )
 ```
 

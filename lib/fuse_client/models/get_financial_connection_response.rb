@@ -14,23 +14,17 @@ require 'date'
 require 'time'
 
 module FuseClient
-  class GetEntityResponseAggregatorAccessTokensInner
-    # The fuse financial connection id associated with the aggregator access token
-    attr_accessor :financial_connection_id
+  class GetFinancialConnectionResponse
+    attr_accessor :financial_connection
 
-    attr_accessor :plaid
-
-    attr_accessor :teller
-
-    attr_accessor :mx
+    # An identifier that is exclusive to the request and can serve as a means for investigating and resolving issues.
+    attr_accessor :request_id
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'financial_connection_id' => :'financial_connection_id',
-        :'plaid' => :'plaid',
-        :'teller' => :'teller',
-        :'mx' => :'mx'
+        :'financial_connection' => :'financial_connection',
+        :'request_id' => :'request_id'
       }
     end
 
@@ -42,10 +36,8 @@ module FuseClient
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'financial_connection_id' => :'String',
-        :'plaid' => :'GetEntityResponseAggregatorAccessTokensInnerPlaid',
-        :'teller' => :'GetEntityResponseAggregatorAccessTokensInnerTeller',
-        :'mx' => :'GetEntityResponseAggregatorAccessTokensInnerMx'
+        :'financial_connection' => :'FinancialConnectionDetails',
+        :'request_id' => :'String'
       }
     end
 
@@ -59,31 +51,23 @@ module FuseClient
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `FuseClient::GetEntityResponseAggregatorAccessTokensInner` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `FuseClient::GetFinancialConnectionResponse` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `FuseClient::GetEntityResponseAggregatorAccessTokensInner`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `FuseClient::GetFinancialConnectionResponse`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'financial_connection_id')
-        self.financial_connection_id = attributes[:'financial_connection_id']
+      if attributes.key?(:'financial_connection')
+        self.financial_connection = attributes[:'financial_connection']
       end
 
-      if attributes.key?(:'plaid')
-        self.plaid = attributes[:'plaid']
-      end
-
-      if attributes.key?(:'teller')
-        self.teller = attributes[:'teller']
-      end
-
-      if attributes.key?(:'mx')
-        self.mx = attributes[:'mx']
+      if attributes.key?(:'request_id')
+        self.request_id = attributes[:'request_id']
       end
     end
 
@@ -91,12 +75,22 @@ module FuseClient
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if @financial_connection.nil?
+        invalid_properties.push('invalid value for "financial_connection", financial_connection cannot be nil.')
+      end
+
+      if @request_id.nil?
+        invalid_properties.push('invalid value for "request_id", request_id cannot be nil.')
+      end
+
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if @financial_connection.nil?
+      return false if @request_id.nil?
       true
     end
 
@@ -105,10 +99,8 @@ module FuseClient
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          financial_connection_id == o.financial_connection_id &&
-          plaid == o.plaid &&
-          teller == o.teller &&
-          mx == o.mx
+          financial_connection == o.financial_connection &&
+          request_id == o.request_id
     end
 
     # @see the `==` method
@@ -120,7 +112,7 @@ module FuseClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [financial_connection_id, plaid, teller, mx].hash
+      [financial_connection, request_id].hash
     end
 
     # Builds the object from hash

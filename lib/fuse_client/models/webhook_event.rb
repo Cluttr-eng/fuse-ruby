@@ -14,10 +14,17 @@ require 'date'
 require 'time'
 
 module FuseClient
-  class FuseApiWarningData
-    attr_accessor :aggregator
+  class WebhookEvent
+    attr_accessor :type
 
-    attr_accessor :warnings
+    # Financial connection id associated with the webhook
+    attr_accessor :financial_connection_id
+
+    attr_accessor :environment
+
+    attr_accessor :source
+
+    attr_accessor :remote_data
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -44,8 +51,11 @@ module FuseClient
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'aggregator' => :'aggregator',
-        :'warnings' => :'warnings'
+        :'type' => :'type',
+        :'financial_connection_id' => :'financial_connection_id',
+        :'environment' => :'environment',
+        :'source' => :'source',
+        :'remote_data' => :'remote_data'
       }
     end
 
@@ -57,14 +67,18 @@ module FuseClient
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'aggregator' => :'Aggregator',
-        :'warnings' => :'Array<FuseApiWarningDataWarningsInner>'
+        :'type' => :'WebhookType',
+        :'financial_connection_id' => :'String',
+        :'environment' => :'String',
+        :'source' => :'WebhookSource',
+        :'remote_data' => :'Object'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'remote_data'
       ])
     end
 
@@ -72,25 +86,35 @@ module FuseClient
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `FuseClient::FuseApiWarningData` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `FuseClient::WebhookEvent` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `FuseClient::FuseApiWarningData`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `FuseClient::WebhookEvent`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'aggregator')
-        self.aggregator = attributes[:'aggregator']
+      if attributes.key?(:'type')
+        self.type = attributes[:'type']
       end
 
-      if attributes.key?(:'warnings')
-        if (value = attributes[:'warnings']).is_a?(Array)
-          self.warnings = value
-        end
+      if attributes.key?(:'financial_connection_id')
+        self.financial_connection_id = attributes[:'financial_connection_id']
+      end
+
+      if attributes.key?(:'environment')
+        self.environment = attributes[:'environment']
+      end
+
+      if attributes.key?(:'source')
+        self.source = attributes[:'source']
+      end
+
+      if attributes.key?(:'remote_data')
+        self.remote_data = attributes[:'remote_data']
       end
     end
 
@@ -98,13 +122,45 @@ module FuseClient
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if @type.nil?
+        invalid_properties.push('invalid value for "type", type cannot be nil.')
+      end
+
+      if @financial_connection_id.nil?
+        invalid_properties.push('invalid value for "financial_connection_id", financial_connection_id cannot be nil.')
+      end
+
+      if @environment.nil?
+        invalid_properties.push('invalid value for "environment", environment cannot be nil.')
+      end
+
+      if @source.nil?
+        invalid_properties.push('invalid value for "source", source cannot be nil.')
+      end
+
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if @type.nil?
+      return false if @financial_connection_id.nil?
+      return false if @environment.nil?
+      environment_validator = EnumAttributeValidator.new('String', ["sandbox", "production"])
+      return false unless environment_validator.valid?(@environment)
+      return false if @source.nil?
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] environment Object to be assigned
+    def environment=(environment)
+      validator = EnumAttributeValidator.new('String', ["sandbox", "production"])
+      unless validator.valid?(environment)
+        fail ArgumentError, "invalid value for \"environment\", must be one of #{validator.allowable_values}."
+      end
+      @environment = environment
     end
 
     # Checks equality by comparing each attribute.
@@ -112,8 +168,11 @@ module FuseClient
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          aggregator == o.aggregator &&
-          warnings == o.warnings
+          type == o.type &&
+          financial_connection_id == o.financial_connection_id &&
+          environment == o.environment &&
+          source == o.source &&
+          remote_data == o.remote_data
     end
 
     # @see the `==` method
@@ -125,7 +184,7 @@ module FuseClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [aggregator, warnings].hash
+      [type, financial_connection_id, environment, source, remote_data].hash
     end
 
     # Builds the object from hash

@@ -14,19 +14,60 @@ require 'date'
 require 'time'
 
 module FuseClient
-  # Data needed to query data from Plaid
-  class GetEntityResponseAggregatorAccessTokensInnerPlaid
-    # Access token for Plaid
-    attr_accessor :access_token
+  class FinancialConnectionDetails
+    # The fuse financial connection id.
+    attr_accessor :id
 
-    # ID of the item associated with the access token in Plaid
-    attr_accessor :item_id
+    # Connection status of the current financial connection
+    attr_accessor :connection_status
+
+    # Last time the connection status was updated in ISO-8601 format.
+    attr_accessor :connection_status_updated_at
+
+    # Whether this is an oauth connection
+    attr_accessor :is_oauth
+
+    attr_accessor :aggregator
+
+    attr_accessor :plaid
+
+    attr_accessor :teller
+
+    attr_accessor :mx
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'access_token' => :'access_token',
-        :'item_id' => :'item_id'
+        :'id' => :'id',
+        :'connection_status' => :'connection_status',
+        :'connection_status_updated_at' => :'connection_status_updated_at',
+        :'is_oauth' => :'is_oauth',
+        :'aggregator' => :'aggregator',
+        :'plaid' => :'plaid',
+        :'teller' => :'teller',
+        :'mx' => :'mx'
       }
     end
 
@@ -38,8 +79,14 @@ module FuseClient
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'access_token' => :'String',
-        :'item_id' => :'String'
+        :'id' => :'String',
+        :'connection_status' => :'String',
+        :'connection_status_updated_at' => :'String',
+        :'is_oauth' => :'Boolean',
+        :'aggregator' => :'Aggregator',
+        :'plaid' => :'FinancialConnectionDetailsPlaid',
+        :'teller' => :'FinancialConnectionDetailsTeller',
+        :'mx' => :'FinancialConnectionDetailsMx'
       }
     end
 
@@ -53,23 +100,47 @@ module FuseClient
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `FuseClient::GetEntityResponseAggregatorAccessTokensInnerPlaid` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `FuseClient::FinancialConnectionDetails` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `FuseClient::GetEntityResponseAggregatorAccessTokensInnerPlaid`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `FuseClient::FinancialConnectionDetails`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'access_token')
-        self.access_token = attributes[:'access_token']
+      if attributes.key?(:'id')
+        self.id = attributes[:'id']
       end
 
-      if attributes.key?(:'item_id')
-        self.item_id = attributes[:'item_id']
+      if attributes.key?(:'connection_status')
+        self.connection_status = attributes[:'connection_status']
+      end
+
+      if attributes.key?(:'connection_status_updated_at')
+        self.connection_status_updated_at = attributes[:'connection_status_updated_at']
+      end
+
+      if attributes.key?(:'is_oauth')
+        self.is_oauth = attributes[:'is_oauth']
+      end
+
+      if attributes.key?(:'aggregator')
+        self.aggregator = attributes[:'aggregator']
+      end
+
+      if attributes.key?(:'plaid')
+        self.plaid = attributes[:'plaid']
+      end
+
+      if attributes.key?(:'teller')
+        self.teller = attributes[:'teller']
+      end
+
+      if attributes.key?(:'mx')
+        self.mx = attributes[:'mx']
       end
     end
 
@@ -77,13 +148,50 @@ module FuseClient
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if @id.nil?
+        invalid_properties.push('invalid value for "id", id cannot be nil.')
+      end
+
+      if @connection_status.nil?
+        invalid_properties.push('invalid value for "connection_status", connection_status cannot be nil.')
+      end
+
+      if @connection_status_updated_at.nil?
+        invalid_properties.push('invalid value for "connection_status_updated_at", connection_status_updated_at cannot be nil.')
+      end
+
+      if @is_oauth.nil?
+        invalid_properties.push('invalid value for "is_oauth", is_oauth cannot be nil.')
+      end
+
+      if @aggregator.nil?
+        invalid_properties.push('invalid value for "aggregator", aggregator cannot be nil.')
+      end
+
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if @id.nil?
+      return false if @connection_status.nil?
+      connection_status_validator = EnumAttributeValidator.new('String', ["connected", "disconnected", "finished"])
+      return false unless connection_status_validator.valid?(@connection_status)
+      return false if @connection_status_updated_at.nil?
+      return false if @is_oauth.nil?
+      return false if @aggregator.nil?
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] connection_status Object to be assigned
+    def connection_status=(connection_status)
+      validator = EnumAttributeValidator.new('String', ["connected", "disconnected", "finished"])
+      unless validator.valid?(connection_status)
+        fail ArgumentError, "invalid value for \"connection_status\", must be one of #{validator.allowable_values}."
+      end
+      @connection_status = connection_status
     end
 
     # Checks equality by comparing each attribute.
@@ -91,8 +199,14 @@ module FuseClient
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          access_token == o.access_token &&
-          item_id == o.item_id
+          id == o.id &&
+          connection_status == o.connection_status &&
+          connection_status_updated_at == o.connection_status_updated_at &&
+          is_oauth == o.is_oauth &&
+          aggregator == o.aggregator &&
+          plaid == o.plaid &&
+          teller == o.teller &&
+          mx == o.mx
     end
 
     # @see the `==` method
@@ -104,7 +218,7 @@ module FuseClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [access_token, item_id].hash
+      [id, connection_status, connection_status_updated_at, is_oauth, aggregator, plaid, teller, mx].hash
     end
 
     # Builds the object from hash

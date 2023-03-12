@@ -76,6 +76,17 @@ describe 'FuseApi' do
     end
   end
 
+  # unit tests for delete_financial_connection
+  # Delete a financial connection
+  # @param financial_connection_id_to_delete 
+  # @param [Hash] opts the optional parameters
+  # @return [DeleteFinancialConnectionResponse]
+  describe 'delete_financial_connection test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   # unit tests for exchange_financial_connections_public_token
   # API to exchange a public token for an access token and financial connection id
   # @param [Hash] opts the optional parameters
@@ -104,6 +115,17 @@ describe 'FuseApi' do
   # @param [Hash] opts the optional parameters
   # @return [GetEntityResponse]
   describe 'get_entity test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  # unit tests for get_financial_connection
+  # Get financial connection details
+  # @param financial_connection_id 
+  # @param [Hash] opts the optional parameters
+  # @return [GetFinancialConnectionResponse]
+  describe 'get_financial_connection test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
@@ -193,17 +215,6 @@ describe 'FuseApi' do
   # @param [Hash] opts the optional parameters
   # @return [GetInvestmentTransactionsResponse]
   describe 'get_investment_transactions test' do
-    it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-    end
-  end
-
-  # unit tests for migrate_financial_connections_token
-  # Migrate financial connections token
-  # @param migrate_financial_connections_token_request 
-  # @param [Hash] opts the optional parameters
-  # @return [MigrateFinancialConnectionsTokenResponse]
-  describe 'migrate_financial_connections_token test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end

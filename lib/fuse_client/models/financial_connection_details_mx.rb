@@ -14,49 +14,19 @@ require 'date'
 require 'time'
 
 module FuseClient
-  class GetTransactionsResponseDataInner
-    # Fuse Id of the transaction
-    attr_accessor :id
+  # Data needed to query data from MX
+  class FinancialConnectionDetailsMx
+    # User GUID for MX
+    attr_accessor :user_guid
 
-    # Remote Id of the transaction, ie Plaid or Teller Id
-    attr_accessor :remote_id
-
-    # Remote Account Id of the transaction, ie Plaid Account Id
-    attr_accessor :remote_account_id
-
-    # Amount in cents associated with the transaction
-    attr_accessor :amount
-
-    # Date of the transaction
-    attr_accessor :date
-
-    # Description of the transaction
-    attr_accessor :description
-
-    # Categories of the transaction, ie Computers and Electronics
-    attr_accessor :category
-
-    attr_accessor :merchant
-
-    # The status of the transaction. This will be either POSTED or PENDING.
-    attr_accessor :status
-
-    # Type of the transaction, ie adjustment
-    attr_accessor :type
+    # Member GUID for MX
+    attr_accessor :member_guid
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'id' => :'id',
-        :'remote_id' => :'remote_id',
-        :'remote_account_id' => :'remote_account_id',
-        :'amount' => :'amount',
-        :'date' => :'date',
-        :'description' => :'description',
-        :'category' => :'category',
-        :'merchant' => :'merchant',
-        :'status' => :'status',
-        :'type' => :'type'
+        :'user_guid' => :'user_guid',
+        :'member_guid' => :'member_guid'
       }
     end
 
@@ -68,16 +38,8 @@ module FuseClient
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'id' => :'String',
-        :'remote_id' => :'String',
-        :'remote_account_id' => :'String',
-        :'amount' => :'Float',
-        :'date' => :'String',
-        :'description' => :'String',
-        :'category' => :'Array<String>',
-        :'merchant' => :'GetTransactionsResponseDataInnerMerchant',
-        :'status' => :'String',
-        :'type' => :'String'
+        :'user_guid' => :'String',
+        :'member_guid' => :'String'
       }
     end
 
@@ -91,57 +53,23 @@ module FuseClient
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `FuseClient::GetTransactionsResponseDataInner` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `FuseClient::FinancialConnectionDetailsMx` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `FuseClient::GetTransactionsResponseDataInner`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `FuseClient::FinancialConnectionDetailsMx`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'id')
-        self.id = attributes[:'id']
+      if attributes.key?(:'user_guid')
+        self.user_guid = attributes[:'user_guid']
       end
 
-      if attributes.key?(:'remote_id')
-        self.remote_id = attributes[:'remote_id']
-      end
-
-      if attributes.key?(:'remote_account_id')
-        self.remote_account_id = attributes[:'remote_account_id']
-      end
-
-      if attributes.key?(:'amount')
-        self.amount = attributes[:'amount']
-      end
-
-      if attributes.key?(:'date')
-        self.date = attributes[:'date']
-      end
-
-      if attributes.key?(:'description')
-        self.description = attributes[:'description']
-      end
-
-      if attributes.key?(:'category')
-        if (value = attributes[:'category']).is_a?(Array)
-          self.category = value
-        end
-      end
-
-      if attributes.key?(:'merchant')
-        self.merchant = attributes[:'merchant']
-      end
-
-      if attributes.key?(:'status')
-        self.status = attributes[:'status']
-      end
-
-      if attributes.key?(:'type')
-        self.type = attributes[:'type']
+      if attributes.key?(:'member_guid')
+        self.member_guid = attributes[:'member_guid']
       end
     end
 
@@ -149,12 +77,22 @@ module FuseClient
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if @user_guid.nil?
+        invalid_properties.push('invalid value for "user_guid", user_guid cannot be nil.')
+      end
+
+      if @member_guid.nil?
+        invalid_properties.push('invalid value for "member_guid", member_guid cannot be nil.')
+      end
+
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if @user_guid.nil?
+      return false if @member_guid.nil?
       true
     end
 
@@ -163,16 +101,8 @@ module FuseClient
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          id == o.id &&
-          remote_id == o.remote_id &&
-          remote_account_id == o.remote_account_id &&
-          amount == o.amount &&
-          date == o.date &&
-          description == o.description &&
-          category == o.category &&
-          merchant == o.merchant &&
-          status == o.status &&
-          type == o.type
+          user_guid == o.user_guid &&
+          member_guid == o.member_guid
     end
 
     # @see the `==` method
@@ -184,7 +114,7 @@ module FuseClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, remote_id, remote_account_id, amount, date, description, category, merchant, status, type].hash
+      [user_guid, member_guid].hash
     end
 
     # Builds the object from hash

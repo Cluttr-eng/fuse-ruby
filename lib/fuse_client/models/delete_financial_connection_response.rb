@@ -14,19 +14,22 @@ require 'date'
 require 'time'
 
 module FuseClient
-  # Data needed to query data from Teller
-  class GetEntityResponseAggregatorAccessTokensInnerTeller
-    # Access token for Teller
+  class DeleteFinancialConnectionResponse
+    # Id of the deleted financial connection
+    attr_accessor :financial_connection_id
+
+    # Access token of the deleted financial connection
     attr_accessor :access_token
 
-    # Enrollment ID associated with the access token in Teller
-    attr_accessor :enrollment_id
+    # An identifier that is exclusive to the request and can serve as a means for investigating and resolving issues.
+    attr_accessor :request_id
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'financial_connection_id' => :'financial_connection_id',
         :'access_token' => :'access_token',
-        :'enrollment_id' => :'enrollment_id'
+        :'request_id' => :'request_id'
       }
     end
 
@@ -38,8 +41,9 @@ module FuseClient
     # Attribute type mapping.
     def self.openapi_types
       {
+        :'financial_connection_id' => :'String',
         :'access_token' => :'String',
-        :'enrollment_id' => :'String'
+        :'request_id' => :'String'
       }
     end
 
@@ -53,23 +57,27 @@ module FuseClient
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `FuseClient::GetEntityResponseAggregatorAccessTokensInnerTeller` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `FuseClient::DeleteFinancialConnectionResponse` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `FuseClient::GetEntityResponseAggregatorAccessTokensInnerTeller`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `FuseClient::DeleteFinancialConnectionResponse`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
+
+      if attributes.key?(:'financial_connection_id')
+        self.financial_connection_id = attributes[:'financial_connection_id']
+      end
 
       if attributes.key?(:'access_token')
         self.access_token = attributes[:'access_token']
       end
 
-      if attributes.key?(:'enrollment_id')
-        self.enrollment_id = attributes[:'enrollment_id']
+      if attributes.key?(:'request_id')
+        self.request_id = attributes[:'request_id']
       end
     end
 
@@ -77,12 +85,27 @@ module FuseClient
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if @financial_connection_id.nil?
+        invalid_properties.push('invalid value for "financial_connection_id", financial_connection_id cannot be nil.')
+      end
+
+      if @access_token.nil?
+        invalid_properties.push('invalid value for "access_token", access_token cannot be nil.')
+      end
+
+      if @request_id.nil?
+        invalid_properties.push('invalid value for "request_id", request_id cannot be nil.')
+      end
+
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if @financial_connection_id.nil?
+      return false if @access_token.nil?
+      return false if @request_id.nil?
       true
     end
 
@@ -91,8 +114,9 @@ module FuseClient
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          financial_connection_id == o.financial_connection_id &&
           access_token == o.access_token &&
-          enrollment_id == o.enrollment_id
+          request_id == o.request_id
     end
 
     # @see the `==` method
@@ -104,7 +128,7 @@ module FuseClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [access_token, enrollment_id].hash
+      [financial_connection_id, access_token, request_id].hash
     end
 
     # Builds the object from hash
