@@ -1,4 +1,4 @@
-# FuseClient::GetTransactionsResponse
+# FuseClient::GetFinancialConnectionsTransactionsResponse
 
 ## Properties
 
@@ -13,7 +13,7 @@
 ```ruby
 require 'fuse_client'
 
-instance = FuseClient::GetTransactionsResponse.new(
+instance = FuseClient::GetFinancialConnectionsTransactionsResponse.new(
   transactions: null,
   total_transactions: null,
   request_id: null

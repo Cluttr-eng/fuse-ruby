@@ -1012,7 +1012,7 @@ end
 
 ## get_financial_connections_transactions
 
-> <GetTransactionsResponse> get_financial_connections_transactions(get_transactions_request)
+> <GetFinancialConnectionsTransactionsResponse> get_financial_connections_transactions(get_financial_connections_transactions_request)
 
 Get transactions
 
@@ -1035,11 +1035,11 @@ FuseClient.configure do |config|
 end
 
 api_instance = FuseClient::FuseApi.new
-get_transactions_request = FuseClient::GetTransactionsRequest.new({access_token: 'access_token_example', start_date: 'start_date_example', end_date: 'end_date_example', page: 37, records_per_page: 37}) # GetTransactionsRequest | 
+get_financial_connections_transactions_request = FuseClient::GetFinancialConnectionsTransactionsRequest.new({access_token: 'access_token_example', start_date: 'start_date_example', end_date: 'end_date_example', page: 37, records_per_page: 37}) # GetFinancialConnectionsTransactionsRequest | 
 
 begin
   # Get transactions
-  result = api_instance.get_financial_connections_transactions(get_transactions_request)
+  result = api_instance.get_financial_connections_transactions(get_financial_connections_transactions_request)
   p result
 rescue FuseClient::ApiError => e
   puts "Error when calling FuseApi->get_financial_connections_transactions: #{e}"
@@ -1050,15 +1050,15 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<GetTransactionsResponse>, Integer, Hash)> get_financial_connections_transactions_with_http_info(get_transactions_request)
+> <Array(<GetFinancialConnectionsTransactionsResponse>, Integer, Hash)> get_financial_connections_transactions_with_http_info(get_financial_connections_transactions_request)
 
 ```ruby
 begin
   # Get transactions
-  data, status_code, headers = api_instance.get_financial_connections_transactions_with_http_info(get_transactions_request)
+  data, status_code, headers = api_instance.get_financial_connections_transactions_with_http_info(get_financial_connections_transactions_request)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <GetTransactionsResponse>
+  p data # => <GetFinancialConnectionsTransactionsResponse>
 rescue FuseClient::ApiError => e
   puts "Error when calling FuseApi->get_financial_connections_transactions_with_http_info: #{e}"
 end
@@ -1068,11 +1068,11 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **get_transactions_request** | [**GetTransactionsRequest**](GetTransactionsRequest.md) |  |  |
+| **get_financial_connections_transactions_request** | [**GetFinancialConnectionsTransactionsRequest**](GetFinancialConnectionsTransactionsRequest.md) |  |  |
 
 ### Return type
 
-[**GetTransactionsResponse**](GetTransactionsResponse.md)
+[**GetFinancialConnectionsTransactionsResponse**](GetFinancialConnectionsTransactionsResponse.md)
 
 ### Authorization
 

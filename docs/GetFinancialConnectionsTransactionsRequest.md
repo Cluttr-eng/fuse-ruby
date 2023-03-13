@@ -1,4 +1,4 @@
-# FuseClient::GetTransactionsRequest
+# FuseClient::GetFinancialConnectionsTransactionsRequest
 
 ## Properties
 
@@ -15,7 +15,7 @@
 ```ruby
 require 'fuse_client'
 
-instance = FuseClient::GetTransactionsRequest.new(
+instance = FuseClient::GetFinancialConnectionsTransactionsRequest.new(
   access_token: null,
   start_date: null,
   end_date: null,

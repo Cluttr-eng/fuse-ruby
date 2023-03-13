@@ -843,25 +843,25 @@ module FuseClient
     end
 
     # Get transactions
-    # @param get_transactions_request [GetTransactionsRequest] 
+    # @param get_financial_connections_transactions_request [GetFinancialConnectionsTransactionsRequest] 
     # @param [Hash] opts the optional parameters
-    # @return [GetTransactionsResponse]
-    def get_financial_connections_transactions(get_transactions_request, opts = {})
-      data, _status_code, _headers = get_financial_connections_transactions_with_http_info(get_transactions_request, opts)
+    # @return [GetFinancialConnectionsTransactionsResponse]
+    def get_financial_connections_transactions(get_financial_connections_transactions_request, opts = {})
+      data, _status_code, _headers = get_financial_connections_transactions_with_http_info(get_financial_connections_transactions_request, opts)
       data
     end
 
     # Get transactions
-    # @param get_transactions_request [GetTransactionsRequest] 
+    # @param get_financial_connections_transactions_request [GetFinancialConnectionsTransactionsRequest] 
     # @param [Hash] opts the optional parameters
-    # @return [Array<(GetTransactionsResponse, Integer, Hash)>] GetTransactionsResponse data, response status code and response headers
-    def get_financial_connections_transactions_with_http_info(get_transactions_request, opts = {})
+    # @return [Array<(GetFinancialConnectionsTransactionsResponse, Integer, Hash)>] GetFinancialConnectionsTransactionsResponse data, response status code and response headers
+    def get_financial_connections_transactions_with_http_info(get_financial_connections_transactions_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: FuseApi.get_financial_connections_transactions ...'
       end
-      # verify the required parameter 'get_transactions_request' is set
-      if @api_client.config.client_side_validation && get_transactions_request.nil?
-        fail ArgumentError, "Missing the required parameter 'get_transactions_request' when calling FuseApi.get_financial_connections_transactions"
+      # verify the required parameter 'get_financial_connections_transactions_request' is set
+      if @api_client.config.client_side_validation && get_financial_connections_transactions_request.nil?
+        fail ArgumentError, "Missing the required parameter 'get_financial_connections_transactions_request' when calling FuseApi.get_financial_connections_transactions"
       end
       # resource path
       local_var_path = '/v1/financial_connections/transactions'
@@ -883,10 +883,10 @@ module FuseClient
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(get_transactions_request)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(get_financial_connections_transactions_request)
 
       # return_type
-      return_type = opts[:debug_return_type] || 'GetTransactionsResponse'
+      return_type = opts[:debug_return_type] || 'GetFinancialConnectionsTransactionsResponse'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['fuseApiKey', 'fuseClientId']
