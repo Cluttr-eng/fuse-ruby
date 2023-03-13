@@ -11,7 +11,7 @@
 | **name** | **String** | The account&#39;s name, ie &#39;My Checking&#39; |  |
 | **type** | [**AccountType**](AccountType.md) |  |  |
 | **subtype** | [**AccountSubtype**](AccountSubtype.md) |  | [optional] |
-| **balance** | [**FinancialConnectionsAccountCachedBalance**](FinancialConnectionsAccountCachedBalance.md) |  | [optional] |
+| **balance** | [**FinancialConnectionsAccountCachedBalance**](FinancialConnectionsAccountCachedBalance.md) |  |  |
 
 ## Example
 
