@@ -177,9 +177,9 @@ describe 'FuseApi' do
 
   # unit tests for get_financial_connections_transactions
   # Get transactions
-  # @param get_transactions_request 
+  # @param get_financial_connections_transactions_request 
   # @param [Hash] opts the optional parameters
-  # @return [GetTransactionsResponse]
+  # @return [GetFinancialConnectionsTransactionsResponse]
   describe 'get_financial_connections_transactions test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers

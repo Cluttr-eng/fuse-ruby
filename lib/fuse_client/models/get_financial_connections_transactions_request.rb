@@ -14,21 +14,30 @@ require 'date'
 require 'time'
 
 module FuseClient
-  class GetTransactionsResponse
-    attr_accessor :transactions
+  class GetFinancialConnectionsTransactionsRequest
+    # Access token for authentication.
+    attr_accessor :access_token
 
-    # The total number of transactions.
-    attr_accessor :total_transactions
+    # The earliest date for which data should be returned. Dates should be formatted as YYYY-MM-DD.
+    attr_accessor :start_date
 
-    # An identifier that is exclusive to the request and can serve as a means for investigating and resolving issues.
-    attr_accessor :request_id
+    # The latest date for which data should be returned. Dates should be formatted as YYYY-MM-DD.
+    attr_accessor :end_date
+
+    # Specify current page.
+    attr_accessor :page
+
+    # Number of items per page.
+    attr_accessor :records_per_page
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'transactions' => :'transactions',
-        :'total_transactions' => :'total_transactions',
-        :'request_id' => :'request_id'
+        :'access_token' => :'access_token',
+        :'start_date' => :'start_date',
+        :'end_date' => :'end_date',
+        :'page' => :'page',
+        :'records_per_page' => :'records_per_page'
       }
     end
 
@@ -40,9 +49,11 @@ module FuseClient
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'transactions' => :'Array<Transaction>',
-        :'total_transactions' => :'Float',
-        :'request_id' => :'String'
+        :'access_token' => :'String',
+        :'start_date' => :'String',
+        :'end_date' => :'String',
+        :'page' => :'Integer',
+        :'records_per_page' => :'Integer'
       }
     end
 
@@ -56,29 +67,37 @@ module FuseClient
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `FuseClient::GetTransactionsResponse` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `FuseClient::GetFinancialConnectionsTransactionsRequest` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `FuseClient::GetTransactionsResponse`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `FuseClient::GetFinancialConnectionsTransactionsRequest`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'transactions')
-        if (value = attributes[:'transactions']).is_a?(Array)
-          self.transactions = value
-        end
+      if attributes.key?(:'access_token')
+        self.access_token = attributes[:'access_token']
       end
 
-      if attributes.key?(:'total_transactions')
-        self.total_transactions = attributes[:'total_transactions']
+      if attributes.key?(:'start_date')
+        self.start_date = attributes[:'start_date']
       end
 
-      if attributes.key?(:'request_id')
-        self.request_id = attributes[:'request_id']
+      if attributes.key?(:'end_date')
+        self.end_date = attributes[:'end_date']
+      end
+
+      if attributes.key?(:'page')
+        self.page = attributes[:'page']
+      end
+
+      if attributes.key?(:'records_per_page')
+        self.records_per_page = attributes[:'records_per_page']
+      else
+        self.records_per_page = 100
       end
     end
 
@@ -86,16 +105,32 @@ module FuseClient
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @transactions.nil?
-        invalid_properties.push('invalid value for "transactions", transactions cannot be nil.')
+      if @access_token.nil?
+        invalid_properties.push('invalid value for "access_token", access_token cannot be nil.')
       end
 
-      if @total_transactions.nil?
-        invalid_properties.push('invalid value for "total_transactions", total_transactions cannot be nil.')
+      if @start_date.nil?
+        invalid_properties.push('invalid value for "start_date", start_date cannot be nil.')
       end
 
-      if @request_id.nil?
-        invalid_properties.push('invalid value for "request_id", request_id cannot be nil.')
+      if @end_date.nil?
+        invalid_properties.push('invalid value for "end_date", end_date cannot be nil.')
+      end
+
+      if @page.nil?
+        invalid_properties.push('invalid value for "page", page cannot be nil.')
+      end
+
+      if @records_per_page.nil?
+        invalid_properties.push('invalid value for "records_per_page", records_per_page cannot be nil.')
+      end
+
+      if @records_per_page > 500
+        invalid_properties.push('invalid value for "records_per_page", must be smaller than or equal to 500.')
+      end
+
+      if @records_per_page < 1
+        invalid_properties.push('invalid value for "records_per_page", must be greater than or equal to 1.')
       end
 
       invalid_properties
@@ -104,10 +139,32 @@ module FuseClient
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @transactions.nil?
-      return false if @total_transactions.nil?
-      return false if @request_id.nil?
+      return false if @access_token.nil?
+      return false if @start_date.nil?
+      return false if @end_date.nil?
+      return false if @page.nil?
+      return false if @records_per_page.nil?
+      return false if @records_per_page > 500
+      return false if @records_per_page < 1
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] records_per_page Value to be assigned
+    def records_per_page=(records_per_page)
+      if records_per_page.nil?
+        fail ArgumentError, 'records_per_page cannot be nil'
+      end
+
+      if records_per_page > 500
+        fail ArgumentError, 'invalid value for "records_per_page", must be smaller than or equal to 500.'
+      end
+
+      if records_per_page < 1
+        fail ArgumentError, 'invalid value for "records_per_page", must be greater than or equal to 1.'
+      end
+
+      @records_per_page = records_per_page
     end
 
     # Checks equality by comparing each attribute.
@@ -115,9 +172,11 @@ module FuseClient
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          transactions == o.transactions &&
-          total_transactions == o.total_transactions &&
-          request_id == o.request_id
+          access_token == o.access_token &&
+          start_date == o.start_date &&
+          end_date == o.end_date &&
+          page == o.page &&
+          records_per_page == o.records_per_page
     end
 
     # @see the `==` method
@@ -129,7 +188,7 @@ module FuseClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [transactions, total_transactions, request_id].hash
+      [access_token, start_date, end_date, page, records_per_page].hash
     end
 
     # Builds the object from hash

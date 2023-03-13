@@ -125,6 +125,10 @@ module FuseClient
         invalid_properties.push('invalid value for "aggregators", number of items must be greater than or equal to 1.')
       end
 
+      if @financial_connections.nil?
+        invalid_properties.push('invalid value for "financial_connections", financial_connections cannot be nil.')
+      end
+
       if @request_id.nil?
         invalid_properties.push('invalid value for "request_id", request_id cannot be nil.')
       end
@@ -137,6 +141,7 @@ module FuseClient
     def valid?
       return false if @id.nil?
       return false if !@aggregators.nil? && @aggregators.length < 1
+      return false if @financial_connections.nil?
       return false if @request_id.nil?
       true
     end
