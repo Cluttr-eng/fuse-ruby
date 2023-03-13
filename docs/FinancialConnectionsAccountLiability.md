@@ -11,7 +11,7 @@
 | **name** | **String** | The account&#39;s name, ie &#39;My Checking&#39; |  |
 | **type** | [**AccountType**](AccountType.md) |  |  |
 | **subtype** | [**AccountSubtype**](AccountSubtype.md) |  | [optional] |
-| **balance** | [**FinancialConnectionsAccountCachedBalance**](FinancialConnectionsAccountCachedBalance.md) |  | [optional] |
+| **balance** | [**FinancialConnectionsAccountCachedBalance**](FinancialConnectionsAccountCachedBalance.md) |  |  |
 | **aprs** | [**Array&lt;FinancialConnectionsAccountLiabilityAllOfAprs&gt;**](FinancialConnectionsAccountLiabilityAllOfAprs.md) | The various interest rates that apply to the account. If APR data is not available, this array will be empty. | [optional] |
 | **interest_rate_percentage** | **Float** | The interest rate on the loan as a percentage. | [optional] |
 | **origination_principal_amount** | **Float** | The original principal balance of the loan. | [optional] |

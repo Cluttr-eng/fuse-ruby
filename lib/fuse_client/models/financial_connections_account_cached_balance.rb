@@ -45,7 +45,7 @@ module FuseClient
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'available' => :'String',
+        :'available' => :'Float',
         :'current' => :'Float',
         :'iso_currency_code' => :'String',
         :'last_updated_date' => :'String'
