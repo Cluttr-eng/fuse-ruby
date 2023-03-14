@@ -44,6 +44,8 @@ module FuseClient
     # The ISO-4217 currency code of the transaction
     attr_accessor :iso_currency_code
 
+    attr_accessor :remote_data
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -78,7 +80,8 @@ module FuseClient
         :'merchant' => :'merchant',
         :'status' => :'status',
         :'type' => :'type',
-        :'iso_currency_code' => :'iso_currency_code'
+        :'iso_currency_code' => :'iso_currency_code',
+        :'remote_data' => :'remote_data'
       }
     end
 
@@ -99,13 +102,15 @@ module FuseClient
         :'merchant' => :'TransactionMerchant',
         :'status' => :'String',
         :'type' => :'String',
-        :'iso_currency_code' => :'String'
+        :'iso_currency_code' => :'String',
+        :'remote_data' => :'Object'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'remote_data'
       ])
     end
 
@@ -164,6 +169,10 @@ module FuseClient
 
       if attributes.key?(:'iso_currency_code')
         self.iso_currency_code = attributes[:'iso_currency_code']
+      end
+
+      if attributes.key?(:'remote_data')
+        self.remote_data = attributes[:'remote_data']
       end
     end
 
@@ -251,7 +260,8 @@ module FuseClient
           merchant == o.merchant &&
           status == o.status &&
           type == o.type &&
-          iso_currency_code == o.iso_currency_code
+          iso_currency_code == o.iso_currency_code &&
+          remote_data == o.remote_data
     end
 
     # @see the `==` method
@@ -263,7 +273,7 @@ module FuseClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [remote_id, remote_account_id, amount, date, description, category, merchant, status, type, iso_currency_code].hash
+      [remote_id, remote_account_id, amount, date, description, category, merchant, status, type, iso_currency_code, remote_data].hash
     end
 
     # Builds the object from hash

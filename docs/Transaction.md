@@ -14,6 +14,7 @@
 | **status** | **String** | The status of the transaction. This will be either posted or pending. |  |
 | **type** | **String** | Type of the transaction, ie adjustment |  |
 | **iso_currency_code** | **String** | The ISO-4217 currency code of the transaction | [optional] |
+| **remote_data** | **Object** |  |  |
 
 ## Example
 
@@ -30,7 +31,8 @@ instance = FuseClient::Transaction.new(
   merchant: null,
   status: null,
   type: null,
-  iso_currency_code: null
+  iso_currency_code: null,
+  remote_data: null
 )
 ```
 
