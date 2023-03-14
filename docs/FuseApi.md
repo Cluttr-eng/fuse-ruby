@@ -864,7 +864,7 @@ end
 
 ## get_financial_connections_balances
 
-> <GetFinancialConnectionsAccountBalanceResponse> get_financial_connections_balances(get_financial_connections_balance_request)
+> <GetFinancialConnectionsBalanceResponse> get_financial_connections_balances(get_financial_connections_balance_request)
 
 Get balances
 
@@ -902,7 +902,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<GetFinancialConnectionsAccountBalanceResponse>, Integer, Hash)> get_financial_connections_balances_with_http_info(get_financial_connections_balance_request)
+> <Array(<GetFinancialConnectionsBalanceResponse>, Integer, Hash)> get_financial_connections_balances_with_http_info(get_financial_connections_balance_request)
 
 ```ruby
 begin
@@ -910,7 +910,7 @@ begin
   data, status_code, headers = api_instance.get_financial_connections_balances_with_http_info(get_financial_connections_balance_request)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <GetFinancialConnectionsAccountBalanceResponse>
+  p data # => <GetFinancialConnectionsBalanceResponse>
 rescue FuseClient::ApiError => e
   puts "Error when calling FuseApi->get_financial_connections_balances_with_http_info: #{e}"
 end
@@ -924,7 +924,7 @@ end
 
 ### Return type
 
-[**GetFinancialConnectionsAccountBalanceResponse**](GetFinancialConnectionsAccountBalanceResponse.md)
+[**GetFinancialConnectionsBalanceResponse**](GetFinancialConnectionsBalanceResponse.md)
 
 ### Authorization
 

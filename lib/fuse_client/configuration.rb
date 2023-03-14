@@ -304,6 +304,13 @@ module FuseClient
             key: 'Mx-Api-Key',
             value: api_key_with_prefix('mxApiKey')
           },
+        'proxyUrlKey' =>
+          {
+            type: 'api_key',
+            in: 'header',
+            key: 'Proxy-Url',
+            value: api_key_with_prefix('proxyUrlKey')
+          },
       }
     end
 
