@@ -713,7 +713,7 @@ module FuseClient
     # Get balances
     # @param get_financial_connections_balance_request [GetFinancialConnectionsBalanceRequest] 
     # @param [Hash] opts the optional parameters
-    # @return [GetFinancialConnectionsAccountBalanceResponse]
+    # @return [GetFinancialConnectionsBalanceResponse]
     def get_financial_connections_balances(get_financial_connections_balance_request, opts = {})
       data, _status_code, _headers = get_financial_connections_balances_with_http_info(get_financial_connections_balance_request, opts)
       data
@@ -722,7 +722,7 @@ module FuseClient
     # Get balances
     # @param get_financial_connections_balance_request [GetFinancialConnectionsBalanceRequest] 
     # @param [Hash] opts the optional parameters
-    # @return [Array<(GetFinancialConnectionsAccountBalanceResponse, Integer, Hash)>] GetFinancialConnectionsAccountBalanceResponse data, response status code and response headers
+    # @return [Array<(GetFinancialConnectionsBalanceResponse, Integer, Hash)>] GetFinancialConnectionsBalanceResponse data, response status code and response headers
     def get_financial_connections_balances_with_http_info(get_financial_connections_balance_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: FuseApi.get_financial_connections_balances ...'
@@ -754,7 +754,7 @@ module FuseClient
       post_body = opts[:debug_body] || @api_client.object_to_http_body(get_financial_connections_balance_request)
 
       # return_type
-      return_type = opts[:debug_return_type] || 'GetFinancialConnectionsAccountBalanceResponse'
+      return_type = opts[:debug_return_type] || 'GetFinancialConnectionsBalanceResponse'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['fuseApiKey', 'fuseClientId']

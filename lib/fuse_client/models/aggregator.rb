@@ -18,10 +18,9 @@ module FuseClient
     PLAID = "plaid".freeze
     TELLER = "teller".freeze
     MX = "mx".freeze
-    FINICITY = "finicity".freeze
 
     def self.all_vars
-      @all_vars ||= [PLAID, TELLER, MX, FINICITY].freeze
+      @all_vars ||= [PLAID, TELLER, MX].freeze
     end
 
     # Builds the enum from string

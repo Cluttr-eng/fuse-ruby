@@ -157,7 +157,7 @@ describe 'FuseApi' do
   # Get balances
   # @param get_financial_connections_balance_request 
   # @param [Hash] opts the optional parameters
-  # @return [GetFinancialConnectionsAccountBalanceResponse]
+  # @return [GetFinancialConnectionsBalanceResponse]
   describe 'get_financial_connections_balances test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
