@@ -15,12 +15,13 @@ require 'time'
 
 module FuseClient
   class WebhookType
-    SYNC_UPDATES_AVAILABLE = "sync_updates_available".freeze
+    FINANCIAL_CONNECTION_SYNC_DATA = "financial_connection.sync_data".freeze
     FINANCIAL_CONNECTION_DISCONNECTED = "financial_connection.disconnected".freeze
     FINANCIAL_CONNECTION_FINISHED = "financial_connection.finished".freeze
+    TRANSACTION_UPDATES = "transaction.updates".freeze
 
     def self.all_vars
-      @all_vars ||= [SYNC_UPDATES_AVAILABLE, FINANCIAL_CONNECTION_DISCONNECTED, FINANCIAL_CONNECTION_FINISHED].freeze
+      @all_vars ||= [FINANCIAL_CONNECTION_SYNC_DATA, FINANCIAL_CONNECTION_DISCONNECTED, FINANCIAL_CONNECTION_FINISHED, TRANSACTION_UPDATES].freeze
     end
 
     # Builds the enum from string

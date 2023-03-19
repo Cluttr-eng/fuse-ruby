@@ -8,7 +8,7 @@
 | **start_date** | **String** | The earliest date for which data should be returned. Dates should be formatted as YYYY-MM-DD. |  |
 | **end_date** | **String** | The latest date for which data should be returned. Dates should be formatted as YYYY-MM-DD. |  |
 | **page** | **Integer** | Specify current page. |  |
-| **records_per_page** | **Integer** | Number of items per page. | [default to 100] |
+| **records_per_page** | **Integer** | Number of items per page. | [default to 25] |
 
 ## Example
 
