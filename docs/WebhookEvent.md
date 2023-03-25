@@ -8,6 +8,7 @@
 | **financial_connection_id** | **String** | Financial connection id associated with the webhook |  |
 | **environment** | **String** |  |  |
 | **source** | [**WebhookSource**](WebhookSource.md) |  |  |
+| **verification_token** | **String** | Aggregator verification data needed to verify the webhook | [optional] |
 | **remote_data** | **Object** |  |  |
 
 ## Example
@@ -20,6 +21,7 @@ instance = FuseClient::WebhookEvent.new(
   financial_connection_id: null,
   environment: null,
   source: null,
+  verification_token: null,
   remote_data: null
 )
 ```

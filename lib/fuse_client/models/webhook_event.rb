@@ -24,6 +24,9 @@ module FuseClient
 
     attr_accessor :source
 
+    # Aggregator verification data needed to verify the webhook
+    attr_accessor :verification_token
+
     attr_accessor :remote_data
 
     class EnumAttributeValidator
@@ -55,6 +58,7 @@ module FuseClient
         :'financial_connection_id' => :'financial_connection_id',
         :'environment' => :'environment',
         :'source' => :'source',
+        :'verification_token' => :'verification_token',
         :'remote_data' => :'remote_data'
       }
     end
@@ -71,6 +75,7 @@ module FuseClient
         :'financial_connection_id' => :'String',
         :'environment' => :'String',
         :'source' => :'WebhookSource',
+        :'verification_token' => :'String',
         :'remote_data' => :'Object'
       }
     end
@@ -111,6 +116,10 @@ module FuseClient
 
       if attributes.key?(:'source')
         self.source = attributes[:'source']
+      end
+
+      if attributes.key?(:'verification_token')
+        self.verification_token = attributes[:'verification_token']
       end
 
       if attributes.key?(:'remote_data')
@@ -172,6 +181,7 @@ module FuseClient
           financial_connection_id == o.financial_connection_id &&
           environment == o.environment &&
           source == o.source &&
+          verification_token == o.verification_token &&
           remote_data == o.remote_data
     end
 
@@ -184,7 +194,7 @@ module FuseClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [type, financial_connection_id, environment, source, remote_data].hash
+      [type, financial_connection_id, environment, source, verification_token, remote_data].hash
     end
 
     # Builds the object from hash
