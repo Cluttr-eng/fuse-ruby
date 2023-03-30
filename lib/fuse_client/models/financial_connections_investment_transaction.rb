@@ -15,12 +15,55 @@ require 'time'
 
 module FuseClient
   class FinancialConnectionsInvestmentTransaction
-    attr_accessor :data
+    # The remote ID of the Investment transaction
+    attr_accessor :remote_id
+
+    # Remote Account Id of the transaction, ie Plaid Account Id
+    attr_accessor :remote_account_id
+
+    # The name of the account associated with the investment transaction
+    attr_accessor :account_name
+
+    # The amount of the investment transaction
+    attr_accessor :amount
+
+    attr_accessor :currency
+
+    # A description of the investment transaction
+    attr_accessor :description
+
+    # The fees associated with the investment transaction
+    attr_accessor :fees
+
+    # The date and time of the investment transaction
+    attr_accessor :date
+
+    # The type of the investment transaction (e.g., 'buy', 'sell', 'dividend')
+    attr_accessor :type
+
+    # The number of units of the security involved in this transaction
+    attr_accessor :quantity
+
+    # The price of the security involved in this transaction
+    attr_accessor :price
+
+    attr_accessor :security
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'data' => :'data'
+        :'remote_id' => :'remote_id',
+        :'remote_account_id' => :'remote_account_id',
+        :'account_name' => :'account_name',
+        :'amount' => :'amount',
+        :'currency' => :'currency',
+        :'description' => :'description',
+        :'fees' => :'fees',
+        :'date' => :'date',
+        :'type' => :'type',
+        :'quantity' => :'quantity',
+        :'price' => :'price',
+        :'security' => :'security'
       }
     end
 
@@ -32,7 +75,18 @@ module FuseClient
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'data' => :'Array<FinancialConnectionsInvestmentTransactionDataInner>'
+        :'remote_id' => :'String',
+        :'remote_account_id' => :'String',
+        :'account_name' => :'String',
+        :'amount' => :'Float',
+        :'currency' => :'FinancialConnectionsInvestmentTransactionCurrency',
+        :'description' => :'String',
+        :'fees' => :'Float',
+        :'date' => :'Time',
+        :'type' => :'String',
+        :'quantity' => :'Float',
+        :'price' => :'Float',
+        :'security' => :'FinancialConnectionsInvestmentSecurity'
       }
     end
 
@@ -57,10 +111,52 @@ module FuseClient
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'data')
-        if (value = attributes[:'data']).is_a?(Array)
-          self.data = value
-        end
+      if attributes.key?(:'remote_id')
+        self.remote_id = attributes[:'remote_id']
+      end
+
+      if attributes.key?(:'remote_account_id')
+        self.remote_account_id = attributes[:'remote_account_id']
+      end
+
+      if attributes.key?(:'account_name')
+        self.account_name = attributes[:'account_name']
+      end
+
+      if attributes.key?(:'amount')
+        self.amount = attributes[:'amount']
+      end
+
+      if attributes.key?(:'currency')
+        self.currency = attributes[:'currency']
+      end
+
+      if attributes.key?(:'description')
+        self.description = attributes[:'description']
+      end
+
+      if attributes.key?(:'fees')
+        self.fees = attributes[:'fees']
+      end
+
+      if attributes.key?(:'date')
+        self.date = attributes[:'date']
+      end
+
+      if attributes.key?(:'type')
+        self.type = attributes[:'type']
+      end
+
+      if attributes.key?(:'quantity')
+        self.quantity = attributes[:'quantity']
+      end
+
+      if attributes.key?(:'price')
+        self.price = attributes[:'price']
+      end
+
+      if attributes.key?(:'security')
+        self.security = attributes[:'security']
       end
     end
 
@@ -68,12 +164,62 @@ module FuseClient
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if @remote_id.nil?
+        invalid_properties.push('invalid value for "remote_id", remote_id cannot be nil.')
+      end
+
+      if @remote_account_id.nil?
+        invalid_properties.push('invalid value for "remote_account_id", remote_account_id cannot be nil.')
+      end
+
+      if @amount.nil?
+        invalid_properties.push('invalid value for "amount", amount cannot be nil.')
+      end
+
+      if @currency.nil?
+        invalid_properties.push('invalid value for "currency", currency cannot be nil.')
+      end
+
+      if @description.nil?
+        invalid_properties.push('invalid value for "description", description cannot be nil.')
+      end
+
+      if @fees.nil?
+        invalid_properties.push('invalid value for "fees", fees cannot be nil.')
+      end
+
+      if @date.nil?
+        invalid_properties.push('invalid value for "date", date cannot be nil.')
+      end
+
+      if @quantity.nil?
+        invalid_properties.push('invalid value for "quantity", quantity cannot be nil.')
+      end
+
+      if @price.nil?
+        invalid_properties.push('invalid value for "price", price cannot be nil.')
+      end
+
+      if @security.nil?
+        invalid_properties.push('invalid value for "security", security cannot be nil.')
+      end
+
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if @remote_id.nil?
+      return false if @remote_account_id.nil?
+      return false if @amount.nil?
+      return false if @currency.nil?
+      return false if @description.nil?
+      return false if @fees.nil?
+      return false if @date.nil?
+      return false if @quantity.nil?
+      return false if @price.nil?
+      return false if @security.nil?
       true
     end
 
@@ -82,7 +228,18 @@ module FuseClient
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          data == o.data
+          remote_id == o.remote_id &&
+          remote_account_id == o.remote_account_id &&
+          account_name == o.account_name &&
+          amount == o.amount &&
+          currency == o.currency &&
+          description == o.description &&
+          fees == o.fees &&
+          date == o.date &&
+          type == o.type &&
+          quantity == o.quantity &&
+          price == o.price &&
+          security == o.security
     end
 
     # @see the `==` method
@@ -94,7 +251,7 @@ module FuseClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [data].hash
+      [remote_id, remote_account_id, account_name, amount, currency, description, fees, date, type, quantity, price, security].hash
     end
 
     # Builds the object from hash

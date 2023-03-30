@@ -1,4 +1,4 @@
-# FuseClient::FinancialConnectionsInvestmentTransactionDataInnerCurrency
+# FuseClient::FinancialConnectionsInvestmentTransactionCurrency
 
 ## Properties
 
@@ -12,7 +12,7 @@
 ```ruby
 require 'fuse_client'
 
-instance = FuseClient::FinancialConnectionsInvestmentTransactionDataInnerCurrency.new(
+instance = FuseClient::FinancialConnectionsInvestmentTransactionCurrency.new(
   code: null,
   name: null
 )
