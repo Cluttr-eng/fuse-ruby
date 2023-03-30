@@ -192,6 +192,10 @@ module FuseClient
         invalid_properties.push('invalid value for "date", date cannot be nil.')
       end
 
+      if @type.nil?
+        invalid_properties.push('invalid value for "type", type cannot be nil.')
+      end
+
       if @quantity.nil?
         invalid_properties.push('invalid value for "quantity", quantity cannot be nil.')
       end
@@ -217,6 +221,7 @@ module FuseClient
       return false if @description.nil?
       return false if @fees.nil?
       return false if @date.nil?
+      return false if @type.nil?
       return false if @quantity.nil?
       return false if @price.nil?
       return false if @security.nil?

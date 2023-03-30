@@ -12,7 +12,7 @@
 | **description** | **String** | A description of the investment transaction |  |
 | **fees** | **Float** | The fees associated with the investment transaction |  |
 | **date** | **Time** | The date and time of the investment transaction |  |
-| **type** | **String** | The type of the investment transaction (e.g., &#39;buy&#39;, &#39;sell&#39;, &#39;dividend&#39;) | [optional] |
+| **type** | **String** | The type of the investment transaction (e.g., &#39;buy&#39;, &#39;sell&#39;, &#39;dividend&#39;) |  |
 | **quantity** | **Float** | The number of units of the security involved in this transaction |  |
 | **price** | **Float** | The price of the security involved in this transaction |  |
 | **security** | [**FinancialConnectionsInvestmentSecurity**](FinancialConnectionsInvestmentSecurity.md) |  |  |

@@ -15,7 +15,11 @@ require 'time'
 
 module FuseClient
   class GetInvestmentHoldingsResponse
+    attr_accessor :accounts
+
     attr_accessor :holdings
+
+    attr_accessor :securities
 
     # An identifier that is exclusive to the request and can serve as a means for investigating and resolving issues.
     attr_accessor :request_id
@@ -23,7 +27,9 @@ module FuseClient
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'accounts' => :'accounts',
         :'holdings' => :'holdings',
+        :'securities' => :'securities',
         :'request_id' => :'request_id'
       }
     end
@@ -36,7 +42,9 @@ module FuseClient
     # Attribute type mapping.
     def self.openapi_types
       {
+        :'accounts' => :'Array<FinancialConnectionsInvestmentAccount>',
         :'holdings' => :'Array<FinancialConnectionsHolding>',
+        :'securities' => :'Array<FinancialConnectionsInvestmentSecurity>',
         :'request_id' => :'String'
       }
     end
@@ -62,9 +70,21 @@ module FuseClient
         h[k.to_sym] = v
       }
 
+      if attributes.key?(:'accounts')
+        if (value = attributes[:'accounts']).is_a?(Array)
+          self.accounts = value
+        end
+      end
+
       if attributes.key?(:'holdings')
         if (value = attributes[:'holdings']).is_a?(Array)
           self.holdings = value
+        end
+      end
+
+      if attributes.key?(:'securities')
+        if (value = attributes[:'securities']).is_a?(Array)
+          self.securities = value
         end
       end
 
@@ -77,12 +97,32 @@ module FuseClient
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if @accounts.nil?
+        invalid_properties.push('invalid value for "accounts", accounts cannot be nil.')
+      end
+
+      if @holdings.nil?
+        invalid_properties.push('invalid value for "holdings", holdings cannot be nil.')
+      end
+
+      if @securities.nil?
+        invalid_properties.push('invalid value for "securities", securities cannot be nil.')
+      end
+
+      if @request_id.nil?
+        invalid_properties.push('invalid value for "request_id", request_id cannot be nil.')
+      end
+
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if @accounts.nil?
+      return false if @holdings.nil?
+      return false if @securities.nil?
+      return false if @request_id.nil?
       true
     end
 
@@ -91,7 +131,9 @@ module FuseClient
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          accounts == o.accounts &&
           holdings == o.holdings &&
+          securities == o.securities &&
           request_id == o.request_id
     end
 
@@ -104,7 +146,7 @@ module FuseClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [holdings, request_id].hash
+      [accounts, holdings, securities, request_id].hash
     end
 
     # Builds the object from hash
