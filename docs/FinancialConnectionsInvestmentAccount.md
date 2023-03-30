@@ -4,14 +4,14 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **remote_id** | **String** | Remote Id of the account, ie Plaid or Teller account id | [optional] |
-| **fingerprint** | **String** | Uniquely identifies this account across all accounts associated with your organization. See more information here: https://letsfuse.readme.io/docs/duplicate-accounts | [optional] |
+| **remote_id** | **String** | Remote Id of the account, ie Plaid or Teller account id |  |
+| **fingerprint** | **String** | Uniquely identifies this account across all accounts associated with your organization. See more information here: https://letsfuse.readme.io/docs/duplicate-accounts |  |
 | **institution** | [**FinancialConnectionsAccountInstitution**](FinancialConnectionsAccountInstitution.md) |  | [optional] |
 | **last_four** | **String** | The last four digits of the account number. | [optional] |
-| **name** | **String** | The account&#39;s name, ie &#39;My Checking&#39; | [optional] |
-| **type** | **String** | The account&#39;s type e.g depository. | [optional] |
+| **name** | **String** | The account&#39;s name, ie &#39;My Checking&#39; |  |
+| **type** | **String** | The account&#39;s type e.g depository. |  |
 | **subtype** | **String** | The account&#39;s subtype e.g checking | [optional] |
-| **balance** | [**FinancialConnectionsInvestmentAccountBalance**](FinancialConnectionsInvestmentAccountBalance.md) |  | [optional] |
+| **balance** | [**FinancialConnectionsInvestmentAccountBalance**](FinancialConnectionsInvestmentAccountBalance.md) |  |  |
 
 ## Example
 
