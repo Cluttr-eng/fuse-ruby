@@ -26,13 +26,17 @@ module FuseClient
     # Website of the financial institution.
     attr_accessor :website
 
+    # List of country codes supported by this institution
+    attr_accessor :country_codes
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'id' => :'id',
         :'name' => :'name',
         :'logo' => :'logo',
-        :'website' => :'website'
+        :'website' => :'website',
+        :'country_codes' => :'country_codes'
       }
     end
 
@@ -47,7 +51,8 @@ module FuseClient
         :'id' => :'String',
         :'name' => :'String',
         :'logo' => :'FinancialInstitutionLogo',
-        :'website' => :'String'
+        :'website' => :'String',
+        :'country_codes' => :'Array<CountryCode>'
       }
     end
 
@@ -87,6 +92,12 @@ module FuseClient
       if attributes.key?(:'website')
         self.website = attributes[:'website']
       end
+
+      if attributes.key?(:'country_codes')
+        if (value = attributes[:'country_codes']).is_a?(Array)
+          self.country_codes = value
+        end
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -101,6 +112,10 @@ module FuseClient
         invalid_properties.push('invalid value for "name", name cannot be nil.')
       end
 
+      if @country_codes.nil?
+        invalid_properties.push('invalid value for "country_codes", country_codes cannot be nil.')
+      end
+
       invalid_properties
     end
 
@@ -109,6 +124,7 @@ module FuseClient
     def valid?
       return false if @id.nil?
       return false if @name.nil?
+      return false if @country_codes.nil?
       true
     end
 
@@ -120,7 +136,8 @@ module FuseClient
           id == o.id &&
           name == o.name &&
           logo == o.logo &&
-          website == o.website
+          website == o.website &&
+          country_codes == o.country_codes
     end
 
     # @see the `==` method
@@ -132,7 +149,7 @@ module FuseClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, name, logo, website].hash
+      [id, name, logo, website, country_codes].hash
     end
 
     # Builds the object from hash
