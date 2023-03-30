@@ -4,8 +4,8 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **access_token** | **String** | Access token for authentication |  |
-| **iso_currency_code** | **String** | The ISO-4217 currency code to convert the holding to. | [optional] |
+| **access_token** | **String** | The access token of the financial institution connection |  |
+| **options** | [**GetInvestmentHoldingsRequestOptions**](GetInvestmentHoldingsRequestOptions.md) |  | [optional] |
 
 ## Example
 
@@ -14,7 +14,7 @@ require 'fuse_client'
 
 instance = FuseClient::GetInvestmentHoldingsRequest.new(
   access_token: null,
-  iso_currency_code: null
+  options: null
 )
 ```
 

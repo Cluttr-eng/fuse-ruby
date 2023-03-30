@@ -15,17 +15,16 @@ require 'time'
 
 module FuseClient
   class GetInvestmentHoldingsRequest
-    # Access token for authentication
+    # The access token of the financial institution connection
     attr_accessor :access_token
 
-    # The ISO-4217 currency code to convert the holding to.
-    attr_accessor :iso_currency_code
+    attr_accessor :options
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'access_token' => :'access_token',
-        :'iso_currency_code' => :'iso_currency_code'
+        :'options' => :'options'
       }
     end
 
@@ -38,7 +37,7 @@ module FuseClient
     def self.openapi_types
       {
         :'access_token' => :'String',
-        :'iso_currency_code' => :'String'
+        :'options' => :'GetInvestmentHoldingsRequestOptions'
       }
     end
 
@@ -67,8 +66,8 @@ module FuseClient
         self.access_token = attributes[:'access_token']
       end
 
-      if attributes.key?(:'iso_currency_code')
-        self.iso_currency_code = attributes[:'iso_currency_code']
+      if attributes.key?(:'options')
+        self.options = attributes[:'options']
       end
     end
 
@@ -96,7 +95,7 @@ module FuseClient
       return true if self.equal?(o)
       self.class == o.class &&
           access_token == o.access_token &&
-          iso_currency_code == o.iso_currency_code
+          options == o.options
     end
 
     # @see the `==` method
@@ -108,7 +107,7 @@ module FuseClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [access_token, iso_currency_code].hash
+      [access_token, options].hash
     end
 
     # Builds the object from hash
