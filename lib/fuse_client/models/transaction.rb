@@ -24,7 +24,7 @@ module FuseClient
     # Amount in cents associated with the transaction
     attr_accessor :amount
 
-    # Date of the transaction
+    # Date of the transaction (YYYY-MM-DD)
     attr_accessor :date
 
     # Description of the transaction
