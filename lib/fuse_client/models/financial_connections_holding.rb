@@ -27,9 +27,6 @@ module FuseClient
     # The number of units of the security held in this holding.
     attr_accessor :quantity
 
-    # The closing price of the security at the end of the most recent trading day.
-    attr_accessor :close_price
-
     # The price of the security as provided by the financial institution managing the holding.
     attr_accessor :institution_price
 
@@ -42,7 +39,6 @@ module FuseClient
         :'cost_basis' => :'cost_basis',
         :'value' => :'value',
         :'quantity' => :'quantity',
-        :'close_price' => :'close_price',
         :'institution_price' => :'institution_price',
         :'security' => :'security'
       }
@@ -60,7 +56,6 @@ module FuseClient
         :'cost_basis' => :'Float',
         :'value' => :'Float',
         :'quantity' => :'Float',
-        :'close_price' => :'Float',
         :'institution_price' => :'Float',
         :'security' => :'FinancialConnectionsInvestmentSecurity'
       }
@@ -103,10 +98,6 @@ module FuseClient
         self.quantity = attributes[:'quantity']
       end
 
-      if attributes.key?(:'close_price')
-        self.close_price = attributes[:'close_price']
-      end
-
       if attributes.key?(:'institution_price')
         self.institution_price = attributes[:'institution_price']
       end
@@ -136,10 +127,6 @@ module FuseClient
         invalid_properties.push('invalid value for "quantity", quantity cannot be nil.')
       end
 
-      if @close_price.nil?
-        invalid_properties.push('invalid value for "close_price", close_price cannot be nil.')
-      end
-
       if @institution_price.nil?
         invalid_properties.push('invalid value for "institution_price", institution_price cannot be nil.')
       end
@@ -158,7 +145,6 @@ module FuseClient
       return false if @cost_basis.nil?
       return false if @value.nil?
       return false if @quantity.nil?
-      return false if @close_price.nil?
       return false if @institution_price.nil?
       return false if @security.nil?
       true
@@ -173,7 +159,6 @@ module FuseClient
           cost_basis == o.cost_basis &&
           value == o.value &&
           quantity == o.quantity &&
-          close_price == o.close_price &&
           institution_price == o.institution_price &&
           security == o.security
     end
@@ -187,7 +172,7 @@ module FuseClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [remote_account_id, cost_basis, value, quantity, close_price, institution_price, security].hash
+      [remote_account_id, cost_basis, value, quantity, institution_price, security].hash
     end
 
     # Builds the object from hash

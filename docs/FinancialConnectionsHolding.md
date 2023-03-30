@@ -8,7 +8,6 @@
 | **cost_basis** | **Float** | The original total value of the holding when it was purchased. |  |
 | **value** | **Float** | The current market value of the holding. |  |
 | **quantity** | **Float** | The number of units of the security held in this holding. |  |
-| **close_price** | **Float** | The closing price of the security at the end of the most recent trading day. |  |
 | **institution_price** | **Float** | The price of the security as provided by the financial institution managing the holding. |  |
 | **security** | [**FinancialConnectionsInvestmentSecurity**](FinancialConnectionsInvestmentSecurity.md) |  |  |
 
@@ -22,7 +21,6 @@ instance = FuseClient::FinancialConnectionsHolding.new(
   cost_basis: null,
   value: null,
   quantity: null,
-  close_price: null,
   institution_price: null,
   security: null
 )
