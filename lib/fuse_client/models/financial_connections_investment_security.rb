@@ -15,29 +15,39 @@ require 'time'
 
 module FuseClient
   class FinancialConnectionsInvestmentSecurity
-    # The security type of the holding.
-    attr_accessor :type
+    # The trading symbol for publicly traded securities, or a short identifier if available.
+    attr_accessor :symbol
 
-    # 9-character CUSIP, an identifier assigned to North American securities.
+    # The International Securities Identification Number (ISIN) uniquely identifies the security.
+    attr_accessor :isin
+
+    # The Stock Exchange Daily Official List (SEDOL) code uniquely identifies the security, primarily used in the United Kingdom and Ireland.
+    attr_accessor :sedol
+
+    # The Committee on Uniform Securities Identification Procedures (CUSIP) number uniquely identifies the security, primarily used in the United States and Canada.
     attr_accessor :cusip
+
+    attr_accessor :currency
 
     # A descriptive name for the security, suitable for display.
     attr_accessor :name
 
-    # The security’s trading symbol for publicly traded securities, and otherwise a short identifier if available.
-    attr_accessor :ticker_symbol
+    # The type of security (e.g., equity, mutual fund)
+    attr_accessor :type
 
-    # A unique identity for the security
-    attr_accessor :id
+    attr_accessor :exchange
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'type' => :'type',
+        :'symbol' => :'symbol',
+        :'isin' => :'isin',
+        :'sedol' => :'sedol',
         :'cusip' => :'cusip',
+        :'currency' => :'currency',
         :'name' => :'name',
-        :'ticker_symbol' => :'ticker_symbol',
-        :'id' => :'id'
+        :'type' => :'type',
+        :'exchange' => :'exchange'
       }
     end
 
@@ -49,11 +59,14 @@ module FuseClient
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'type' => :'String',
+        :'symbol' => :'String',
+        :'isin' => :'String',
+        :'sedol' => :'String',
         :'cusip' => :'String',
+        :'currency' => :'FinancialConnectionsInvestmentSecurityCurrency',
         :'name' => :'String',
-        :'ticker_symbol' => :'String',
-        :'id' => :'String'
+        :'type' => :'String',
+        :'exchange' => :'FinancialConnectionsInvestmentSecurityExchange'
       }
     end
 
@@ -78,24 +91,36 @@ module FuseClient
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'type')
-        self.type = attributes[:'type']
+      if attributes.key?(:'symbol')
+        self.symbol = attributes[:'symbol']
+      end
+
+      if attributes.key?(:'isin')
+        self.isin = attributes[:'isin']
+      end
+
+      if attributes.key?(:'sedol')
+        self.sedol = attributes[:'sedol']
       end
 
       if attributes.key?(:'cusip')
         self.cusip = attributes[:'cusip']
       end
 
+      if attributes.key?(:'currency')
+        self.currency = attributes[:'currency']
+      end
+
       if attributes.key?(:'name')
         self.name = attributes[:'name']
       end
 
-      if attributes.key?(:'ticker_symbol')
-        self.ticker_symbol = attributes[:'ticker_symbol']
+      if attributes.key?(:'type')
+        self.type = attributes[:'type']
       end
 
-      if attributes.key?(:'id')
-        self.id = attributes[:'id']
+      if attributes.key?(:'exchange')
+        self.exchange = attributes[:'exchange']
       end
     end
 
@@ -103,12 +128,22 @@ module FuseClient
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if @symbol.nil?
+        invalid_properties.push('invalid value for "symbol", symbol cannot be nil.')
+      end
+
+      if @currency.nil?
+        invalid_properties.push('invalid value for "currency", currency cannot be nil.')
+      end
+
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if @symbol.nil?
+      return false if @currency.nil?
       true
     end
 
@@ -117,11 +152,14 @@ module FuseClient
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          type == o.type &&
+          symbol == o.symbol &&
+          isin == o.isin &&
+          sedol == o.sedol &&
           cusip == o.cusip &&
+          currency == o.currency &&
           name == o.name &&
-          ticker_symbol == o.ticker_symbol &&
-          id == o.id
+          type == o.type &&
+          exchange == o.exchange
     end
 
     # @see the `==` method
@@ -133,7 +171,7 @@ module FuseClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [type, cusip, name, ticker_symbol, id].hash
+      [symbol, isin, sedol, cusip, currency, name, type, exchange].hash
     end
 
     # Builds the object from hash

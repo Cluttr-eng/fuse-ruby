@@ -31,7 +31,7 @@ describe FuseClient::GetInvestmentHoldingsRequest do
     end
   end
 
-  describe 'test attribute "iso_currency_code"' do
+  describe 'test attribute "options"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end

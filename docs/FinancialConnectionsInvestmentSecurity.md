@@ -4,11 +4,14 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **type** | **String** | The security type of the holding. | [optional] |
-| **cusip** | **String** | 9-character CUSIP, an identifier assigned to North American securities. | [optional] |
+| **symbol** | **String** | The trading symbol for publicly traded securities, or a short identifier if available. |  |
+| **isin** | **String** | The International Securities Identification Number (ISIN) uniquely identifies the security. | [optional] |
+| **sedol** | **String** | The Stock Exchange Daily Official List (SEDOL) code uniquely identifies the security, primarily used in the United Kingdom and Ireland. | [optional] |
+| **cusip** | **String** | The Committee on Uniform Securities Identification Procedures (CUSIP) number uniquely identifies the security, primarily used in the United States and Canada. | [optional] |
+| **currency** | [**FinancialConnectionsInvestmentSecurityCurrency**](FinancialConnectionsInvestmentSecurityCurrency.md) |  |  |
 | **name** | **String** | A descriptive name for the security, suitable for display. | [optional] |
-| **ticker_symbol** | **String** | The security’s trading symbol for publicly traded securities, and otherwise a short identifier if available. | [optional] |
-| **id** | **String** | A unique identity for the security | [optional] |
+| **type** | **String** | The type of security (e.g., equity, mutual fund) | [optional] |
+| **exchange** | [**FinancialConnectionsInvestmentSecurityExchange**](FinancialConnectionsInvestmentSecurityExchange.md) |  | [optional] |
 
 ## Example
 
@@ -16,11 +19,14 @@
 require 'fuse_client'
 
 instance = FuseClient::FinancialConnectionsInvestmentSecurity.new(
-  type: null,
+  symbol: null,
+  isin: null,
+  sedol: null,
   cusip: null,
+  currency: null,
   name: null,
-  ticker_symbol: null,
-  id: null
+  type: null,
+  exchange: null
 )
 ```
 
