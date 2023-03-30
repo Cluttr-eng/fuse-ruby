@@ -7,7 +7,7 @@
 | **remote_id** | **String** | Remote Id of the transaction, ie Plaid or Teller Id |  |
 | **remote_account_id** | **String** | Remote Account Id of the transaction, ie Plaid Account Id |  |
 | **amount** | **Float** | Amount in cents associated with the transaction |  |
-| **date** | **String** | Date of the transaction |  |
+| **date** | **String** | Date of the transaction (YYYY-MM-DD) |  |
 | **description** | **String** | Description of the transaction |  |
 | **category** | **Array&lt;String&gt;** | Categories of the transaction, ie Computers and Electronics |  |
 | **merchant** | [**TransactionMerchant**](TransactionMerchant.md) |  |  |

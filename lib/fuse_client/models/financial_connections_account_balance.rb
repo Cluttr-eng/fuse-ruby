@@ -27,13 +27,17 @@ module FuseClient
     # The ISO-4217 currency code of the balance.
     attr_accessor :iso_currency_code
 
+    # The last time the account balance was updated, represented as an ISO 8601 timestamp (YYYY-MM-DDTHH:mm:ssZ). This value may not be available for some accounts.
+    attr_accessor :last_updated_date
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'remote_account_id' => :'remote_account_id',
         :'available' => :'available',
         :'current' => :'current',
-        :'iso_currency_code' => :'iso_currency_code'
+        :'iso_currency_code' => :'iso_currency_code',
+        :'last_updated_date' => :'last_updated_date'
       }
     end
 
@@ -48,7 +52,8 @@ module FuseClient
         :'remote_account_id' => :'String',
         :'available' => :'Float',
         :'current' => :'Float',
-        :'iso_currency_code' => :'String'
+        :'iso_currency_code' => :'String',
+        :'last_updated_date' => :'String'
       }
     end
 
@@ -88,6 +93,10 @@ module FuseClient
       if attributes.key?(:'iso_currency_code')
         self.iso_currency_code = attributes[:'iso_currency_code']
       end
+
+      if attributes.key?(:'last_updated_date')
+        self.last_updated_date = attributes[:'last_updated_date']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -116,7 +125,8 @@ module FuseClient
           remote_account_id == o.remote_account_id &&
           available == o.available &&
           current == o.current &&
-          iso_currency_code == o.iso_currency_code
+          iso_currency_code == o.iso_currency_code &&
+          last_updated_date == o.last_updated_date
     end
 
     # @see the `==` method
@@ -128,7 +138,7 @@ module FuseClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [remote_account_id, available, current, iso_currency_code].hash
+      [remote_account_id, available, current, iso_currency_code, last_updated_date].hash
     end
 
     # Builds the object from hash

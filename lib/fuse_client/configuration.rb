@@ -304,6 +304,20 @@ module FuseClient
             key: 'Mx-Api-Key',
             value: api_key_with_prefix('mxApiKey')
           },
+        'snaptradeClientId' =>
+          {
+            type: 'api_key',
+            in: 'header',
+            key: 'Snaptrade-Client-Id',
+            value: api_key_with_prefix('snaptradeClientId')
+          },
+        'snaptradeConsumerKey' =>
+          {
+            type: 'api_key',
+            in: 'header',
+            key: 'Snaptrade-Consumer-Id',
+            value: api_key_with_prefix('snaptradeConsumerKey')
+          },
         'proxyUrlKey' =>
           {
             type: 'api_key',
