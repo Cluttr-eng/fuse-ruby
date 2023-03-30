@@ -15,6 +15,9 @@ require 'time'
 
 module FuseClient
   class FinancialConnectionsInvestmentSecurity
+    # Remote Id of the security, ie Plaid or Snaptrade security id
+    attr_accessor :remote_id
+
     # The trading symbol for publicly traded securities, or a short identifier if available.
     attr_accessor :symbol
 
@@ -40,6 +43,7 @@ module FuseClient
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'remote_id' => :'remote_id',
         :'symbol' => :'symbol',
         :'isin' => :'isin',
         :'sedol' => :'sedol',
@@ -59,6 +63,7 @@ module FuseClient
     # Attribute type mapping.
     def self.openapi_types
       {
+        :'remote_id' => :'String',
         :'symbol' => :'String',
         :'isin' => :'String',
         :'sedol' => :'String',
@@ -90,6 +95,10 @@ module FuseClient
         end
         h[k.to_sym] = v
       }
+
+      if attributes.key?(:'remote_id')
+        self.remote_id = attributes[:'remote_id']
+      end
 
       if attributes.key?(:'symbol')
         self.symbol = attributes[:'symbol']
@@ -128,6 +137,10 @@ module FuseClient
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if @remote_id.nil?
+        invalid_properties.push('invalid value for "remote_id", remote_id cannot be nil.')
+      end
+
       if @symbol.nil?
         invalid_properties.push('invalid value for "symbol", symbol cannot be nil.')
       end
@@ -142,6 +155,7 @@ module FuseClient
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if @remote_id.nil?
       return false if @symbol.nil?
       return false if @currency.nil?
       true
@@ -152,6 +166,7 @@ module FuseClient
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          remote_id == o.remote_id &&
           symbol == o.symbol &&
           isin == o.isin &&
           sedol == o.sedol &&
@@ -171,7 +186,7 @@ module FuseClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [symbol, isin, sedol, cusip, currency, name, type, exchange].hash
+      [remote_id, symbol, isin, sedol, cusip, currency, name, type, exchange].hash
     end
 
     # Builds the object from hash

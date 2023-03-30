@@ -4,6 +4,7 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
+| **remote_id** | **String** | Remote Id of the security, ie Plaid or Snaptrade security id |  |
 | **symbol** | **String** | The trading symbol for publicly traded securities, or a short identifier if available. |  |
 | **isin** | **String** | The International Securities Identification Number (ISIN) uniquely identifies the security. | [optional] |
 | **sedol** | **String** | The Stock Exchange Daily Official List (SEDOL) code uniquely identifies the security, primarily used in the United Kingdom and Ireland. | [optional] |
@@ -19,6 +20,7 @@
 require 'fuse_client'
 
 instance = FuseClient::FinancialConnectionsInvestmentSecurity.new(
+  remote_id: null,
   symbol: null,
   isin: null,
   sedol: null,
