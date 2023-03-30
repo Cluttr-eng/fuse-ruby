@@ -20,6 +20,9 @@ module FuseClient
     # List of products that you would like the institutions to support
     attr_accessor :products
 
+    # List of country codes that you would like the institutions to support
+    attr_accessor :country_codes
+
     # The fuse access token for an existing account integration. This will perform the process to reconnect an existing disconnected account.
     attr_accessor :access_token
 
@@ -28,6 +31,7 @@ module FuseClient
       {
         :'supported_financial_institution_aggregators' => :'supported_financial_institution_aggregators',
         :'products' => :'products',
+        :'country_codes' => :'country_codes',
         :'access_token' => :'access_token'
       }
     end
@@ -42,6 +46,7 @@ module FuseClient
       {
         :'supported_financial_institution_aggregators' => :'Array<Aggregator>',
         :'products' => :'Array<Product>',
+        :'country_codes' => :'Array<CountryCode>',
         :'access_token' => :'String'
       }
     end
@@ -76,6 +81,12 @@ module FuseClient
       if attributes.key?(:'products')
         if (value = attributes[:'products']).is_a?(Array)
           self.products = value
+        end
+      end
+
+      if attributes.key?(:'country_codes')
+        if (value = attributes[:'country_codes']).is_a?(Array)
+          self.country_codes = value
         end
       end
 
@@ -134,6 +145,7 @@ module FuseClient
       self.class == o.class &&
           supported_financial_institution_aggregators == o.supported_financial_institution_aggregators &&
           products == o.products &&
+          country_codes == o.country_codes &&
           access_token == o.access_token
     end
 
@@ -146,7 +158,7 @@ module FuseClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [supported_financial_institution_aggregators, products, access_token].hash
+      [supported_financial_institution_aggregators, products, country_codes, access_token].hash
     end
 
     # Builds the object from hash
