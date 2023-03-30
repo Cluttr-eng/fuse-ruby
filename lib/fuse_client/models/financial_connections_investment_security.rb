@@ -30,6 +30,9 @@ module FuseClient
     # The Committee on Uniform Securities Identification Procedures (CUSIP) number uniquely identifies the security, primarily used in the United States and Canada.
     attr_accessor :cusip
 
+    # The closing price of the security at the end of the most recent trading day.
+    attr_accessor :close_price
+
     attr_accessor :currency
 
     # A descriptive name for the security, suitable for display.
@@ -48,6 +51,7 @@ module FuseClient
         :'isin' => :'isin',
         :'sedol' => :'sedol',
         :'cusip' => :'cusip',
+        :'close_price' => :'close_price',
         :'currency' => :'currency',
         :'name' => :'name',
         :'type' => :'type',
@@ -68,6 +72,7 @@ module FuseClient
         :'isin' => :'String',
         :'sedol' => :'String',
         :'cusip' => :'String',
+        :'close_price' => :'Float',
         :'currency' => :'FinancialConnectionsInvestmentSecurityCurrency',
         :'name' => :'String',
         :'type' => :'String',
@@ -116,6 +121,10 @@ module FuseClient
         self.cusip = attributes[:'cusip']
       end
 
+      if attributes.key?(:'close_price')
+        self.close_price = attributes[:'close_price']
+      end
+
       if attributes.key?(:'currency')
         self.currency = attributes[:'currency']
       end
@@ -145,6 +154,10 @@ module FuseClient
         invalid_properties.push('invalid value for "symbol", symbol cannot be nil.')
       end
 
+      if @close_price.nil?
+        invalid_properties.push('invalid value for "close_price", close_price cannot be nil.')
+      end
+
       if @currency.nil?
         invalid_properties.push('invalid value for "currency", currency cannot be nil.')
       end
@@ -157,6 +170,7 @@ module FuseClient
     def valid?
       return false if @remote_id.nil?
       return false if @symbol.nil?
+      return false if @close_price.nil?
       return false if @currency.nil?
       true
     end
@@ -171,6 +185,7 @@ module FuseClient
           isin == o.isin &&
           sedol == o.sedol &&
           cusip == o.cusip &&
+          close_price == o.close_price &&
           currency == o.currency &&
           name == o.name &&
           type == o.type &&
@@ -186,7 +201,7 @@ module FuseClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [remote_id, symbol, isin, sedol, cusip, currency, name, type, exchange].hash
+      [remote_id, symbol, isin, sedol, cusip, close_price, currency, name, type, exchange].hash
     end
 
     # Builds the object from hash
