@@ -97,12 +97,32 @@ module FuseClient
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if @accounts.nil?
+        invalid_properties.push('invalid value for "accounts", accounts cannot be nil.')
+      end
+
+      if @investment_transactions.nil?
+        invalid_properties.push('invalid value for "investment_transactions", investment_transactions cannot be nil.')
+      end
+
+      if @securities.nil?
+        invalid_properties.push('invalid value for "securities", securities cannot be nil.')
+      end
+
+      if @request_id.nil?
+        invalid_properties.push('invalid value for "request_id", request_id cannot be nil.')
+      end
+
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if @accounts.nil?
+      return false if @investment_transactions.nil?
+      return false if @securities.nil?
+      return false if @request_id.nil?
       true
     end
 

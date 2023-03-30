@@ -25,7 +25,19 @@ describe FuseClient::GetInvestmentHoldingsResponse do
       expect(instance).to be_instance_of(FuseClient::GetInvestmentHoldingsResponse)
     end
   end
+  describe 'test attribute "accounts"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   describe 'test attribute "holdings"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  describe 'test attribute "securities"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
