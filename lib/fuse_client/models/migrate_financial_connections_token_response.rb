@@ -15,8 +15,7 @@ require 'time'
 
 module FuseClient
   class MigrateFinancialConnectionsTokenResponse
-    # Input token for the existing connection
-    attr_accessor :input_token
+    attr_accessor :connection_data
 
     # Fuse access token for the fuse connection
     attr_accessor :fuse_access_token
@@ -30,7 +29,7 @@ module FuseClient
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'input_token' => :'input_token',
+        :'connection_data' => :'connection_data',
         :'fuse_access_token' => :'fuse_access_token',
         :'fuse_financial_connection_id' => :'fuse_financial_connection_id',
         :'request_id' => :'request_id'
@@ -45,7 +44,7 @@ module FuseClient
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'input_token' => :'String',
+        :'connection_data' => :'MigrateFinancialConnectionsAggregatorConnectionData',
         :'fuse_access_token' => :'String',
         :'fuse_financial_connection_id' => :'String',
         :'request_id' => :'String'
@@ -73,8 +72,8 @@ module FuseClient
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'input_token')
-        self.input_token = attributes[:'input_token']
+      if attributes.key?(:'connection_data')
+        self.connection_data = attributes[:'connection_data']
       end
 
       if attributes.key?(:'fuse_access_token')
@@ -94,8 +93,8 @@ module FuseClient
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @input_token.nil?
-        invalid_properties.push('invalid value for "input_token", input_token cannot be nil.')
+      if @connection_data.nil?
+        invalid_properties.push('invalid value for "connection_data", connection_data cannot be nil.')
       end
 
       if @fuse_access_token.nil?
@@ -112,7 +111,7 @@ module FuseClient
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @input_token.nil?
+      return false if @connection_data.nil?
       return false if @fuse_access_token.nil?
       return false if @fuse_financial_connection_id.nil?
       true
@@ -123,7 +122,7 @@ module FuseClient
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          input_token == o.input_token &&
+          connection_data == o.connection_data &&
           fuse_access_token == o.fuse_access_token &&
           fuse_financial_connection_id == o.fuse_financial_connection_id &&
           request_id == o.request_id
@@ -138,7 +137,7 @@ module FuseClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [input_token, fuse_access_token, fuse_financial_connection_id, request_id].hash
+      [connection_data, fuse_access_token, fuse_financial_connection_id, request_id].hash
     end
 
     # Builds the object from hash

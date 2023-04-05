@@ -25,7 +25,7 @@ describe FuseClient::MigrateFinancialConnectionsTokenRequest do
       expect(instance).to be_instance_of(FuseClient::MigrateFinancialConnectionsTokenRequest)
     end
   end
-  describe 'test attribute "token"' do
+  describe 'test attribute "connection_data"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
@@ -34,7 +34,7 @@ describe FuseClient::MigrateFinancialConnectionsTokenRequest do
   describe 'test attribute "aggregator"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["plaid"])
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["plaid", "mx"])
       # validator.allowable_values.each do |value|
       #   expect { instance.aggregator = value }.not_to raise_error
       # end

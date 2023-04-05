@@ -7,6 +7,7 @@
 | **supported_financial_institution_aggregators** | [**Array&lt;Aggregator&gt;**](Aggregator.md) |  | [optional] |
 | **products** | [**Array&lt;Product&gt;**](Product.md) | List of products that you would like the institutions to support | [optional] |
 | **country_codes** | [**Array&lt;CountryCode&gt;**](CountryCode.md) | List of country codes that you would like the institutions to support | [optional] |
+| **entity** | [**Entity**](Entity.md) |  | [optional] |
 | **access_token** | **String** | The fuse access token for an existing account integration. This will perform the process to reconnect an existing disconnected account. | [optional] |
 
 ## Example
@@ -18,6 +19,7 @@ instance = FuseClient::CreateSessionRequest.new(
   supported_financial_institution_aggregators: null,
   products: null,
   country_codes: null,
+  entity: null,
   access_token: null
 )
 ```
