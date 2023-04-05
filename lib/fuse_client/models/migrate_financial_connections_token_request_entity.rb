@@ -15,7 +15,7 @@ require 'time'
 
 module FuseClient
   class MigrateFinancialConnectionsTokenRequestEntity
-    # Id of the entity
+    # The unique identifier of the entity (user or business) associated with the financial connections.
     attr_accessor :id
 
     # Attribute mapping from ruby-style variable name to JSON key.

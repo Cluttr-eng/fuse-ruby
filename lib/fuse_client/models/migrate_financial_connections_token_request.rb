@@ -15,13 +15,14 @@ require 'time'
 
 module FuseClient
   class MigrateFinancialConnectionsTokenRequest
-    # Token for existing connection
-    attr_accessor :token
+    attr_accessor :connection_data
 
+    # The aggregator being migrated (either 'plaid' or 'mx').
     attr_accessor :aggregator
 
     attr_accessor :entity
 
+    # A list of Fuse products that the migrated connection will have access to.
     attr_accessor :fuse_products
 
     class EnumAttributeValidator
@@ -49,7 +50,7 @@ module FuseClient
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'token' => :'token',
+        :'connection_data' => :'connection_data',
         :'aggregator' => :'aggregator',
         :'entity' => :'entity',
         :'fuse_products' => :'fuse_products'
@@ -64,7 +65,7 @@ module FuseClient
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'token' => :'String',
+        :'connection_data' => :'MigrateFinancialConnectionsAggregatorConnectionData',
         :'aggregator' => :'String',
         :'entity' => :'MigrateFinancialConnectionsTokenRequestEntity',
         :'fuse_products' => :'Array<Product>'
@@ -92,8 +93,8 @@ module FuseClient
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'token')
-        self.token = attributes[:'token']
+      if attributes.key?(:'connection_data')
+        self.connection_data = attributes[:'connection_data']
       end
 
       if attributes.key?(:'aggregator')
@@ -115,8 +116,8 @@ module FuseClient
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @token.nil?
-        invalid_properties.push('invalid value for "token", token cannot be nil.')
+      if @connection_data.nil?
+        invalid_properties.push('invalid value for "connection_data", connection_data cannot be nil.')
       end
 
       if @aggregator.nil?
@@ -137,9 +138,9 @@ module FuseClient
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @token.nil?
+      return false if @connection_data.nil?
       return false if @aggregator.nil?
-      aggregator_validator = EnumAttributeValidator.new('String', ["plaid"])
+      aggregator_validator = EnumAttributeValidator.new('String', ["plaid", "mx"])
       return false unless aggregator_validator.valid?(@aggregator)
       return false if @entity.nil?
       return false if @fuse_products.nil?
@@ -149,7 +150,7 @@ module FuseClient
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] aggregator Object to be assigned
     def aggregator=(aggregator)
-      validator = EnumAttributeValidator.new('String', ["plaid"])
+      validator = EnumAttributeValidator.new('String', ["plaid", "mx"])
       unless validator.valid?(aggregator)
         fail ArgumentError, "invalid value for \"aggregator\", must be one of #{validator.allowable_values}."
       end
@@ -161,7 +162,7 @@ module FuseClient
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          token == o.token &&
+          connection_data == o.connection_data &&
           aggregator == o.aggregator &&
           entity == o.entity &&
           fuse_products == o.fuse_products
@@ -176,7 +177,7 @@ module FuseClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [token, aggregator, entity, fuse_products].hash
+      [connection_data, aggregator, entity, fuse_products].hash
     end
 
     # Builds the object from hash

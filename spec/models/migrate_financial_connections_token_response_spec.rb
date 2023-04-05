@@ -25,7 +25,7 @@ describe FuseClient::MigrateFinancialConnectionsTokenResponse do
       expect(instance).to be_instance_of(FuseClient::MigrateFinancialConnectionsTokenResponse)
     end
   end
-  describe 'test attribute "input_token"' do
+  describe 'test attribute "connection_data"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end

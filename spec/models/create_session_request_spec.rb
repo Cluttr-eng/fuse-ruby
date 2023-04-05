@@ -43,6 +43,12 @@ describe FuseClient::CreateSessionRequest do
     end
   end
 
+  describe 'test attribute "entity"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   describe 'test attribute "access_token"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers

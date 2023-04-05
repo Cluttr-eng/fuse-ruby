@@ -4,10 +4,10 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **token** | **String** | Token for existing connection |  |
-| **aggregator** | **String** |  |  |
+| **connection_data** | [**MigrateFinancialConnectionsAggregatorConnectionData**](MigrateFinancialConnectionsAggregatorConnectionData.md) |  |  |
+| **aggregator** | **String** | The aggregator being migrated (either &#39;plaid&#39; or &#39;mx&#39;). |  |
 | **entity** | [**MigrateFinancialConnectionsTokenRequestEntity**](MigrateFinancialConnectionsTokenRequestEntity.md) |  |  |
-| **fuse_products** | [**Array&lt;Product&gt;**](Product.md) |  |  |
+| **fuse_products** | [**Array&lt;Product&gt;**](Product.md) | A list of Fuse products that the migrated connection will have access to. |  |
 
 ## Example
 
@@ -15,7 +15,7 @@
 require 'fuse_client'
 
 instance = FuseClient::MigrateFinancialConnectionsTokenRequest.new(
-  token: null,
+  connection_data: null,
   aggregator: null,
   entity: null,
   fuse_products: null
