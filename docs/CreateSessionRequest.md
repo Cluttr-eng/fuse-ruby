@@ -9,6 +9,7 @@
 | **country_codes** | [**Array&lt;CountryCode&gt;**](CountryCode.md) | List of country codes that you would like the institutions to support | [optional] |
 | **entity** | [**Entity**](Entity.md) |  | [optional] |
 | **access_token** | **String** | The fuse access token for an existing account integration. This will perform the process to reconnect an existing disconnected account. | [optional] |
+| **is_web_view** | **Boolean** | True if the fuse sdk is using a web view. Defaults to true. | [optional] |
 
 ## Example
 
@@ -20,7 +21,8 @@ instance = FuseClient::CreateSessionRequest.new(
   products: null,
   country_codes: null,
   entity: null,
-  access_token: null
+  access_token: null,
+  is_web_view: null
 )
 ```
 
