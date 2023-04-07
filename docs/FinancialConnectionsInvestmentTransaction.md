@@ -8,7 +8,6 @@
 | **remote_account_id** | **String** | Remote Account Id of the transaction, ie Plaid Account Id |  |
 | **account_name** | **String** | The name of the account associated with the investment transaction | [optional] |
 | **amount** | **Float** | The amount of the investment transaction |  |
-| **currency** | [**FinancialConnectionsInvestmentTransactionCurrency**](FinancialConnectionsInvestmentTransactionCurrency.md) |  |  |
 | **description** | **String** | A description of the investment transaction |  |
 | **fees** | **Float** | The fees associated with the investment transaction |  |
 | **date** | **Time** | The date and time of the investment transaction |  |
@@ -27,7 +26,6 @@ instance = FuseClient::FinancialConnectionsInvestmentTransaction.new(
   remote_account_id: null,
   account_name: null,
   amount: null,
-  currency: null,
   description: null,
   fees: null,
   date: null,

@@ -14,15 +14,18 @@ require 'date'
 require 'time'
 
 module FuseClient
-  # The currency in which the holding is denominated.
-  class FinancialConnectionsInvestmentSecurityCurrency
-    # The ISO-4217 currency code.
+  class Currency
+    # The ISO-4217 currency code
     attr_accessor :code
+
+    # The name of the currency
+    attr_accessor :name
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'code' => :'code'
+        :'code' => :'code',
+        :'name' => :'name'
       }
     end
 
@@ -34,7 +37,8 @@ module FuseClient
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'code' => :'String'
+        :'code' => :'String',
+        :'name' => :'String'
       }
     end
 
@@ -48,13 +52,13 @@ module FuseClient
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `FuseClient::FinancialConnectionsInvestmentSecurityCurrency` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `FuseClient::Currency` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `FuseClient::FinancialConnectionsInvestmentSecurityCurrency`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `FuseClient::Currency`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
@@ -62,18 +66,27 @@ module FuseClient
       if attributes.key?(:'code')
         self.code = attributes[:'code']
       end
+
+      if attributes.key?(:'name')
+        self.name = attributes[:'name']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if @code.nil?
+        invalid_properties.push('invalid value for "code", code cannot be nil.')
+      end
+
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if @code.nil?
       true
     end
 
@@ -82,7 +95,8 @@ module FuseClient
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          code == o.code
+          code == o.code &&
+          name == o.name
     end
 
     # @see the `==` method
@@ -94,7 +108,7 @@ module FuseClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [code].hash
+      [code, name].hash
     end
 
     # Builds the object from hash

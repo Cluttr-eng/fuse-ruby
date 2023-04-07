@@ -55,4 +55,10 @@ describe FuseClient::CreateSessionRequest do
     end
   end
 
+  describe 'test attribute "is_web_view"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
 end

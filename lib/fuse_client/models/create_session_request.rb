@@ -28,6 +28,9 @@ module FuseClient
     # The fuse access token for an existing account integration. This will perform the process to reconnect an existing disconnected account.
     attr_accessor :access_token
 
+    # True if the fuse sdk is using a web view. Defaults to true.
+    attr_accessor :is_web_view
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -35,7 +38,8 @@ module FuseClient
         :'products' => :'products',
         :'country_codes' => :'country_codes',
         :'entity' => :'entity',
-        :'access_token' => :'access_token'
+        :'access_token' => :'access_token',
+        :'is_web_view' => :'is_web_view'
       }
     end
 
@@ -51,7 +55,8 @@ module FuseClient
         :'products' => :'Array<Product>',
         :'country_codes' => :'Array<CountryCode>',
         :'entity' => :'Entity',
-        :'access_token' => :'String'
+        :'access_token' => :'String',
+        :'is_web_view' => :'Boolean'
       }
     end
 
@@ -100,6 +105,10 @@ module FuseClient
 
       if attributes.key?(:'access_token')
         self.access_token = attributes[:'access_token']
+      end
+
+      if attributes.key?(:'is_web_view')
+        self.is_web_view = attributes[:'is_web_view']
       end
     end
 
@@ -155,7 +164,8 @@ module FuseClient
           products == o.products &&
           country_codes == o.country_codes &&
           entity == o.entity &&
-          access_token == o.access_token
+          access_token == o.access_token &&
+          is_web_view == o.is_web_view
     end
 
     # @see the `==` method
@@ -167,7 +177,7 @@ module FuseClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [supported_financial_institution_aggregators, products, country_codes, entity, access_token].hash
+      [supported_financial_institution_aggregators, products, country_codes, entity, access_token, is_web_view].hash
     end
 
     # Builds the object from hash
