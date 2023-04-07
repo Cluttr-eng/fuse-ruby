@@ -73,7 +73,7 @@ module FuseClient
         :'sedol' => :'String',
         :'cusip' => :'String',
         :'close_price' => :'Float',
-        :'currency' => :'FinancialConnectionsInvestmentSecurityCurrency',
+        :'currency' => :'Currency',
         :'name' => :'String',
         :'type' => :'String',
         :'exchange' => :'FinancialConnectionsInvestmentSecurityExchange'
