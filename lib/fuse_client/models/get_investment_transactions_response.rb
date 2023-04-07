@@ -19,8 +19,6 @@ module FuseClient
 
     attr_accessor :investment_transactions
 
-    attr_accessor :securities
-
     # An identifier that is exclusive to the request and can serve as a means for investigating and resolving issues.
     attr_accessor :request_id
 
@@ -29,7 +27,6 @@ module FuseClient
       {
         :'accounts' => :'accounts',
         :'investment_transactions' => :'investment_transactions',
-        :'securities' => :'securities',
         :'request_id' => :'request_id'
       }
     end
@@ -42,9 +39,8 @@ module FuseClient
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'accounts' => :'Array<FinancialConnectionsInvestmentAccount>',
+        :'accounts' => :'Array<FinancialConnectionsAccount>',
         :'investment_transactions' => :'Array<FinancialConnectionsInvestmentTransaction>',
-        :'securities' => :'Array<FinancialConnectionsInvestmentSecurity>',
         :'request_id' => :'String'
       }
     end
@@ -82,12 +78,6 @@ module FuseClient
         end
       end
 
-      if attributes.key?(:'securities')
-        if (value = attributes[:'securities']).is_a?(Array)
-          self.securities = value
-        end
-      end
-
       if attributes.key?(:'request_id')
         self.request_id = attributes[:'request_id']
       end
@@ -105,10 +95,6 @@ module FuseClient
         invalid_properties.push('invalid value for "investment_transactions", investment_transactions cannot be nil.')
       end
 
-      if @securities.nil?
-        invalid_properties.push('invalid value for "securities", securities cannot be nil.')
-      end
-
       if @request_id.nil?
         invalid_properties.push('invalid value for "request_id", request_id cannot be nil.')
       end
@@ -121,7 +107,6 @@ module FuseClient
     def valid?
       return false if @accounts.nil?
       return false if @investment_transactions.nil?
-      return false if @securities.nil?
       return false if @request_id.nil?
       true
     end
@@ -133,7 +118,6 @@ module FuseClient
       self.class == o.class &&
           accounts == o.accounts &&
           investment_transactions == o.investment_transactions &&
-          securities == o.securities &&
           request_id == o.request_id
     end
 
@@ -146,7 +130,7 @@ module FuseClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [accounts, investment_transactions, securities, request_id].hash
+      [accounts, investment_transactions, request_id].hash
     end
 
     # Builds the object from hash

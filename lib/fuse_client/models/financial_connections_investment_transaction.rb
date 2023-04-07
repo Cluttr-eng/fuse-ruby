@@ -27,8 +27,6 @@ module FuseClient
     # The amount of the investment transaction
     attr_accessor :amount
 
-    attr_accessor :currency
-
     # A description of the investment transaction
     attr_accessor :description
 
@@ -56,7 +54,6 @@ module FuseClient
         :'remote_account_id' => :'remote_account_id',
         :'account_name' => :'account_name',
         :'amount' => :'amount',
-        :'currency' => :'currency',
         :'description' => :'description',
         :'fees' => :'fees',
         :'date' => :'date',
@@ -79,7 +76,6 @@ module FuseClient
         :'remote_account_id' => :'String',
         :'account_name' => :'String',
         :'amount' => :'Float',
-        :'currency' => :'FinancialConnectionsInvestmentTransactionCurrency',
         :'description' => :'String',
         :'fees' => :'Float',
         :'date' => :'Time',
@@ -127,10 +123,6 @@ module FuseClient
         self.amount = attributes[:'amount']
       end
 
-      if attributes.key?(:'currency')
-        self.currency = attributes[:'currency']
-      end
-
       if attributes.key?(:'description')
         self.description = attributes[:'description']
       end
@@ -176,10 +168,6 @@ module FuseClient
         invalid_properties.push('invalid value for "amount", amount cannot be nil.')
       end
 
-      if @currency.nil?
-        invalid_properties.push('invalid value for "currency", currency cannot be nil.')
-      end
-
       if @description.nil?
         invalid_properties.push('invalid value for "description", description cannot be nil.')
       end
@@ -217,7 +205,6 @@ module FuseClient
       return false if @remote_id.nil?
       return false if @remote_account_id.nil?
       return false if @amount.nil?
-      return false if @currency.nil?
       return false if @description.nil?
       return false if @fees.nil?
       return false if @date.nil?
@@ -237,7 +224,6 @@ module FuseClient
           remote_account_id == o.remote_account_id &&
           account_name == o.account_name &&
           amount == o.amount &&
-          currency == o.currency &&
           description == o.description &&
           fees == o.fees &&
           date == o.date &&
@@ -256,7 +242,7 @@ module FuseClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [remote_id, remote_account_id, account_name, amount, currency, description, fees, date, type, quantity, price, security].hash
+      [remote_id, remote_account_id, account_name, amount, description, fees, date, type, quantity, price, security].hash
     end
 
     # Builds the object from hash

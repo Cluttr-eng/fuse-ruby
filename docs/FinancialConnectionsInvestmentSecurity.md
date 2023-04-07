@@ -10,7 +10,7 @@
 | **sedol** | **String** | The Stock Exchange Daily Official List (SEDOL) code uniquely identifies the security, primarily used in the United Kingdom and Ireland. | [optional] |
 | **cusip** | **String** | The Committee on Uniform Securities Identification Procedures (CUSIP) number uniquely identifies the security, primarily used in the United States and Canada. | [optional] |
 | **close_price** | **Float** | The closing price of the security at the end of the most recent trading day. |  |
-| **currency** | [**FinancialConnectionsInvestmentSecurityCurrency**](FinancialConnectionsInvestmentSecurityCurrency.md) |  |  |
+| **currency** | [**Currency**](Currency.md) |  |  |
 | **name** | **String** | A descriptive name for the security, suitable for display. | [optional] |
 | **type** | **String** | The type of security (e.g., equity, mutual fund) | [optional] |
 | **exchange** | [**FinancialConnectionsInvestmentSecurityExchange**](FinancialConnectionsInvestmentSecurityExchange.md) |  | [optional] |
