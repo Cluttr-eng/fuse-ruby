@@ -233,6 +233,8 @@ module FuseClient
       status_validator = EnumAttributeValidator.new('String', ["pending", "posted"])
       return false unless status_validator.valid?(@status)
       return false if @type.nil?
+      type_validator = EnumAttributeValidator.new('String', ["ach", "adjustment", "atm", "bank_charge", "bill_payment", "card_payment", "cash", "cashback", "charge", "cheque", "credit", "debit", "deposit", "digital_payment", "direct_debit", "fee", "in_store", "interest", "online", "other", "payment", "purchase", "standing_order", "transaction", "transfer", "wire", "withdrawal"])
+      return false unless type_validator.valid?(@type)
       true
     end
 
@@ -244,6 +246,16 @@ module FuseClient
         fail ArgumentError, "invalid value for \"status\", must be one of #{validator.allowable_values}."
       end
       @status = status
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] type Object to be assigned
+    def type=(type)
+      validator = EnumAttributeValidator.new('String', ["ach", "adjustment", "atm", "bank_charge", "bill_payment", "card_payment", "cash", "cashback", "charge", "cheque", "credit", "debit", "deposit", "digital_payment", "direct_debit", "fee", "in_store", "interest", "online", "other", "payment", "purchase", "standing_order", "transaction", "transfer", "wire", "withdrawal"])
+      unless validator.valid?(type)
+        fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
+      end
+      @type = type
     end
 
     # Checks equality by comparing each attribute.
