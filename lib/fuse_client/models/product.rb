@@ -19,11 +19,11 @@ module FuseClient
     BALANCE = "balance".freeze
     OWNERSHIP = "ownership".freeze
     TRANSACTIONS = "transactions".freeze
-    LIABILITIES = "liabilities".freeze
     INVESTMENTS = "investments".freeze
+    ASSET_REPORT = "asset_report".freeze
 
     def self.all_vars
-      @all_vars ||= [ACCOUNT_DETAILS, BALANCE, OWNERSHIP, TRANSACTIONS, LIABILITIES, INVESTMENTS].freeze
+      @all_vars ||= [ACCOUNT_DETAILS, BALANCE, OWNERSHIP, TRANSACTIONS, INVESTMENTS, ASSET_REPORT].freeze
     end
 
     # Builds the enum from string

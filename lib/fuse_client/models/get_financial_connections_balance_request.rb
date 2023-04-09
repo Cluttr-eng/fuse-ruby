@@ -18,10 +18,13 @@ module FuseClient
     # Access token for authentication
     attr_accessor :access_token
 
+    attr_accessor :options
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'access_token' => :'access_token'
+        :'access_token' => :'access_token',
+        :'options' => :'options'
       }
     end
 
@@ -33,7 +36,8 @@ module FuseClient
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'access_token' => :'String'
+        :'access_token' => :'String',
+        :'options' => :'GetFinancialConnectionsBalanceRequestOptions'
       }
     end
 
@@ -61,6 +65,10 @@ module FuseClient
       if attributes.key?(:'access_token')
         self.access_token = attributes[:'access_token']
       end
+
+      if attributes.key?(:'options')
+        self.options = attributes[:'options']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -86,7 +94,8 @@ module FuseClient
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          access_token == o.access_token
+          access_token == o.access_token &&
+          options == o.options
     end
 
     # @see the `==` method
@@ -98,7 +107,7 @@ module FuseClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [access_token].hash
+      [access_token, options].hash
     end
 
     # Builds the object from hash

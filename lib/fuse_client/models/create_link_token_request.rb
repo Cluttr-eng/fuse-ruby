@@ -20,9 +20,6 @@ module FuseClient
 
     attr_accessor :entity
 
-    # This field is used to provide the user with a link to reconnect their financial account. It may be included in an automated email sent by Fuse to the entity's registered email address. It's important to note that the reconnection_url should be a valid URL and can only be used once to reconnect the disconnected account.
-    attr_accessor :reconnection_url
-
     # The name of your application.
     attr_accessor :client_name
 
@@ -38,7 +35,6 @@ module FuseClient
       {
         :'institution_id' => :'institution_id',
         :'entity' => :'entity',
-        :'reconnection_url' => :'reconnection_url',
         :'client_name' => :'client_name',
         :'session_client_secret' => :'session_client_secret',
         :'mx' => :'mx',
@@ -56,7 +52,6 @@ module FuseClient
       {
         :'institution_id' => :'String',
         :'entity' => :'Entity',
-        :'reconnection_url' => :'String',
         :'client_name' => :'String',
         :'session_client_secret' => :'String',
         :'mx' => :'CreateLinkTokenRequestMx',
@@ -91,10 +86,6 @@ module FuseClient
 
       if attributes.key?(:'entity')
         self.entity = attributes[:'entity']
-      end
-
-      if attributes.key?(:'reconnection_url')
-        self.reconnection_url = attributes[:'reconnection_url']
       end
 
       if attributes.key?(:'client_name')
@@ -154,7 +145,6 @@ module FuseClient
       self.class == o.class &&
           institution_id == o.institution_id &&
           entity == o.entity &&
-          reconnection_url == o.reconnection_url &&
           client_name == o.client_name &&
           session_client_secret == o.session_client_secret &&
           mx == o.mx &&
@@ -170,7 +160,7 @@ module FuseClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [institution_id, entity, reconnection_url, client_name, session_client_secret, mx, plaid].hash
+      [institution_id, entity, client_name, session_client_secret, mx, plaid].hash
     end
 
     # Builds the object from hash
