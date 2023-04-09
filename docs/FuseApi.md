@@ -5,13 +5,12 @@ All URIs are relative to *https://sandbox-api.letsfuse.com*
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
 | [**create_asset_report**](FuseApi.md#create_asset_report) | **POST** /v1/asset_report/create |  |
-| [**create_entity**](FuseApi.md#create_entity) | **POST** /v1/entities | Create entity |
 | [**create_link_token**](FuseApi.md#create_link_token) | **POST** /v1/link/token |  |
 | [**create_session**](FuseApi.md#create_session) | **POST** /v1/session |  |
 | [**delete_financial_connection**](FuseApi.md#delete_financial_connection) | **DELETE** /v1/financial_connections/{financial_connection_id_to_delete} | Delete a financial connection |
 | [**exchange_financial_connections_public_token**](FuseApi.md#exchange_financial_connections_public_token) | **POST** /v1/financial_connections/public_token/exchange |  |
 | [**get_asset_report**](FuseApi.md#get_asset_report) | **POST** /v1/asset_report |  |
-| [**get_entity**](FuseApi.md#get_entity) | **GET** /v1/entities/{entity_id} | Get entity |
+| [**get_entity**](FuseApi.md#get_entity) | **GET** /v1/entities/{entity_id} | Get an entity - an entity is automatically created after a successful institution connection |
 | [**get_financial_connection**](FuseApi.md#get_financial_connection) | **GET** /v1/financial_connections/{financial_connection_id} | Get financial connection details |
 | [**get_financial_connections_account_details**](FuseApi.md#get_financial_connections_account_details) | **POST** /v1/financial_connections/accounts/details | Get account details |
 | [**get_financial_connections_accounts**](FuseApi.md#get_financial_connections_accounts) | **POST** /v1/financial_connections/accounts | Get accounts |
@@ -21,10 +20,9 @@ All URIs are relative to *https://sandbox-api.letsfuse.com*
 | [**get_financial_institution**](FuseApi.md#get_financial_institution) | **GET** /v1/financial_connections/institutions/{institution_id} | Get a financial institution |
 | [**get_investment_holdings**](FuseApi.md#get_investment_holdings) | **POST** /v1/financial_connections/investments/holdings | Get investment holdings |
 | [**get_investment_transactions**](FuseApi.md#get_investment_transactions) | **POST** /v1/financial_connections/investments/transactions | Get investment transactions |
+| [**migrate_financial_connection**](FuseApi.md#migrate_financial_connection) | **POST** /v1/financial_connections/migrate | Migrate financial connection |
 | [**refresh_asset_report**](FuseApi.md#refresh_asset_report) | **POST** /v1/asset_report/refresh |  |
 | [**sync_financial_connections_data**](FuseApi.md#sync_financial_connections_data) | **POST** /v1/financial_connections/sync | Sync financial connections data |
-| [**sync_financial_connections_transactions**](FuseApi.md#sync_financial_connections_transactions) | **POST** /v1/financial_connections/transactions/sync | Sync transactions |
-| [**update_entity**](FuseApi.md#update_entity) | **PUT** /v1/entities/{entity_id_to_update} | Update entity |
 | [**v1_financial_connections_liabilities_post**](FuseApi.md#v1_financial_connections_liabilities_post) | **POST** /v1/financial_connections/liabilities | Get liabilities |
 
 
@@ -95,80 +93,6 @@ end
 ### Return type
 
 [**CreateAssetReportResponse**](CreateAssetReportResponse.md)
-
-### Authorization
-
-[fuseApiKey](../README.md#fuseApiKey), [fuseClientId](../README.md#fuseClientId)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-
-## create_entity
-
-> <CreateEntityResponse> create_entity(create_entity_request)
-
-Create entity
-
-### Examples
-
-```ruby
-require 'time'
-require 'fuse_client'
-# setup authorization
-FuseClient.configure do |config|
-  # Configure API key authorization: fuseApiKey
-  config.api_key['fuseApiKey'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['fuseApiKey'] = 'Bearer'
-
-  # Configure API key authorization: fuseClientId
-  config.api_key['fuseClientId'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['fuseClientId'] = 'Bearer'
-end
-
-api_instance = FuseClient::FuseApi.new
-create_entity_request = FuseClient::CreateEntityRequest.new # CreateEntityRequest | 
-
-begin
-  # Create entity
-  result = api_instance.create_entity(create_entity_request)
-  p result
-rescue FuseClient::ApiError => e
-  puts "Error when calling FuseApi->create_entity: #{e}"
-end
-```
-
-#### Using the create_entity_with_http_info variant
-
-This returns an Array which contains the response data, status code and headers.
-
-> <Array(<CreateEntityResponse>, Integer, Hash)> create_entity_with_http_info(create_entity_request)
-
-```ruby
-begin
-  # Create entity
-  data, status_code, headers = api_instance.create_entity_with_http_info(create_entity_request)
-  p status_code # => 2xx
-  p headers # => { ... }
-  p data # => <CreateEntityResponse>
-rescue FuseClient::ApiError => e
-  puts "Error when calling FuseApi->create_entity_with_http_info: #{e}"
-end
-```
-
-### Parameters
-
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
-| **create_entity_request** | [**CreateEntityRequest**](CreateEntityRequest.md) |  |  |
-
-### Return type
-
-[**CreateEntityResponse**](CreateEntityResponse.md)
 
 ### Authorization
 
@@ -570,7 +494,7 @@ end
 
 > <GetEntityResponse> get_entity(entity_id)
 
-Get entity
+Get an entity - an entity is automatically created after a successful institution connection
 
 ### Examples
 
@@ -594,7 +518,7 @@ api_instance = FuseClient::FuseApi.new
 entity_id = 'entity_id_example' # String | 
 
 begin
-  # Get entity
+  # Get an entity - an entity is automatically created after a successful institution connection
   result = api_instance.get_entity(entity_id)
   p result
 rescue FuseClient::ApiError => e
@@ -610,7 +534,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Get entity
+  # Get an entity - an entity is automatically created after a successful institution connection
   data, status_code, headers = api_instance.get_entity_with_http_info(entity_id)
   p status_code # => 2xx
   p headers # => { ... }
@@ -1308,6 +1232,84 @@ end
 - **Accept**: application/json
 
 
+## migrate_financial_connection
+
+> <MigrateFinancialConnectionsTokenResponse> migrate_financial_connection(opts)
+
+Migrate financial connection
+
+This endpoint migrates financial connections from Plaid or MX into the unified Fuse API. It accepts a POST request with connection data, aggregator, entity, and Fuse products, and responds with a JSON payload containing the migrated connection's data, access token, ID, and request ID.
+
+### Examples
+
+```ruby
+require 'time'
+require 'fuse_client'
+# setup authorization
+FuseClient.configure do |config|
+  # Configure API key authorization: fuseApiKey
+  config.api_key['fuseApiKey'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['fuseApiKey'] = 'Bearer'
+
+  # Configure API key authorization: fuseClientId
+  config.api_key['fuseClientId'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['fuseClientId'] = 'Bearer'
+end
+
+api_instance = FuseClient::FuseApi.new
+opts = {
+  migrate_financial_connections_token_request: FuseClient::MigrateFinancialConnectionsTokenRequest.new({connection_data: FuseClient::MigrateFinancialConnectionsAggregatorConnectionData.new, aggregator: 'plaid', entity: FuseClient::MigrateFinancialConnectionsTokenRequestEntity.new, fuse_products: [FuseClient::Product::ACCOUNT_DETAILS]}) # MigrateFinancialConnectionsTokenRequest | 
+}
+
+begin
+  # Migrate financial connection
+  result = api_instance.migrate_financial_connection(opts)
+  p result
+rescue FuseClient::ApiError => e
+  puts "Error when calling FuseApi->migrate_financial_connection: #{e}"
+end
+```
+
+#### Using the migrate_financial_connection_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<MigrateFinancialConnectionsTokenResponse>, Integer, Hash)> migrate_financial_connection_with_http_info(opts)
+
+```ruby
+begin
+  # Migrate financial connection
+  data, status_code, headers = api_instance.migrate_financial_connection_with_http_info(opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <MigrateFinancialConnectionsTokenResponse>
+rescue FuseClient::ApiError => e
+  puts "Error when calling FuseApi->migrate_financial_connection_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **migrate_financial_connections_token_request** | [**MigrateFinancialConnectionsTokenRequest**](MigrateFinancialConnectionsTokenRequest.md) |  | [optional] |
+
+### Return type
+
+[**MigrateFinancialConnectionsTokenResponse**](MigrateFinancialConnectionsTokenResponse.md)
+
+### Authorization
+
+[fuseApiKey](../README.md#fuseApiKey), [fuseClientId](../README.md#fuseClientId)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
 ## refresh_asset_report
 
 > <CreateAssetReportResponse> refresh_asset_report(opts)
@@ -1392,7 +1394,7 @@ end
 
 Sync financial connections data
 
-Call this endpoint upon receiving a SYNC_REQUIRED webhook. This will keep the financial connections data up to date.
+Call this endpoint upon receiving a financial_connection.sync_data webhook. This will keep the financial connections data up to date.
 
 ### Examples
 
@@ -1451,156 +1453,6 @@ end
 ### Return type
 
 [**SyncFinancialConnectionsDataResponse**](SyncFinancialConnectionsDataResponse.md)
-
-### Authorization
-
-[fuseApiKey](../README.md#fuseApiKey), [fuseClientId](../README.md#fuseClientId)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-
-## sync_financial_connections_transactions
-
-> <SyncTransactionsResponse> sync_financial_connections_transactions(sync_transactions_request)
-
-Sync transactions
-
-### Examples
-
-```ruby
-require 'time'
-require 'fuse_client'
-# setup authorization
-FuseClient.configure do |config|
-  # Configure API key authorization: fuseApiKey
-  config.api_key['fuseApiKey'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['fuseApiKey'] = 'Bearer'
-
-  # Configure API key authorization: fuseClientId
-  config.api_key['fuseClientId'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['fuseClientId'] = 'Bearer'
-end
-
-api_instance = FuseClient::FuseApi.new
-sync_transactions_request = FuseClient::SyncTransactionsRequest.new({access_token: 'access_token_example'}) # SyncTransactionsRequest | 
-
-begin
-  # Sync transactions
-  result = api_instance.sync_financial_connections_transactions(sync_transactions_request)
-  p result
-rescue FuseClient::ApiError => e
-  puts "Error when calling FuseApi->sync_financial_connections_transactions: #{e}"
-end
-```
-
-#### Using the sync_financial_connections_transactions_with_http_info variant
-
-This returns an Array which contains the response data, status code and headers.
-
-> <Array(<SyncTransactionsResponse>, Integer, Hash)> sync_financial_connections_transactions_with_http_info(sync_transactions_request)
-
-```ruby
-begin
-  # Sync transactions
-  data, status_code, headers = api_instance.sync_financial_connections_transactions_with_http_info(sync_transactions_request)
-  p status_code # => 2xx
-  p headers # => { ... }
-  p data # => <SyncTransactionsResponse>
-rescue FuseClient::ApiError => e
-  puts "Error when calling FuseApi->sync_financial_connections_transactions_with_http_info: #{e}"
-end
-```
-
-### Parameters
-
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
-| **sync_transactions_request** | [**SyncTransactionsRequest**](SyncTransactionsRequest.md) |  |  |
-
-### Return type
-
-[**SyncTransactionsResponse**](SyncTransactionsResponse.md)
-
-### Authorization
-
-[fuseApiKey](../README.md#fuseApiKey), [fuseClientId](../README.md#fuseClientId)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-
-## update_entity
-
-> <UpdateEntityResponse> update_entity(entity_id_to_update, update_entity_request)
-
-Update entity
-
-### Examples
-
-```ruby
-require 'time'
-require 'fuse_client'
-# setup authorization
-FuseClient.configure do |config|
-  # Configure API key authorization: fuseApiKey
-  config.api_key['fuseApiKey'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['fuseApiKey'] = 'Bearer'
-
-  # Configure API key authorization: fuseClientId
-  config.api_key['fuseClientId'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['fuseClientId'] = 'Bearer'
-end
-
-api_instance = FuseClient::FuseApi.new
-entity_id_to_update = 'entity_id_to_update_example' # String | 
-update_entity_request = FuseClient::UpdateEntityRequest.new # UpdateEntityRequest | 
-
-begin
-  # Update entity
-  result = api_instance.update_entity(entity_id_to_update, update_entity_request)
-  p result
-rescue FuseClient::ApiError => e
-  puts "Error when calling FuseApi->update_entity: #{e}"
-end
-```
-
-#### Using the update_entity_with_http_info variant
-
-This returns an Array which contains the response data, status code and headers.
-
-> <Array(<UpdateEntityResponse>, Integer, Hash)> update_entity_with_http_info(entity_id_to_update, update_entity_request)
-
-```ruby
-begin
-  # Update entity
-  data, status_code, headers = api_instance.update_entity_with_http_info(entity_id_to_update, update_entity_request)
-  p status_code # => 2xx
-  p headers # => { ... }
-  p data # => <UpdateEntityResponse>
-rescue FuseClient::ApiError => e
-  puts "Error when calling FuseApi->update_entity_with_http_info: #{e}"
-end
-```
-
-### Parameters
-
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
-| **entity_id_to_update** | **String** |  |  |
-| **update_entity_request** | [**UpdateEntityRequest**](UpdateEntityRequest.md) |  |  |
-
-### Return type
-
-[**UpdateEntityResponse**](UpdateEntityResponse.md)
 
 ### Authorization
 

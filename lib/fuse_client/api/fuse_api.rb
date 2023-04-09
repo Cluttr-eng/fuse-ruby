@@ -81,72 +81,6 @@ module FuseClient
       return data, status_code, headers
     end
 
-    # Create entity
-    # @param create_entity_request [CreateEntityRequest] 
-    # @param [Hash] opts the optional parameters
-    # @return [CreateEntityResponse]
-    def create_entity(create_entity_request, opts = {})
-      data, _status_code, _headers = create_entity_with_http_info(create_entity_request, opts)
-      data
-    end
-
-    # Create entity
-    # @param create_entity_request [CreateEntityRequest] 
-    # @param [Hash] opts the optional parameters
-    # @return [Array<(CreateEntityResponse, Integer, Hash)>] CreateEntityResponse data, response status code and response headers
-    def create_entity_with_http_info(create_entity_request, opts = {})
-      if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: FuseApi.create_entity ...'
-      end
-      # verify the required parameter 'create_entity_request' is set
-      if @api_client.config.client_side_validation && create_entity_request.nil?
-        fail ArgumentError, "Missing the required parameter 'create_entity_request' when calling FuseApi.create_entity"
-      end
-      # resource path
-      local_var_path = '/v1/entities'
-
-      # query parameters
-      query_params = opts[:query_params] || {}
-
-      # header parameters
-      header_params = opts[:header_params] || {}
-      # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
-      # HTTP header 'Content-Type'
-      content_type = @api_client.select_header_content_type(['application/json'])
-      if !content_type.nil?
-          header_params['Content-Type'] = content_type
-      end
-
-      # form parameters
-      form_params = opts[:form_params] || {}
-
-      # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(create_entity_request)
-
-      # return_type
-      return_type = opts[:debug_return_type] || 'CreateEntityResponse'
-
-      # auth_names
-      auth_names = opts[:debug_auth_names] || ['fuseApiKey', 'fuseClientId']
-
-      new_options = opts.merge(
-        :operation => :"FuseApi.create_entity",
-        :header_params => header_params,
-        :query_params => query_params,
-        :form_params => form_params,
-        :body => post_body,
-        :auth_names => auth_names,
-        :return_type => return_type
-      )
-
-      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: FuseApi#create_entity\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-      end
-      return data, status_code, headers
-    end
-
     # Create a link token to start the process of a user connecting to a specific financial institution.
     # @param [Hash] opts the optional parameters
     # @option opts [CreateLinkTokenRequest] :create_link_token_request 
@@ -456,7 +390,7 @@ module FuseClient
       return data, status_code, headers
     end
 
-    # Get entity
+    # Get an entity - an entity is automatically created after a successful institution connection
     # @param entity_id [String] 
     # @param [Hash] opts the optional parameters
     # @return [GetEntityResponse]
@@ -465,7 +399,7 @@ module FuseClient
       data
     end
 
-    # Get entity
+    # Get an entity - an entity is automatically created after a successful institution connection
     # @param entity_id [String] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(GetEntityResponse, Integer, Hash)>] GetEntityResponse data, response status code and response headers
@@ -1103,6 +1037,70 @@ module FuseClient
       return data, status_code, headers
     end
 
+    # Migrate financial connection
+    # This endpoint migrates financial connections from Plaid or MX into the unified Fuse API. It accepts a POST request with connection data, aggregator, entity, and Fuse products, and responds with a JSON payload containing the migrated connection's data, access token, ID, and request ID.
+    # @param [Hash] opts the optional parameters
+    # @option opts [MigrateFinancialConnectionsTokenRequest] :migrate_financial_connections_token_request 
+    # @return [MigrateFinancialConnectionsTokenResponse]
+    def migrate_financial_connection(opts = {})
+      data, _status_code, _headers = migrate_financial_connection_with_http_info(opts)
+      data
+    end
+
+    # Migrate financial connection
+    # This endpoint migrates financial connections from Plaid or MX into the unified Fuse API. It accepts a POST request with connection data, aggregator, entity, and Fuse products, and responds with a JSON payload containing the migrated connection&#39;s data, access token, ID, and request ID.
+    # @param [Hash] opts the optional parameters
+    # @option opts [MigrateFinancialConnectionsTokenRequest] :migrate_financial_connections_token_request 
+    # @return [Array<(MigrateFinancialConnectionsTokenResponse, Integer, Hash)>] MigrateFinancialConnectionsTokenResponse data, response status code and response headers
+    def migrate_financial_connection_with_http_info(opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: FuseApi.migrate_financial_connection ...'
+      end
+      # resource path
+      local_var_path = '/v1/financial_connections/migrate'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'migrate_financial_connections_token_request'])
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'MigrateFinancialConnectionsTokenResponse'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['fuseApiKey', 'fuseClientId']
+
+      new_options = opts.merge(
+        :operation => :"FuseApi.migrate_financial_connection",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: FuseApi#migrate_financial_connection\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Refreshes the Asset Report in JSON format.
     # @param [Hash] opts the optional parameters
     # @option opts [RefreshAssetReportRequest] :refresh_asset_report_request 
@@ -1166,7 +1164,7 @@ module FuseClient
     end
 
     # Sync financial connections data
-    # Call this endpoint upon receiving a SYNC_REQUIRED webhook. This will keep the financial connections data up to date.
+    # Call this endpoint upon receiving a financial_connection.sync_data webhook. This will keep the financial connections data up to date.
     # @param body [Object] 
     # @param [Hash] opts the optional parameters
     # @return [SyncFinancialConnectionsDataResponse]
@@ -1176,7 +1174,7 @@ module FuseClient
     end
 
     # Sync financial connections data
-    # Call this endpoint upon receiving a SYNC_REQUIRED webhook. This will keep the financial connections data up to date.
+    # Call this endpoint upon receiving a financial_connection.sync_data webhook. This will keep the financial connections data up to date.
     # @param body [Object] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(SyncFinancialConnectionsDataResponse, Integer, Hash)>] SyncFinancialConnectionsDataResponse data, response status code and response headers
@@ -1229,144 +1227,6 @@ module FuseClient
       data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: FuseApi#sync_financial_connections_data\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-      end
-      return data, status_code, headers
-    end
-
-    # Sync transactions
-    # @param sync_transactions_request [SyncTransactionsRequest] 
-    # @param [Hash] opts the optional parameters
-    # @return [SyncTransactionsResponse]
-    def sync_financial_connections_transactions(sync_transactions_request, opts = {})
-      data, _status_code, _headers = sync_financial_connections_transactions_with_http_info(sync_transactions_request, opts)
-      data
-    end
-
-    # Sync transactions
-    # @param sync_transactions_request [SyncTransactionsRequest] 
-    # @param [Hash] opts the optional parameters
-    # @return [Array<(SyncTransactionsResponse, Integer, Hash)>] SyncTransactionsResponse data, response status code and response headers
-    def sync_financial_connections_transactions_with_http_info(sync_transactions_request, opts = {})
-      if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: FuseApi.sync_financial_connections_transactions ...'
-      end
-      # verify the required parameter 'sync_transactions_request' is set
-      if @api_client.config.client_side_validation && sync_transactions_request.nil?
-        fail ArgumentError, "Missing the required parameter 'sync_transactions_request' when calling FuseApi.sync_financial_connections_transactions"
-      end
-      # resource path
-      local_var_path = '/v1/financial_connections/transactions/sync'
-
-      # query parameters
-      query_params = opts[:query_params] || {}
-
-      # header parameters
-      header_params = opts[:header_params] || {}
-      # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
-      # HTTP header 'Content-Type'
-      content_type = @api_client.select_header_content_type(['application/json'])
-      if !content_type.nil?
-          header_params['Content-Type'] = content_type
-      end
-
-      # form parameters
-      form_params = opts[:form_params] || {}
-
-      # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(sync_transactions_request)
-
-      # return_type
-      return_type = opts[:debug_return_type] || 'SyncTransactionsResponse'
-
-      # auth_names
-      auth_names = opts[:debug_auth_names] || ['fuseApiKey', 'fuseClientId']
-
-      new_options = opts.merge(
-        :operation => :"FuseApi.sync_financial_connections_transactions",
-        :header_params => header_params,
-        :query_params => query_params,
-        :form_params => form_params,
-        :body => post_body,
-        :auth_names => auth_names,
-        :return_type => return_type
-      )
-
-      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: FuseApi#sync_financial_connections_transactions\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-      end
-      return data, status_code, headers
-    end
-
-    # Update entity
-    # @param entity_id_to_update [String] 
-    # @param update_entity_request [UpdateEntityRequest] 
-    # @param [Hash] opts the optional parameters
-    # @return [UpdateEntityResponse]
-    def update_entity(entity_id_to_update, update_entity_request, opts = {})
-      data, _status_code, _headers = update_entity_with_http_info(entity_id_to_update, update_entity_request, opts)
-      data
-    end
-
-    # Update entity
-    # @param entity_id_to_update [String] 
-    # @param update_entity_request [UpdateEntityRequest] 
-    # @param [Hash] opts the optional parameters
-    # @return [Array<(UpdateEntityResponse, Integer, Hash)>] UpdateEntityResponse data, response status code and response headers
-    def update_entity_with_http_info(entity_id_to_update, update_entity_request, opts = {})
-      if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: FuseApi.update_entity ...'
-      end
-      # verify the required parameter 'entity_id_to_update' is set
-      if @api_client.config.client_side_validation && entity_id_to_update.nil?
-        fail ArgumentError, "Missing the required parameter 'entity_id_to_update' when calling FuseApi.update_entity"
-      end
-      # verify the required parameter 'update_entity_request' is set
-      if @api_client.config.client_side_validation && update_entity_request.nil?
-        fail ArgumentError, "Missing the required parameter 'update_entity_request' when calling FuseApi.update_entity"
-      end
-      # resource path
-      local_var_path = '/v1/entities/{entity_id_to_update}'.sub('{' + 'entity_id_to_update' + '}', CGI.escape(entity_id_to_update.to_s))
-
-      # query parameters
-      query_params = opts[:query_params] || {}
-
-      # header parameters
-      header_params = opts[:header_params] || {}
-      # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
-      # HTTP header 'Content-Type'
-      content_type = @api_client.select_header_content_type(['application/json'])
-      if !content_type.nil?
-          header_params['Content-Type'] = content_type
-      end
-
-      # form parameters
-      form_params = opts[:form_params] || {}
-
-      # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(update_entity_request)
-
-      # return_type
-      return_type = opts[:debug_return_type] || 'UpdateEntityResponse'
-
-      # auth_names
-      auth_names = opts[:debug_auth_names] || ['fuseApiKey', 'fuseClientId']
-
-      new_options = opts.merge(
-        :operation => :"FuseApi.update_entity",
-        :header_params => header_params,
-        :query_params => query_params,
-        :form_params => form_params,
-        :body => post_body,
-        :auth_names => auth_names,
-        :return_type => return_type
-      )
-
-      data, status_code, headers = @api_client.call_api(:PUT, local_var_path, new_options)
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: FuseApi#update_entity\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
