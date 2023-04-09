@@ -39,6 +39,9 @@ class FuseService
     opts = {
       create_session_request: FuseClient::CreateSessionRequest.new(
         supported_financial_institution_aggregators: %w[plaid teller mx],
+        entity: {
+          id: 'my entity id'
+        },
         products: ['account_details']
       )
     }
