@@ -43,17 +43,6 @@ describe 'FuseApi' do
     end
   end
 
-  # unit tests for create_entity
-  # Create entity
-  # @param create_entity_request 
-  # @param [Hash] opts the optional parameters
-  # @return [CreateEntityResponse]
-  describe 'create_entity test' do
-    it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-    end
-  end
-
   # unit tests for create_link_token
   # Create a link token to start the process of a user connecting to a specific financial institution.
   # @param [Hash] opts the optional parameters
@@ -111,6 +100,7 @@ describe 'FuseApi' do
 
   # unit tests for get_entity
   # Get entity
+  # An entity is automatically created after a successful connection. The id of the entity is what is set when calling the &#39;create session&#39; endpoint
   # @param entity_id 
   # @param [Hash] opts the optional parameters
   # @return [GetEntityResponse]
@@ -220,6 +210,18 @@ describe 'FuseApi' do
     end
   end
 
+  # unit tests for migrate_financial_connection
+  # Migrate financial connection
+  # This endpoint migrates financial connections from Plaid or MX into the unified Fuse API. It accepts a POST request with connection data, aggregator, entity, and Fuse products, and responds with a JSON payload containing the migrated connection&#39;s data, access token, ID, and request ID.
+  # @param [Hash] opts the optional parameters
+  # @option opts [MigrateFinancialConnectionsTokenRequest] :migrate_financial_connections_token_request 
+  # @return [MigrateFinancialConnectionsTokenResponse]
+  describe 'migrate_financial_connection test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   # unit tests for refresh_asset_report
   # Refreshes the Asset Report in JSON format.
   # @param [Hash] opts the optional parameters
@@ -233,34 +235,11 @@ describe 'FuseApi' do
 
   # unit tests for sync_financial_connections_data
   # Sync financial connections data
-  # Call this endpoint upon receiving a SYNC_REQUIRED webhook. This will keep the financial connections data up to date.
+  # Call this endpoint upon receiving a financial_connection.sync_data webhook. This will keep the financial connections data up to date.
   # @param body 
   # @param [Hash] opts the optional parameters
   # @return [SyncFinancialConnectionsDataResponse]
   describe 'sync_financial_connections_data test' do
-    it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-    end
-  end
-
-  # unit tests for sync_financial_connections_transactions
-  # Sync transactions
-  # @param sync_transactions_request 
-  # @param [Hash] opts the optional parameters
-  # @return [SyncTransactionsResponse]
-  describe 'sync_financial_connections_transactions test' do
-    it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-    end
-  end
-
-  # unit tests for update_entity
-  # Update entity
-  # @param entity_id_to_update 
-  # @param update_entity_request 
-  # @param [Hash] opts the optional parameters
-  # @return [UpdateEntityResponse]
-  describe 'update_entity test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end

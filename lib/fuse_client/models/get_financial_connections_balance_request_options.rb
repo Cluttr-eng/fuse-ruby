@@ -14,21 +14,14 @@ require 'date'
 require 'time'
 
 module FuseClient
-  class GetFinancialConnectionsTransactionsResponse
-    attr_accessor :transactions
-
-    # The total number of transactions available within the date range specified. If total_transactions is larger than the size of the transactions array, more transactions are available and can be fetched
-    attr_accessor :total_transactions
-
-    # An identifier that is exclusive to the request and can serve as a means for investigating and resolving issues.
-    attr_accessor :request_id
+  class GetFinancialConnectionsBalanceRequestOptions
+    # An array of remote account ids to retrieve balances for.
+    attr_accessor :remote_account_ids
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'transactions' => :'transactions',
-        :'total_transactions' => :'total_transactions',
-        :'request_id' => :'request_id'
+        :'remote_account_ids' => :'remote_account_ids'
       }
     end
 
@@ -40,9 +33,7 @@ module FuseClient
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'transactions' => :'Array<Transaction>',
-        :'total_transactions' => :'Float',
-        :'request_id' => :'String'
+        :'remote_account_ids' => :'Array<String>'
       }
     end
 
@@ -56,29 +47,21 @@ module FuseClient
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `FuseClient::GetFinancialConnectionsTransactionsResponse` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `FuseClient::GetFinancialConnectionsBalanceRequestOptions` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `FuseClient::GetFinancialConnectionsTransactionsResponse`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `FuseClient::GetFinancialConnectionsBalanceRequestOptions`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'transactions')
-        if (value = attributes[:'transactions']).is_a?(Array)
-          self.transactions = value
+      if attributes.key?(:'remote_account_ids')
+        if (value = attributes[:'remote_account_ids']).is_a?(Array)
+          self.remote_account_ids = value
         end
-      end
-
-      if attributes.key?(:'total_transactions')
-        self.total_transactions = attributes[:'total_transactions']
-      end
-
-      if attributes.key?(:'request_id')
-        self.request_id = attributes[:'request_id']
       end
     end
 
@@ -86,27 +69,12 @@ module FuseClient
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @transactions.nil?
-        invalid_properties.push('invalid value for "transactions", transactions cannot be nil.')
-      end
-
-      if @total_transactions.nil?
-        invalid_properties.push('invalid value for "total_transactions", total_transactions cannot be nil.')
-      end
-
-      if @request_id.nil?
-        invalid_properties.push('invalid value for "request_id", request_id cannot be nil.')
-      end
-
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @transactions.nil?
-      return false if @total_transactions.nil?
-      return false if @request_id.nil?
       true
     end
 
@@ -115,9 +83,7 @@ module FuseClient
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          transactions == o.transactions &&
-          total_transactions == o.total_transactions &&
-          request_id == o.request_id
+          remote_account_ids == o.remote_account_ids
     end
 
     # @see the `==` method
@@ -129,7 +95,7 @@ module FuseClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [transactions, total_transactions, request_id].hash
+      [remote_account_ids].hash
     end
 
     # Builds the object from hash
