@@ -14,24 +14,15 @@ require 'date'
 require 'time'
 
 module FuseClient
-  class GetInvestmentTransactionsResponse
-    attr_accessor :accounts
-
-    attr_accessor :investment_transactions
-
-    # The total number of transactions within the specified date range.
-    attr_accessor :total_transactions
-
-    # An identifier that is exclusive to the request and can serve as a means for investigating and resolving issues.
-    attr_accessor :request_id
+  # Details of the Teller connection to migrate into the unified Fuse API.
+  class MigrateFinancialConnectionsAggregatorConnectionDataTeller
+    # The Teller access token associated with the user's financial accounts.
+    attr_accessor :access_token
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'accounts' => :'accounts',
-        :'investment_transactions' => :'investment_transactions',
-        :'total_transactions' => :'total_transactions',
-        :'request_id' => :'request_id'
+        :'access_token' => :'access_token'
       }
     end
 
@@ -43,10 +34,7 @@ module FuseClient
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'accounts' => :'Array<FinancialConnectionsAccount>',
-        :'investment_transactions' => :'Array<FinancialConnectionsInvestmentTransaction>',
-        :'total_transactions' => :'Float',
-        :'request_id' => :'String'
+        :'access_token' => :'String'
       }
     end
 
@@ -60,35 +48,19 @@ module FuseClient
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `FuseClient::GetInvestmentTransactionsResponse` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `FuseClient::MigrateFinancialConnectionsAggregatorConnectionDataTeller` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `FuseClient::GetInvestmentTransactionsResponse`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `FuseClient::MigrateFinancialConnectionsAggregatorConnectionDataTeller`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'accounts')
-        if (value = attributes[:'accounts']).is_a?(Array)
-          self.accounts = value
-        end
-      end
-
-      if attributes.key?(:'investment_transactions')
-        if (value = attributes[:'investment_transactions']).is_a?(Array)
-          self.investment_transactions = value
-        end
-      end
-
-      if attributes.key?(:'total_transactions')
-        self.total_transactions = attributes[:'total_transactions']
-      end
-
-      if attributes.key?(:'request_id')
-        self.request_id = attributes[:'request_id']
+      if attributes.key?(:'access_token')
+        self.access_token = attributes[:'access_token']
       end
     end
 
@@ -96,16 +68,8 @@ module FuseClient
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @accounts.nil?
-        invalid_properties.push('invalid value for "accounts", accounts cannot be nil.')
-      end
-
-      if @investment_transactions.nil?
-        invalid_properties.push('invalid value for "investment_transactions", investment_transactions cannot be nil.')
-      end
-
-      if @request_id.nil?
-        invalid_properties.push('invalid value for "request_id", request_id cannot be nil.')
+      if @access_token.nil?
+        invalid_properties.push('invalid value for "access_token", access_token cannot be nil.')
       end
 
       invalid_properties
@@ -114,9 +78,7 @@ module FuseClient
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @accounts.nil?
-      return false if @investment_transactions.nil?
-      return false if @request_id.nil?
+      return false if @access_token.nil?
       true
     end
 
@@ -125,10 +87,7 @@ module FuseClient
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          accounts == o.accounts &&
-          investment_transactions == o.investment_transactions &&
-          total_transactions == o.total_transactions &&
-          request_id == o.request_id
+          access_token == o.access_token
     end
 
     # @see the `==` method
@@ -140,7 +99,7 @@ module FuseClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [accounts, investment_transactions, total_transactions, request_id].hash
+      [access_token].hash
     end
 
     # Builds the object from hash

@@ -9,7 +9,7 @@
 | **country_codes** | [**Array&lt;CountryCode&gt;**](CountryCode.md) | List of country codes that you would like the institutions to support | [optional] |
 | **entity** | [**Entity**](Entity.md) |  | [optional] |
 | **access_token** | **String** | The fuse access token for an existing account integration. This will perform the process to reconnect an existing disconnected account. | [optional] |
-| **is_web_view** | **Boolean** | True if the fuse sdk is using a web view. Defaults to true. | [optional] |
+| **is_web_view** | **Boolean** | Set to false for web SDKs (e.g., React), and true for mobile SDKs (e.g., React Native, Flutter, iOS, Android). | [optional] |
 
 ## Example
 

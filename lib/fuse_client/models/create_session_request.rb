@@ -28,7 +28,7 @@ module FuseClient
     # The fuse access token for an existing account integration. This will perform the process to reconnect an existing disconnected account.
     attr_accessor :access_token
 
-    # True if the fuse sdk is using a web view. Defaults to true.
+    # Set to false for web SDKs (e.g., React), and true for mobile SDKs (e.g., React Native, Flutter, iOS, Android).
     attr_accessor :is_web_view
 
     # Attribute mapping from ruby-style variable name to JSON key.
