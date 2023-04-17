@@ -1,4 +1,4 @@
-# FuseClient::GetAssetReportResponseReportAccountsInnerBalances
+# FuseClient::AssetReportAccountsInnerBalance
 
 ## Properties
 
@@ -13,7 +13,7 @@
 ```ruby
 require 'fuse_client'
 
-instance = FuseClient::GetAssetReportResponseReportAccountsInnerBalances.new(
+instance = FuseClient::AssetReportAccountsInnerBalance.new(
   available: null,
   current: null,
   iso_currency_code: null

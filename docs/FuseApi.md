@@ -32,7 +32,7 @@ All URIs are relative to *https://sandbox-api.letsfuse.com*
 
 
 
-Use this endpoint to generate an Asset Report for a user.
+Use this endpoint to generate an Asset Report for a user. For Plaid, you will need to have the assets product enabled on your plaid account.
 
 ### Examples
 
@@ -210,7 +210,7 @@ end
 
 api_instance = FuseClient::FuseApi.new
 opts = {
-  create_session_request: FuseClient::CreateSessionRequest.new # CreateSessionRequest | 
+  create_session_request: FuseClient::CreateSessionRequest.new({supported_financial_institution_aggregators: [FuseClient::Aggregator::PLAID], products: [FuseClient::Product::ACCOUNT_DETAILS], entity: FuseClient::Entity.new({id: 'id_example'})}) # CreateSessionRequest | 
 }
 
 begin
@@ -414,11 +414,11 @@ end
 
 ## get_asset_report
 
-> <GetAssetReportResponse> get_asset_report(opts)
+> <RefreshAssetReportResponse> get_asset_report(opts)
 
 
 
-Retrieves the Asset Report in JSON format.
+Retrieves the Asset Report in JSON format. For Plaid, you will need to have the assets product enabled on your plaid account.
 
 ### Examples
 
@@ -440,7 +440,7 @@ end
 
 api_instance = FuseClient::FuseApi.new
 opts = {
-  get_asset_report_request: FuseClient::GetAssetReportRequest.new({asset_report_token: 'asset_report_token_example'}) # GetAssetReportRequest | 
+  get_asset_report_request: FuseClient::GetAssetReportRequest.new({access_token: 'access_token_example', asset_report_token: 'asset_report_token_example'}) # GetAssetReportRequest | 
 }
 
 begin
@@ -456,7 +456,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<GetAssetReportResponse>, Integer, Hash)> get_asset_report_with_http_info(opts)
+> <Array(<RefreshAssetReportResponse>, Integer, Hash)> get_asset_report_with_http_info(opts)
 
 ```ruby
 begin
@@ -464,7 +464,7 @@ begin
   data, status_code, headers = api_instance.get_asset_report_with_http_info(opts)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <GetAssetReportResponse>
+  p data # => <RefreshAssetReportResponse>
 rescue FuseClient::ApiError => e
   puts "Error when calling FuseApi->get_asset_report_with_http_info: #{e}"
 end
@@ -478,7 +478,7 @@ end
 
 ### Return type
 
-[**GetAssetReportResponse**](GetAssetReportResponse.md)
+[**RefreshAssetReportResponse**](RefreshAssetReportResponse.md)
 
 ### Authorization
 
@@ -1314,11 +1314,11 @@ end
 
 ## refresh_asset_report
 
-> <CreateAssetReportResponse> refresh_asset_report(opts)
+> <AssetReportResponse> refresh_asset_report(opts)
 
 
 
-Refreshes the Asset Report in JSON format.
+Refreshes the Asset Report in JSON format. For Plaid, you will need to have the assets product enabled on your plaid account.
 
 ### Examples
 
@@ -1340,7 +1340,7 @@ end
 
 api_instance = FuseClient::FuseApi.new
 opts = {
-  refresh_asset_report_request: FuseClient::RefreshAssetReportRequest.new({days_requested: 3.56}) # RefreshAssetReportRequest | 
+  refresh_asset_report_request: FuseClient::RefreshAssetReportRequest.new({access_token: 'access_token_example', asset_report_token: 'asset_report_token_example'}) # RefreshAssetReportRequest | 
 }
 
 begin
@@ -1356,7 +1356,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<CreateAssetReportResponse>, Integer, Hash)> refresh_asset_report_with_http_info(opts)
+> <Array(<AssetReportResponse>, Integer, Hash)> refresh_asset_report_with_http_info(opts)
 
 ```ruby
 begin
@@ -1364,7 +1364,7 @@ begin
   data, status_code, headers = api_instance.refresh_asset_report_with_http_info(opts)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <CreateAssetReportResponse>
+  p data # => <AssetReportResponse>
 rescue FuseClient::ApiError => e
   puts "Error when calling FuseApi->refresh_asset_report_with_http_info: #{e}"
 end
@@ -1378,7 +1378,7 @@ end
 
 ### Return type
 
-[**CreateAssetReportResponse**](CreateAssetReportResponse.md)
+[**AssetReportResponse**](AssetReportResponse.md)
 
 ### Authorization
 
@@ -1392,7 +1392,7 @@ end
 
 ## sync_financial_connections_data
 
-> <SyncFinancialConnectionsDataResponse> sync_financial_connections_data(body)
+> <SyncFinancialConnectionsDataResponse> sync_financial_connections_data(fuse_verification, body)
 
 Sync financial connections data
 
@@ -1417,11 +1417,12 @@ FuseClient.configure do |config|
 end
 
 api_instance = FuseClient::FuseApi.new
+fuse_verification = 'fuse_verification_example' # String | 
 body = { ... } # Object | 
 
 begin
   # Sync financial connections data
-  result = api_instance.sync_financial_connections_data(body)
+  result = api_instance.sync_financial_connections_data(fuse_verification, body)
   p result
 rescue FuseClient::ApiError => e
   puts "Error when calling FuseApi->sync_financial_connections_data: #{e}"
@@ -1432,12 +1433,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<SyncFinancialConnectionsDataResponse>, Integer, Hash)> sync_financial_connections_data_with_http_info(body)
+> <Array(<SyncFinancialConnectionsDataResponse>, Integer, Hash)> sync_financial_connections_data_with_http_info(fuse_verification, body)
 
 ```ruby
 begin
   # Sync financial connections data
-  data, status_code, headers = api_instance.sync_financial_connections_data_with_http_info(body)
+  data, status_code, headers = api_instance.sync_financial_connections_data_with_http_info(fuse_verification, body)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <SyncFinancialConnectionsDataResponse>
@@ -1450,6 +1451,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
+| **fuse_verification** | **String** |  |  |
 | **body** | **Object** |  |  |
 
 ### Return type

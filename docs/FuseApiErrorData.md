@@ -5,7 +5,7 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **aggregator** | [**Aggregator**](Aggregator.md) |  | [optional] |
-| **errors** | [**Array&lt;FuseApiError&gt;**](FuseApiError.md) |  | [optional] |
+| **errors** | [**Array&lt;FuseApiAggregatorError&gt;**](FuseApiAggregatorError.md) |  | [optional] |
 
 ## Example
 
