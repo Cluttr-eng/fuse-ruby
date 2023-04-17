@@ -4,11 +4,12 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **title** | **String** |  | [optional] |
-| **details** | **String** |  | [optional] |
-| **code** | **String** |  | [optional] |
-| **type** | **String** |  | [optional] |
-| **source** | **String** |  | [optional] |
+| **request_id** | **String** |  |  |
+| **title** | **String** |  |  |
+| **details** | **String** |  |  |
+| **code** | [**FuseApiErrorCode**](FuseApiErrorCode.md) |  |  |
+| **type** | [**FuseApiErrorType**](FuseApiErrorType.md) |  |  |
+| **source** | **String** |  |  |
 | **data** | [**FuseApiErrorData**](FuseApiErrorData.md) |  | [optional] |
 
 ## Example
@@ -17,6 +18,7 @@
 require 'fuse_client'
 
 instance = FuseClient::FuseApiError.new(
+  request_id: null,
   title: null,
   details: null,
   code: null,

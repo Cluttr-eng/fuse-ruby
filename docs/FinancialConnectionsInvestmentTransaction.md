@@ -10,6 +10,7 @@
 | **amount** | **Float** | The amount of the investment transaction |  |
 | **description** | **String** | A description of the investment transaction |  |
 | **fees** | **Float** | The fees associated with the investment transaction |  |
+| **currency** | [**Currency**](Currency.md) |  |  |
 | **date** | **Time** | The date and time of the investment transaction |  |
 | **type** | **String** | The type of the investment transaction (e.g., &#39;buy&#39;, &#39;sell&#39;, &#39;dividend&#39;) |  |
 | **quantity** | **Float** | The number of units of the security involved in this transaction |  |
@@ -28,6 +29,7 @@ instance = FuseClient::FinancialConnectionsInvestmentTransaction.new(
   amount: null,
   description: null,
   fees: null,
+  currency: null,
   date: null,
   type: null,
   quantity: null,
