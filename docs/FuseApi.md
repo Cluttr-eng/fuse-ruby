@@ -4,12 +4,12 @@ All URIs are relative to *https://sandbox-api.letsfuse.com*
 
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
-| [**create_asset_report**](FuseApi.md#create_asset_report) | **POST** /v1/asset_report/create |  |
+| [**create_asset_report**](FuseApi.md#create_asset_report) | **POST** /v1/financial_connections/asset_report/create |  |
 | [**create_link_token**](FuseApi.md#create_link_token) | **POST** /v1/link/token |  |
 | [**create_session**](FuseApi.md#create_session) | **POST** /v1/session |  |
 | [**delete_financial_connection**](FuseApi.md#delete_financial_connection) | **DELETE** /v1/financial_connections/{financial_connection_id_to_delete} | Delete a financial connection |
 | [**exchange_financial_connections_public_token**](FuseApi.md#exchange_financial_connections_public_token) | **POST** /v1/financial_connections/public_token/exchange |  |
-| [**get_asset_report**](FuseApi.md#get_asset_report) | **POST** /v1/asset_report |  |
+| [**get_asset_report**](FuseApi.md#get_asset_report) | **POST** /v1/financial_connections/asset_report |  |
 | [**get_entity**](FuseApi.md#get_entity) | **GET** /v1/entities/{entity_id} | Get entity |
 | [**get_financial_connection**](FuseApi.md#get_financial_connection) | **GET** /v1/financial_connections/{financial_connection_id} | Get financial connection details |
 | [**get_financial_connections_account_details**](FuseApi.md#get_financial_connections_account_details) | **POST** /v1/financial_connections/accounts/details | Get account details |
@@ -21,7 +21,7 @@ All URIs are relative to *https://sandbox-api.letsfuse.com*
 | [**get_investment_holdings**](FuseApi.md#get_investment_holdings) | **POST** /v1/financial_connections/investments/holdings | Get investment holdings |
 | [**get_investment_transactions**](FuseApi.md#get_investment_transactions) | **POST** /v1/financial_connections/investments/transactions | Get investment transactions |
 | [**migrate_financial_connection**](FuseApi.md#migrate_financial_connection) | **POST** /v1/financial_connections/migrate | Migrate financial connection |
-| [**refresh_asset_report**](FuseApi.md#refresh_asset_report) | **POST** /v1/asset_report/refresh |  |
+| [**refresh_asset_report**](FuseApi.md#refresh_asset_report) | **POST** /v1/financial_connections/asset_report/refresh |  |
 | [**sync_financial_connections_data**](FuseApi.md#sync_financial_connections_data) | **POST** /v1/financial_connections/sync | Sync financial connections data |
 | [**v1_financial_connections_liabilities_post**](FuseApi.md#v1_financial_connections_liabilities_post) | **POST** /v1/financial_connections/liabilities | Get liabilities |
 
@@ -362,7 +362,7 @@ end
 
 api_instance = FuseClient::FuseApi.new
 opts = {
-  exchange_financial_connections_public_token_request: FuseClient::ExchangeFinancialConnectionsPublicTokenRequest.new # ExchangeFinancialConnectionsPublicTokenRequest | 
+  exchange_financial_connections_public_token_request: FuseClient::ExchangeFinancialConnectionsPublicTokenRequest.new({public_token: 'public_token_example'}) # ExchangeFinancialConnectionsPublicTokenRequest | 
 }
 
 begin

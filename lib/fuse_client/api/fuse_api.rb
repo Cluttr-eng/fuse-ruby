@@ -37,7 +37,7 @@ module FuseClient
         @api_client.config.logger.debug 'Calling API: FuseApi.create_asset_report ...'
       end
       # resource path
-      local_var_path = '/v1/asset_report/create'
+      local_var_path = '/v1/financial_connections/asset_report/create'
 
       # query parameters
       query_params = opts[:query_params] || {}
@@ -346,7 +346,7 @@ module FuseClient
         @api_client.config.logger.debug 'Calling API: FuseApi.get_asset_report ...'
       end
       # resource path
-      local_var_path = '/v1/asset_report'
+      local_var_path = '/v1/financial_connections/asset_report'
 
       # query parameters
       query_params = opts[:query_params] || {}
@@ -1121,7 +1121,7 @@ module FuseClient
         @api_client.config.logger.debug 'Calling API: FuseApi.refresh_asset_report ...'
       end
       # resource path
-      local_var_path = '/v1/asset_report/refresh'
+      local_var_path = '/v1/financial_connections/asset_report/refresh'
 
       # query parameters
       query_params = opts[:query_params] || {}

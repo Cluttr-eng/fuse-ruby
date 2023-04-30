@@ -84,7 +84,7 @@ describe FuseClient::Transaction do
   describe 'test attribute "type"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["ach", "adjustment", "atm", "bank_charge", "bill_payment", "card_payment", "cash", "cashback", "charge", "cheque", "credit", "debit", "deposit", "digital_payment", "direct_debit", "fee", "in_store", "interest", "online", "other", "payment", "purchase", "standing_order", "transaction", "transfer", "wire", "withdrawal"])
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["ach", "adjustment", "atm", "bank_charge", "bill_payment", "card_payment", "cash", "cashback", "charge", "cheque", "credit", "debit", "deposit", "digital_payment", "direct_debit", "fee", "in_store", "interest", "online", "other", "payment", "purchase", "standing_order", "transaction", "transfer", "wire", "withdrawal", "-"])
       # validator.allowable_values.each do |value|
       #   expect { instance.type = value }.not_to raise_error
       # end

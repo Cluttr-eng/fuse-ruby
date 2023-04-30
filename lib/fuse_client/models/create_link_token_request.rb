@@ -20,7 +20,7 @@ module FuseClient
 
     attr_accessor :entity
 
-    # The name of your application.
+    # The name of your application. This is what will be displayed to users.
     attr_accessor :client_name
 
     # The session client secret created from the 'Create session client secret' endpoint
