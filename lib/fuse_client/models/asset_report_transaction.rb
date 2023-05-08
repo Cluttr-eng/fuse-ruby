@@ -30,7 +30,7 @@ module FuseClient
     # Description of the transaction
     attr_accessor :description
 
-    # Categories of the transaction, ie Computers and Electronics
+    # Categories of the transaction, ie Computers and Electronics. '-' means we could not map the upstream category.
     attr_accessor :category
 
     attr_accessor :merchant

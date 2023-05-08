@@ -30,6 +30,15 @@ module FuseClient
     # Exists for assets.report_ready webhooks
     attr_accessor :asset_report_id
 
+    # Exists for transactions.updates webhooks
+    attr_accessor :new_transactions_count
+
+    # Exists for transactions.updates webhooks. Indicates if historical transaction information (up to 24 months) is ready to be queried.
+    attr_accessor :historical_transactions_available
+
+    # Exists for transactions.updates webhooks. Currently only supported by Plaid.
+    attr_accessor :removed_transaction_ids
+
     attr_accessor :remote_data
 
     class EnumAttributeValidator
@@ -63,6 +72,9 @@ module FuseClient
         :'source' => :'source',
         :'verification_token' => :'verification_token',
         :'asset_report_id' => :'asset_report_id',
+        :'new_transactions_count' => :'new_transactions_count',
+        :'historical_transactions_available' => :'historical_transactions_available',
+        :'removed_transaction_ids' => :'removed_transaction_ids',
         :'remote_data' => :'remote_data'
       }
     end
@@ -81,6 +93,9 @@ module FuseClient
         :'source' => :'WebhookSource',
         :'verification_token' => :'String',
         :'asset_report_id' => :'String',
+        :'new_transactions_count' => :'Float',
+        :'historical_transactions_available' => :'Boolean',
+        :'removed_transaction_ids' => :'Array<String>',
         :'remote_data' => :'Object'
       }
     end
@@ -129,6 +144,20 @@ module FuseClient
 
       if attributes.key?(:'asset_report_id')
         self.asset_report_id = attributes[:'asset_report_id']
+      end
+
+      if attributes.key?(:'new_transactions_count')
+        self.new_transactions_count = attributes[:'new_transactions_count']
+      end
+
+      if attributes.key?(:'historical_transactions_available')
+        self.historical_transactions_available = attributes[:'historical_transactions_available']
+      end
+
+      if attributes.key?(:'removed_transaction_ids')
+        if (value = attributes[:'removed_transaction_ids']).is_a?(Array)
+          self.removed_transaction_ids = value
+        end
       end
 
       if attributes.key?(:'remote_data')
@@ -192,6 +221,9 @@ module FuseClient
           source == o.source &&
           verification_token == o.verification_token &&
           asset_report_id == o.asset_report_id &&
+          new_transactions_count == o.new_transactions_count &&
+          historical_transactions_available == o.historical_transactions_available &&
+          removed_transaction_ids == o.removed_transaction_ids &&
           remote_data == o.remote_data
     end
 
@@ -204,7 +236,7 @@ module FuseClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [type, financial_connection_id, environment, source, verification_token, asset_report_id, remote_data].hash
+      [type, financial_connection_id, environment, source, verification_token, asset_report_id, new_transactions_count, historical_transactions_available, removed_transaction_ids, remote_data].hash
     end
 
     # Builds the object from hash

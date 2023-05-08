@@ -132,6 +132,10 @@ module FuseClient
         invalid_properties.push('invalid value for "fuse_products", fuse_products cannot be nil.')
       end
 
+      if @fuse_products.length < 1
+        invalid_properties.push('invalid value for "fuse_products", number of items must be greater than or equal to 1.')
+      end
+
       invalid_properties
     end
 
@@ -144,6 +148,7 @@ module FuseClient
       return false unless aggregator_validator.valid?(@aggregator)
       return false if @entity.nil?
       return false if @fuse_products.nil?
+      return false if @fuse_products.length < 1
       true
     end
 
@@ -155,6 +160,20 @@ module FuseClient
         fail ArgumentError, "invalid value for \"aggregator\", must be one of #{validator.allowable_values}."
       end
       @aggregator = aggregator
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] fuse_products Value to be assigned
+    def fuse_products=(fuse_products)
+      if fuse_products.nil?
+        fail ArgumentError, 'fuse_products cannot be nil'
+      end
+
+      if fuse_products.length < 1
+        fail ArgumentError, 'invalid value for "fuse_products", number of items must be greater than or equal to 1.'
+      end
+
+      @fuse_products = fuse_products
     end
 
     # Checks equality by comparing each attribute.

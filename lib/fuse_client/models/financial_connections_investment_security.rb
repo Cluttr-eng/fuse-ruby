@@ -38,10 +38,31 @@ module FuseClient
     # A descriptive name for the security, suitable for display.
     attr_accessor :name
 
-    # The type of security (e.g., equity, mutual fund)
     attr_accessor :type
 
     attr_accessor :exchange
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -75,7 +96,7 @@ module FuseClient
         :'close_price' => :'Float',
         :'currency' => :'Currency',
         :'name' => :'String',
-        :'type' => :'String',
+        :'type' => :'FinancialConnectionsInvestmentSecurityType',
         :'exchange' => :'FinancialConnectionsInvestmentSecurityExchange'
       }
     end

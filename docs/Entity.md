@@ -4,7 +4,7 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **id** | **String** | Unique identifier for the user or business account. |  |
+| **id** | **String** | Unique identifier for the user or business account that is connecting to an institution. Use this id when calling the GET /entities/${entity_id} endpoint. |  |
 | **name** | **String** | Name for the user or business account. | [optional] |
 | **email** | **String** | Email address associated with the user or business account. | [optional] |
 

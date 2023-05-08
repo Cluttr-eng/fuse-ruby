@@ -12,7 +12,7 @@
 | **category** | **Array&lt;String&gt;** | Categories of the transaction, ie Computers and Electronics |  |
 | **merchant** | [**TransactionMerchant**](TransactionMerchant.md) |  |  |
 | **status** | **String** | The status of the transaction. This will be either posted or pending. |  |
-| **type** | **String** | Type of the transaction, ie adjustment |  |
+| **type** | **String** | Type of the transaction, ie adjustment. &#39;-&#39; means we were not able to map the upstream type. |  |
 | **iso_currency_code** | **String** | The ISO-4217 currency code of the transaction | [optional] |
 | **remote_data** | **Object** |  |  |
 

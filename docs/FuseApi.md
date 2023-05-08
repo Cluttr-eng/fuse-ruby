@@ -4,15 +4,19 @@ All URIs are relative to *https://sandbox-api.letsfuse.com*
 
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
-| [**create_asset_report**](FuseApi.md#create_asset_report) | **POST** /v1/asset_report/create |  |
+| [**add_spend_power_transaction**](FuseApi.md#add_spend_power_transaction) | **POST** /v1/financial_connections/spend-power/{spend_power_id}/transaction |  |
+| [**create_asset_report**](FuseApi.md#create_asset_report) | **POST** /v1/financial_connections/asset_report/create |  |
 | [**create_link_token**](FuseApi.md#create_link_token) | **POST** /v1/link/token |  |
 | [**create_session**](FuseApi.md#create_session) | **POST** /v1/session |  |
+| [**create_spend_power**](FuseApi.md#create_spend_power) | **POST** /v1/financial_connections/spend-power |  |
+| [**create_spend_power_customization**](FuseApi.md#create_spend_power_customization) | **POST** /v1/financial_connections/spend-power/customization |  |
 | [**delete_financial_connection**](FuseApi.md#delete_financial_connection) | **DELETE** /v1/financial_connections/{financial_connection_id_to_delete} | Delete a financial connection |
 | [**exchange_financial_connections_public_token**](FuseApi.md#exchange_financial_connections_public_token) | **POST** /v1/financial_connections/public_token/exchange |  |
-| [**get_asset_report**](FuseApi.md#get_asset_report) | **POST** /v1/asset_report |  |
+| [**get_asset_report**](FuseApi.md#get_asset_report) | **POST** /v1/financial_connections/asset_report |  |
 | [**get_entity**](FuseApi.md#get_entity) | **GET** /v1/entities/{entity_id} | Get entity |
 | [**get_financial_connection**](FuseApi.md#get_financial_connection) | **GET** /v1/financial_connections/{financial_connection_id} | Get financial connection details |
 | [**get_financial_connections_account_details**](FuseApi.md#get_financial_connections_account_details) | **POST** /v1/financial_connections/accounts/details | Get account details |
+| [**get_financial_connections_account_statement**](FuseApi.md#get_financial_connections_account_statement) | **POST** /v1/financial_connections/accounts/statement |  |
 | [**get_financial_connections_accounts**](FuseApi.md#get_financial_connections_accounts) | **POST** /v1/financial_connections/accounts | Get accounts |
 | [**get_financial_connections_balances**](FuseApi.md#get_financial_connections_balances) | **POST** /v1/financial_connections/balances | Get balances |
 | [**get_financial_connections_owners**](FuseApi.md#get_financial_connections_owners) | **POST** /v1/financial_connections/owners | Get account owners |
@@ -20,10 +24,90 @@ All URIs are relative to *https://sandbox-api.letsfuse.com*
 | [**get_financial_institution**](FuseApi.md#get_financial_institution) | **GET** /v1/financial_connections/institutions/{institution_id} | Get a financial institution |
 | [**get_investment_holdings**](FuseApi.md#get_investment_holdings) | **POST** /v1/financial_connections/investments/holdings | Get investment holdings |
 | [**get_investment_transactions**](FuseApi.md#get_investment_transactions) | **POST** /v1/financial_connections/investments/transactions | Get investment transactions |
+| [**get_spend_power**](FuseApi.md#get_spend_power) | **GET** /v1/financial_connections/spend-power/{spend_power_id} |  |
 | [**migrate_financial_connection**](FuseApi.md#migrate_financial_connection) | **POST** /v1/financial_connections/migrate | Migrate financial connection |
-| [**refresh_asset_report**](FuseApi.md#refresh_asset_report) | **POST** /v1/asset_report/refresh |  |
+| [**refresh_asset_report**](FuseApi.md#refresh_asset_report) | **POST** /v1/financial_connections/asset_report/refresh |  |
 | [**sync_financial_connections_data**](FuseApi.md#sync_financial_connections_data) | **POST** /v1/financial_connections/sync | Sync financial connections data |
+| [**update_spend_power_customization**](FuseApi.md#update_spend_power_customization) | **POST** /v1/financial_connections/spend-power/customization/update |  |
 | [**v1_financial_connections_liabilities_post**](FuseApi.md#v1_financial_connections_liabilities_post) | **POST** /v1/financial_connections/liabilities | Get liabilities |
+
+
+## add_spend_power_transaction
+
+> <AddSpendPowerTransactionResponse> add_spend_power_transaction(spend_power_id, opts)
+
+
+
+### Examples
+
+```ruby
+require 'time'
+require 'fuse_client'
+# setup authorization
+FuseClient.configure do |config|
+  # Configure API key authorization: fuseApiKey
+  config.api_key['fuseApiKey'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['fuseApiKey'] = 'Bearer'
+
+  # Configure API key authorization: fuseClientId
+  config.api_key['fuseClientId'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['fuseClientId'] = 'Bearer'
+end
+
+api_instance = FuseClient::FuseApi.new
+spend_power_id = 'spend_power_id_example' # String | 
+opts = {
+  add_spend_power_transaction_request: FuseClient::AddSpendPowerTransactionRequest.new({id: 'id_example', status: 'pending'}) # AddSpendPowerTransactionRequest | 
+}
+
+begin
+  
+  result = api_instance.add_spend_power_transaction(spend_power_id, opts)
+  p result
+rescue FuseClient::ApiError => e
+  puts "Error when calling FuseApi->add_spend_power_transaction: #{e}"
+end
+```
+
+#### Using the add_spend_power_transaction_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<AddSpendPowerTransactionResponse>, Integer, Hash)> add_spend_power_transaction_with_http_info(spend_power_id, opts)
+
+```ruby
+begin
+  
+  data, status_code, headers = api_instance.add_spend_power_transaction_with_http_info(spend_power_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <AddSpendPowerTransactionResponse>
+rescue FuseClient::ApiError => e
+  puts "Error when calling FuseApi->add_spend_power_transaction_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **spend_power_id** | **String** |  |  |
+| **add_spend_power_transaction_request** | [**AddSpendPowerTransactionRequest**](AddSpendPowerTransactionRequest.md) |  | [optional] |
+
+### Return type
+
+[**AddSpendPowerTransactionResponse**](AddSpendPowerTransactionResponse.md)
+
+### Authorization
+
+[fuseApiKey](../README.md#fuseApiKey), [fuseClientId](../README.md#fuseClientId)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
 
 
 ## create_asset_report
@@ -260,6 +344,160 @@ end
 - **Accept**: application/json
 
 
+## create_spend_power
+
+> <CreateSpendPowerResponse> create_spend_power(opts)
+
+
+
+Starts the background process that will determine the spend power depending on the customization passed in.
+
+### Examples
+
+```ruby
+require 'time'
+require 'fuse_client'
+# setup authorization
+FuseClient.configure do |config|
+  # Configure API key authorization: fuseApiKey
+  config.api_key['fuseApiKey'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['fuseApiKey'] = 'Bearer'
+
+  # Configure API key authorization: fuseClientId
+  config.api_key['fuseClientId'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['fuseClientId'] = 'Bearer'
+end
+
+api_instance = FuseClient::FuseApi.new
+opts = {
+  create_spend_power_request: FuseClient::CreateSpendPowerRequest.new({access_token: 'access_token_example', remote_account_id: 'remote_account_id_example', customization_id: 'customization_id_example'}) # CreateSpendPowerRequest | 
+}
+
+begin
+  
+  result = api_instance.create_spend_power(opts)
+  p result
+rescue FuseClient::ApiError => e
+  puts "Error when calling FuseApi->create_spend_power: #{e}"
+end
+```
+
+#### Using the create_spend_power_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<CreateSpendPowerResponse>, Integer, Hash)> create_spend_power_with_http_info(opts)
+
+```ruby
+begin
+  
+  data, status_code, headers = api_instance.create_spend_power_with_http_info(opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <CreateSpendPowerResponse>
+rescue FuseClient::ApiError => e
+  puts "Error when calling FuseApi->create_spend_power_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **create_spend_power_request** | [**CreateSpendPowerRequest**](CreateSpendPowerRequest.md) |  | [optional] |
+
+### Return type
+
+[**CreateSpendPowerResponse**](CreateSpendPowerResponse.md)
+
+### Authorization
+
+[fuseApiKey](../README.md#fuseApiKey), [fuseClientId](../README.md#fuseClientId)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## create_spend_power_customization
+
+> <CreateSpendPowerCustomizationResponse> create_spend_power_customization(opts)
+
+
+
+### Examples
+
+```ruby
+require 'time'
+require 'fuse_client'
+# setup authorization
+FuseClient.configure do |config|
+  # Configure API key authorization: fuseApiKey
+  config.api_key['fuseApiKey'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['fuseApiKey'] = 'Bearer'
+
+  # Configure API key authorization: fuseClientId
+  config.api_key['fuseClientId'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['fuseClientId'] = 'Bearer'
+end
+
+api_instance = FuseClient::FuseApi.new
+opts = {
+  body: 3.56 # SpendPowerCustomization | 
+}
+
+begin
+  
+  result = api_instance.create_spend_power_customization(opts)
+  p result
+rescue FuseClient::ApiError => e
+  puts "Error when calling FuseApi->create_spend_power_customization: #{e}"
+end
+```
+
+#### Using the create_spend_power_customization_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<CreateSpendPowerCustomizationResponse>, Integer, Hash)> create_spend_power_customization_with_http_info(opts)
+
+```ruby
+begin
+  
+  data, status_code, headers = api_instance.create_spend_power_customization_with_http_info(opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <CreateSpendPowerCustomizationResponse>
+rescue FuseClient::ApiError => e
+  puts "Error when calling FuseApi->create_spend_power_customization_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **body** | **SpendPowerCustomization** |  | [optional] |
+
+### Return type
+
+[**CreateSpendPowerCustomizationResponse**](CreateSpendPowerCustomizationResponse.md)
+
+### Authorization
+
+[fuseApiKey](../README.md#fuseApiKey), [fuseClientId](../README.md#fuseClientId)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
 ## delete_financial_connection
 
 > <DeleteFinancialConnectionResponse> delete_financial_connection(financial_connection_id_to_delete)
@@ -362,7 +600,7 @@ end
 
 api_instance = FuseClient::FuseApi.new
 opts = {
-  exchange_financial_connections_public_token_request: FuseClient::ExchangeFinancialConnectionsPublicTokenRequest.new # ExchangeFinancialConnectionsPublicTokenRequest | 
+  exchange_financial_connections_public_token_request: FuseClient::ExchangeFinancialConnectionsPublicTokenRequest.new({public_token: 'public_token_example'}) # ExchangeFinancialConnectionsPublicTokenRequest | 
 }
 
 begin
@@ -703,6 +941,84 @@ end
 ### Return type
 
 [**GetFinancialConnectionsAccountDetailsResponse**](GetFinancialConnectionsAccountDetailsResponse.md)
+
+### Authorization
+
+[fuseApiKey](../README.md#fuseApiKey), [fuseClientId](../README.md#fuseClientId)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## get_financial_connections_account_statement
+
+> <GetFinancialConnectionsAccountStatementResponse> get_financial_connections_account_statement(opts)
+
+
+
+Retrieves an account statement for the given financial connection, account and date. This endpoint may time out so we recommend using a retry mechanism with exponential backoff.
+
+### Examples
+
+```ruby
+require 'time'
+require 'fuse_client'
+# setup authorization
+FuseClient.configure do |config|
+  # Configure API key authorization: fuseApiKey
+  config.api_key['fuseApiKey'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['fuseApiKey'] = 'Bearer'
+
+  # Configure API key authorization: fuseClientId
+  config.api_key['fuseClientId'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['fuseClientId'] = 'Bearer'
+end
+
+api_instance = FuseClient::FuseApi.new
+opts = {
+  get_financial_connections_account_statement_request: FuseClient::GetFinancialConnectionsAccountStatementRequest.new({access_token: 'access_token_example', remote_account_id: 'remote_account_id_example'}) # GetFinancialConnectionsAccountStatementRequest | 
+}
+
+begin
+  
+  result = api_instance.get_financial_connections_account_statement(opts)
+  p result
+rescue FuseClient::ApiError => e
+  puts "Error when calling FuseApi->get_financial_connections_account_statement: #{e}"
+end
+```
+
+#### Using the get_financial_connections_account_statement_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetFinancialConnectionsAccountStatementResponse>, Integer, Hash)> get_financial_connections_account_statement_with_http_info(opts)
+
+```ruby
+begin
+  
+  data, status_code, headers = api_instance.get_financial_connections_account_statement_with_http_info(opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetFinancialConnectionsAccountStatementResponse>
+rescue FuseClient::ApiError => e
+  puts "Error when calling FuseApi->get_financial_connections_account_statement_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **get_financial_connections_account_statement_request** | [**GetFinancialConnectionsAccountStatementRequest**](GetFinancialConnectionsAccountStatementRequest.md) |  | [optional] |
+
+### Return type
+
+[**GetFinancialConnectionsAccountStatementResponse**](GetFinancialConnectionsAccountStatementResponse.md)
 
 ### Authorization
 
@@ -1234,6 +1550,80 @@ end
 - **Accept**: application/json
 
 
+## get_spend_power
+
+> <GetSpendPowerResponse> get_spend_power(spend_power_id)
+
+
+
+### Examples
+
+```ruby
+require 'time'
+require 'fuse_client'
+# setup authorization
+FuseClient.configure do |config|
+  # Configure API key authorization: fuseApiKey
+  config.api_key['fuseApiKey'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['fuseApiKey'] = 'Bearer'
+
+  # Configure API key authorization: fuseClientId
+  config.api_key['fuseClientId'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['fuseClientId'] = 'Bearer'
+end
+
+api_instance = FuseClient::FuseApi.new
+spend_power_id = 'spend_power_id_example' # String | 
+
+begin
+  
+  result = api_instance.get_spend_power(spend_power_id)
+  p result
+rescue FuseClient::ApiError => e
+  puts "Error when calling FuseApi->get_spend_power: #{e}"
+end
+```
+
+#### Using the get_spend_power_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetSpendPowerResponse>, Integer, Hash)> get_spend_power_with_http_info(spend_power_id)
+
+```ruby
+begin
+  
+  data, status_code, headers = api_instance.get_spend_power_with_http_info(spend_power_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetSpendPowerResponse>
+rescue FuseClient::ApiError => e
+  puts "Error when calling FuseApi->get_spend_power_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **spend_power_id** | **String** |  |  |
+
+### Return type
+
+[**GetSpendPowerResponse**](GetSpendPowerResponse.md)
+
+### Authorization
+
+[fuseApiKey](../README.md#fuseApiKey), [fuseClientId](../README.md#fuseClientId)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
 ## migrate_financial_connection
 
 > <MigrateFinancialConnectionsTokenResponse> migrate_financial_connection(opts)
@@ -1392,7 +1782,7 @@ end
 
 ## sync_financial_connections_data
 
-> <SyncFinancialConnectionsDataResponse> sync_financial_connections_data(fuse_verification, body)
+> <SyncFinancialConnectionsDataResponse> sync_financial_connections_data(body)
 
 Sync financial connections data
 
@@ -1417,12 +1807,11 @@ FuseClient.configure do |config|
 end
 
 api_instance = FuseClient::FuseApi.new
-fuse_verification = 'fuse_verification_example' # String | 
 body = { ... } # Object | 
 
 begin
   # Sync financial connections data
-  result = api_instance.sync_financial_connections_data(fuse_verification, body)
+  result = api_instance.sync_financial_connections_data(body)
   p result
 rescue FuseClient::ApiError => e
   puts "Error when calling FuseApi->sync_financial_connections_data: #{e}"
@@ -1433,12 +1822,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<SyncFinancialConnectionsDataResponse>, Integer, Hash)> sync_financial_connections_data_with_http_info(fuse_verification, body)
+> <Array(<SyncFinancialConnectionsDataResponse>, Integer, Hash)> sync_financial_connections_data_with_http_info(body)
 
 ```ruby
 begin
   # Sync financial connections data
-  data, status_code, headers = api_instance.sync_financial_connections_data_with_http_info(fuse_verification, body)
+  data, status_code, headers = api_instance.sync_financial_connections_data_with_http_info(body)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <SyncFinancialConnectionsDataResponse>
@@ -1451,12 +1840,87 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **fuse_verification** | **String** |  |  |
 | **body** | **Object** |  |  |
 
 ### Return type
 
 [**SyncFinancialConnectionsDataResponse**](SyncFinancialConnectionsDataResponse.md)
+
+### Authorization
+
+[fuseApiKey](../README.md#fuseApiKey), [fuseClientId](../README.md#fuseClientId)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## update_spend_power_customization
+
+> <UpdateSpendPowerCustomizationResponse> update_spend_power_customization(opts)
+
+
+
+### Examples
+
+```ruby
+require 'time'
+require 'fuse_client'
+# setup authorization
+FuseClient.configure do |config|
+  # Configure API key authorization: fuseApiKey
+  config.api_key['fuseApiKey'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['fuseApiKey'] = 'Bearer'
+
+  # Configure API key authorization: fuseClientId
+  config.api_key['fuseClientId'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['fuseClientId'] = 'Bearer'
+end
+
+api_instance = FuseClient::FuseApi.new
+opts = {
+  body: 3.56 # SpendPowerCustomization | 
+}
+
+begin
+  
+  result = api_instance.update_spend_power_customization(opts)
+  p result
+rescue FuseClient::ApiError => e
+  puts "Error when calling FuseApi->update_spend_power_customization: #{e}"
+end
+```
+
+#### Using the update_spend_power_customization_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<UpdateSpendPowerCustomizationResponse>, Integer, Hash)> update_spend_power_customization_with_http_info(opts)
+
+```ruby
+begin
+  
+  data, status_code, headers = api_instance.update_spend_power_customization_with_http_info(opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <UpdateSpendPowerCustomizationResponse>
+rescue FuseClient::ApiError => e
+  puts "Error when calling FuseApi->update_spend_power_customization_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **body** | **SpendPowerCustomization** |  | [optional] |
+
+### Return type
+
+[**UpdateSpendPowerCustomizationResponse**](UpdateSpendPowerCustomizationResponse.md)
 
 ### Authorization
 

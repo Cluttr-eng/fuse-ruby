@@ -4,7 +4,7 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **public_token** | **String** | The public token created after a user connects with their financial institution | [optional] |
+| **public_token** | **String** | The public token created after a user connects with their financial institution |  |
 
 ## Example
 
