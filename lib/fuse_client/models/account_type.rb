@@ -22,9 +22,10 @@ module FuseClient
     INSURANCE = "insurance".freeze
     PROPERTY = "property".freeze
     OTHER = "other".freeze
+     = "-".freeze
 
     def self.all_vars
-      @all_vars ||= [DEPOSITORY, CREDIT, LOAN, INVESTMENT, INSURANCE, PROPERTY, OTHER].freeze
+      @all_vars ||= [DEPOSITORY, CREDIT, LOAN, INVESTMENT, INSURANCE, PROPERTY, OTHER, ].freeze
     end
 
     # Builds the enum from string

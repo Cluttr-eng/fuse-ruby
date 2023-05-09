@@ -15,7 +15,7 @@ require 'time'
 
 module FuseClient
   class Entity
-    # Unique identifier for the user or business account.
+    # Unique identifier for the user or business account that is connecting to an institution. Use this id when calling the GET /entities/${entity_id} endpoint.
     attr_accessor :id
 
     # Name for the user or business account.
