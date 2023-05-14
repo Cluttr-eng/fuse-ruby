@@ -16,7 +16,7 @@ require 'time'
 module FuseClient
   # An object specifying information about the Plaid configuration to use when creating a link token. 
   class CreateLinkTokenRequestPlaid
-    # Follows the same schema as Plaid's Link Token Create Schema(https://plaid.com/docs/api/tokens/#linktokencreate). 'products', 'client_id', 'secret', 'client_user_id', 'client_name', 'webhook', 'institution_data' and 'country_codes' (only US supported right now) will be set by Fuse and override any values you set.
+    # Follows the same schema as Plaid's Link Token Create Schema(https://plaid.com/docs/api/tokens/#linktokencreate). 'products', 'client_id', 'secret', 'client_user_id', 'client_name', 'webhook', 'institution_data' and 'country_codes' (only US and Canada is supported right now) will be set by Fuse and override any values you set.
     attr_accessor :config
 
     # Attribute mapping from ruby-style variable name to JSON key.

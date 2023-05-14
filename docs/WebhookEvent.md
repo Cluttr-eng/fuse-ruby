@@ -10,6 +10,8 @@
 | **source** | [**WebhookSource**](WebhookSource.md) |  |  |
 | **verification_token** | **String** | Aggregator verification data needed to verify the webhook | [optional] |
 | **asset_report_id** | **String** | Exists for assets.report_ready webhooks | [optional] |
+| **historical_transactions_available** | **Boolean** | Exists for transactions.updates webhooks. Indicates if historical transaction information (up to 24 months) is ready to be queried. | [optional] |
+| **removed_transaction_ids** | **Array&lt;String&gt;** | Exists for transactions.updates webhooks. Currently only supported by Plaid. | [optional] |
 | **remote_data** | **Object** |  |  |
 
 ## Example
@@ -24,6 +26,8 @@ instance = FuseClient::WebhookEvent.new(
   source: null,
   verification_token: null,
   asset_report_id: null,
+  historical_transactions_available: null,
+  removed_transaction_ids: null,
   remote_data: null
 )
 ```
