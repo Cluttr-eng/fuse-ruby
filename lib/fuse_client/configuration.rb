@@ -323,12 +323,54 @@ module FuseClient
             key: 'Snaptrade-Consumer-Id',
             value: api_key_with_prefix('snaptradeConsumerKey')
           },
-        'proxyUrlKey' =>
+        'flinksCaCustomerIdKey' =>
           {
             type: 'api_key',
             in: 'header',
-            key: 'Proxy-Url',
-            value: api_key_with_prefix('proxyUrlKey')
+            key: 'Flinks-Ca-Customer-Id',
+            value: api_key_with_prefix('flinksCaCustomerIdKey')
+          },
+        'flinksUsCustomerIdKey' =>
+          {
+            type: 'api_key',
+            in: 'header',
+            key: 'Flinks-Us-Customer-Id',
+            value: api_key_with_prefix('flinksUsCustomerIdKey')
+          },
+        'flinksUsInstanceKey' =>
+          {
+            type: 'api_key',
+            in: 'header',
+            key: 'Flinks-Us-Instance-Id',
+            value: api_key_with_prefix('flinksUsInstanceKey')
+          },
+        'flinksCaInstanceKey' =>
+          {
+            type: 'api_key',
+            in: 'header',
+            key: 'Flinks-Ca-Instance-Id',
+            value: api_key_with_prefix('flinksCaInstanceKey')
+          },
+        'finicityPartnerId' =>
+          {
+            type: 'api_key',
+            in: 'header',
+            key: 'Finicity-Partner-Id',
+            value: api_key_with_prefix('finicityPartnerId')
+          },
+        'finicityPartnerSecret' =>
+          {
+            type: 'api_key',
+            in: 'header',
+            key: 'Finicity-Partner-Secret',
+            value: api_key_with_prefix('finicityPartnerSecret')
+          },
+        'finicityAppKey' =>
+          {
+            type: 'api_key',
+            in: 'header',
+            key: 'Finicity-App-Key',
+            value: api_key_with_prefix('finicityAppKey')
           },
       }
     end

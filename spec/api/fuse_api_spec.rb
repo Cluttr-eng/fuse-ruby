@@ -32,6 +32,17 @@ describe 'FuseApi' do
     end
   end
 
+  # unit tests for add_spend_power_transaction
+  # @param spend_power_id 
+  # @param [Hash] opts the optional parameters
+  # @option opts [AddSpendPowerTransactionRequest] :add_spend_power_transaction_request 
+  # @return [AddSpendPowerTransactionResponse]
+  describe 'add_spend_power_transaction test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   # unit tests for create_asset_report
   # Use this endpoint to generate an Asset Report for a user. For Plaid, you will need to have the assets product enabled on your plaid account.
   # @param [Hash] opts the optional parameters
@@ -60,6 +71,27 @@ describe 'FuseApi' do
   # @option opts [CreateSessionRequest] :create_session_request 
   # @return [CreateSessionResponse]
   describe 'create_session test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  # unit tests for create_spend_power
+  # Starts the background process that will determine the spend power depending on the customization passed in.
+  # @param [Hash] opts the optional parameters
+  # @option opts [CreateSpendPowerRequest] :create_spend_power_request 
+  # @return [CreateSpendPowerResponse]
+  describe 'create_spend_power test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  # unit tests for create_spend_power_customization
+  # @param [Hash] opts the optional parameters
+  # @option opts [SpendPowerCustomization] :body 
+  # @return [CreateSpendPowerCustomizationResponse]
+  describe 'create_spend_power_customization test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
@@ -127,6 +159,17 @@ describe 'FuseApi' do
   # @param [Hash] opts the optional parameters
   # @return [GetFinancialConnectionsAccountDetailsResponse]
   describe 'get_financial_connections_account_details test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  # unit tests for get_financial_connections_account_statement
+  # Retrieves an account statement for the given financial connection, account and date. This endpoint may time out so we recommend using a retry mechanism with exponential backoff.
+  # @param [Hash] opts the optional parameters
+  # @option opts [GetFinancialConnectionsAccountStatementRequest] :get_financial_connections_account_statement_request 
+  # @return [GetFinancialConnectionsAccountStatementResponse]
+  describe 'get_financial_connections_account_statement test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
@@ -210,6 +253,16 @@ describe 'FuseApi' do
     end
   end
 
+  # unit tests for get_spend_power
+  # @param spend_power_id 
+  # @param [Hash] opts the optional parameters
+  # @return [GetSpendPowerResponse]
+  describe 'get_spend_power test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   # unit tests for migrate_financial_connection
   # Migrate financial connection
   # This endpoint migrates financial connections from Plaid or MX into the unified Fuse API. It accepts a POST request with connection data, aggregator, entity, and Fuse products, and responds with a JSON payload containing the migrated connection&#39;s data, access token, ID, and request ID.
@@ -236,11 +289,20 @@ describe 'FuseApi' do
   # unit tests for sync_financial_connections_data
   # Sync financial connections data
   # Call this endpoint upon receiving a financial_connection.sync_data webhook. This will keep the financial connections data up to date.
-  # @param fuse_verification 
   # @param body 
   # @param [Hash] opts the optional parameters
   # @return [SyncFinancialConnectionsDataResponse]
   describe 'sync_financial_connections_data test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  # unit tests for update_spend_power_customization
+  # @param [Hash] opts the optional parameters
+  # @option opts [SpendPowerCustomization] :body 
+  # @return [UpdateSpendPowerCustomizationResponse]
+  describe 'update_spend_power_customization test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end

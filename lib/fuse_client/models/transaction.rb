@@ -38,7 +38,7 @@ module FuseClient
     # The status of the transaction. This will be either posted or pending.
     attr_accessor :status
 
-    # Type of the transaction, ie adjustment
+    # Type of the transaction, ie adjustment. '-' means we were not able to map the upstream type.
     attr_accessor :type
 
     # The ISO-4217 currency code of the transaction
@@ -233,7 +233,7 @@ module FuseClient
       status_validator = EnumAttributeValidator.new('String', ["pending", "posted"])
       return false unless status_validator.valid?(@status)
       return false if @type.nil?
-      type_validator = EnumAttributeValidator.new('String', ["ach", "adjustment", "atm", "bank_charge", "bill_payment", "card_payment", "cash", "cashback", "charge", "cheque", "credit", "debit", "deposit", "digital_payment", "direct_debit", "fee", "in_store", "interest", "online", "other", "payment", "purchase", "standing_order", "transaction", "transfer", "wire", "withdrawal"])
+      type_validator = EnumAttributeValidator.new('String', ["ach", "adjustment", "atm", "bank_charge", "bill_payment", "card_payment", "cash", "cashback", "charge", "cheque", "credit", "debit", "deposit", "digital_payment", "direct_debit", "fee", "in_store", "interest", "online", "other", "payment", "purchase", "standing_order", "transaction", "transfer", "wire", "withdrawal", "-"])
       return false unless type_validator.valid?(@type)
       true
     end
@@ -251,7 +251,7 @@ module FuseClient
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] type Object to be assigned
     def type=(type)
-      validator = EnumAttributeValidator.new('String', ["ach", "adjustment", "atm", "bank_charge", "bill_payment", "card_payment", "cash", "cashback", "charge", "cheque", "credit", "debit", "deposit", "digital_payment", "direct_debit", "fee", "in_store", "interest", "online", "other", "payment", "purchase", "standing_order", "transaction", "transfer", "wire", "withdrawal"])
+      validator = EnumAttributeValidator.new('String', ["ach", "adjustment", "atm", "bank_charge", "bill_payment", "card_payment", "cash", "cashback", "charge", "cheque", "credit", "debit", "deposit", "digital_payment", "direct_debit", "fee", "in_store", "interest", "online", "other", "payment", "purchase", "standing_order", "transaction", "transfer", "wire", "withdrawal", "-"])
       unless validator.valid?(type)
         fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
       end

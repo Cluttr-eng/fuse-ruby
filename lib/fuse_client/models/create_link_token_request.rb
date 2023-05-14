@@ -20,7 +20,7 @@ module FuseClient
 
     attr_accessor :entity
 
-    # The name of your application.
+    # The name of your application. This is what will be displayed to users.
     attr_accessor :client_name
 
     # The session client secret created from the 'Create session client secret' endpoint
@@ -33,6 +33,8 @@ module FuseClient
 
     attr_accessor :plaid
 
+    attr_accessor :teller
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -42,7 +44,8 @@ module FuseClient
         :'session_client_secret' => :'session_client_secret',
         :'webhook_url' => :'webhook_url',
         :'mx' => :'mx',
-        :'plaid' => :'plaid'
+        :'plaid' => :'plaid',
+        :'teller' => :'teller'
       }
     end
 
@@ -60,7 +63,8 @@ module FuseClient
         :'session_client_secret' => :'String',
         :'webhook_url' => :'String',
         :'mx' => :'CreateLinkTokenRequestMx',
-        :'plaid' => :'CreateLinkTokenRequestPlaid'
+        :'plaid' => :'CreateLinkTokenRequestPlaid',
+        :'teller' => :'CreateLinkTokenRequestTeller'
       }
     end
 
@@ -112,6 +116,10 @@ module FuseClient
       if attributes.key?(:'plaid')
         self.plaid = attributes[:'plaid']
       end
+
+      if attributes.key?(:'teller')
+        self.teller = attributes[:'teller']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -158,7 +166,8 @@ module FuseClient
           session_client_secret == o.session_client_secret &&
           webhook_url == o.webhook_url &&
           mx == o.mx &&
-          plaid == o.plaid
+          plaid == o.plaid &&
+          teller == o.teller
     end
 
     # @see the `==` method
@@ -170,7 +179,7 @@ module FuseClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [institution_id, entity, client_name, session_client_secret, webhook_url, mx, plaid].hash
+      [institution_id, entity, client_name, session_client_secret, webhook_url, mx, plaid, teller].hash
     end
 
     # Builds the object from hash
