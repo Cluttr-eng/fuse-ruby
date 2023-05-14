@@ -3,7 +3,7 @@
 ### Add to gem file
 
 ```ruby
-gem 'fuse_client', "~> 1.0.6"
+gem 'fuse_client', "~> 1.0.33"
 ```
 
 ### Setup fuse client
