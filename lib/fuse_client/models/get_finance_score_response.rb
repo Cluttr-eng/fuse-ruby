@@ -14,44 +14,18 @@ require 'date'
 require 'time'
 
 module FuseClient
-  class AddSpendPowerTransactionRequest
-    # Id of the transaction
-    attr_accessor :id
+  class GetFinanceScoreResponse
+    # A value between 0 and 1 where 1 is a perfect finance score and 0 is the worst finance score.
+    attr_accessor :finance_score
 
-    # The status of the transaction. This will be either pending, posted or cancelled.
-    attr_accessor :status
-
-    # The amount of the transaction, in cents. Use positive numbers to represent money going out and negative numbers to represent money coming in.
-    attr_accessor :amount
-
-    class EnumAttributeValidator
-      attr_reader :datatype
-      attr_reader :allowable_values
-
-      def initialize(datatype, allowable_values)
-        @allowable_values = allowable_values.map do |value|
-          case datatype.to_s
-          when /Integer/i
-            value.to_i
-          when /Float/i
-            value.to_f
-          else
-            value
-          end
-        end
-      end
-
-      def valid?(value)
-        !value || allowable_values.include?(value)
-      end
-    end
+    # An identifier that is exclusive to the request and can serve as a means for investigating and resolving issues.
+    attr_accessor :request_id
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'id' => :'id',
-        :'status' => :'status',
-        :'amount' => :'amount'
+        :'finance_score' => :'finance_score',
+        :'request_id' => :'request_id'
       }
     end
 
@@ -63,9 +37,8 @@ module FuseClient
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'id' => :'String',
-        :'status' => :'String',
-        :'amount' => :'String'
+        :'finance_score' => :'Float',
+        :'request_id' => :'String'
       }
     end
 
@@ -79,27 +52,23 @@ module FuseClient
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `FuseClient::AddSpendPowerTransactionRequest` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `FuseClient::GetFinanceScoreResponse` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `FuseClient::AddSpendPowerTransactionRequest`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `FuseClient::GetFinanceScoreResponse`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'id')
-        self.id = attributes[:'id']
+      if attributes.key?(:'finance_score')
+        self.finance_score = attributes[:'finance_score']
       end
 
-      if attributes.key?(:'status')
-        self.status = attributes[:'status']
-      end
-
-      if attributes.key?(:'amount')
-        self.amount = attributes[:'amount']
+      if attributes.key?(:'request_id')
+        self.request_id = attributes[:'request_id']
       end
     end
 
@@ -107,12 +76,12 @@ module FuseClient
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @id.nil?
-        invalid_properties.push('invalid value for "id", id cannot be nil.')
+      if @finance_score.nil?
+        invalid_properties.push('invalid value for "finance_score", finance_score cannot be nil.')
       end
 
-      if @status.nil?
-        invalid_properties.push('invalid value for "status", status cannot be nil.')
+      if @request_id.nil?
+        invalid_properties.push('invalid value for "request_id", request_id cannot be nil.')
       end
 
       invalid_properties
@@ -121,21 +90,9 @@ module FuseClient
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @id.nil?
-      return false if @status.nil?
-      status_validator = EnumAttributeValidator.new('String', ["pending", "posted", "cancelled"])
-      return false unless status_validator.valid?(@status)
+      return false if @finance_score.nil?
+      return false if @request_id.nil?
       true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] status Object to be assigned
-    def status=(status)
-      validator = EnumAttributeValidator.new('String', ["pending", "posted", "cancelled"])
-      unless validator.valid?(status)
-        fail ArgumentError, "invalid value for \"status\", must be one of #{validator.allowable_values}."
-      end
-      @status = status
     end
 
     # Checks equality by comparing each attribute.
@@ -143,9 +100,8 @@ module FuseClient
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          id == o.id &&
-          status == o.status &&
-          amount == o.amount
+          finance_score == o.finance_score &&
+          request_id == o.request_id
     end
 
     # @see the `==` method
@@ -157,7 +113,7 @@ module FuseClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, status, amount].hash
+      [finance_score, request_id].hash
     end
 
     # Builds the object from hash

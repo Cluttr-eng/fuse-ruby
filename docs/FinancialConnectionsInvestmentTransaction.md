@@ -13,6 +13,7 @@
 | **currency** | [**Currency**](Currency.md) |  |  |
 | **date** | **Time** | The date and time of the investment transaction |  |
 | **type** | **String** | The type of the investment transaction (e.g., &#39;buy&#39;, &#39;sell&#39;, &#39;dividend&#39;) |  |
+| **subtype** | [**FinancialConnectionsInvestmentTransactionSubtype**](FinancialConnectionsInvestmentTransactionSubtype.md) |  | [optional] |
 | **quantity** | **Float** | The number of units of the security involved in this transaction |  |
 | **price** | **Float** | The price of the security involved in this transaction |  |
 | **security** | [**FinancialConnectionsInvestmentSecurity**](FinancialConnectionsInvestmentSecurity.md) |  |  |
@@ -32,6 +33,7 @@ instance = FuseClient::FinancialConnectionsInvestmentTransaction.new(
   currency: null,
   date: null,
   type: null,
+  subtype: null,
   quantity: null,
   price: null,
   security: null

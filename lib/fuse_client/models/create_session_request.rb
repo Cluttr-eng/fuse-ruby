@@ -25,7 +25,7 @@ module FuseClient
 
     attr_accessor :entity
 
-    # The fuse access token for an existing account integration. This will perform the process to reconnect an existing disconnected account.
+    # The fuse access token for an existing financial connection. This will perform the process to reconnect an existing disconnected account.
     attr_accessor :access_token
 
     # Set to false for web SDKs (e.g., React), and true for mobile SDKs (e.g., React Native, Flutter, iOS, Android).

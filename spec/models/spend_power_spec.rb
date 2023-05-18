@@ -55,7 +55,7 @@ describe FuseClient::SpendPower do
     end
   end
 
-  describe 'test attribute "currency"' do
+  describe 'test attribute "iso_currency_code"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end

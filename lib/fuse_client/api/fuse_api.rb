@@ -19,29 +19,29 @@ module FuseClient
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
     end
-    # @param spend_power_id [String] 
+    # @param account_id [String] 
     # @param [Hash] opts the optional parameters
-    # @option opts [AddSpendPowerTransactionRequest] :add_spend_power_transaction_request 
-    # @return [AddSpendPowerTransactionResponse]
-    def add_spend_power_transaction(spend_power_id, opts = {})
-      data, _status_code, _headers = add_spend_power_transaction_with_http_info(spend_power_id, opts)
+    # @option opts [AddAccountEventsRequest] :add_account_events_request 
+    # @return [AddAccountEventsResponse]
+    def add_account_events(account_id, opts = {})
+      data, _status_code, _headers = add_account_events_with_http_info(account_id, opts)
       data
     end
 
-    # @param spend_power_id [String] 
+    # @param account_id [String] 
     # @param [Hash] opts the optional parameters
-    # @option opts [AddSpendPowerTransactionRequest] :add_spend_power_transaction_request 
-    # @return [Array<(AddSpendPowerTransactionResponse, Integer, Hash)>] AddSpendPowerTransactionResponse data, response status code and response headers
-    def add_spend_power_transaction_with_http_info(spend_power_id, opts = {})
+    # @option opts [AddAccountEventsRequest] :add_account_events_request 
+    # @return [Array<(AddAccountEventsResponse, Integer, Hash)>] AddAccountEventsResponse data, response status code and response headers
+    def add_account_events_with_http_info(account_id, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: FuseApi.add_spend_power_transaction ...'
+        @api_client.config.logger.debug 'Calling API: FuseApi.add_account_events ...'
       end
-      # verify the required parameter 'spend_power_id' is set
-      if @api_client.config.client_side_validation && spend_power_id.nil?
-        fail ArgumentError, "Missing the required parameter 'spend_power_id' when calling FuseApi.add_spend_power_transaction"
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling FuseApi.add_account_events"
       end
       # resource path
-      local_var_path = '/v1/financial_connections/spend-power/{spend_power_id}/transaction'.sub('{' + 'spend_power_id' + '}', CGI.escape(spend_power_id.to_s))
+      local_var_path = '/v1/accounts/{account_id}/events'.sub('{' + 'account_id' + '}', CGI.escape(account_id.to_s))
 
       # query parameters
       query_params = opts[:query_params] || {}
@@ -60,16 +60,16 @@ module FuseClient
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'add_spend_power_transaction_request'])
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'add_account_events_request'])
 
       # return_type
-      return_type = opts[:debug_return_type] || 'AddSpendPowerTransactionResponse'
+      return_type = opts[:debug_return_type] || 'AddAccountEventsResponse'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['fuseApiKey', 'fuseClientId']
 
       new_options = opts.merge(
-        :operation => :"FuseApi.add_spend_power_transaction",
+        :operation => :"FuseApi.add_account_events",
         :header_params => header_params,
         :query_params => query_params,
         :form_params => form_params,
@@ -80,7 +80,7 @@ module FuseClient
 
       data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: FuseApi#add_spend_power_transaction\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: FuseApi#add_account_events\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -289,7 +289,7 @@ module FuseClient
         @api_client.config.logger.debug 'Calling API: FuseApi.create_spend_power ...'
       end
       # resource path
-      local_var_path = '/v1/financial_connections/spend-power'
+      local_var_path = '/v1/spend_power'
 
       # query parameters
       query_params = opts[:query_params] || {}
@@ -334,7 +334,7 @@ module FuseClient
     end
 
     # @param [Hash] opts the optional parameters
-    # @option opts [SpendPowerCustomization] :body 
+    # @option opts [CreateSpendPowerCustomizationRequest] :create_spend_power_customization_request 
     # @return [CreateSpendPowerCustomizationResponse]
     def create_spend_power_customization(opts = {})
       data, _status_code, _headers = create_spend_power_customization_with_http_info(opts)
@@ -342,14 +342,14 @@ module FuseClient
     end
 
     # @param [Hash] opts the optional parameters
-    # @option opts [SpendPowerCustomization] :body 
+    # @option opts [CreateSpendPowerCustomizationRequest] :create_spend_power_customization_request 
     # @return [Array<(CreateSpendPowerCustomizationResponse, Integer, Hash)>] CreateSpendPowerCustomizationResponse data, response status code and response headers
     def create_spend_power_customization_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: FuseApi.create_spend_power_customization ...'
       end
       # resource path
-      local_var_path = '/v1/financial_connections/spend-power/customization'
+      local_var_path = '/v1/spend_power/customization'
 
       # query parameters
       query_params = opts[:query_params] || {}
@@ -368,7 +368,7 @@ module FuseClient
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'body'])
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'create_spend_power_customization_request'])
 
       # return_type
       return_type = opts[:debug_return_type] || 'CreateSpendPowerCustomizationResponse'
@@ -450,6 +450,80 @@ module FuseClient
       data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: FuseApi#delete_financial_connection\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # @param fuse_client_id [String] 
+    # @param fuse_api_key [String] 
+    # @param [Hash] opts the optional parameters
+    # @option opts [EnrichTransactionsRequest] :enrich_transactions_request 
+    # @return [EnrichTransactionsResponse]
+    def enrich_transactions(fuse_client_id, fuse_api_key, opts = {})
+      data, _status_code, _headers = enrich_transactions_with_http_info(fuse_client_id, fuse_api_key, opts)
+      data
+    end
+
+    # @param fuse_client_id [String] 
+    # @param fuse_api_key [String] 
+    # @param [Hash] opts the optional parameters
+    # @option opts [EnrichTransactionsRequest] :enrich_transactions_request 
+    # @return [Array<(EnrichTransactionsResponse, Integer, Hash)>] EnrichTransactionsResponse data, response status code and response headers
+    def enrich_transactions_with_http_info(fuse_client_id, fuse_api_key, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: FuseApi.enrich_transactions ...'
+      end
+      # verify the required parameter 'fuse_client_id' is set
+      if @api_client.config.client_side_validation && fuse_client_id.nil?
+        fail ArgumentError, "Missing the required parameter 'fuse_client_id' when calling FuseApi.enrich_transactions"
+      end
+      # verify the required parameter 'fuse_api_key' is set
+      if @api_client.config.client_side_validation && fuse_api_key.nil?
+        fail ArgumentError, "Missing the required parameter 'fuse_api_key' when calling FuseApi.enrich_transactions"
+      end
+      # resource path
+      local_var_path = '/v1/transactions/enrich'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+      header_params[:'Fuse-Client-Id'] = fuse_client_id
+      header_params[:'Fuse-Api-Key'] = fuse_api_key
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'enrich_transactions_request'])
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'EnrichTransactionsResponse'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['fuseApiKey', 'fuseClientId']
+
+      new_options = opts.merge(
+        :operation => :"FuseApi.enrich_transactions",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: FuseApi#enrich_transactions\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -637,6 +711,67 @@ module FuseClient
       data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: FuseApi#get_entity\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Get finance score
+    # @param account_id [String] 
+    # @param [Hash] opts the optional parameters
+    # @return [GetFinanceScoreResponse]
+    def get_finance_score(account_id, opts = {})
+      data, _status_code, _headers = get_finance_score_with_http_info(account_id, opts)
+      data
+    end
+
+    # Get finance score
+    # @param account_id [String] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(GetFinanceScoreResponse, Integer, Hash)>] GetFinanceScoreResponse data, response status code and response headers
+    def get_finance_score_with_http_info(account_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: FuseApi.get_finance_score ...'
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling FuseApi.get_finance_score"
+      end
+      # resource path
+      local_var_path = '/v1/accounts/{account_id}/finance_score'.sub('{' + 'account_id' + '}', CGI.escape(account_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'GetFinanceScoreResponse'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['fuseApiKey', 'fuseClientId']
+
+      new_options = opts.merge(
+        :operation => :"FuseApi.get_finance_score",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: FuseApi#get_finance_score\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -1289,6 +1424,7 @@ module FuseClient
       return data, status_code, headers
     end
 
+    # Get spend power
     # @param spend_power_id [String] 
     # @param [Hash] opts the optional parameters
     # @return [GetSpendPowerResponse]
@@ -1297,6 +1433,7 @@ module FuseClient
       data
     end
 
+    # Get spend power
     # @param spend_power_id [String] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(GetSpendPowerResponse, Integer, Hash)>] GetSpendPowerResponse data, response status code and response headers
@@ -1309,7 +1446,7 @@ module FuseClient
         fail ArgumentError, "Missing the required parameter 'spend_power_id' when calling FuseApi.get_spend_power"
       end
       # resource path
-      local_var_path = '/v1/financial_connections/spend-power/{spend_power_id}'.sub('{' + 'spend_power_id' + '}', CGI.escape(spend_power_id.to_s))
+      local_var_path = '/v1/spend_power/{spend_power_id}'.sub('{' + 'spend_power_id' + '}', CGI.escape(spend_power_id.to_s))
 
       # query parameters
       query_params = opts[:query_params] || {}
@@ -1542,23 +1679,31 @@ module FuseClient
       return data, status_code, headers
     end
 
+    # Update spend power customization
+    # @param spend_power_customization_id [String] 
     # @param [Hash] opts the optional parameters
-    # @option opts [SpendPowerCustomization] :body 
+    # @option opts [UpdateSpendPowerCustomizationRequest] :update_spend_power_customization_request 
     # @return [UpdateSpendPowerCustomizationResponse]
-    def update_spend_power_customization(opts = {})
-      data, _status_code, _headers = update_spend_power_customization_with_http_info(opts)
+    def update_spend_power_customization(spend_power_customization_id, opts = {})
+      data, _status_code, _headers = update_spend_power_customization_with_http_info(spend_power_customization_id, opts)
       data
     end
 
+    # Update spend power customization
+    # @param spend_power_customization_id [String] 
     # @param [Hash] opts the optional parameters
-    # @option opts [SpendPowerCustomization] :body 
+    # @option opts [UpdateSpendPowerCustomizationRequest] :update_spend_power_customization_request 
     # @return [Array<(UpdateSpendPowerCustomizationResponse, Integer, Hash)>] UpdateSpendPowerCustomizationResponse data, response status code and response headers
-    def update_spend_power_customization_with_http_info(opts = {})
+    def update_spend_power_customization_with_http_info(spend_power_customization_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: FuseApi.update_spend_power_customization ...'
       end
+      # verify the required parameter 'spend_power_customization_id' is set
+      if @api_client.config.client_side_validation && spend_power_customization_id.nil?
+        fail ArgumentError, "Missing the required parameter 'spend_power_customization_id' when calling FuseApi.update_spend_power_customization"
+      end
       # resource path
-      local_var_path = '/v1/financial_connections/spend-power/customization/update'
+      local_var_path = '/v1/spend_power/customization/{spend_power_customization_id}'.sub('{' + 'spend_power_customization_id' + '}', CGI.escape(spend_power_customization_id.to_s))
 
       # query parameters
       query_params = opts[:query_params] || {}
@@ -1577,7 +1722,7 @@ module FuseClient
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'body'])
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'update_spend_power_customization_request'])
 
       # return_type
       return_type = opts[:debug_return_type] || 'UpdateSpendPowerCustomizationResponse'

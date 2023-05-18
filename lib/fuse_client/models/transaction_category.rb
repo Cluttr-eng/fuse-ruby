@@ -14,18 +14,38 @@ require 'date'
 require 'time'
 
 module FuseClient
-  class AddSpendPowerTransactionResponse
-    # Response message
-    attr_accessor :message
+  class TransactionCategory
+    attr_accessor :primary
 
-    # An identifier that is exclusive to the request and can serve as a means for investigating and resolving issues.
-    attr_accessor :request_id
+    attr_accessor :detailed
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'message' => :'message',
-        :'request_id' => :'request_id'
+        :'primary' => :'primary',
+        :'detailed' => :'detailed'
       }
     end
 
@@ -37,8 +57,8 @@ module FuseClient
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'message' => :'String',
-        :'request_id' => :'String'
+        :'primary' => :'TransactionCategoryPrimary',
+        :'detailed' => :'TransactionCategoryDetailed'
       }
     end
 
@@ -52,23 +72,23 @@ module FuseClient
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `FuseClient::AddSpendPowerTransactionResponse` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `FuseClient::TransactionCategory` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `FuseClient::AddSpendPowerTransactionResponse`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `FuseClient::TransactionCategory`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'message')
-        self.message = attributes[:'message']
+      if attributes.key?(:'primary')
+        self.primary = attributes[:'primary']
       end
 
-      if attributes.key?(:'request_id')
-        self.request_id = attributes[:'request_id']
+      if attributes.key?(:'detailed')
+        self.detailed = attributes[:'detailed']
       end
     end
 
@@ -76,12 +96,12 @@ module FuseClient
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @message.nil?
-        invalid_properties.push('invalid value for "message", message cannot be nil.')
+      if @primary.nil?
+        invalid_properties.push('invalid value for "primary", primary cannot be nil.')
       end
 
-      if @request_id.nil?
-        invalid_properties.push('invalid value for "request_id", request_id cannot be nil.')
+      if @detailed.nil?
+        invalid_properties.push('invalid value for "detailed", detailed cannot be nil.')
       end
 
       invalid_properties
@@ -90,8 +110,8 @@ module FuseClient
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @message.nil?
-      return false if @request_id.nil?
+      return false if @primary.nil?
+      return false if @detailed.nil?
       true
     end
 
@@ -100,8 +120,8 @@ module FuseClient
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          message == o.message &&
-          request_id == o.request_id
+          primary == o.primary &&
+          detailed == o.detailed
     end
 
     # @see the `==` method
@@ -113,7 +133,7 @@ module FuseClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [message, request_id].hash
+      [primary, detailed].hash
     end
 
     # Builds the object from hash

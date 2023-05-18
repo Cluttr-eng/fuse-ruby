@@ -32,12 +32,12 @@ describe 'FuseApi' do
     end
   end
 
-  # unit tests for add_spend_power_transaction
-  # @param spend_power_id 
+  # unit tests for add_account_events
+  # @param account_id 
   # @param [Hash] opts the optional parameters
-  # @option opts [AddSpendPowerTransactionRequest] :add_spend_power_transaction_request 
-  # @return [AddSpendPowerTransactionResponse]
-  describe 'add_spend_power_transaction test' do
+  # @option opts [AddAccountEventsRequest] :add_account_events_request 
+  # @return [AddAccountEventsResponse]
+  describe 'add_account_events test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
@@ -89,7 +89,7 @@ describe 'FuseApi' do
 
   # unit tests for create_spend_power_customization
   # @param [Hash] opts the optional parameters
-  # @option opts [SpendPowerCustomization] :body 
+  # @option opts [CreateSpendPowerCustomizationRequest] :create_spend_power_customization_request 
   # @return [CreateSpendPowerCustomizationResponse]
   describe 'create_spend_power_customization test' do
     it 'should work' do
@@ -103,6 +103,18 @@ describe 'FuseApi' do
   # @param [Hash] opts the optional parameters
   # @return [DeleteFinancialConnectionResponse]
   describe 'delete_financial_connection test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  # unit tests for enrich_transactions
+  # @param fuse_client_id 
+  # @param fuse_api_key 
+  # @param [Hash] opts the optional parameters
+  # @option opts [EnrichTransactionsRequest] :enrich_transactions_request 
+  # @return [EnrichTransactionsResponse]
+  describe 'enrich_transactions test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
@@ -137,6 +149,17 @@ describe 'FuseApi' do
   # @param [Hash] opts the optional parameters
   # @return [GetEntityResponse]
   describe 'get_entity test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  # unit tests for get_finance_score
+  # Get finance score
+  # @param account_id 
+  # @param [Hash] opts the optional parameters
+  # @return [GetFinanceScoreResponse]
+  describe 'get_finance_score test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
@@ -254,6 +277,7 @@ describe 'FuseApi' do
   end
 
   # unit tests for get_spend_power
+  # Get spend power
   # @param spend_power_id 
   # @param [Hash] opts the optional parameters
   # @return [GetSpendPowerResponse]
@@ -299,8 +323,10 @@ describe 'FuseApi' do
   end
 
   # unit tests for update_spend_power_customization
+  # Update spend power customization
+  # @param spend_power_customization_id 
   # @param [Hash] opts the optional parameters
-  # @option opts [SpendPowerCustomization] :body 
+  # @option opts [UpdateSpendPowerCustomizationRequest] :update_spend_power_customization_request 
   # @return [UpdateSpendPowerCustomizationResponse]
   describe 'update_spend_power_customization test' do
     it 'should work' do
