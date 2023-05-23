@@ -83,3 +83,9 @@ class FuseService
 
 end
 ```
+
+### Pushing to gems
+```
+gem build fuse_client.gemspec
+gem push fuse_client-${VERSION}.gem
+```
