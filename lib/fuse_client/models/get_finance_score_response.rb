@@ -14,9 +14,9 @@ require 'date'
 require 'time'
 
 module FuseClient
-  class AddSpendPowerTransactionResponse
-    # Response message
-    attr_accessor :message
+  class GetFinanceScoreResponse
+    # A value between 0 and 1 where 1 is a perfect finance score and 0 is the worst finance score.
+    attr_accessor :finance_score
 
     # An identifier that is exclusive to the request and can serve as a means for investigating and resolving issues.
     attr_accessor :request_id
@@ -24,7 +24,7 @@ module FuseClient
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'message' => :'message',
+        :'finance_score' => :'finance_score',
         :'request_id' => :'request_id'
       }
     end
@@ -37,7 +37,7 @@ module FuseClient
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'message' => :'String',
+        :'finance_score' => :'Float',
         :'request_id' => :'String'
       }
     end
@@ -52,19 +52,19 @@ module FuseClient
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `FuseClient::AddSpendPowerTransactionResponse` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `FuseClient::GetFinanceScoreResponse` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `FuseClient::AddSpendPowerTransactionResponse`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `FuseClient::GetFinanceScoreResponse`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'message')
-        self.message = attributes[:'message']
+      if attributes.key?(:'finance_score')
+        self.finance_score = attributes[:'finance_score']
       end
 
       if attributes.key?(:'request_id')
@@ -76,8 +76,8 @@ module FuseClient
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @message.nil?
-        invalid_properties.push('invalid value for "message", message cannot be nil.')
+      if @finance_score.nil?
+        invalid_properties.push('invalid value for "finance_score", finance_score cannot be nil.')
       end
 
       if @request_id.nil?
@@ -90,7 +90,7 @@ module FuseClient
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @message.nil?
+      return false if @finance_score.nil?
       return false if @request_id.nil?
       true
     end
@@ -100,7 +100,7 @@ module FuseClient
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          message == o.message &&
+          finance_score == o.finance_score &&
           request_id == o.request_id
     end
 
@@ -113,7 +113,7 @@ module FuseClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [message, request_id].hash
+      [finance_score, request_id].hash
     end
 
     # Builds the object from hash

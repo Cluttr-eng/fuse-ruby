@@ -117,15 +117,31 @@ module FuseClient
         invalid_properties.push('invalid value for "access_token", access_token cannot be nil.')
       end
 
-      if !@page.nil? && @page < 1
+      if @start_date.nil?
+        invalid_properties.push('invalid value for "start_date", start_date cannot be nil.')
+      end
+
+      if @end_date.nil?
+        invalid_properties.push('invalid value for "end_date", end_date cannot be nil.')
+      end
+
+      if @page.nil?
+        invalid_properties.push('invalid value for "page", page cannot be nil.')
+      end
+
+      if @page < 1
         invalid_properties.push('invalid value for "page", must be greater than or equal to 1.')
       end
 
-      if !@records_per_page.nil? && @records_per_page > 100
+      if @records_per_page.nil?
+        invalid_properties.push('invalid value for "records_per_page", records_per_page cannot be nil.')
+      end
+
+      if @records_per_page > 100
         invalid_properties.push('invalid value for "records_per_page", must be smaller than or equal to 100.')
       end
 
-      if !@records_per_page.nil? && @records_per_page < 10
+      if @records_per_page < 10
         invalid_properties.push('invalid value for "records_per_page", must be greater than or equal to 10.')
       end
 
@@ -136,16 +152,24 @@ module FuseClient
     # @return true if the model is valid
     def valid?
       return false if @access_token.nil?
-      return false if !@page.nil? && @page < 1
-      return false if !@records_per_page.nil? && @records_per_page > 100
-      return false if !@records_per_page.nil? && @records_per_page < 10
+      return false if @start_date.nil?
+      return false if @end_date.nil?
+      return false if @page.nil?
+      return false if @page < 1
+      return false if @records_per_page.nil?
+      return false if @records_per_page > 100
+      return false if @records_per_page < 10
       true
     end
 
     # Custom attribute writer method with validation
     # @param [Object] page Value to be assigned
     def page=(page)
-      if !page.nil? && page < 1
+      if page.nil?
+        fail ArgumentError, 'page cannot be nil'
+      end
+
+      if page < 1
         fail ArgumentError, 'invalid value for "page", must be greater than or equal to 1.'
       end
 
@@ -155,11 +179,15 @@ module FuseClient
     # Custom attribute writer method with validation
     # @param [Object] records_per_page Value to be assigned
     def records_per_page=(records_per_page)
-      if !records_per_page.nil? && records_per_page > 100
+      if records_per_page.nil?
+        fail ArgumentError, 'records_per_page cannot be nil'
+      end
+
+      if records_per_page > 100
         fail ArgumentError, 'invalid value for "records_per_page", must be smaller than or equal to 100.'
       end
 
-      if !records_per_page.nil? && records_per_page < 10
+      if records_per_page < 10
         fail ArgumentError, 'invalid value for "records_per_page", must be greater than or equal to 10.'
       end
 

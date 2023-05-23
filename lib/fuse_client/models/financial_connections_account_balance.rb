@@ -18,10 +18,10 @@ module FuseClient
     # Remote Account Id of the transaction, ie Plaid Account Id
     attr_accessor :remote_account_id
 
-    # Amount in cents after factoring in pending balances. For accounts with credit features, the available funds generally equal the credit limit. Some institutions may not provide an available balance calculation. If this is the case, Fuse will return a null value for the available balance. To ensure you have the most accurate information, we recommend obtaining the current balance by using 'balance.available || balance.current'.
+    # Amount in cents after factoring in pending balances. The format of this value is a double. For accounts with credit features, the available funds generally equal the credit limit. Some institutions may not provide an available balance calculation. If this is the case, Fuse will return a null value for the available balance. To ensure you have the most accurate information, we recommend obtaining the current balance by using 'balance.available || balance.current'.
     attr_accessor :available
 
-    # Amount in cents without factoring in pending balances
+    # Amount in cents without factoring in pending balances. The format of this value is a double.
     attr_accessor :current
 
     # The ISO-4217 currency code of the balance.

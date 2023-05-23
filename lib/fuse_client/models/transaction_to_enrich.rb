@@ -14,15 +14,21 @@ require 'date'
 require 'time'
 
 module FuseClient
-  class AddSpendPowerTransactionRequest
-    # Id of the transaction
+  class TransactionToEnrich
+    # A unique ID for the transaction that to help you tie data back to your systems.
     attr_accessor :id
 
-    # The status of the transaction. This will be either pending, posted or cancelled.
-    attr_accessor :status
+    # The name of the merchant.
+    attr_accessor :merchant_name
 
-    # The amount of the transaction, in cents. Use positive numbers to represent money going out and negative numbers to represent money coming in.
+    # The merchant category code.
+    attr_accessor :mcc
+
+    # The amount of the transaction in cents, in the currency of the account.
     attr_accessor :amount
+
+    # The type of the transaction
+    attr_accessor :type
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -50,8 +56,10 @@ module FuseClient
     def self.attribute_map
       {
         :'id' => :'id',
-        :'status' => :'status',
-        :'amount' => :'amount'
+        :'merchant_name' => :'merchant_name',
+        :'mcc' => :'mcc',
+        :'amount' => :'amount',
+        :'type' => :'type'
       }
     end
 
@@ -64,8 +72,10 @@ module FuseClient
     def self.openapi_types
       {
         :'id' => :'String',
-        :'status' => :'String',
-        :'amount' => :'String'
+        :'merchant_name' => :'String',
+        :'mcc' => :'String',
+        :'amount' => :'Float',
+        :'type' => :'String'
       }
     end
 
@@ -79,13 +89,13 @@ module FuseClient
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `FuseClient::AddSpendPowerTransactionRequest` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `FuseClient::TransactionToEnrich` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `FuseClient::AddSpendPowerTransactionRequest`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `FuseClient::TransactionToEnrich`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
@@ -94,12 +104,20 @@ module FuseClient
         self.id = attributes[:'id']
       end
 
-      if attributes.key?(:'status')
-        self.status = attributes[:'status']
+      if attributes.key?(:'merchant_name')
+        self.merchant_name = attributes[:'merchant_name']
+      end
+
+      if attributes.key?(:'mcc')
+        self.mcc = attributes[:'mcc']
       end
 
       if attributes.key?(:'amount')
         self.amount = attributes[:'amount']
+      end
+
+      if attributes.key?(:'type')
+        self.type = attributes[:'type']
       end
     end
 
@@ -111,8 +129,8 @@ module FuseClient
         invalid_properties.push('invalid value for "id", id cannot be nil.')
       end
 
-      if @status.nil?
-        invalid_properties.push('invalid value for "status", status cannot be nil.')
+      if @merchant_name.nil?
+        invalid_properties.push('invalid value for "merchant_name", merchant_name cannot be nil.')
       end
 
       invalid_properties
@@ -122,20 +140,20 @@ module FuseClient
     # @return true if the model is valid
     def valid?
       return false if @id.nil?
-      return false if @status.nil?
-      status_validator = EnumAttributeValidator.new('String', ["pending", "posted", "cancelled"])
-      return false unless status_validator.valid?(@status)
+      return false if @merchant_name.nil?
+      type_validator = EnumAttributeValidator.new('String', ["debit", "credit"])
+      return false unless type_validator.valid?(@type)
       true
     end
 
     # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] status Object to be assigned
-    def status=(status)
-      validator = EnumAttributeValidator.new('String', ["pending", "posted", "cancelled"])
-      unless validator.valid?(status)
-        fail ArgumentError, "invalid value for \"status\", must be one of #{validator.allowable_values}."
+    # @param [Object] type Object to be assigned
+    def type=(type)
+      validator = EnumAttributeValidator.new('String', ["debit", "credit"])
+      unless validator.valid?(type)
+        fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
       end
-      @status = status
+      @type = type
     end
 
     # Checks equality by comparing each attribute.
@@ -144,8 +162,10 @@ module FuseClient
       return true if self.equal?(o)
       self.class == o.class &&
           id == o.id &&
-          status == o.status &&
-          amount == o.amount
+          merchant_name == o.merchant_name &&
+          mcc == o.mcc &&
+          amount == o.amount &&
+          type == o.type
     end
 
     # @see the `==` method
@@ -157,7 +177,7 @@ module FuseClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, status, amount].hash
+      [id, merchant_name, mcc, amount, type].hash
     end
 
     # Builds the object from hash

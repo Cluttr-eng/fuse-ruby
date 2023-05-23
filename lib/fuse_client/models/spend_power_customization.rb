@@ -15,7 +15,9 @@ require 'time'
 
 module FuseClient
   class SpendPowerCustomization
-    # The timeframe to base the spend power on.
+    # The id of the spend power customization
+    attr_accessor :id
+
     attr_accessor :timeframe
 
     # The minimum allowed limit for the spend power, in cents.
@@ -49,6 +51,7 @@ module FuseClient
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'id' => :'id',
         :'timeframe' => :'timeframe',
         :'min_limit' => :'min_limit',
         :'max_limit' => :'max_limit'
@@ -63,9 +66,10 @@ module FuseClient
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'timeframe' => :'String',
-        :'min_limit' => :'String',
-        :'max_limit' => :'String'
+        :'id' => :'String',
+        :'timeframe' => :'SpendPowerTimeFrame',
+        :'min_limit' => :'Float',
+        :'max_limit' => :'Float'
       }
     end
 
@@ -90,6 +94,10 @@ module FuseClient
         h[k.to_sym] = v
       }
 
+      if attributes.key?(:'id')
+        self.id = attributes[:'id']
+      end
+
       if attributes.key?(:'timeframe')
         self.timeframe = attributes[:'timeframe']
       end
@@ -107,6 +115,10 @@ module FuseClient
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if @id.nil?
+        invalid_properties.push('invalid value for "id", id cannot be nil.')
+      end
+
       if @timeframe.nil?
         invalid_properties.push('invalid value for "timeframe", timeframe cannot be nil.')
       end
@@ -115,8 +127,16 @@ module FuseClient
         invalid_properties.push('invalid value for "min_limit", min_limit cannot be nil.')
       end
 
+      if @min_limit < 0
+        invalid_properties.push('invalid value for "min_limit", must be greater than or equal to 0.')
+      end
+
       if @max_limit.nil?
         invalid_properties.push('invalid value for "max_limit", max_limit cannot be nil.')
+      end
+
+      if @max_limit < 1
+        invalid_properties.push('invalid value for "max_limit", must be greater than or equal to 1.')
       end
 
       invalid_properties
@@ -125,22 +145,41 @@ module FuseClient
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if @id.nil?
       return false if @timeframe.nil?
-      timeframe_validator = EnumAttributeValidator.new('String', ["daily", "weekly", "monthly"])
-      return false unless timeframe_validator.valid?(@timeframe)
       return false if @min_limit.nil?
+      return false if @min_limit < 0
       return false if @max_limit.nil?
+      return false if @max_limit < 1
       true
     end
 
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] timeframe Object to be assigned
-    def timeframe=(timeframe)
-      validator = EnumAttributeValidator.new('String', ["daily", "weekly", "monthly"])
-      unless validator.valid?(timeframe)
-        fail ArgumentError, "invalid value for \"timeframe\", must be one of #{validator.allowable_values}."
+    # Custom attribute writer method with validation
+    # @param [Object] min_limit Value to be assigned
+    def min_limit=(min_limit)
+      if min_limit.nil?
+        fail ArgumentError, 'min_limit cannot be nil'
       end
-      @timeframe = timeframe
+
+      if min_limit < 0
+        fail ArgumentError, 'invalid value for "min_limit", must be greater than or equal to 0.'
+      end
+
+      @min_limit = min_limit
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] max_limit Value to be assigned
+    def max_limit=(max_limit)
+      if max_limit.nil?
+        fail ArgumentError, 'max_limit cannot be nil'
+      end
+
+      if max_limit < 1
+        fail ArgumentError, 'invalid value for "max_limit", must be greater than or equal to 1.'
+      end
+
+      @max_limit = max_limit
     end
 
     # Checks equality by comparing each attribute.
@@ -148,6 +187,7 @@ module FuseClient
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          id == o.id &&
           timeframe == o.timeframe &&
           min_limit == o.min_limit &&
           max_limit == o.max_limit
@@ -162,7 +202,7 @@ module FuseClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [timeframe, min_limit, max_limit].hash
+      [id, timeframe, min_limit, max_limit].hash
     end
 
     # Builds the object from hash

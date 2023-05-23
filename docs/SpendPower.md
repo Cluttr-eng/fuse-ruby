@@ -6,11 +6,11 @@
 | ---- | ---- | ----------- | ----- |
 | **id** | **String** | The id of the spend power |  |
 | **customization_id** | **String** | The customization id of the spend power. |  |
-| **spend_limit** | **String** | The amount, in cents, of the users spend limit. |  |
-| **current_spend** | **String** | The amount, in cents, that the user has already spent. |  |
-| **pending_payments_amount** | **String** | The accumulative amount, in cents, of all the combined pending payments. |  |
-| **currency** | **String** | The currency. |  |
-| **last_updated** | **String** | The datetime of when the spend power was most recently updated. |  |
+| **spend_limit** | **Float** | The total limit for the current timeframe, in cents. |  |
+| **current_spend** | **Float** | The total current spend in the current timeframe, in cents, without factoring in pending payments. |  |
+| **pending_payments_amount** | **Float** | The total unpaid amount, in cents, from all timeframes. |  |
+| **iso_currency_code** | **String** | The ISO-4217 currency code of the transaction |  |
+| **last_updated** | **String** | The datetime of when the spend power was most recently updated, in ISO-8601 format. |  |
 
 ## Example
 
@@ -23,7 +23,7 @@ instance = FuseClient::SpendPower.new(
   spend_limit: null,
   current_spend: null,
   pending_payments_amount: null,
-  currency: null,
+  iso_currency_code: null,
   last_updated: null
 )
 ```

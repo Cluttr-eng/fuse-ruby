@@ -15,7 +15,7 @@ require 'time'
 
 module FuseClient
   class CreateSpendPowerResponse
-    # The id of the created spend power
+    # The id of the created spend power.
     attr_accessor :id
 
     # An identifier that is exclusive to the request and can serve as a means for investigating and resolving issues.

@@ -30,7 +30,7 @@ module FuseClient
     # The Committee on Uniform Securities Identification Procedures (CUSIP) number uniquely identifies the security, primarily used in the United States and Canada.
     attr_accessor :cusip
 
-    # The closing price of the security at the end of the most recent trading day.
+    # The closing price of the security, in cents, at the end of the most recent trading day. The format of this value is a double.
     attr_accessor :close_price
 
     attr_accessor :currency
