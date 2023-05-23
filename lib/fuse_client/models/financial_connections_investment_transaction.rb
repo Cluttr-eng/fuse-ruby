@@ -24,13 +24,13 @@ module FuseClient
     # The name of the account associated with the investment transaction
     attr_accessor :account_name
 
-    # The amount of the investment transaction
+    # The amount of the investment transaction, in cents. The format of this value is a double.
     attr_accessor :amount
 
     # A description of the investment transaction
     attr_accessor :description
 
-    # The fees associated with the investment transaction
+    # The fees associated with the investment transaction, in cents. The format of this value is a double.
     attr_accessor :fees
 
     attr_accessor :currency
@@ -41,10 +41,12 @@ module FuseClient
     # The type of the investment transaction (e.g., 'buy', 'sell', 'dividend')
     attr_accessor :type
 
+    attr_accessor :subtype
+
     # The number of units of the security involved in this transaction
     attr_accessor :quantity
 
-    # The price of the security involved in this transaction
+    # The price of the security involved in this transaction, in cents. The format of this value is a double.
     attr_accessor :price
 
     attr_accessor :security
@@ -83,6 +85,7 @@ module FuseClient
         :'currency' => :'currency',
         :'date' => :'date',
         :'type' => :'type',
+        :'subtype' => :'subtype',
         :'quantity' => :'quantity',
         :'price' => :'price',
         :'security' => :'security'
@@ -106,6 +109,7 @@ module FuseClient
         :'currency' => :'Currency',
         :'date' => :'Time',
         :'type' => :'String',
+        :'subtype' => :'FinancialConnectionsInvestmentTransactionSubtype',
         :'quantity' => :'Float',
         :'price' => :'Float',
         :'security' => :'FinancialConnectionsInvestmentSecurity'
@@ -167,6 +171,10 @@ module FuseClient
 
       if attributes.key?(:'type')
         self.type = attributes[:'type']
+      end
+
+      if attributes.key?(:'subtype')
+        self.subtype = attributes[:'subtype']
       end
 
       if attributes.key?(:'quantity')
@@ -276,6 +284,7 @@ module FuseClient
           currency == o.currency &&
           date == o.date &&
           type == o.type &&
+          subtype == o.subtype &&
           quantity == o.quantity &&
           price == o.price &&
           security == o.security
@@ -290,7 +299,7 @@ module FuseClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [remote_id, remote_account_id, account_name, amount, description, fees, currency, date, type, quantity, price, security].hash
+      [remote_id, remote_account_id, account_name, amount, description, fees, currency, date, type, subtype, quantity, price, security].hash
     end
 
     # Builds the object from hash

@@ -25,13 +25,13 @@ describe FuseClient::CreateSpendPowerRequest do
       expect(instance).to be_instance_of(FuseClient::CreateSpendPowerRequest)
     end
   end
-  describe 'test attribute "access_token"' do
+  describe 'test attribute "account_id"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
   end
 
-  describe 'test attribute "remote_account_id"' do
+  describe 'test attribute "iso_currency_code"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end

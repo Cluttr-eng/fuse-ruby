@@ -15,20 +15,20 @@ require 'time'
 
 module FuseClient
   class CreateSpendPowerRequest
-    # Access token for authentication
-    attr_accessor :access_token
+    # A unique ID representing the bank account that this spend power is calculated for. Typically this will be a bank connection account ID from your application. It is currently used as a means of connecting events to the spend power.
+    attr_accessor :account_id
 
-    # The remote account id to create the spend power for.
-    attr_accessor :remote_account_id
+    # The ISO-4217 currency code of the transaction
+    attr_accessor :iso_currency_code
 
-    # The spend power customization id.
+    # The spend power customization id. This is used to determine the timeframe and other metadata for the spend power.
     attr_accessor :customization_id
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'access_token' => :'access_token',
-        :'remote_account_id' => :'remote_account_id',
+        :'account_id' => :'account_id',
+        :'iso_currency_code' => :'iso_currency_code',
         :'customization_id' => :'customization_id'
       }
     end
@@ -41,8 +41,8 @@ module FuseClient
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'access_token' => :'String',
-        :'remote_account_id' => :'String',
+        :'account_id' => :'String',
+        :'iso_currency_code' => :'String',
         :'customization_id' => :'String'
       }
     end
@@ -68,12 +68,12 @@ module FuseClient
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'access_token')
-        self.access_token = attributes[:'access_token']
+      if attributes.key?(:'account_id')
+        self.account_id = attributes[:'account_id']
       end
 
-      if attributes.key?(:'remote_account_id')
-        self.remote_account_id = attributes[:'remote_account_id']
+      if attributes.key?(:'iso_currency_code')
+        self.iso_currency_code = attributes[:'iso_currency_code']
       end
 
       if attributes.key?(:'customization_id')
@@ -85,12 +85,12 @@ module FuseClient
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @access_token.nil?
-        invalid_properties.push('invalid value for "access_token", access_token cannot be nil.')
+      if @account_id.nil?
+        invalid_properties.push('invalid value for "account_id", account_id cannot be nil.')
       end
 
-      if @remote_account_id.nil?
-        invalid_properties.push('invalid value for "remote_account_id", remote_account_id cannot be nil.')
+      if @iso_currency_code.nil?
+        invalid_properties.push('invalid value for "iso_currency_code", iso_currency_code cannot be nil.')
       end
 
       if @customization_id.nil?
@@ -103,8 +103,8 @@ module FuseClient
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @access_token.nil?
-      return false if @remote_account_id.nil?
+      return false if @account_id.nil?
+      return false if @iso_currency_code.nil?
       return false if @customization_id.nil?
       true
     end
@@ -114,8 +114,8 @@ module FuseClient
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          access_token == o.access_token &&
-          remote_account_id == o.remote_account_id &&
+          account_id == o.account_id &&
+          iso_currency_code == o.iso_currency_code &&
           customization_id == o.customization_id
     end
 
@@ -128,7 +128,7 @@ module FuseClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [access_token, remote_account_id, customization_id].hash
+      [account_id, iso_currency_code, customization_id].hash
     end
 
     # Builds the object from hash

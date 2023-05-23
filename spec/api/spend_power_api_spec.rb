@@ -33,29 +33,26 @@ describe 'SpendPowerApi' do
   end
 
   # unit tests for delete_spend_power
+  # Delete spend power customization
   # @param spend_power_id 
   # @param fuse_client_id 
   # @param fuse_api_key 
   # @param [Hash] opts the optional parameters
-  # @option opts [String] :plaid_client_id 
-  # @option opts [String] :plaid_secret 
-  # @option opts [String] :teller_application_id 
-  # @option opts [String] :teller_certificate 
-  # @option opts [String] :teller_private_key 
-  # @option opts [String] :teller_token_signing_key 
-  # @option opts [String] :teller_signing_secret 
-  # @option opts [String] :mx_client_id 
-  # @option opts [String] :mx_api_key 
-  # @option opts [String] :snaptrade_client_id 
-  # @option opts [String] :snaptrade_consumer_key 
-  # @option opts [String] :flinks_customer_id 
-  # @option opts [String] :flinks_us_instance_id 
-  # @option opts [String] :flinks_ca_instance_id 
-  # @option opts [String] :finicity_partner_id 
-  # @option opts [String] :finicity_partner_secret 
-  # @option opts [String] :finicity_app_key 
   # @return [DeleteSpendPowerResponse]
   describe 'delete_spend_power test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  # unit tests for get_spend_power_customization
+  # Get spend power customization
+  # @param spend_power_customization_id 
+  # @param fuse_client_id 
+  # @param fuse_api_key 
+  # @param [Hash] opts the optional parameters
+  # @return [GetSpendPowerCustomizationResponse]
+  describe 'get_spend_power_customization test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end

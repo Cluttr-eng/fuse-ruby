@@ -18,16 +18,16 @@ module FuseClient
     # The remote account ID associated with this holding.
     attr_accessor :remote_account_id
 
-    # The original total value of the holding when it was purchased.
+    # The original total value of the holding, in cents, when it was purchased. The format of this value is a double.
     attr_accessor :cost_basis
 
-    # The current market value of the holding.
+    # The current market value of the holding, in cents. The format of this value is a double.
     attr_accessor :value
 
     # The number of units of the security held in this holding.
     attr_accessor :quantity
 
-    # The price of the security as provided by the financial institution managing the holding.
+    # The price of the security, in cents, as provided by the financial institution managing the holding. The format of this value is a double.
     attr_accessor :institution_price
 
     attr_accessor :security

@@ -15,7 +15,8 @@ require 'time'
 
 module FuseClient
   class DeleteSpendPowerResponse
-    attr_accessor :spend_power
+    # The id of the deleted spend power
+    attr_accessor :id
 
     # An identifier that is exclusive to the request and can serve as a means for investigating and resolving issues.
     attr_accessor :request_id
@@ -23,7 +24,7 @@ module FuseClient
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'spend_power' => :'spend_power',
+        :'id' => :'id',
         :'request_id' => :'request_id'
       }
     end
@@ -36,7 +37,7 @@ module FuseClient
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'spend_power' => :'SpendPower',
+        :'id' => :'String',
         :'request_id' => :'String'
       }
     end
@@ -62,8 +63,8 @@ module FuseClient
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'spend_power')
-        self.spend_power = attributes[:'spend_power']
+      if attributes.key?(:'id')
+        self.id = attributes[:'id']
       end
 
       if attributes.key?(:'request_id')
@@ -75,8 +76,8 @@ module FuseClient
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @spend_power.nil?
-        invalid_properties.push('invalid value for "spend_power", spend_power cannot be nil.')
+      if @id.nil?
+        invalid_properties.push('invalid value for "id", id cannot be nil.')
       end
 
       if @request_id.nil?
@@ -89,7 +90,7 @@ module FuseClient
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @spend_power.nil?
+      return false if @id.nil?
       return false if @request_id.nil?
       true
     end
@@ -99,7 +100,7 @@ module FuseClient
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          spend_power == o.spend_power &&
+          id == o.id &&
           request_id == o.request_id
     end
 
@@ -112,7 +113,7 @@ module FuseClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [spend_power, request_id].hash
+      [id, request_id].hash
     end
 
     # Builds the object from hash

@@ -17,9 +17,10 @@ module FuseClient
   class CountryCode
     US = "US".freeze
     CA = "CA".freeze
+    IN = "IN".freeze
 
     def self.all_vars
-      @all_vars ||= [US, CA].freeze
+      @all_vars ||= [US, CA, IN].freeze
     end
 
     # Builds the enum from string

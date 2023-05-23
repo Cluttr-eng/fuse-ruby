@@ -4,7 +4,7 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **spend_power** | [**SpendPower**](SpendPower.md) |  |  |
+| **id** | **String** | The id of the deleted spend power |  |
 | **request_id** | **String** | An identifier that is exclusive to the request and can serve as a means for investigating and resolving issues. |  |
 
 ## Example
@@ -13,7 +13,7 @@
 require 'fuse_client'
 
 instance = FuseClient::DeleteSpendPowerResponse.new(
-  spend_power: null,
+  id: null,
   request_id: null
 )
 ```

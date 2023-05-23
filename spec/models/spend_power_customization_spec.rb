@@ -25,13 +25,15 @@ describe FuseClient::SpendPowerCustomization do
       expect(instance).to be_instance_of(FuseClient::SpendPowerCustomization)
     end
   end
+  describe 'test attribute "id"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   describe 'test attribute "timeframe"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["daily", "weekly", "monthly"])
-      # validator.allowable_values.each do |value|
-      #   expect { instance.timeframe = value }.not_to raise_error
-      # end
     end
   end
 

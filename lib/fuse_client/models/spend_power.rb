@@ -21,19 +21,19 @@ module FuseClient
     # The customization id of the spend power.
     attr_accessor :customization_id
 
-    # The amount, in cents, of the users spend limit.
+    # The total limit for the current timeframe, in cents.
     attr_accessor :spend_limit
 
-    # The amount, in cents, that the user has already spent.
+    # The total current spend in the current timeframe, in cents, without factoring in pending payments.
     attr_accessor :current_spend
 
-    # The accumulative amount, in cents, of all the combined pending payments.
+    # The total unpaid amount, in cents, from all timeframes.
     attr_accessor :pending_payments_amount
 
-    # The currency.
-    attr_accessor :currency
+    # The ISO-4217 currency code of the transaction
+    attr_accessor :iso_currency_code
 
-    # The datetime of when the spend power was most recently updated.
+    # The datetime of when the spend power was most recently updated, in ISO-8601 format.
     attr_accessor :last_updated
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -44,7 +44,7 @@ module FuseClient
         :'spend_limit' => :'spend_limit',
         :'current_spend' => :'current_spend',
         :'pending_payments_amount' => :'pending_payments_amount',
-        :'currency' => :'currency',
+        :'iso_currency_code' => :'iso_currency_code',
         :'last_updated' => :'last_updated'
       }
     end
@@ -59,10 +59,10 @@ module FuseClient
       {
         :'id' => :'String',
         :'customization_id' => :'String',
-        :'spend_limit' => :'String',
-        :'current_spend' => :'String',
-        :'pending_payments_amount' => :'String',
-        :'currency' => :'String',
+        :'spend_limit' => :'Float',
+        :'current_spend' => :'Float',
+        :'pending_payments_amount' => :'Float',
+        :'iso_currency_code' => :'String',
         :'last_updated' => :'String'
       }
     end
@@ -108,8 +108,8 @@ module FuseClient
         self.pending_payments_amount = attributes[:'pending_payments_amount']
       end
 
-      if attributes.key?(:'currency')
-        self.currency = attributes[:'currency']
+      if attributes.key?(:'iso_currency_code')
+        self.iso_currency_code = attributes[:'iso_currency_code']
       end
 
       if attributes.key?(:'last_updated')
@@ -141,8 +141,8 @@ module FuseClient
         invalid_properties.push('invalid value for "pending_payments_amount", pending_payments_amount cannot be nil.')
       end
 
-      if @currency.nil?
-        invalid_properties.push('invalid value for "currency", currency cannot be nil.')
+      if @iso_currency_code.nil?
+        invalid_properties.push('invalid value for "iso_currency_code", iso_currency_code cannot be nil.')
       end
 
       if @last_updated.nil?
@@ -160,7 +160,7 @@ module FuseClient
       return false if @spend_limit.nil?
       return false if @current_spend.nil?
       return false if @pending_payments_amount.nil?
-      return false if @currency.nil?
+      return false if @iso_currency_code.nil?
       return false if @last_updated.nil?
       true
     end
@@ -175,7 +175,7 @@ module FuseClient
           spend_limit == o.spend_limit &&
           current_spend == o.current_spend &&
           pending_payments_amount == o.pending_payments_amount &&
-          currency == o.currency &&
+          iso_currency_code == o.iso_currency_code &&
           last_updated == o.last_updated
     end
 
@@ -188,7 +188,7 @@ module FuseClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, customization_id, spend_limit, current_spend, pending_payments_amount, currency, last_updated].hash
+      [id, customization_id, spend_limit, current_spend, pending_payments_amount, iso_currency_code, last_updated].hash
     end
 
     # Builds the object from hash

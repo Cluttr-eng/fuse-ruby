@@ -21,7 +21,7 @@ module FuseClient
     # Remote Account Id of the transaction, ie Plaid Account Id
     attr_accessor :remote_account_id
 
-    # Amount in cents associated with the transaction. Positive values when money moves out of the account; negative values when money moves in. For example, debit card purchases are positive; credit card payments, direct deposits, and refunds are negative.
+    # Amount in cents associated with the transaction. The format of this value is a double.  Positive values when money moves out of the account; negative values when money moves in. For example, debit card purchases are positive; credit card payments, direct deposits, and refunds are negative.
     attr_accessor :amount
 
     # Date of the transaction (YYYY-MM-DD)
