@@ -18,6 +18,9 @@ module FuseClient
     # Remote Id of the transaction, ie Plaid or Teller Id
     attr_accessor :remote_id
 
+    # Uniquely identifies this account across all transactions for a single financial connection. Used for reconnection deduplication. This field may or may not be present depending on if a transaction can be uniquely identified. See more information here: https://letsfuse.readme.io/docs/duplicate-accounts
+    attr_accessor :fingerprint
+
     # Remote Account Id of the transaction, ie Plaid Account Id
     attr_accessor :remote_account_id
 
@@ -72,6 +75,7 @@ module FuseClient
     def self.attribute_map
       {
         :'remote_id' => :'remote_id',
+        :'fingerprint' => :'fingerprint',
         :'remote_account_id' => :'remote_account_id',
         :'amount' => :'amount',
         :'date' => :'date',
@@ -94,6 +98,7 @@ module FuseClient
     def self.openapi_types
       {
         :'remote_id' => :'String',
+        :'fingerprint' => :'String',
         :'remote_account_id' => :'String',
         :'amount' => :'Float',
         :'date' => :'String',
@@ -131,6 +136,10 @@ module FuseClient
 
       if attributes.key?(:'remote_id')
         self.remote_id = attributes[:'remote_id']
+      end
+
+      if attributes.key?(:'fingerprint')
+        self.fingerprint = attributes[:'fingerprint']
       end
 
       if attributes.key?(:'remote_account_id')
@@ -264,6 +273,7 @@ module FuseClient
       return true if self.equal?(o)
       self.class == o.class &&
           remote_id == o.remote_id &&
+          fingerprint == o.fingerprint &&
           remote_account_id == o.remote_account_id &&
           amount == o.amount &&
           date == o.date &&
@@ -285,7 +295,7 @@ module FuseClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [remote_id, remote_account_id, amount, date, description, category, merchant, status, type, iso_currency_code, remote_data].hash
+      [remote_id, fingerprint, remote_account_id, amount, date, description, category, merchant, status, type, iso_currency_code, remote_data].hash
     end
 
     # Builds the object from hash

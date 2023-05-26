@@ -131,6 +131,18 @@ describe 'FuseApi' do
     end
   end
 
+  # unit tests for fin_ql_prompt
+  # FinQL Prompt
+  # Retrieve information using finQL. Uses data submitted via the /events endpoint. This feature is being built and is not currently available.
+  # @param [Hash] opts the optional parameters
+  # @option opts [FinQLPromptRequest] :fin_ql_prompt_request 
+  # @return [FinQLPromptResponse]
+  describe 'fin_ql_prompt test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   # unit tests for get_asset_report
   # Retrieves the Asset Report in JSON format. For Plaid, you will need to have the assets product enabled on your plaid account.
   # @param [Hash] opts the optional parameters

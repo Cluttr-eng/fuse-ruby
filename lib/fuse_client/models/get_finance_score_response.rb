@@ -15,7 +15,6 @@ require 'time'
 
 module FuseClient
   class GetFinanceScoreResponse
-    # A value between 0 and 1 where 1 is a perfect finance score and 0 is the worst finance score.
     attr_accessor :finance_score
 
     # An identifier that is exclusive to the request and can serve as a means for investigating and resolving issues.
@@ -37,7 +36,7 @@ module FuseClient
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'finance_score' => :'Float',
+        :'finance_score' => :'FinanceScore',
         :'request_id' => :'String'
       }
     end

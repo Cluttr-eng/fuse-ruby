@@ -25,13 +25,25 @@ describe FuseClient::EvalSpendPowerResponse do
       expect(instance).to be_instance_of(FuseClient::EvalSpendPowerResponse)
     end
   end
-  describe 'test attribute "mean_absolute_overestimation_error"' do
+  describe 'test attribute "mean_granted_above_failed_payments"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
   end
 
-  describe 'test attribute "mean_absolute_underestimation_error"' do
+  describe 'test attribute "mean_granted_below_failed_payments"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  describe 'test attribute "mean_predicted_limits"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  describe 'test attribute "mean_successful_payments"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end

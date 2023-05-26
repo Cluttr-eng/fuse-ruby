@@ -18,7 +18,7 @@ module FuseClient
     # Remote Id of the account, ie Plaid or Teller account id
     attr_accessor :remote_id
 
-    # Uniquely identifies this account across all accounts associated with your organization. See more information here: https://letsfuse.readme.io/docs/duplicate-accounts
+    # Uniquely identifies this account across all accounts for a single financial connection. Used for reconnection deduplication. See more information here: https://letsfuse.readme.io/docs/duplicate-accounts
     attr_accessor :fingerprint
 
     attr_accessor :institution
@@ -34,6 +34,8 @@ module FuseClient
     attr_accessor :subtype
 
     attr_accessor :balance
+
+    attr_accessor :remote_data
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -67,7 +69,8 @@ module FuseClient
         :'name' => :'name',
         :'type' => :'type',
         :'subtype' => :'subtype',
-        :'balance' => :'balance'
+        :'balance' => :'balance',
+        :'remote_data' => :'remote_data'
       }
     end
 
@@ -86,13 +89,15 @@ module FuseClient
         :'name' => :'String',
         :'type' => :'AccountType',
         :'subtype' => :'AccountSubtype',
-        :'balance' => :'FinancialConnectionsAccountCachedBalance'
+        :'balance' => :'FinancialConnectionsAccountCachedBalance',
+        :'remote_data' => :'Object'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'remote_data'
       ])
     end
 
@@ -141,6 +146,10 @@ module FuseClient
 
       if attributes.key?(:'balance')
         self.balance = attributes[:'balance']
+      end
+
+      if attributes.key?(:'remote_data')
+        self.remote_data = attributes[:'remote_data']
       end
     end
 
@@ -194,7 +203,8 @@ module FuseClient
           name == o.name &&
           type == o.type &&
           subtype == o.subtype &&
-          balance == o.balance
+          balance == o.balance &&
+          remote_data == o.remote_data
     end
 
     # @see the `==` method
@@ -206,7 +216,7 @@ module FuseClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [remote_id, fingerprint, institution, mask, name, type, subtype, balance].hash
+      [remote_id, fingerprint, institution, mask, name, type, subtype, balance, remote_data].hash
     end
 
     # Builds the object from hash

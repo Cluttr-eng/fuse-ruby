@@ -18,7 +18,7 @@ module FuseClient
     # Remote Id of the account, ie Plaid or Teller account id
     attr_accessor :remote_id
 
-    # Uniquely identifies this account across all accounts associated with your organization. See more information here: https://letsfuse.readme.io/docs/duplicate-accounts
+    # Uniquely identifies this account across all accounts for a single financial connection. Used for reconnection deduplication. See more information here: https://letsfuse.readme.io/docs/duplicate-accounts
     attr_accessor :fingerprint
 
     attr_accessor :institution
@@ -34,6 +34,8 @@ module FuseClient
     attr_accessor :subtype
 
     attr_accessor :balance
+
+    attr_accessor :remote_data
 
     # The various interest rates that apply to the account. If APR data is not available, this array will be empty.
     attr_accessor :aprs
@@ -89,6 +91,7 @@ module FuseClient
         :'type' => :'type',
         :'subtype' => :'subtype',
         :'balance' => :'balance',
+        :'remote_data' => :'remote_data',
         :'aprs' => :'aprs',
         :'interest_rate_percentage' => :'interest_rate_percentage',
         :'origination_principal_amount' => :'origination_principal_amount',
@@ -115,6 +118,7 @@ module FuseClient
         :'type' => :'AccountType',
         :'subtype' => :'AccountSubtype',
         :'balance' => :'FinancialConnectionsAccountCachedBalance',
+        :'remote_data' => :'Object',
         :'aprs' => :'Array<FinancialConnectionsAccountLiabilityAllOfAprs>',
         :'interest_rate_percentage' => :'Float',
         :'origination_principal_amount' => :'Float',
@@ -128,6 +132,7 @@ module FuseClient
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'remote_data',
       ])
     end
 
@@ -184,6 +189,10 @@ module FuseClient
 
       if attributes.key?(:'balance')
         self.balance = attributes[:'balance']
+      end
+
+      if attributes.key?(:'remote_data')
+        self.remote_data = attributes[:'remote_data']
       end
 
       if attributes.key?(:'aprs')
@@ -268,6 +277,7 @@ module FuseClient
           type == o.type &&
           subtype == o.subtype &&
           balance == o.balance &&
+          remote_data == o.remote_data &&
           aprs == o.aprs &&
           interest_rate_percentage == o.interest_rate_percentage &&
           origination_principal_amount == o.origination_principal_amount &&
@@ -286,7 +296,7 @@ module FuseClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [remote_id, fingerprint, institution, mask, name, type, subtype, balance, aprs, interest_rate_percentage, origination_principal_amount, next_payment_due_date, last_payment_date, last_payment_amount, minimum_payment_amount].hash
+      [remote_id, fingerprint, institution, mask, name, type, subtype, balance, remote_data, aprs, interest_rate_percentage, origination_principal_amount, next_payment_due_date, last_payment_date, last_payment_amount, minimum_payment_amount].hash
     end
 
     # Builds the object from hash

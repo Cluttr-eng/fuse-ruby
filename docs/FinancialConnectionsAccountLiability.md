@@ -5,13 +5,14 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **remote_id** | **String** | Remote Id of the account, ie Plaid or Teller account id |  |
-| **fingerprint** | **String** | Uniquely identifies this account across all accounts associated with your organization. See more information here: https://letsfuse.readme.io/docs/duplicate-accounts |  |
+| **fingerprint** | **String** | Uniquely identifies this account across all accounts for a single financial connection. Used for reconnection deduplication. See more information here: https://letsfuse.readme.io/docs/duplicate-accounts |  |
 | **institution** | [**FinancialConnectionsAccountInstitution**](FinancialConnectionsAccountInstitution.md) |  | [optional] |
 | **mask** | **String** | The partial account number. | [optional] |
 | **name** | **String** | The account&#39;s name, ie &#39;My Checking&#39; |  |
 | **type** | [**AccountType**](AccountType.md) |  |  |
 | **subtype** | [**AccountSubtype**](AccountSubtype.md) |  | [optional] |
 | **balance** | [**FinancialConnectionsAccountCachedBalance**](FinancialConnectionsAccountCachedBalance.md) |  |  |
+| **remote_data** | **Object** |  |  |
 | **aprs** | [**Array&lt;FinancialConnectionsAccountLiabilityAllOfAprs&gt;**](FinancialConnectionsAccountLiabilityAllOfAprs.md) | The various interest rates that apply to the account. If APR data is not available, this array will be empty. | [optional] |
 | **interest_rate_percentage** | **Float** | The interest rate on the loan as a percentage. | [optional] |
 | **origination_principal_amount** | **Float** | The original principal balance of the loan. | [optional] |
@@ -34,6 +35,7 @@ instance = FuseClient::FinancialConnectionsAccountLiability.new(
   type: null,
   subtype: null,
   balance: null,
+  remote_data: null,
   aprs: null,
   interest_rate_percentage: null,
   origination_principal_amount: null,

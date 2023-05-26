@@ -36,6 +36,11 @@ module FuseClient
     # The datetime of when the spend power was most recently updated, in ISO-8601 format.
     attr_accessor :last_updated
 
+    attr_accessor :finance_score
+
+    # Predicted balance for the timeframe.
+    attr_accessor :predicted_balance
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -45,7 +50,9 @@ module FuseClient
         :'current_spend' => :'current_spend',
         :'pending_payments_amount' => :'pending_payments_amount',
         :'iso_currency_code' => :'iso_currency_code',
-        :'last_updated' => :'last_updated'
+        :'last_updated' => :'last_updated',
+        :'finance_score' => :'finance_score',
+        :'predicted_balance' => :'predicted_balance'
       }
     end
 
@@ -63,7 +70,9 @@ module FuseClient
         :'current_spend' => :'Float',
         :'pending_payments_amount' => :'Float',
         :'iso_currency_code' => :'String',
-        :'last_updated' => :'String'
+        :'last_updated' => :'String',
+        :'finance_score' => :'FinanceScore',
+        :'predicted_balance' => :'Float'
       }
     end
 
@@ -115,6 +124,14 @@ module FuseClient
       if attributes.key?(:'last_updated')
         self.last_updated = attributes[:'last_updated']
       end
+
+      if attributes.key?(:'finance_score')
+        self.finance_score = attributes[:'finance_score']
+      end
+
+      if attributes.key?(:'predicted_balance')
+        self.predicted_balance = attributes[:'predicted_balance']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -149,6 +166,14 @@ module FuseClient
         invalid_properties.push('invalid value for "last_updated", last_updated cannot be nil.')
       end
 
+      if @finance_score.nil?
+        invalid_properties.push('invalid value for "finance_score", finance_score cannot be nil.')
+      end
+
+      if @predicted_balance.nil?
+        invalid_properties.push('invalid value for "predicted_balance", predicted_balance cannot be nil.')
+      end
+
       invalid_properties
     end
 
@@ -162,6 +187,8 @@ module FuseClient
       return false if @pending_payments_amount.nil?
       return false if @iso_currency_code.nil?
       return false if @last_updated.nil?
+      return false if @finance_score.nil?
+      return false if @predicted_balance.nil?
       true
     end
 
@@ -176,7 +203,9 @@ module FuseClient
           current_spend == o.current_spend &&
           pending_payments_amount == o.pending_payments_amount &&
           iso_currency_code == o.iso_currency_code &&
-          last_updated == o.last_updated
+          last_updated == o.last_updated &&
+          finance_score == o.finance_score &&
+          predicted_balance == o.predicted_balance
     end
 
     # @see the `==` method
@@ -188,7 +217,7 @@ module FuseClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, customization_id, spend_limit, current_spend, pending_payments_amount, iso_currency_code, last_updated].hash
+      [id, customization_id, spend_limit, current_spend, pending_payments_amount, iso_currency_code, last_updated, finance_score, predicted_balance].hash
     end
 
     # Builds the object from hash
