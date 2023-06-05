@@ -12,6 +12,9 @@
 | **plaid** | [**FinancialConnectionDetailsPlaid**](FinancialConnectionDetailsPlaid.md) |  | [optional] |
 | **teller** | [**FinancialConnectionDetailsTeller**](FinancialConnectionDetailsTeller.md) |  | [optional] |
 | **mx** | [**FinancialConnectionDetailsMx**](FinancialConnectionDetailsMx.md) |  | [optional] |
+| **snaptrade** | [**FinancialConnectionDetailsSnaptrade**](FinancialConnectionDetailsSnaptrade.md) |  | [optional] |
+| **flinks** | [**FinancialConnectionDetailsFlinks**](FinancialConnectionDetailsFlinks.md) |  | [optional] |
+| **mono** | [**FinancialConnectionDetailsMono**](FinancialConnectionDetailsMono.md) |  | [optional] |
 
 ## Example
 
@@ -26,7 +29,10 @@ instance = FuseClient::FinancialConnectionDetails.new(
   aggregator: null,
   plaid: null,
   teller: null,
-  mx: null
+  mx: null,
+  snaptrade: null,
+  flinks: null,
+  mono: null
 )
 ```
 
