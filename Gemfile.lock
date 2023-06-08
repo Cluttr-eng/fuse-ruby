@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    fuse_client (1.0.35)
+    fuse_client (1.0.36)
       typhoeus (~> 1.0, >= 1.0.1)
 
 GEM
@@ -57,7 +57,7 @@ GEM
     unicode-display_width (1.5.0)
 
 PLATFORMS
-  x86_64-darwin-21
+  x86_64-darwin-19
 
 DEPENDENCIES
   fuse_client!
@@ -67,4 +67,4 @@ DEPENDENCIES
   rubocop (~> 0.66.0)
 
 BUNDLED WITH
-   2.4.13
+   2.3.26
