@@ -13,6 +13,7 @@ All URIs are relative to *https://sandbox-api.letsfuse.com*
 | [**delete_financial_connection**](FuseApi.md#delete_financial_connection) | **DELETE** /v1/financial_connections/{financial_connection_id_to_delete} | Delete a financial connection |
 | [**enrich_transactions**](FuseApi.md#enrich_transactions) | **POST** /v1/transactions/enrich |  |
 | [**exchange_financial_connections_public_token**](FuseApi.md#exchange_financial_connections_public_token) | **POST** /v1/financial_connections/public_token/exchange |  |
+| [**fin_ql_prompt**](FuseApi.md#fin_ql_prompt) | **POST** /v1/finql/prompt | FinQL Prompt |
 | [**get_asset_report**](FuseApi.md#get_asset_report) | **POST** /v1/financial_connections/asset_report |  |
 | [**get_entity**](FuseApi.md#get_entity) | **GET** /v1/entities/{entity_id} | Get entity |
 | [**get_finance_score**](FuseApi.md#get_finance_score) | **GET** /v1/accounts/{account_id}/finance_score | Get finance score |
@@ -61,7 +62,7 @@ end
 api_instance = FuseClient::FuseApi.new
 account_id = 'account_id_example' # String | 
 opts = {
-  add_account_events_request: FuseClient::AddAccountEventsRequest.new({events: [FuseClient::ExternalTransactionEvent.new({id: 'id_example', event_type: 'external_transaction', status: FuseClient::ExternalTransactionEventStatus::PENDING, amount: 3.56, merchant_name: 'merchant_name_example', transaction_type: FuseClient::TransactionEventType::ACH, category: FuseClient::TransactionCategory.new({primary: FuseClient::TransactionCategoryPrimary::AUTO_AND_TRANSPORT, detailed: FuseClient::TransactionCategoryDetailed::AUTO_INSURANCE}), iso_currency_code: 'iso_currency_code_example', timestamp: 'timestamp_example'})]}) # AddAccountEventsRequest | 
+  add_account_events_request: FuseClient::AddAccountEventsRequest.new({events: [FuseClient::ExternalTransactionEvent.new({id: 'id_example', event_type: 'external_transaction', status: FuseClient::ExternalTransactionEventStatus::PENDING, amount: 3.56, iso_currency_code: 'iso_currency_code_example', transaction_type: FuseClient::TransactionEventType::ACH, merchant_name: 'merchant_name_example', timestamp: 'timestamp_example'})]}) # AddAccountEventsRequest | 
 }
 
 begin
@@ -450,7 +451,7 @@ end
 
 api_instance = FuseClient::FuseApi.new
 opts = {
-  create_spend_power_customization_request: FuseClient::CreateSpendPowerCustomizationRequest.new({timeframe: FuseClient::SpendPowerTimeFrame::DAILY, min_limit: 3.56, max_limit: 3.56}) # CreateSpendPowerCustomizationRequest | 
+  create_spend_power_customization_request: FuseClient::CreateSpendPowerCustomizationRequest.new({timeframe: FuseClient::SpendPowerTimeFrame::DAILY, min_limit: 3.56, max_limit: 3.56, risk_tolerance: 3.56}) # CreateSpendPowerCustomizationRequest | 
 }
 
 begin
@@ -721,6 +722,84 @@ end
 ### Return type
 
 [**ExchangeFinancialConnectionsPublicTokenResponse**](ExchangeFinancialConnectionsPublicTokenResponse.md)
+
+### Authorization
+
+[fuseApiKey](../README.md#fuseApiKey), [fuseClientId](../README.md#fuseClientId)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## fin_ql_prompt
+
+> <FinQLPromptResponse> fin_ql_prompt(opts)
+
+FinQL Prompt
+
+Retrieve information using finQL. Uses data submitted via the /events endpoint. This feature is being built and is not currently available.
+
+### Examples
+
+```ruby
+require 'time'
+require 'fuse_client'
+# setup authorization
+FuseClient.configure do |config|
+  # Configure API key authorization: fuseApiKey
+  config.api_key['fuseApiKey'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['fuseApiKey'] = 'Bearer'
+
+  # Configure API key authorization: fuseClientId
+  config.api_key['fuseClientId'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['fuseClientId'] = 'Bearer'
+end
+
+api_instance = FuseClient::FuseApi.new
+opts = {
+  fin_ql_prompt_request: FuseClient::FinQLPromptRequest.new({prompt: 'prompt_example', account_id: 'account_id_example', feature: FuseClient::FinQLFeatureRequest::TEXT}) # FinQLPromptRequest | 
+}
+
+begin
+  # FinQL Prompt
+  result = api_instance.fin_ql_prompt(opts)
+  p result
+rescue FuseClient::ApiError => e
+  puts "Error when calling FuseApi->fin_ql_prompt: #{e}"
+end
+```
+
+#### Using the fin_ql_prompt_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<FinQLPromptResponse>, Integer, Hash)> fin_ql_prompt_with_http_info(opts)
+
+```ruby
+begin
+  # FinQL Prompt
+  data, status_code, headers = api_instance.fin_ql_prompt_with_http_info(opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <FinQLPromptResponse>
+rescue FuseClient::ApiError => e
+  puts "Error when calling FuseApi->fin_ql_prompt_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **fin_ql_prompt_request** | [**FinQLPromptRequest**](FinQLPromptRequest.md) |  | [optional] |
+
+### Return type
+
+[**FinQLPromptResponse**](FinQLPromptResponse.md)
 
 ### Authorization
 
