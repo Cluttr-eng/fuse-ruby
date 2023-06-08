@@ -1,4 +1,4 @@
-# FuseClient::EnrichedTransactionLogo
+# FuseClient::MerchantLogo
 
 ## Properties
 
@@ -11,7 +11,7 @@
 ```ruby
 require 'fuse_client'
 
-instance = FuseClient::EnrichedTransactionLogo.new(
+instance = FuseClient::MerchantLogo.new(
   url: null
 )
 ```

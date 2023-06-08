@@ -11,6 +11,8 @@
 | **pending_payments_amount** | **Float** | The total unpaid amount, in cents, from all timeframes. |  |
 | **iso_currency_code** | **String** | The ISO-4217 currency code of the transaction |  |
 | **last_updated** | **String** | The datetime of when the spend power was most recently updated, in ISO-8601 format. |  |
+| **finance_score** | [**FinanceScore**](FinanceScore.md) |  |  |
+| **predicted_balance** | **Float** | Predicted balance for the timeframe. |  |
 
 ## Example
 
@@ -24,7 +26,9 @@ instance = FuseClient::SpendPower.new(
   current_spend: null,
   pending_payments_amount: null,
   iso_currency_code: null,
-  last_updated: null
+  last_updated: null,
+  finance_score: null,
+  predicted_balance: null
 )
 ```
 

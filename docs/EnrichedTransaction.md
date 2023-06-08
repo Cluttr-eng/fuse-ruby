@@ -5,8 +5,9 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **id** | **String** | A original ID for the transaction that to help you tie data back to your systems. |  |
+| **merchant_id** | **String** | A Fuse defined, unique ID for the merchant associated with this transaction. | [optional] |
 | **name** | **String** | The original or enhanced name of the merchant. | [optional] |
-| **logo** | [**EnrichedTransactionLogo**](EnrichedTransactionLogo.md) |  | [optional] |
+| **logo** | [**MerchantLogo**](MerchantLogo.md) |  | [optional] |
 | **amount** | **Float** | The amount of the transaction in cents, in the currency of the account. | [optional] |
 | **category** | [**TransactionCategory**](TransactionCategory.md) |  | [optional] |
 | **is_bill_pay** | **Boolean** | Whether the transaction is a bill pay. | [optional] |
@@ -27,6 +28,7 @@ require 'fuse_client'
 
 instance = FuseClient::EnrichedTransaction.new(
   id: null,
+  merchant_id: null,
   name: null,
   logo: null,
   amount: null,
