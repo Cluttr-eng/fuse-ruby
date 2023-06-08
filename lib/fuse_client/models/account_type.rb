@@ -22,7 +22,7 @@ module FuseClient
     INSURANCE = "insurance".freeze
     PROPERTY = "property".freeze
     OTHER = "other".freeze
-     = "-".freeze
+    UNMAPPED = "-".freeze
 
     def self.all_vars
       @all_vars ||= [DEPOSITORY, CREDIT, LOAN, INVESTMENT, INSURANCE, PROPERTY, OTHER, ].freeze
