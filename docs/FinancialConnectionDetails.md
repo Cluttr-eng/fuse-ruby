@@ -15,6 +15,8 @@
 | **snaptrade** | [**FinancialConnectionDetailsSnaptrade**](FinancialConnectionDetailsSnaptrade.md) |  | [optional] |
 | **flinks** | [**FinancialConnectionDetailsFlinks**](FinancialConnectionDetailsFlinks.md) |  | [optional] |
 | **mono** | [**FinancialConnectionDetailsMono**](FinancialConnectionDetailsMono.md) |  | [optional] |
+| **truelayer** | [**FinancialConnectionDetailsTruelayer**](FinancialConnectionDetailsTruelayer.md) |  | [optional] |
+| **finverse** | [**FinancialConnectionDetailsFinverse**](FinancialConnectionDetailsFinverse.md) |  | [optional] |
 
 ## Example
 
@@ -32,7 +34,9 @@ instance = FuseClient::FinancialConnectionDetails.new(
   mx: null,
   snaptrade: null,
   flinks: null,
-  mono: null
+  mono: null,
+  truelayer: null,
+  finverse: null
 )
 ```
 

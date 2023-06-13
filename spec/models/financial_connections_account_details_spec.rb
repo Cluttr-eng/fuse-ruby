@@ -37,6 +37,12 @@ describe FuseClient::FinancialConnectionsAccountDetails do
     end
   end
 
+  describe 'test attribute "account_number"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   describe 'test attribute "remote_data"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/

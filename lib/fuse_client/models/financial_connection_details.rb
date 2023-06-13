@@ -41,6 +41,10 @@ module FuseClient
 
     attr_accessor :mono
 
+    attr_accessor :truelayer
+
+    attr_accessor :finverse
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -76,7 +80,9 @@ module FuseClient
         :'mx' => :'mx',
         :'snaptrade' => :'snaptrade',
         :'flinks' => :'flinks',
-        :'mono' => :'mono'
+        :'mono' => :'mono',
+        :'truelayer' => :'truelayer',
+        :'finverse' => :'finverse'
       }
     end
 
@@ -98,7 +104,9 @@ module FuseClient
         :'mx' => :'FinancialConnectionDetailsMx',
         :'snaptrade' => :'FinancialConnectionDetailsSnaptrade',
         :'flinks' => :'FinancialConnectionDetailsFlinks',
-        :'mono' => :'FinancialConnectionDetailsMono'
+        :'mono' => :'FinancialConnectionDetailsMono',
+        :'truelayer' => :'FinancialConnectionDetailsTruelayer',
+        :'finverse' => :'FinancialConnectionDetailsFinverse'
       }
     end
 
@@ -165,6 +173,14 @@ module FuseClient
 
       if attributes.key?(:'mono')
         self.mono = attributes[:'mono']
+      end
+
+      if attributes.key?(:'truelayer')
+        self.truelayer = attributes[:'truelayer']
+      end
+
+      if attributes.key?(:'finverse')
+        self.finverse = attributes[:'finverse']
       end
     end
 
@@ -233,7 +249,9 @@ module FuseClient
           mx == o.mx &&
           snaptrade == o.snaptrade &&
           flinks == o.flinks &&
-          mono == o.mono
+          mono == o.mono &&
+          truelayer == o.truelayer &&
+          finverse == o.finverse
     end
 
     # @see the `==` method
@@ -245,7 +263,7 @@ module FuseClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, connection_status, connection_status_updated_at, is_oauth, aggregator, plaid, teller, mx, snaptrade, flinks, mono].hash
+      [id, connection_status, connection_status_updated_at, is_oauth, aggregator, plaid, teller, mx, snaptrade, flinks, mono, truelayer, finverse].hash
     end
 
     # Builds the object from hash

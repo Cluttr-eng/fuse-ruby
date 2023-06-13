@@ -14,17 +14,34 @@ require 'date'
 require 'time'
 
 module FuseClient
-  class GetFinancialConnectionsOwnersResponseAccountsInner
-    # The remote account id of the account
-    attr_accessor :remote_account_id
+  class FinancialConnectionsAccountDetailsAccountNumber
+    # Unique identifier representing the account, typically referred to as the account number.
+    attr_accessor :number
 
-    attr_accessor :owners
+    # A six-digit number used by banks in the United Kingdom and Ireland to identify the branch where the account is held.
+    attr_accessor :sort_code
+
+    # International Bank Account Number (IBAN) is an internationally agreed system of identifying bank accounts across national borders to facilitate the communication and processing of cross border transactions.
+    attr_accessor :iban
+
+    # SWIFT/BIC code is an international identifier used to distinctively recognize a particular bank during financial transactions, such as money transfers.
+    attr_accessor :swift_bic
+
+    # Bank-State-Branch (BSB) code is a six-digit numerical code used to identify an individual branch of a financial institution in Australia.
+    attr_accessor :bsb
+
+    # Bank Identifier Code (BIC) is an international standard identifier used by banks and financial institutions globally to carry out transactions.
+    attr_accessor :bic
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'remote_account_id' => :'remote_account_id',
-        :'owners' => :'owners'
+        :'number' => :'number',
+        :'sort_code' => :'sort_code',
+        :'iban' => :'iban',
+        :'swift_bic' => :'swift_bic',
+        :'bsb' => :'bsb',
+        :'bic' => :'bic'
       }
     end
 
@@ -36,8 +53,12 @@ module FuseClient
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'remote_account_id' => :'String',
-        :'owners' => :'Array<FinancialConnectionsOwner>'
+        :'number' => :'String',
+        :'sort_code' => :'String',
+        :'iban' => :'String',
+        :'swift_bic' => :'String',
+        :'bsb' => :'String',
+        :'bic' => :'String'
       }
     end
 
@@ -51,25 +72,39 @@ module FuseClient
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `FuseClient::GetFinancialConnectionsOwnersResponseAccountsInner` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `FuseClient::FinancialConnectionsAccountDetailsAccountNumber` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `FuseClient::GetFinancialConnectionsOwnersResponseAccountsInner`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `FuseClient::FinancialConnectionsAccountDetailsAccountNumber`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'remote_account_id')
-        self.remote_account_id = attributes[:'remote_account_id']
+      if attributes.key?(:'number')
+        self.number = attributes[:'number']
       end
 
-      if attributes.key?(:'owners')
-        if (value = attributes[:'owners']).is_a?(Array)
-          self.owners = value
-        end
+      if attributes.key?(:'sort_code')
+        self.sort_code = attributes[:'sort_code']
+      end
+
+      if attributes.key?(:'iban')
+        self.iban = attributes[:'iban']
+      end
+
+      if attributes.key?(:'swift_bic')
+        self.swift_bic = attributes[:'swift_bic']
+      end
+
+      if attributes.key?(:'bsb')
+        self.bsb = attributes[:'bsb']
+      end
+
+      if attributes.key?(:'bic')
+        self.bic = attributes[:'bic']
       end
     end
 
@@ -77,22 +112,12 @@ module FuseClient
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @remote_account_id.nil?
-        invalid_properties.push('invalid value for "remote_account_id", remote_account_id cannot be nil.')
-      end
-
-      if @owners.nil?
-        invalid_properties.push('invalid value for "owners", owners cannot be nil.')
-      end
-
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @remote_account_id.nil?
-      return false if @owners.nil?
       true
     end
 
@@ -101,8 +126,12 @@ module FuseClient
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          remote_account_id == o.remote_account_id &&
-          owners == o.owners
+          number == o.number &&
+          sort_code == o.sort_code &&
+          iban == o.iban &&
+          swift_bic == o.swift_bic &&
+          bsb == o.bsb &&
+          bic == o.bic
     end
 
     # @see the `==` method
@@ -114,7 +143,7 @@ module FuseClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [remote_account_id, owners].hash
+      [number, sort_code, iban, swift_bic, bsb, bic].hash
     end
 
     # Builds the object from hash

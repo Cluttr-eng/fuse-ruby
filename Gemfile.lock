@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    fuse_client (1.0.36)
+    fuse_client (1.0.37)
       typhoeus (~> 1.0, >= 1.0.1)
 
 GEM
@@ -17,8 +17,9 @@ GEM
     jaro_winkler (1.5.6)
     method_source (1.0.0)
     parallel (1.23.0)
-    parser (3.2.2.1)
+    parser (3.2.2.3)
       ast (~> 2.4.1)
+      racc
     pry (0.14.2)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -27,6 +28,7 @@ GEM
       pry (>= 0.13, < 0.15)
     psych (5.1.0)
       stringio
+    racc (1.7.0)
     rainbow (3.1.1)
     rake (13.0.6)
     rspec (3.12.0)

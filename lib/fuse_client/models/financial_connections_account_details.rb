@@ -20,6 +20,8 @@ module FuseClient
 
     attr_accessor :ach
 
+    attr_accessor :account_number
+
     attr_accessor :remote_data
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -27,6 +29,7 @@ module FuseClient
       {
         :'remote_id' => :'remote_id',
         :'ach' => :'ach',
+        :'account_number' => :'account_number',
         :'remote_data' => :'remote_data'
       }
     end
@@ -41,6 +44,7 @@ module FuseClient
       {
         :'remote_id' => :'String',
         :'ach' => :'FinancialConnectionsAccountDetailsAch',
+        :'account_number' => :'FinancialConnectionsAccountDetailsAccountNumber',
         :'remote_data' => :'Object'
       }
     end
@@ -73,6 +77,10 @@ module FuseClient
 
       if attributes.key?(:'ach')
         self.ach = attributes[:'ach']
+      end
+
+      if attributes.key?(:'account_number')
+        self.account_number = attributes[:'account_number']
       end
 
       if attributes.key?(:'remote_data')
@@ -110,6 +118,7 @@ module FuseClient
       self.class == o.class &&
           remote_id == o.remote_id &&
           ach == o.ach &&
+          account_number == o.account_number &&
           remote_data == o.remote_data
     end
 
@@ -122,7 +131,7 @@ module FuseClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [remote_id, ach, remote_data].hash
+      [remote_id, ach, account_number, remote_data].hash
     end
 
     # Builds the object from hash

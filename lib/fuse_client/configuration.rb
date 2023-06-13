@@ -372,6 +372,48 @@ module FuseClient
             key: 'Mono-Webhook-Secret',
             value: api_key_with_prefix('monoWebhookSecret')
           },
+        'trueLayerClientId' =>
+          {
+            type: 'api_key',
+            in: 'header',
+            key: 'TrueLayer-Client-Id',
+            value: api_key_with_prefix('trueLayerClientId')
+          },
+        'trueLayerClientSecret' =>
+          {
+            type: 'api_key',
+            in: 'header',
+            key: 'TrueLayer-Client-Secret',
+            value: api_key_with_prefix('trueLayerClientSecret')
+          },
+        'trueLayerClientRedirectUri' =>
+          {
+            type: 'api_key',
+            in: 'header',
+            key: 'TrueLayer-Redirect-Uri',
+            value: api_key_with_prefix('trueLayerClientRedirectUri')
+          },
+        'finverseClientId' =>
+          {
+            type: 'api_key',
+            in: 'header',
+            key: 'Finverse-Client-Id',
+            value: api_key_with_prefix('finverseClientId')
+          },
+        'finverseClientSecret' =>
+          {
+            type: 'api_key',
+            in: 'header',
+            key: 'Finverse-Client-Secret',
+            value: api_key_with_prefix('finverseClientSecret')
+          },
+        'finverseClientRedirectUri' =>
+          {
+            type: 'api_key',
+            in: 'header',
+            key: 'Finverse-Redirect-Uri',
+            value: api_key_with_prefix('finverseClientRedirectUri')
+          },
       }
     end
 
