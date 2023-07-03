@@ -95,4 +95,16 @@ describe FuseClient::FinancialConnectionDetails do
     end
   end
 
+  describe 'test attribute "truelayer"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  describe 'test attribute "finverse"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
 end

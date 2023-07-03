@@ -21,9 +21,11 @@ module FuseClient
     SNAPTRADE = "snaptrade".freeze
     FLINKS = "flinks".freeze
     MONO = "mono".freeze
+    TRUELAYER = "truelayer".freeze
+    FINVERSE = "finverse".freeze
 
     def self.all_vars
-      @all_vars ||= [PLAID, TELLER, MX, SNAPTRADE, FLINKS, MONO].freeze
+      @all_vars ||= [PLAID, TELLER, MX, SNAPTRADE, FLINKS, MONO, TRUELAYER, FINVERSE].freeze
     end
 
     # Builds the enum from string

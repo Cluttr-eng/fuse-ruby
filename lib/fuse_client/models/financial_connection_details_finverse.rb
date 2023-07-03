@@ -14,17 +14,19 @@ require 'date'
 require 'time'
 
 module FuseClient
-  class GetFinancialConnectionsOwnersResponseAccountsInner
-    # The remote account id of the account
-    attr_accessor :remote_account_id
+  # Data needed to query data from Finverse
+  class FinancialConnectionDetailsFinverse
+    # Access token for Finverse
+    attr_accessor :access_token
 
-    attr_accessor :owners
+    # Login Identity Id for Finverse
+    attr_accessor :login_identity_id
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'remote_account_id' => :'remote_account_id',
-        :'owners' => :'owners'
+        :'access_token' => :'access_token',
+        :'login_identity_id' => :'login_identity_id'
       }
     end
 
@@ -36,8 +38,8 @@ module FuseClient
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'remote_account_id' => :'String',
-        :'owners' => :'Array<FinancialConnectionsOwner>'
+        :'access_token' => :'String',
+        :'login_identity_id' => :'String'
       }
     end
 
@@ -51,25 +53,23 @@ module FuseClient
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `FuseClient::GetFinancialConnectionsOwnersResponseAccountsInner` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `FuseClient::FinancialConnectionDetailsFinverse` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `FuseClient::GetFinancialConnectionsOwnersResponseAccountsInner`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `FuseClient::FinancialConnectionDetailsFinverse`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'remote_account_id')
-        self.remote_account_id = attributes[:'remote_account_id']
+      if attributes.key?(:'access_token')
+        self.access_token = attributes[:'access_token']
       end
 
-      if attributes.key?(:'owners')
-        if (value = attributes[:'owners']).is_a?(Array)
-          self.owners = value
-        end
+      if attributes.key?(:'login_identity_id')
+        self.login_identity_id = attributes[:'login_identity_id']
       end
     end
 
@@ -77,12 +77,8 @@ module FuseClient
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @remote_account_id.nil?
-        invalid_properties.push('invalid value for "remote_account_id", remote_account_id cannot be nil.')
-      end
-
-      if @owners.nil?
-        invalid_properties.push('invalid value for "owners", owners cannot be nil.')
+      if @access_token.nil?
+        invalid_properties.push('invalid value for "access_token", access_token cannot be nil.')
       end
 
       invalid_properties
@@ -91,8 +87,7 @@ module FuseClient
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @remote_account_id.nil?
-      return false if @owners.nil?
+      return false if @access_token.nil?
       true
     end
 
@@ -101,8 +96,8 @@ module FuseClient
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          remote_account_id == o.remote_account_id &&
-          owners == o.owners
+          access_token == o.access_token &&
+          login_identity_id == o.login_identity_id
     end
 
     # @see the `==` method
@@ -114,7 +109,7 @@ module FuseClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [remote_account_id, owners].hash
+      [access_token, login_identity_id].hash
     end
 
     # Builds the object from hash

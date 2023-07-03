@@ -18,18 +18,22 @@ module FuseClient
     # Unique identifier for the user or business account that is connecting to an institution. Use this id when calling the GET /entities/${entity_id} endpoint.
     attr_accessor :id
 
-    # Name for the user or business account.
+    # Name for the user or business account. Required for EU connections.
     attr_accessor :name
 
-    # Email address associated with the user or business account.
+    # Email address associated with the user or business account. One of email/phone is required for EU connections.
     attr_accessor :email
+
+    # Phone number associated with the user or business account. One of email/phone is required for EU connections.
+    attr_accessor :phone
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'id' => :'id',
         :'name' => :'name',
-        :'email' => :'email'
+        :'email' => :'email',
+        :'phone' => :'phone'
       }
     end
 
@@ -43,7 +47,8 @@ module FuseClient
       {
         :'id' => :'String',
         :'name' => :'String',
-        :'email' => :'String'
+        :'email' => :'String',
+        :'phone' => :'String'
       }
     end
 
@@ -79,6 +84,10 @@ module FuseClient
       if attributes.key?(:'email')
         self.email = attributes[:'email']
       end
+
+      if attributes.key?(:'phone')
+        self.phone = attributes[:'phone']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -106,7 +115,8 @@ module FuseClient
       self.class == o.class &&
           id == o.id &&
           name == o.name &&
-          email == o.email
+          email == o.email &&
+          phone == o.phone
     end
 
     # @see the `==` method
@@ -118,7 +128,7 @@ module FuseClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, name, email].hash
+      [id, name, email, phone].hash
     end
 
     # Builds the object from hash
