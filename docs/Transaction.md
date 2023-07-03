@@ -10,7 +10,7 @@
 | **amount** | **Float** | Amount in cents associated with the transaction. The format of this value is a double.  Positive values when money moves out of the account; negative values when money moves in. For example, debit card purchases are positive; credit card payments, direct deposits, and refunds are negative. |  |
 | **date** | **String** | Date of the transaction (YYYY-MM-DD) |  |
 | **description** | **String** | Description of the transaction |  |
-| **category** | **Array&lt;String&gt;** | Categories of the transaction, ie Computers and Electronics |  |
+| **category** | **Array&lt;String&gt;** | Categories of the transaction, i.e., Computers and Electronics. You can download the categories from [here](https://fuse-public-bucket.s3.amazonaws.com/transaction-categories.csv) |  |
 | **merchant** | [**TransactionMerchant**](TransactionMerchant.md) |  |  |
 | **status** | **String** | The status of the transaction. This will be either posted or pending. |  |
 | **type** | **String** | Type of the transaction, ie adjustment. &#39;-&#39; means we were not able to map the upstream type. |  |

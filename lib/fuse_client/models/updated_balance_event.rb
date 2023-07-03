@@ -23,10 +23,10 @@ module FuseClient
     # Datetime that the balance is accurate for In ISO-8601 format
     attr_accessor :timestamp
 
-    # The current balance of the account factoring in pending transactions. Use positive values to represent money going out and negative to represent money going in.
+    # The current balance of the account factoring in pending transactions.
     attr_accessor :available
 
-    # The current balance of the account without factoring in pending transactions. Use positive values to represent money going out and negative to represent money going in.
+    # The current balance of the account without factoring in pending transactions.
     attr_accessor :current
 
     class EnumAttributeValidator

@@ -6,15 +6,16 @@ All URIs are relative to *https://sandbox-api.letsfuse.com*
 | ------ | ------------ | ----------- |
 | [**add_account_events**](FuseApi.md#add_account_events) | **POST** /v1/accounts/{account_id}/events |  |
 | [**create_asset_report**](FuseApi.md#create_asset_report) | **POST** /v1/financial_connections/asset_report/create |  |
+| [**create_consumer_risk_report**](FuseApi.md#create_consumer_risk_report) | **POST** /v1/risk_report/consumer |  |
+| [**create_consumer_risk_report_customization**](FuseApi.md#create_consumer_risk_report_customization) | **POST** /v1/risk_report/consumer/customization |  |
 | [**create_link_token**](FuseApi.md#create_link_token) | **POST** /v1/link/token |  |
 | [**create_session**](FuseApi.md#create_session) | **POST** /v1/session |  |
-| [**create_spend_power**](FuseApi.md#create_spend_power) | **POST** /v1/spend_power |  |
-| [**create_spend_power_customization**](FuseApi.md#create_spend_power_customization) | **POST** /v1/spend_power/customization |  |
 | [**delete_financial_connection**](FuseApi.md#delete_financial_connection) | **DELETE** /v1/financial_connections/{financial_connection_id_to_delete} | Delete a financial connection |
 | [**enrich_transactions**](FuseApi.md#enrich_transactions) | **POST** /v1/transactions/enrich |  |
 | [**exchange_financial_connections_public_token**](FuseApi.md#exchange_financial_connections_public_token) | **POST** /v1/financial_connections/public_token/exchange |  |
 | [**fin_ql_prompt**](FuseApi.md#fin_ql_prompt) | **POST** /v1/finql/prompt | FinQL Prompt |
 | [**get_asset_report**](FuseApi.md#get_asset_report) | **POST** /v1/financial_connections/asset_report |  |
+| [**get_consumer_risk_report**](FuseApi.md#get_consumer_risk_report) | **GET** /v1/risk_report/consumer/{consumer_risk_report_id} | Get consumer risk report |
 | [**get_entity**](FuseApi.md#get_entity) | **GET** /v1/entities/{entity_id} | Get entity |
 | [**get_finance_score**](FuseApi.md#get_finance_score) | **GET** /v1/accounts/{account_id}/finance_score | Get finance score |
 | [**get_financial_connection**](FuseApi.md#get_financial_connection) | **GET** /v1/financial_connections/{financial_connection_id} | Get financial connection details |
@@ -27,11 +28,10 @@ All URIs are relative to *https://sandbox-api.letsfuse.com*
 | [**get_financial_institution**](FuseApi.md#get_financial_institution) | **GET** /v1/financial_connections/institutions/{institution_id} | Get a financial institution |
 | [**get_investment_holdings**](FuseApi.md#get_investment_holdings) | **POST** /v1/financial_connections/investments/holdings | Get investment holdings |
 | [**get_investment_transactions**](FuseApi.md#get_investment_transactions) | **POST** /v1/financial_connections/investments/transactions | Get investment transactions |
-| [**get_spend_power**](FuseApi.md#get_spend_power) | **GET** /v1/spend_power/{spend_power_id} | Get spend power |
 | [**migrate_financial_connection**](FuseApi.md#migrate_financial_connection) | **POST** /v1/financial_connections/migrate | Migrate financial connection |
 | [**refresh_asset_report**](FuseApi.md#refresh_asset_report) | **POST** /v1/financial_connections/asset_report/refresh |  |
 | [**sync_financial_connections_data**](FuseApi.md#sync_financial_connections_data) | **POST** /v1/financial_connections/sync | Sync financial connections data |
-| [**update_spend_power_customization**](FuseApi.md#update_spend_power_customization) | **POST** /v1/spend_power/customization/{spend_power_customization_id} | Update spend power customization |
+| [**update_consumer_risk_report_customization**](FuseApi.md#update_consumer_risk_report_customization) | **POST** /v1/risk_report/consumer/customization/{consumer_risk_report_customization_id} | Update consumer risk report customization |
 | [**v1_financial_connections_liabilities_post**](FuseApi.md#v1_financial_connections_liabilities_post) | **POST** /v1/financial_connections/liabilities | Get liabilities |
 
 
@@ -62,7 +62,7 @@ end
 api_instance = FuseClient::FuseApi.new
 account_id = 'account_id_example' # String | 
 opts = {
-  add_account_events_request: FuseClient::AddAccountEventsRequest.new({events: [FuseClient::ExternalTransactionEvent.new({id: 'id_example', event_type: 'external_transaction', status: FuseClient::ExternalTransactionEventStatus::PENDING, amount: 3.56, iso_currency_code: 'iso_currency_code_example', transaction_type: FuseClient::TransactionEventType::ACH, merchant_name: 'merchant_name_example', timestamp: 'timestamp_example'})]}) # AddAccountEventsRequest | 
+  add_account_events_request: FuseClient::AddAccountEventsRequest.new({events: [FuseClient::ExternalTransactionEvent.new({id: 'id_example', event_type: 'external_transaction', status: FuseClient::ExternalTransactionEventStatus::PENDING, amount: 3.56, iso_currency_code: 'iso_currency_code_example', merchant_name: 'merchant_name_example', timestamp: 'timestamp_example'})]}) # AddAccountEventsRequest | 
 }
 
 begin
@@ -180,6 +180,160 @@ end
 ### Return type
 
 [**CreateAssetReportResponse**](CreateAssetReportResponse.md)
+
+### Authorization
+
+[fuseApiKey](../README.md#fuseApiKey), [fuseClientId](../README.md#fuseClientId)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## create_consumer_risk_report
+
+> <CreateConsumerRiskReportResponse> create_consumer_risk_report(opts)
+
+
+
+Starts the background process that will calculate the consumer risk report depending on the customization passed in.
+
+### Examples
+
+```ruby
+require 'time'
+require 'fuse_client'
+# setup authorization
+FuseClient.configure do |config|
+  # Configure API key authorization: fuseApiKey
+  config.api_key['fuseApiKey'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['fuseApiKey'] = 'Bearer'
+
+  # Configure API key authorization: fuseClientId
+  config.api_key['fuseClientId'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['fuseClientId'] = 'Bearer'
+end
+
+api_instance = FuseClient::FuseApi.new
+opts = {
+  create_consumer_risk_report_request: FuseClient::CreateConsumerRiskReportRequest.new({account_id: 'account_id_example', iso_currency_code: 'iso_currency_code_example', customization_id: 'customization_id_example'}) # CreateConsumerRiskReportRequest | 
+}
+
+begin
+  
+  result = api_instance.create_consumer_risk_report(opts)
+  p result
+rescue FuseClient::ApiError => e
+  puts "Error when calling FuseApi->create_consumer_risk_report: #{e}"
+end
+```
+
+#### Using the create_consumer_risk_report_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<CreateConsumerRiskReportResponse>, Integer, Hash)> create_consumer_risk_report_with_http_info(opts)
+
+```ruby
+begin
+  
+  data, status_code, headers = api_instance.create_consumer_risk_report_with_http_info(opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <CreateConsumerRiskReportResponse>
+rescue FuseClient::ApiError => e
+  puts "Error when calling FuseApi->create_consumer_risk_report_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **create_consumer_risk_report_request** | [**CreateConsumerRiskReportRequest**](CreateConsumerRiskReportRequest.md) |  | [optional] |
+
+### Return type
+
+[**CreateConsumerRiskReportResponse**](CreateConsumerRiskReportResponse.md)
+
+### Authorization
+
+[fuseApiKey](../README.md#fuseApiKey), [fuseClientId](../README.md#fuseClientId)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## create_consumer_risk_report_customization
+
+> <CreateConsumerRiskReportCustomizationResponse> create_consumer_risk_report_customization(opts)
+
+
+
+### Examples
+
+```ruby
+require 'time'
+require 'fuse_client'
+# setup authorization
+FuseClient.configure do |config|
+  # Configure API key authorization: fuseApiKey
+  config.api_key['fuseApiKey'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['fuseApiKey'] = 'Bearer'
+
+  # Configure API key authorization: fuseClientId
+  config.api_key['fuseClientId'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['fuseClientId'] = 'Bearer'
+end
+
+api_instance = FuseClient::FuseApi.new
+opts = {
+  create_consumer_risk_report_customization_request: FuseClient::CreateConsumerRiskReportCustomizationRequest.new({timeframe: FuseClient::ConsumerRiskReportTimeFrame::DAILY, min_limit: 3.56, max_limit: 3.56, risk_tolerance: 3.56}) # CreateConsumerRiskReportCustomizationRequest | 
+}
+
+begin
+  
+  result = api_instance.create_consumer_risk_report_customization(opts)
+  p result
+rescue FuseClient::ApiError => e
+  puts "Error when calling FuseApi->create_consumer_risk_report_customization: #{e}"
+end
+```
+
+#### Using the create_consumer_risk_report_customization_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<CreateConsumerRiskReportCustomizationResponse>, Integer, Hash)> create_consumer_risk_report_customization_with_http_info(opts)
+
+```ruby
+begin
+  
+  data, status_code, headers = api_instance.create_consumer_risk_report_customization_with_http_info(opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <CreateConsumerRiskReportCustomizationResponse>
+rescue FuseClient::ApiError => e
+  puts "Error when calling FuseApi->create_consumer_risk_report_customization_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **create_consumer_risk_report_customization_request** | [**CreateConsumerRiskReportCustomizationRequest**](CreateConsumerRiskReportCustomizationRequest.md) |  | [optional] |
+
+### Return type
+
+[**CreateConsumerRiskReportCustomizationResponse**](CreateConsumerRiskReportCustomizationResponse.md)
 
 ### Authorization
 
@@ -336,160 +490,6 @@ end
 ### Return type
 
 [**CreateSessionResponse**](CreateSessionResponse.md)
-
-### Authorization
-
-[fuseApiKey](../README.md#fuseApiKey), [fuseClientId](../README.md#fuseClientId)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-
-## create_spend_power
-
-> <CreateSpendPowerResponse> create_spend_power(opts)
-
-
-
-Starts the background process that will determine the spend power depending on the customization passed in.
-
-### Examples
-
-```ruby
-require 'time'
-require 'fuse_client'
-# setup authorization
-FuseClient.configure do |config|
-  # Configure API key authorization: fuseApiKey
-  config.api_key['fuseApiKey'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['fuseApiKey'] = 'Bearer'
-
-  # Configure API key authorization: fuseClientId
-  config.api_key['fuseClientId'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['fuseClientId'] = 'Bearer'
-end
-
-api_instance = FuseClient::FuseApi.new
-opts = {
-  create_spend_power_request: FuseClient::CreateSpendPowerRequest.new({account_id: 'account_id_example', iso_currency_code: 'iso_currency_code_example', customization_id: 'customization_id_example'}) # CreateSpendPowerRequest | 
-}
-
-begin
-  
-  result = api_instance.create_spend_power(opts)
-  p result
-rescue FuseClient::ApiError => e
-  puts "Error when calling FuseApi->create_spend_power: #{e}"
-end
-```
-
-#### Using the create_spend_power_with_http_info variant
-
-This returns an Array which contains the response data, status code and headers.
-
-> <Array(<CreateSpendPowerResponse>, Integer, Hash)> create_spend_power_with_http_info(opts)
-
-```ruby
-begin
-  
-  data, status_code, headers = api_instance.create_spend_power_with_http_info(opts)
-  p status_code # => 2xx
-  p headers # => { ... }
-  p data # => <CreateSpendPowerResponse>
-rescue FuseClient::ApiError => e
-  puts "Error when calling FuseApi->create_spend_power_with_http_info: #{e}"
-end
-```
-
-### Parameters
-
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
-| **create_spend_power_request** | [**CreateSpendPowerRequest**](CreateSpendPowerRequest.md) |  | [optional] |
-
-### Return type
-
-[**CreateSpendPowerResponse**](CreateSpendPowerResponse.md)
-
-### Authorization
-
-[fuseApiKey](../README.md#fuseApiKey), [fuseClientId](../README.md#fuseClientId)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-
-## create_spend_power_customization
-
-> <CreateSpendPowerCustomizationResponse> create_spend_power_customization(opts)
-
-
-
-### Examples
-
-```ruby
-require 'time'
-require 'fuse_client'
-# setup authorization
-FuseClient.configure do |config|
-  # Configure API key authorization: fuseApiKey
-  config.api_key['fuseApiKey'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['fuseApiKey'] = 'Bearer'
-
-  # Configure API key authorization: fuseClientId
-  config.api_key['fuseClientId'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['fuseClientId'] = 'Bearer'
-end
-
-api_instance = FuseClient::FuseApi.new
-opts = {
-  create_spend_power_customization_request: FuseClient::CreateSpendPowerCustomizationRequest.new({timeframe: FuseClient::SpendPowerTimeFrame::DAILY, min_limit: 3.56, max_limit: 3.56, risk_tolerance: 3.56}) # CreateSpendPowerCustomizationRequest | 
-}
-
-begin
-  
-  result = api_instance.create_spend_power_customization(opts)
-  p result
-rescue FuseClient::ApiError => e
-  puts "Error when calling FuseApi->create_spend_power_customization: #{e}"
-end
-```
-
-#### Using the create_spend_power_customization_with_http_info variant
-
-This returns an Array which contains the response data, status code and headers.
-
-> <Array(<CreateSpendPowerCustomizationResponse>, Integer, Hash)> create_spend_power_customization_with_http_info(opts)
-
-```ruby
-begin
-  
-  data, status_code, headers = api_instance.create_spend_power_customization_with_http_info(opts)
-  p status_code # => 2xx
-  p headers # => { ... }
-  p data # => <CreateSpendPowerCustomizationResponse>
-rescue FuseClient::ApiError => e
-  puts "Error when calling FuseApi->create_spend_power_customization_with_http_info: #{e}"
-end
-```
-
-### Parameters
-
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
-| **create_spend_power_customization_request** | [**CreateSpendPowerCustomizationRequest**](CreateSpendPowerCustomizationRequest.md) |  | [optional] |
-
-### Return type
-
-[**CreateSpendPowerCustomizationResponse**](CreateSpendPowerCustomizationResponse.md)
 
 ### Authorization
 
@@ -886,6 +886,84 @@ end
 ### HTTP request headers
 
 - **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## get_consumer_risk_report
+
+> <GetConsumerRiskReportResponse> get_consumer_risk_report(consumer_risk_report_id, opts)
+
+Get consumer risk report
+
+### Examples
+
+```ruby
+require 'time'
+require 'fuse_client'
+# setup authorization
+FuseClient.configure do |config|
+  # Configure API key authorization: fuseApiKey
+  config.api_key['fuseApiKey'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['fuseApiKey'] = 'Bearer'
+
+  # Configure API key authorization: fuseClientId
+  config.api_key['fuseClientId'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['fuseClientId'] = 'Bearer'
+end
+
+api_instance = FuseClient::FuseApi.new
+consumer_risk_report_id = 'consumer_risk_report_id_example' # String | 
+opts = {
+  recalculate: true # Boolean | An optional boolean parameter. If set to true, the system will recalculate before returning the risk report. If omitted or set to false, the current risk report will be returned without recalculation.
+}
+
+begin
+  # Get consumer risk report
+  result = api_instance.get_consumer_risk_report(consumer_risk_report_id, opts)
+  p result
+rescue FuseClient::ApiError => e
+  puts "Error when calling FuseApi->get_consumer_risk_report: #{e}"
+end
+```
+
+#### Using the get_consumer_risk_report_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetConsumerRiskReportResponse>, Integer, Hash)> get_consumer_risk_report_with_http_info(consumer_risk_report_id, opts)
+
+```ruby
+begin
+  # Get consumer risk report
+  data, status_code, headers = api_instance.get_consumer_risk_report_with_http_info(consumer_risk_report_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetConsumerRiskReportResponse>
+rescue FuseClient::ApiError => e
+  puts "Error when calling FuseApi->get_consumer_risk_report_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **consumer_risk_report_id** | **String** |  |  |
+| **recalculate** | **Boolean** | An optional boolean parameter. If set to true, the system will recalculate before returning the risk report. If omitted or set to false, the current risk report will be returned without recalculation. | [optional] |
+
+### Return type
+
+[**GetConsumerRiskReportResponse**](GetConsumerRiskReportResponse.md)
+
+### Authorization
+
+[fuseApiKey](../README.md#fuseApiKey), [fuseClientId](../README.md#fuseClientId)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 
@@ -1785,80 +1863,6 @@ end
 - **Accept**: application/json
 
 
-## get_spend_power
-
-> <GetSpendPowerResponse> get_spend_power(spend_power_id)
-
-Get spend power
-
-### Examples
-
-```ruby
-require 'time'
-require 'fuse_client'
-# setup authorization
-FuseClient.configure do |config|
-  # Configure API key authorization: fuseApiKey
-  config.api_key['fuseApiKey'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['fuseApiKey'] = 'Bearer'
-
-  # Configure API key authorization: fuseClientId
-  config.api_key['fuseClientId'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['fuseClientId'] = 'Bearer'
-end
-
-api_instance = FuseClient::FuseApi.new
-spend_power_id = 'spend_power_id_example' # String | 
-
-begin
-  # Get spend power
-  result = api_instance.get_spend_power(spend_power_id)
-  p result
-rescue FuseClient::ApiError => e
-  puts "Error when calling FuseApi->get_spend_power: #{e}"
-end
-```
-
-#### Using the get_spend_power_with_http_info variant
-
-This returns an Array which contains the response data, status code and headers.
-
-> <Array(<GetSpendPowerResponse>, Integer, Hash)> get_spend_power_with_http_info(spend_power_id)
-
-```ruby
-begin
-  # Get spend power
-  data, status_code, headers = api_instance.get_spend_power_with_http_info(spend_power_id)
-  p status_code # => 2xx
-  p headers # => { ... }
-  p data # => <GetSpendPowerResponse>
-rescue FuseClient::ApiError => e
-  puts "Error when calling FuseApi->get_spend_power_with_http_info: #{e}"
-end
-```
-
-### Parameters
-
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
-| **spend_power_id** | **String** |  |  |
-
-### Return type
-
-[**GetSpendPowerResponse**](GetSpendPowerResponse.md)
-
-### Authorization
-
-[fuseApiKey](../README.md#fuseApiKey), [fuseClientId](../README.md#fuseClientId)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-
 ## migrate_financial_connection
 
 > <MigrateFinancialConnectionsTokenResponse> migrate_financial_connection(opts)
@@ -2091,11 +2095,11 @@ end
 - **Accept**: application/json
 
 
-## update_spend_power_customization
+## update_consumer_risk_report_customization
 
-> <UpdateSpendPowerCustomizationResponse> update_spend_power_customization(spend_power_customization_id, opts)
+> <UpdateConsumerRiskReportCustomizationResponse> update_consumer_risk_report_customization(consumer_risk_report_customization_id, opts)
 
-Update spend power customization
+Update consumer risk report customization
 
 ### Examples
 
@@ -2116,35 +2120,35 @@ FuseClient.configure do |config|
 end
 
 api_instance = FuseClient::FuseApi.new
-spend_power_customization_id = 'spend_power_customization_id_example' # String | 
+consumer_risk_report_customization_id = 'consumer_risk_report_customization_id_example' # String | 
 opts = {
-  update_spend_power_customization_request: FuseClient::UpdateSpendPowerCustomizationRequest.new # UpdateSpendPowerCustomizationRequest | 
+  update_consumer_risk_report_customization_request: FuseClient::UpdateConsumerRiskReportCustomizationRequest.new # UpdateConsumerRiskReportCustomizationRequest | 
 }
 
 begin
-  # Update spend power customization
-  result = api_instance.update_spend_power_customization(spend_power_customization_id, opts)
+  # Update consumer risk report customization
+  result = api_instance.update_consumer_risk_report_customization(consumer_risk_report_customization_id, opts)
   p result
 rescue FuseClient::ApiError => e
-  puts "Error when calling FuseApi->update_spend_power_customization: #{e}"
+  puts "Error when calling FuseApi->update_consumer_risk_report_customization: #{e}"
 end
 ```
 
-#### Using the update_spend_power_customization_with_http_info variant
+#### Using the update_consumer_risk_report_customization_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<UpdateSpendPowerCustomizationResponse>, Integer, Hash)> update_spend_power_customization_with_http_info(spend_power_customization_id, opts)
+> <Array(<UpdateConsumerRiskReportCustomizationResponse>, Integer, Hash)> update_consumer_risk_report_customization_with_http_info(consumer_risk_report_customization_id, opts)
 
 ```ruby
 begin
-  # Update spend power customization
-  data, status_code, headers = api_instance.update_spend_power_customization_with_http_info(spend_power_customization_id, opts)
+  # Update consumer risk report customization
+  data, status_code, headers = api_instance.update_consumer_risk_report_customization_with_http_info(consumer_risk_report_customization_id, opts)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <UpdateSpendPowerCustomizationResponse>
+  p data # => <UpdateConsumerRiskReportCustomizationResponse>
 rescue FuseClient::ApiError => e
-  puts "Error when calling FuseApi->update_spend_power_customization_with_http_info: #{e}"
+  puts "Error when calling FuseApi->update_consumer_risk_report_customization_with_http_info: #{e}"
 end
 ```
 
@@ -2152,12 +2156,12 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **spend_power_customization_id** | **String** |  |  |
-| **update_spend_power_customization_request** | [**UpdateSpendPowerCustomizationRequest**](UpdateSpendPowerCustomizationRequest.md) |  | [optional] |
+| **consumer_risk_report_customization_id** | **String** |  |  |
+| **update_consumer_risk_report_customization_request** | [**UpdateConsumerRiskReportCustomizationRequest**](UpdateConsumerRiskReportCustomizationRequest.md) |  | [optional] |
 
 ### Return type
 
-[**UpdateSpendPowerCustomizationResponse**](UpdateSpendPowerCustomizationResponse.md)
+[**UpdateConsumerRiskReportCustomizationResponse**](UpdateConsumerRiskReportCustomizationResponse.md)
 
 ### Authorization
 

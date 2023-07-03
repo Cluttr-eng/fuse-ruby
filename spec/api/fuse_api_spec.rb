@@ -54,6 +54,27 @@ describe 'FuseApi' do
     end
   end
 
+  # unit tests for create_consumer_risk_report
+  # Starts the background process that will calculate the consumer risk report depending on the customization passed in.
+  # @param [Hash] opts the optional parameters
+  # @option opts [CreateConsumerRiskReportRequest] :create_consumer_risk_report_request 
+  # @return [CreateConsumerRiskReportResponse]
+  describe 'create_consumer_risk_report test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for create_consumer_risk_report_customization
+  # @param [Hash] opts the optional parameters
+  # @option opts [CreateConsumerRiskReportCustomizationRequest] :create_consumer_risk_report_customization_request 
+  # @return [CreateConsumerRiskReportCustomizationResponse]
+  describe 'create_consumer_risk_report_customization test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for create_link_token
   # Create a link token to start the process of a user connecting to a specific financial institution.
   # @param [Hash] opts the optional parameters
@@ -71,27 +92,6 @@ describe 'FuseApi' do
   # @option opts [CreateSessionRequest] :create_session_request 
   # @return [CreateSessionResponse]
   describe 'create_session test' do
-    it 'should work' do
-      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-    end
-  end
-
-  # unit tests for create_spend_power
-  # Starts the background process that will determine the spend power depending on the customization passed in.
-  # @param [Hash] opts the optional parameters
-  # @option opts [CreateSpendPowerRequest] :create_spend_power_request 
-  # @return [CreateSpendPowerResponse]
-  describe 'create_spend_power test' do
-    it 'should work' do
-      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-    end
-  end
-
-  # unit tests for create_spend_power_customization
-  # @param [Hash] opts the optional parameters
-  # @option opts [CreateSpendPowerCustomizationRequest] :create_spend_power_customization_request 
-  # @return [CreateSpendPowerCustomizationResponse]
-  describe 'create_spend_power_customization test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end
@@ -149,6 +149,18 @@ describe 'FuseApi' do
   # @option opts [GetAssetReportRequest] :get_asset_report_request 
   # @return [RefreshAssetReportResponse]
   describe 'get_asset_report test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for get_consumer_risk_report
+  # Get consumer risk report
+  # @param consumer_risk_report_id 
+  # @param [Hash] opts the optional parameters
+  # @option opts [Boolean] :recalculate An optional boolean parameter. If set to true, the system will recalculate before returning the risk report. If omitted or set to false, the current risk report will be returned without recalculation.
+  # @return [GetConsumerRiskReportResponse]
+  describe 'get_consumer_risk_report test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end
@@ -288,17 +300,6 @@ describe 'FuseApi' do
     end
   end
 
-  # unit tests for get_spend_power
-  # Get spend power
-  # @param spend_power_id 
-  # @param [Hash] opts the optional parameters
-  # @return [GetSpendPowerResponse]
-  describe 'get_spend_power test' do
-    it 'should work' do
-      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-    end
-  end
-
   # unit tests for migrate_financial_connection
   # Migrate financial connection
   # This endpoint migrates financial connections from Plaid or MX into the unified Fuse API. It accepts a POST request with connection data, aggregator, entity, and Fuse products, and responds with a JSON payload containing the migrated connection&#39;s data, access token, ID, and request ID.
@@ -334,13 +335,13 @@ describe 'FuseApi' do
     end
   end
 
-  # unit tests for update_spend_power_customization
-  # Update spend power customization
-  # @param spend_power_customization_id 
+  # unit tests for update_consumer_risk_report_customization
+  # Update consumer risk report customization
+  # @param consumer_risk_report_customization_id 
   # @param [Hash] opts the optional parameters
-  # @option opts [UpdateSpendPowerCustomizationRequest] :update_spend_power_customization_request 
-  # @return [UpdateSpendPowerCustomizationResponse]
-  describe 'update_spend_power_customization test' do
+  # @option opts [UpdateConsumerRiskReportCustomizationRequest] :update_consumer_risk_report_customization_request 
+  # @return [UpdateConsumerRiskReportCustomizationResponse]
+  describe 'update_consumer_risk_report_customization test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end

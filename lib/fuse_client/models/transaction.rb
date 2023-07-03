@@ -33,7 +33,7 @@ module FuseClient
     # Description of the transaction
     attr_accessor :description
 
-    # Categories of the transaction, ie Computers and Electronics
+    # Categories of the transaction, i.e., Computers and Electronics. You can download the categories from [here](https://fuse-public-bucket.s3.amazonaws.com/transaction-categories.csv)
     attr_accessor :category
 
     attr_accessor :merchant

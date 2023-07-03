@@ -9,7 +9,7 @@
 | **status** | [**InAppTransactionEventStatus**](InAppTransactionEventStatus.md) |  |  |
 | **amount** | **Float** |  |  |
 | **iso_currency_code** | **String** | The ISO-4217 currency code. |  |
-| **transaction_type** | [**TransactionEventType**](TransactionEventType.md) |  |  |
+| **transaction_type** | [**TransactionEventType**](TransactionEventType.md) |  | [optional] |
 | **merchant_name** | **String** |  |  |
 | **timestamp** | **String** | Datetime of the transaction In ISO-8601 format |  |
 | **balance** | **Float** | The running balance of the account after the transaction has occurred, in cents. | [optional] |
