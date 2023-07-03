@@ -147,6 +147,128 @@ module FuseClient
       return data, status_code, headers
     end
 
+    # Starts the background process that will calculate the consumer risk report depending on the customization passed in.
+    # @param [Hash] opts the optional parameters
+    # @option opts [CreateConsumerRiskReportRequest] :create_consumer_risk_report_request 
+    # @return [CreateConsumerRiskReportResponse]
+    def create_consumer_risk_report(opts = {})
+      data, _status_code, _headers = create_consumer_risk_report_with_http_info(opts)
+      data
+    end
+
+    # Starts the background process that will calculate the consumer risk report depending on the customization passed in.
+    # @param [Hash] opts the optional parameters
+    # @option opts [CreateConsumerRiskReportRequest] :create_consumer_risk_report_request 
+    # @return [Array<(CreateConsumerRiskReportResponse, Integer, Hash)>] CreateConsumerRiskReportResponse data, response status code and response headers
+    def create_consumer_risk_report_with_http_info(opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: FuseApi.create_consumer_risk_report ...'
+      end
+      # resource path
+      local_var_path = '/v1/risk_report/consumer'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'create_consumer_risk_report_request'])
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'CreateConsumerRiskReportResponse'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['fuseApiKey', 'fuseClientId']
+
+      new_options = opts.merge(
+        :operation => :"FuseApi.create_consumer_risk_report",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: FuseApi#create_consumer_risk_report\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # @param [Hash] opts the optional parameters
+    # @option opts [CreateConsumerRiskReportCustomizationRequest] :create_consumer_risk_report_customization_request 
+    # @return [CreateConsumerRiskReportCustomizationResponse]
+    def create_consumer_risk_report_customization(opts = {})
+      data, _status_code, _headers = create_consumer_risk_report_customization_with_http_info(opts)
+      data
+    end
+
+    # @param [Hash] opts the optional parameters
+    # @option opts [CreateConsumerRiskReportCustomizationRequest] :create_consumer_risk_report_customization_request 
+    # @return [Array<(CreateConsumerRiskReportCustomizationResponse, Integer, Hash)>] CreateConsumerRiskReportCustomizationResponse data, response status code and response headers
+    def create_consumer_risk_report_customization_with_http_info(opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: FuseApi.create_consumer_risk_report_customization ...'
+      end
+      # resource path
+      local_var_path = '/v1/risk_report/consumer/customization'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'create_consumer_risk_report_customization_request'])
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'CreateConsumerRiskReportCustomizationResponse'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['fuseApiKey', 'fuseClientId']
+
+      new_options = opts.merge(
+        :operation => :"FuseApi.create_consumer_risk_report_customization",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: FuseApi#create_consumer_risk_report_customization\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Create a link token to start the process of a user connecting to a specific financial institution.
     # @param [Hash] opts the optional parameters
     # @option opts [CreateLinkTokenRequest] :create_link_token_request 
@@ -267,128 +389,6 @@ module FuseClient
       data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: FuseApi#create_session\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-      end
-      return data, status_code, headers
-    end
-
-    # Starts the background process that will determine the spend power depending on the customization passed in.
-    # @param [Hash] opts the optional parameters
-    # @option opts [CreateSpendPowerRequest] :create_spend_power_request 
-    # @return [CreateSpendPowerResponse]
-    def create_spend_power(opts = {})
-      data, _status_code, _headers = create_spend_power_with_http_info(opts)
-      data
-    end
-
-    # Starts the background process that will determine the spend power depending on the customization passed in.
-    # @param [Hash] opts the optional parameters
-    # @option opts [CreateSpendPowerRequest] :create_spend_power_request 
-    # @return [Array<(CreateSpendPowerResponse, Integer, Hash)>] CreateSpendPowerResponse data, response status code and response headers
-    def create_spend_power_with_http_info(opts = {})
-      if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: FuseApi.create_spend_power ...'
-      end
-      # resource path
-      local_var_path = '/v1/spend_power'
-
-      # query parameters
-      query_params = opts[:query_params] || {}
-
-      # header parameters
-      header_params = opts[:header_params] || {}
-      # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
-      # HTTP header 'Content-Type'
-      content_type = @api_client.select_header_content_type(['application/json'])
-      if !content_type.nil?
-          header_params['Content-Type'] = content_type
-      end
-
-      # form parameters
-      form_params = opts[:form_params] || {}
-
-      # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'create_spend_power_request'])
-
-      # return_type
-      return_type = opts[:debug_return_type] || 'CreateSpendPowerResponse'
-
-      # auth_names
-      auth_names = opts[:debug_auth_names] || ['fuseApiKey', 'fuseClientId']
-
-      new_options = opts.merge(
-        :operation => :"FuseApi.create_spend_power",
-        :header_params => header_params,
-        :query_params => query_params,
-        :form_params => form_params,
-        :body => post_body,
-        :auth_names => auth_names,
-        :return_type => return_type
-      )
-
-      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: FuseApi#create_spend_power\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-      end
-      return data, status_code, headers
-    end
-
-    # @param [Hash] opts the optional parameters
-    # @option opts [CreateSpendPowerCustomizationRequest] :create_spend_power_customization_request 
-    # @return [CreateSpendPowerCustomizationResponse]
-    def create_spend_power_customization(opts = {})
-      data, _status_code, _headers = create_spend_power_customization_with_http_info(opts)
-      data
-    end
-
-    # @param [Hash] opts the optional parameters
-    # @option opts [CreateSpendPowerCustomizationRequest] :create_spend_power_customization_request 
-    # @return [Array<(CreateSpendPowerCustomizationResponse, Integer, Hash)>] CreateSpendPowerCustomizationResponse data, response status code and response headers
-    def create_spend_power_customization_with_http_info(opts = {})
-      if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: FuseApi.create_spend_power_customization ...'
-      end
-      # resource path
-      local_var_path = '/v1/spend_power/customization'
-
-      # query parameters
-      query_params = opts[:query_params] || {}
-
-      # header parameters
-      header_params = opts[:header_params] || {}
-      # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
-      # HTTP header 'Content-Type'
-      content_type = @api_client.select_header_content_type(['application/json'])
-      if !content_type.nil?
-          header_params['Content-Type'] = content_type
-      end
-
-      # form parameters
-      form_params = opts[:form_params] || {}
-
-      # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'create_spend_power_customization_request'])
-
-      # return_type
-      return_type = opts[:debug_return_type] || 'CreateSpendPowerCustomizationResponse'
-
-      # auth_names
-      auth_names = opts[:debug_auth_names] || ['fuseApiKey', 'fuseClientId']
-
-      new_options = opts.merge(
-        :operation => :"FuseApi.create_spend_power_customization",
-        :header_params => header_params,
-        :query_params => query_params,
-        :form_params => form_params,
-        :body => post_body,
-        :auth_names => auth_names,
-        :return_type => return_type
-      )
-
-      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: FuseApi#create_spend_power_customization\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -712,6 +712,70 @@ module FuseClient
       data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: FuseApi#get_asset_report\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Get consumer risk report
+    # @param consumer_risk_report_id [String] 
+    # @param [Hash] opts the optional parameters
+    # @option opts [Boolean] :recalculate An optional boolean parameter. If set to true, the system will recalculate before returning the risk report. If omitted or set to false, the current risk report will be returned without recalculation.
+    # @return [GetConsumerRiskReportResponse]
+    def get_consumer_risk_report(consumer_risk_report_id, opts = {})
+      data, _status_code, _headers = get_consumer_risk_report_with_http_info(consumer_risk_report_id, opts)
+      data
+    end
+
+    # Get consumer risk report
+    # @param consumer_risk_report_id [String] 
+    # @param [Hash] opts the optional parameters
+    # @option opts [Boolean] :recalculate An optional boolean parameter. If set to true, the system will recalculate before returning the risk report. If omitted or set to false, the current risk report will be returned without recalculation.
+    # @return [Array<(GetConsumerRiskReportResponse, Integer, Hash)>] GetConsumerRiskReportResponse data, response status code and response headers
+    def get_consumer_risk_report_with_http_info(consumer_risk_report_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: FuseApi.get_consumer_risk_report ...'
+      end
+      # verify the required parameter 'consumer_risk_report_id' is set
+      if @api_client.config.client_side_validation && consumer_risk_report_id.nil?
+        fail ArgumentError, "Missing the required parameter 'consumer_risk_report_id' when calling FuseApi.get_consumer_risk_report"
+      end
+      # resource path
+      local_var_path = '/v1/risk_report/consumer/{consumer_risk_report_id}'.sub('{' + 'consumer_risk_report_id' + '}', CGI.escape(consumer_risk_report_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'recalculate'] = opts[:'recalculate'] if !opts[:'recalculate'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'GetConsumerRiskReportResponse'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['fuseApiKey', 'fuseClientId']
+
+      new_options = opts.merge(
+        :operation => :"FuseApi.get_consumer_risk_report",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: FuseApi#get_consumer_risk_report\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -1488,67 +1552,6 @@ module FuseClient
       return data, status_code, headers
     end
 
-    # Get spend power
-    # @param spend_power_id [String] 
-    # @param [Hash] opts the optional parameters
-    # @return [GetSpendPowerResponse]
-    def get_spend_power(spend_power_id, opts = {})
-      data, _status_code, _headers = get_spend_power_with_http_info(spend_power_id, opts)
-      data
-    end
-
-    # Get spend power
-    # @param spend_power_id [String] 
-    # @param [Hash] opts the optional parameters
-    # @return [Array<(GetSpendPowerResponse, Integer, Hash)>] GetSpendPowerResponse data, response status code and response headers
-    def get_spend_power_with_http_info(spend_power_id, opts = {})
-      if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: FuseApi.get_spend_power ...'
-      end
-      # verify the required parameter 'spend_power_id' is set
-      if @api_client.config.client_side_validation && spend_power_id.nil?
-        fail ArgumentError, "Missing the required parameter 'spend_power_id' when calling FuseApi.get_spend_power"
-      end
-      # resource path
-      local_var_path = '/v1/spend_power/{spend_power_id}'.sub('{' + 'spend_power_id' + '}', CGI.escape(spend_power_id.to_s))
-
-      # query parameters
-      query_params = opts[:query_params] || {}
-
-      # header parameters
-      header_params = opts[:header_params] || {}
-      # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
-
-      # form parameters
-      form_params = opts[:form_params] || {}
-
-      # http body (model)
-      post_body = opts[:debug_body]
-
-      # return_type
-      return_type = opts[:debug_return_type] || 'GetSpendPowerResponse'
-
-      # auth_names
-      auth_names = opts[:debug_auth_names] || ['fuseApiKey', 'fuseClientId']
-
-      new_options = opts.merge(
-        :operation => :"FuseApi.get_spend_power",
-        :header_params => header_params,
-        :query_params => query_params,
-        :form_params => form_params,
-        :body => post_body,
-        :auth_names => auth_names,
-        :return_type => return_type
-      )
-
-      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: FuseApi#get_spend_power\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-      end
-      return data, status_code, headers
-    end
-
     # Migrate financial connection
     # This endpoint migrates financial connections from Plaid or MX into the unified Fuse API. It accepts a POST request with connection data, aggregator, entity, and Fuse products, and responds with a JSON payload containing the migrated connection's data, access token, ID, and request ID.
     # @param [Hash] opts the optional parameters
@@ -1743,31 +1746,31 @@ module FuseClient
       return data, status_code, headers
     end
 
-    # Update spend power customization
-    # @param spend_power_customization_id [String] 
+    # Update consumer risk report customization
+    # @param consumer_risk_report_customization_id [String] 
     # @param [Hash] opts the optional parameters
-    # @option opts [UpdateSpendPowerCustomizationRequest] :update_spend_power_customization_request 
-    # @return [UpdateSpendPowerCustomizationResponse]
-    def update_spend_power_customization(spend_power_customization_id, opts = {})
-      data, _status_code, _headers = update_spend_power_customization_with_http_info(spend_power_customization_id, opts)
+    # @option opts [UpdateConsumerRiskReportCustomizationRequest] :update_consumer_risk_report_customization_request 
+    # @return [UpdateConsumerRiskReportCustomizationResponse]
+    def update_consumer_risk_report_customization(consumer_risk_report_customization_id, opts = {})
+      data, _status_code, _headers = update_consumer_risk_report_customization_with_http_info(consumer_risk_report_customization_id, opts)
       data
     end
 
-    # Update spend power customization
-    # @param spend_power_customization_id [String] 
+    # Update consumer risk report customization
+    # @param consumer_risk_report_customization_id [String] 
     # @param [Hash] opts the optional parameters
-    # @option opts [UpdateSpendPowerCustomizationRequest] :update_spend_power_customization_request 
-    # @return [Array<(UpdateSpendPowerCustomizationResponse, Integer, Hash)>] UpdateSpendPowerCustomizationResponse data, response status code and response headers
-    def update_spend_power_customization_with_http_info(spend_power_customization_id, opts = {})
+    # @option opts [UpdateConsumerRiskReportCustomizationRequest] :update_consumer_risk_report_customization_request 
+    # @return [Array<(UpdateConsumerRiskReportCustomizationResponse, Integer, Hash)>] UpdateConsumerRiskReportCustomizationResponse data, response status code and response headers
+    def update_consumer_risk_report_customization_with_http_info(consumer_risk_report_customization_id, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: FuseApi.update_spend_power_customization ...'
+        @api_client.config.logger.debug 'Calling API: FuseApi.update_consumer_risk_report_customization ...'
       end
-      # verify the required parameter 'spend_power_customization_id' is set
-      if @api_client.config.client_side_validation && spend_power_customization_id.nil?
-        fail ArgumentError, "Missing the required parameter 'spend_power_customization_id' when calling FuseApi.update_spend_power_customization"
+      # verify the required parameter 'consumer_risk_report_customization_id' is set
+      if @api_client.config.client_side_validation && consumer_risk_report_customization_id.nil?
+        fail ArgumentError, "Missing the required parameter 'consumer_risk_report_customization_id' when calling FuseApi.update_consumer_risk_report_customization"
       end
       # resource path
-      local_var_path = '/v1/spend_power/customization/{spend_power_customization_id}'.sub('{' + 'spend_power_customization_id' + '}', CGI.escape(spend_power_customization_id.to_s))
+      local_var_path = '/v1/risk_report/consumer/customization/{consumer_risk_report_customization_id}'.sub('{' + 'consumer_risk_report_customization_id' + '}', CGI.escape(consumer_risk_report_customization_id.to_s))
 
       # query parameters
       query_params = opts[:query_params] || {}
@@ -1786,16 +1789,16 @@ module FuseClient
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'update_spend_power_customization_request'])
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'update_consumer_risk_report_customization_request'])
 
       # return_type
-      return_type = opts[:debug_return_type] || 'UpdateSpendPowerCustomizationResponse'
+      return_type = opts[:debug_return_type] || 'UpdateConsumerRiskReportCustomizationResponse'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['fuseApiKey', 'fuseClientId']
 
       new_options = opts.merge(
-        :operation => :"FuseApi.update_spend_power_customization",
+        :operation => :"FuseApi.update_consumer_risk_report_customization",
         :header_params => header_params,
         :query_params => query_params,
         :form_params => form_params,
@@ -1806,7 +1809,7 @@ module FuseClient
 
       data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: FuseApi#update_spend_power_customization\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: FuseApi#update_consumer_risk_report_customization\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

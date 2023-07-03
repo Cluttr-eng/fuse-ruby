@@ -15,6 +15,9 @@ require 'time'
 
 module FuseClient
   class FinancialConnectionsOwnerAddressesInnerData
+    # Full address of the owner
+    attr_accessor :full_address
+
     # City of the address
     attr_accessor :city
 
@@ -33,6 +36,7 @@ module FuseClient
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'full_address' => :'full_address',
         :'city' => :'city',
         :'country' => :'country',
         :'postal_code' => :'postal_code',
@@ -49,6 +53,7 @@ module FuseClient
     # Attribute type mapping.
     def self.openapi_types
       {
+        :'full_address' => :'String',
         :'city' => :'String',
         :'country' => :'String',
         :'postal_code' => :'String',
@@ -77,6 +82,10 @@ module FuseClient
         end
         h[k.to_sym] = v
       }
+
+      if attributes.key?(:'full_address')
+        self.full_address = attributes[:'full_address']
+      end
 
       if attributes.key?(:'city')
         self.city = attributes[:'city']
@@ -117,6 +126,7 @@ module FuseClient
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          full_address == o.full_address &&
           city == o.city &&
           country == o.country &&
           postal_code == o.postal_code &&
@@ -133,7 +143,7 @@ module FuseClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [city, country, postal_code, region, street].hash
+      [full_address, city, country, postal_code, region, street].hash
     end
 
     # Builds the object from hash

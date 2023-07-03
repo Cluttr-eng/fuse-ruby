@@ -18,10 +18,14 @@ module FuseClient
     # The Market Identifier Code (MIC) associated with the specific financial market or exchange where the security is traded.
     attr_accessor :mic_code
 
+    # The suffix of the security's ticker symbol.
+    attr_accessor :suffix
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'mic_code' => :'mic_code'
+        :'mic_code' => :'mic_code',
+        :'suffix' => :'suffix'
       }
     end
 
@@ -33,7 +37,8 @@ module FuseClient
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'mic_code' => :'String'
+        :'mic_code' => :'String',
+        :'suffix' => :'String'
       }
     end
 
@@ -61,6 +66,10 @@ module FuseClient
       if attributes.key?(:'mic_code')
         self.mic_code = attributes[:'mic_code']
       end
+
+      if attributes.key?(:'suffix')
+        self.suffix = attributes[:'suffix']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -81,7 +90,8 @@ module FuseClient
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          mic_code == o.mic_code
+          mic_code == o.mic_code &&
+          suffix == o.suffix
     end
 
     # @see the `==` method
@@ -93,7 +103,7 @@ module FuseClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [mic_code].hash
+      [mic_code, suffix].hash
     end
 
     # Builds the object from hash

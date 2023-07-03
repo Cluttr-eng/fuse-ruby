@@ -17,6 +17,8 @@
 | **mono** | [**FinancialConnectionDetailsMono**](FinancialConnectionDetailsMono.md) |  | [optional] |
 | **truelayer** | [**FinancialConnectionDetailsTruelayer**](FinancialConnectionDetailsTruelayer.md) |  | [optional] |
 | **finverse** | [**FinancialConnectionDetailsFinverse**](FinancialConnectionDetailsFinverse.md) |  | [optional] |
+| **basiq** | [**FinancialConnectionDetailsBasiq**](FinancialConnectionDetailsBasiq.md) |  | [optional] |
+| **belvo** | [**FinancialConnectionDetailsBelvo**](FinancialConnectionDetailsBelvo.md) |  | [optional] |
 
 ## Example
 
@@ -36,7 +38,9 @@ instance = FuseClient::FinancialConnectionDetails.new(
   flinks: null,
   mono: null,
   truelayer: null,
-  finverse: null
+  finverse: null,
+  basiq: null,
+  belvo: null
 )
 ```
 

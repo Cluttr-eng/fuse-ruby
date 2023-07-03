@@ -22,7 +22,7 @@ module FuseClient
 
     attr_accessor :status
 
-    # Use positive values to represent money going out and negative to represent money going in.
+    # Amount in cents associated with the transaction. Use positive values to represent money going out and negative to represent money going in.
     attr_accessor :amount
 
     # The ISO-4217 currency code.
@@ -177,10 +177,6 @@ module FuseClient
         invalid_properties.push('invalid value for "iso_currency_code", iso_currency_code cannot be nil.')
       end
 
-      if @transaction_type.nil?
-        invalid_properties.push('invalid value for "transaction_type", transaction_type cannot be nil.')
-      end
-
       if @merchant_name.nil?
         invalid_properties.push('invalid value for "merchant_name", merchant_name cannot be nil.')
       end
@@ -202,7 +198,6 @@ module FuseClient
       return false if @status.nil?
       return false if @amount.nil?
       return false if @iso_currency_code.nil?
-      return false if @transaction_type.nil?
       return false if @merchant_name.nil?
       return false if @timestamp.nil?
       true

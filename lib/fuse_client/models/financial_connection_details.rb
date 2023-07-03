@@ -45,6 +45,10 @@ module FuseClient
 
     attr_accessor :finverse
 
+    attr_accessor :basiq
+
+    attr_accessor :belvo
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -82,7 +86,9 @@ module FuseClient
         :'flinks' => :'flinks',
         :'mono' => :'mono',
         :'truelayer' => :'truelayer',
-        :'finverse' => :'finverse'
+        :'finverse' => :'finverse',
+        :'basiq' => :'basiq',
+        :'belvo' => :'belvo'
       }
     end
 
@@ -106,7 +112,9 @@ module FuseClient
         :'flinks' => :'FinancialConnectionDetailsFlinks',
         :'mono' => :'FinancialConnectionDetailsMono',
         :'truelayer' => :'FinancialConnectionDetailsTruelayer',
-        :'finverse' => :'FinancialConnectionDetailsFinverse'
+        :'finverse' => :'FinancialConnectionDetailsFinverse',
+        :'basiq' => :'FinancialConnectionDetailsBasiq',
+        :'belvo' => :'FinancialConnectionDetailsBelvo'
       }
     end
 
@@ -182,6 +190,14 @@ module FuseClient
       if attributes.key?(:'finverse')
         self.finverse = attributes[:'finverse']
       end
+
+      if attributes.key?(:'basiq')
+        self.basiq = attributes[:'basiq']
+      end
+
+      if attributes.key?(:'belvo')
+        self.belvo = attributes[:'belvo']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -251,7 +267,9 @@ module FuseClient
           flinks == o.flinks &&
           mono == o.mono &&
           truelayer == o.truelayer &&
-          finverse == o.finverse
+          finverse == o.finverse &&
+          basiq == o.basiq &&
+          belvo == o.belvo
     end
 
     # @see the `==` method
@@ -263,7 +281,7 @@ module FuseClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, connection_status, connection_status_updated_at, is_oauth, aggregator, plaid, teller, mx, snaptrade, flinks, mono, truelayer, finverse].hash
+      [id, connection_status, connection_status_updated_at, is_oauth, aggregator, plaid, teller, mx, snaptrade, flinks, mono, truelayer, finverse, basiq, belvo].hash
     end
 
     # Builds the object from hash
