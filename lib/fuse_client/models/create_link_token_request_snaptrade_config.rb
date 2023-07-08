@@ -14,41 +14,36 @@ require 'date'
 require 'time'
 
 module FuseClient
-  class CreateLinkTokenRequest
-    # An id that is unique for an institution.
-    attr_accessor :institution_id
+  class CreateLinkTokenRequestSnaptradeConfig
+    # SnapTrade connection type. Defaults to 'read'
+    attr_accessor :connection_type
 
-    attr_accessor :entity
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
 
-    # The name of your application. This is what will be displayed to users.
-    attr_accessor :client_name
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
 
-    # The session client secret created from the 'Create session client secret' endpoint
-    attr_accessor :session_client_secret
-
-    # This field allows you to set a unique webhook URL for each individual entity. By specifying an entity-specific webhook URL, you can receive and process data events for each entity separately. If this field is left empty, the organization-wide webhook URL set in the sandbox/production environment will be used as the default for all entities.
-    attr_accessor :webhook_url
-
-    attr_accessor :mx
-
-    attr_accessor :plaid
-
-    attr_accessor :teller
-
-    attr_accessor :snaptrade
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'institution_id' => :'institution_id',
-        :'entity' => :'entity',
-        :'client_name' => :'client_name',
-        :'session_client_secret' => :'session_client_secret',
-        :'webhook_url' => :'webhook_url',
-        :'mx' => :'mx',
-        :'plaid' => :'plaid',
-        :'teller' => :'teller',
-        :'snaptrade' => :'snaptrade'
+        :'connection_type' => :'connectionType'
       }
     end
 
@@ -60,15 +55,7 @@ module FuseClient
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'institution_id' => :'String',
-        :'entity' => :'Entity',
-        :'client_name' => :'String',
-        :'session_client_secret' => :'String',
-        :'webhook_url' => :'String',
-        :'mx' => :'CreateLinkTokenRequestMx',
-        :'plaid' => :'CreateLinkTokenRequestPlaid',
-        :'teller' => :'CreateLinkTokenRequestTeller',
-        :'snaptrade' => :'CreateLinkTokenRequestSnaptrade'
+        :'connection_type' => :'String'
       }
     end
 
@@ -82,51 +69,21 @@ module FuseClient
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `FuseClient::CreateLinkTokenRequest` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `FuseClient::CreateLinkTokenRequestSnaptradeConfig` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `FuseClient::CreateLinkTokenRequest`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `FuseClient::CreateLinkTokenRequestSnaptradeConfig`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'institution_id')
-        self.institution_id = attributes[:'institution_id']
-      end
-
-      if attributes.key?(:'entity')
-        self.entity = attributes[:'entity']
-      end
-
-      if attributes.key?(:'client_name')
-        self.client_name = attributes[:'client_name']
-      end
-
-      if attributes.key?(:'session_client_secret')
-        self.session_client_secret = attributes[:'session_client_secret']
-      end
-
-      if attributes.key?(:'webhook_url')
-        self.webhook_url = attributes[:'webhook_url']
-      end
-
-      if attributes.key?(:'mx')
-        self.mx = attributes[:'mx']
-      end
-
-      if attributes.key?(:'plaid')
-        self.plaid = attributes[:'plaid']
-      end
-
-      if attributes.key?(:'teller')
-        self.teller = attributes[:'teller']
-      end
-
-      if attributes.key?(:'snaptrade')
-        self.snaptrade = attributes[:'snaptrade']
+      if attributes.key?(:'connection_type')
+        self.connection_type = attributes[:'connection_type']
+      else
+        self.connection_type = 'read'
       end
     end
 
@@ -134,33 +91,25 @@ module FuseClient
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @institution_id.nil?
-        invalid_properties.push('invalid value for "institution_id", institution_id cannot be nil.')
-      end
-
-      if @entity.nil?
-        invalid_properties.push('invalid value for "entity", entity cannot be nil.')
-      end
-
-      if @client_name.nil?
-        invalid_properties.push('invalid value for "client_name", client_name cannot be nil.')
-      end
-
-      if @session_client_secret.nil?
-        invalid_properties.push('invalid value for "session_client_secret", session_client_secret cannot be nil.')
-      end
-
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @institution_id.nil?
-      return false if @entity.nil?
-      return false if @client_name.nil?
-      return false if @session_client_secret.nil?
+      connection_type_validator = EnumAttributeValidator.new('String', ["read", "trade"])
+      return false unless connection_type_validator.valid?(@connection_type)
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] connection_type Object to be assigned
+    def connection_type=(connection_type)
+      validator = EnumAttributeValidator.new('String', ["read", "trade"])
+      unless validator.valid?(connection_type)
+        fail ArgumentError, "invalid value for \"connection_type\", must be one of #{validator.allowable_values}."
+      end
+      @connection_type = connection_type
     end
 
     # Checks equality by comparing each attribute.
@@ -168,15 +117,7 @@ module FuseClient
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          institution_id == o.institution_id &&
-          entity == o.entity &&
-          client_name == o.client_name &&
-          session_client_secret == o.session_client_secret &&
-          webhook_url == o.webhook_url &&
-          mx == o.mx &&
-          plaid == o.plaid &&
-          teller == o.teller &&
-          snaptrade == o.snaptrade
+          connection_type == o.connection_type
     end
 
     # @see the `==` method
@@ -188,7 +129,7 @@ module FuseClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [institution_id, entity, client_name, session_client_secret, webhook_url, mx, plaid, teller, snaptrade].hash
+      [connection_type].hash
     end
 
     # Builds the object from hash

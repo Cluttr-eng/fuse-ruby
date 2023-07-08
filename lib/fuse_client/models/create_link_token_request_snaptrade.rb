@@ -14,41 +14,14 @@ require 'date'
 require 'time'
 
 module FuseClient
-  class CreateLinkTokenRequest
-    # An id that is unique for an institution.
-    attr_accessor :institution_id
-
-    attr_accessor :entity
-
-    # The name of your application. This is what will be displayed to users.
-    attr_accessor :client_name
-
-    # The session client secret created from the 'Create session client secret' endpoint
-    attr_accessor :session_client_secret
-
-    # This field allows you to set a unique webhook URL for each individual entity. By specifying an entity-specific webhook URL, you can receive and process data events for each entity separately. If this field is left empty, the organization-wide webhook URL set in the sandbox/production environment will be used as the default for all entities.
-    attr_accessor :webhook_url
-
-    attr_accessor :mx
-
-    attr_accessor :plaid
-
-    attr_accessor :teller
-
-    attr_accessor :snaptrade
+  # An object specifying information about the SnapTrade configuration to use when creating a link token. 
+  class CreateLinkTokenRequestSnaptrade
+    attr_accessor :config
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'institution_id' => :'institution_id',
-        :'entity' => :'entity',
-        :'client_name' => :'client_name',
-        :'session_client_secret' => :'session_client_secret',
-        :'webhook_url' => :'webhook_url',
-        :'mx' => :'mx',
-        :'plaid' => :'plaid',
-        :'teller' => :'teller',
-        :'snaptrade' => :'snaptrade'
+        :'config' => :'config'
       }
     end
 
@@ -60,15 +33,7 @@ module FuseClient
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'institution_id' => :'String',
-        :'entity' => :'Entity',
-        :'client_name' => :'String',
-        :'session_client_secret' => :'String',
-        :'webhook_url' => :'String',
-        :'mx' => :'CreateLinkTokenRequestMx',
-        :'plaid' => :'CreateLinkTokenRequestPlaid',
-        :'teller' => :'CreateLinkTokenRequestTeller',
-        :'snaptrade' => :'CreateLinkTokenRequestSnaptrade'
+        :'config' => :'CreateLinkTokenRequestSnaptradeConfig'
       }
     end
 
@@ -82,51 +47,19 @@ module FuseClient
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `FuseClient::CreateLinkTokenRequest` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `FuseClient::CreateLinkTokenRequestSnaptrade` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `FuseClient::CreateLinkTokenRequest`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `FuseClient::CreateLinkTokenRequestSnaptrade`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'institution_id')
-        self.institution_id = attributes[:'institution_id']
-      end
-
-      if attributes.key?(:'entity')
-        self.entity = attributes[:'entity']
-      end
-
-      if attributes.key?(:'client_name')
-        self.client_name = attributes[:'client_name']
-      end
-
-      if attributes.key?(:'session_client_secret')
-        self.session_client_secret = attributes[:'session_client_secret']
-      end
-
-      if attributes.key?(:'webhook_url')
-        self.webhook_url = attributes[:'webhook_url']
-      end
-
-      if attributes.key?(:'mx')
-        self.mx = attributes[:'mx']
-      end
-
-      if attributes.key?(:'plaid')
-        self.plaid = attributes[:'plaid']
-      end
-
-      if attributes.key?(:'teller')
-        self.teller = attributes[:'teller']
-      end
-
-      if attributes.key?(:'snaptrade')
-        self.snaptrade = attributes[:'snaptrade']
+      if attributes.key?(:'config')
+        self.config = attributes[:'config']
       end
     end
 
@@ -134,32 +67,12 @@ module FuseClient
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @institution_id.nil?
-        invalid_properties.push('invalid value for "institution_id", institution_id cannot be nil.')
-      end
-
-      if @entity.nil?
-        invalid_properties.push('invalid value for "entity", entity cannot be nil.')
-      end
-
-      if @client_name.nil?
-        invalid_properties.push('invalid value for "client_name", client_name cannot be nil.')
-      end
-
-      if @session_client_secret.nil?
-        invalid_properties.push('invalid value for "session_client_secret", session_client_secret cannot be nil.')
-      end
-
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @institution_id.nil?
-      return false if @entity.nil?
-      return false if @client_name.nil?
-      return false if @session_client_secret.nil?
       true
     end
 
@@ -168,15 +81,7 @@ module FuseClient
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          institution_id == o.institution_id &&
-          entity == o.entity &&
-          client_name == o.client_name &&
-          session_client_secret == o.session_client_secret &&
-          webhook_url == o.webhook_url &&
-          mx == o.mx &&
-          plaid == o.plaid &&
-          teller == o.teller &&
-          snaptrade == o.snaptrade
+          config == o.config
     end
 
     # @see the `==` method
@@ -188,7 +93,7 @@ module FuseClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [institution_id, entity, client_name, session_client_secret, webhook_url, mx, plaid, teller, snaptrade].hash
+      [config].hash
     end
 
     # Builds the object from hash
