@@ -14,30 +14,36 @@ require 'date'
 require 'time'
 
 module FuseClient
-  class FinancialConnectionsAccountBalance
-    # Remote Account Id of the transaction, ie Plaid Account Id
-    attr_accessor :remote_account_id
+  class CreateLinkTokenRequestSnaptradeConfig
+    # SnapTrade connection type. Defaults to 'read'
+    attr_accessor :connection_type
 
-    # Amount in cents after factoring in pending balances. The format of this value is a double. For accounts with credit features, the available funds generally equal the credit limit. Some institutions may not provide an available balance calculation. If this is the case, Fuse will return a null value for the available balance. To ensure you have the most accurate information, we recommend obtaining the current balance by using 'balance.available || balance.current'.
-    attr_accessor :available
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
 
-    # Amount in cents without factoring in pending balances. The format of this value is a double.
-    attr_accessor :current
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
 
-    # The ISO-4217 currency code of the balance.
-    attr_accessor :iso_currency_code
-
-    # The last time the account balance was updated, represented as an ISO 8601 timestamp (YYYY-MM-DDTHH:mm:ssZ). This value may not be available for some accounts.
-    attr_accessor :last_updated_date
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'remote_account_id' => :'remote_account_id',
-        :'available' => :'available',
-        :'current' => :'current',
-        :'iso_currency_code' => :'iso_currency_code',
-        :'last_updated_date' => :'last_updated_date'
+        :'connection_type' => :'connectionType'
       }
     end
 
@@ -49,19 +55,13 @@ module FuseClient
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'remote_account_id' => :'String',
-        :'available' => :'Float',
-        :'current' => :'Float',
-        :'iso_currency_code' => :'String',
-        :'last_updated_date' => :'String'
+        :'connection_type' => :'String'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
-        :'available',
-        :'current',
       ])
     end
 
@@ -69,35 +69,21 @@ module FuseClient
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `FuseClient::FinancialConnectionsAccountBalance` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `FuseClient::CreateLinkTokenRequestSnaptradeConfig` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `FuseClient::FinancialConnectionsAccountBalance`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `FuseClient::CreateLinkTokenRequestSnaptradeConfig`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'remote_account_id')
-        self.remote_account_id = attributes[:'remote_account_id']
-      end
-
-      if attributes.key?(:'available')
-        self.available = attributes[:'available']
-      end
-
-      if attributes.key?(:'current')
-        self.current = attributes[:'current']
-      end
-
-      if attributes.key?(:'iso_currency_code')
-        self.iso_currency_code = attributes[:'iso_currency_code']
-      end
-
-      if attributes.key?(:'last_updated_date')
-        self.last_updated_date = attributes[:'last_updated_date']
+      if attributes.key?(:'connection_type')
+        self.connection_type = attributes[:'connection_type']
+      else
+        self.connection_type = 'read'
       end
     end
 
@@ -105,18 +91,25 @@ module FuseClient
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @remote_account_id.nil?
-        invalid_properties.push('invalid value for "remote_account_id", remote_account_id cannot be nil.')
-      end
-
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @remote_account_id.nil?
+      connection_type_validator = EnumAttributeValidator.new('String', ["read", "trade"])
+      return false unless connection_type_validator.valid?(@connection_type)
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] connection_type Object to be assigned
+    def connection_type=(connection_type)
+      validator = EnumAttributeValidator.new('String', ["read", "trade"])
+      unless validator.valid?(connection_type)
+        fail ArgumentError, "invalid value for \"connection_type\", must be one of #{validator.allowable_values}."
+      end
+      @connection_type = connection_type
     end
 
     # Checks equality by comparing each attribute.
@@ -124,11 +117,7 @@ module FuseClient
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          remote_account_id == o.remote_account_id &&
-          available == o.available &&
-          current == o.current &&
-          iso_currency_code == o.iso_currency_code &&
-          last_updated_date == o.last_updated_date
+          connection_type == o.connection_type
     end
 
     # @see the `==` method
@@ -140,7 +129,7 @@ module FuseClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [remote_account_id, available, current, iso_currency_code, last_updated_date].hash
+      [connection_type].hash
     end
 
     # Builds the object from hash
