@@ -603,7 +603,7 @@ api_instance = FuseClient::FuseApi.new
 fuse_client_id = 'fuse_client_id_example' # String | 
 fuse_api_key = 'fuse_api_key_example' # String | 
 opts = {
-  enrich_transactions_request: FuseClient::EnrichTransactionsRequest.new({transactions: [FuseClient::TransactionToEnrich.new({id: 'id_example', merchant_name: 'merchant_name_example'})]}) # EnrichTransactionsRequest | 
+  enrich_transactions_request: FuseClient::EnrichTransactionsRequest.new({transactions: [FuseClient::TransactionToEnrich.new({id: 'id_example', description: 'description_example', amount: 3.56, direction: 'incoming'})]}) # EnrichTransactionsRequest | 
 }
 
 begin

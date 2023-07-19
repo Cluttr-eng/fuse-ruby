@@ -31,7 +31,7 @@ describe FuseClient::TransactionToEnrich do
     end
   end
 
-  describe 'test attribute "merchant_name"' do
+  describe 'test attribute "description"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end
@@ -49,12 +49,40 @@ describe FuseClient::TransactionToEnrich do
     end
   end
 
-  describe 'test attribute "type"' do
+  describe 'test attribute "direction"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["debit", "credit"])
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["incoming", "outgoing"])
       # validator.allowable_values.each do |value|
-      #   expect { instance.type = value }.not_to raise_error
+      #   expect { instance.direction = value }.not_to raise_error
+      # end
+    end
+  end
+
+  describe 'test attribute "country_code"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  describe 'test attribute "iso_currency_code"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  describe 'test attribute "date"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  describe 'test attribute "owner_type"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["consumer", "business"])
+      # validator.allowable_values.each do |value|
+      #   expect { instance.owner_type = value }.not_to raise_error
       # end
     end
   end

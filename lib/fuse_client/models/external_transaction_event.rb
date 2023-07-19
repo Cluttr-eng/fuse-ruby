@@ -25,10 +25,16 @@ module FuseClient
     # Amount in cents associated with the transaction. Use positive values to represent money going out and negative to represent money going in.
     attr_accessor :amount
 
+    attr_accessor :country_code
+
     # The ISO-4217 currency code.
     attr_accessor :iso_currency_code
 
     attr_accessor :transaction_type
+
+    attr_accessor :transaction_description
+
+    attr_accessor :transaction_owner_type
 
     attr_accessor :merchant_name
 
@@ -67,8 +73,11 @@ module FuseClient
         :'event_type' => :'event_type',
         :'status' => :'status',
         :'amount' => :'amount',
+        :'country_code' => :'country_code',
         :'iso_currency_code' => :'iso_currency_code',
         :'transaction_type' => :'transaction_type',
+        :'transaction_description' => :'transaction_description',
+        :'transaction_owner_type' => :'transaction_owner_type',
         :'merchant_name' => :'merchant_name',
         :'timestamp' => :'timestamp',
         :'balance' => :'balance'
@@ -87,8 +96,11 @@ module FuseClient
         :'event_type' => :'String',
         :'status' => :'ExternalTransactionEventStatus',
         :'amount' => :'Float',
+        :'country_code' => :'String',
         :'iso_currency_code' => :'String',
         :'transaction_type' => :'TransactionEventType',
+        :'transaction_description' => :'String',
+        :'transaction_owner_type' => :'String',
         :'merchant_name' => :'String',
         :'timestamp' => :'String',
         :'balance' => :'Float'
@@ -132,12 +144,28 @@ module FuseClient
         self.amount = attributes[:'amount']
       end
 
+      if attributes.key?(:'country_code')
+        self.country_code = attributes[:'country_code']
+      else
+        self.country_code = 'US'
+      end
+
       if attributes.key?(:'iso_currency_code')
         self.iso_currency_code = attributes[:'iso_currency_code']
       end
 
       if attributes.key?(:'transaction_type')
         self.transaction_type = attributes[:'transaction_type']
+      end
+
+      if attributes.key?(:'transaction_description')
+        self.transaction_description = attributes[:'transaction_description']
+      end
+
+      if attributes.key?(:'transaction_owner_type')
+        self.transaction_owner_type = attributes[:'transaction_owner_type']
+      else
+        self.transaction_owner_type = 'consumer'
       end
 
       if attributes.key?(:'merchant_name')
@@ -198,6 +226,8 @@ module FuseClient
       return false if @status.nil?
       return false if @amount.nil?
       return false if @iso_currency_code.nil?
+      transaction_owner_type_validator = EnumAttributeValidator.new('String', ["consumer", "business"])
+      return false unless transaction_owner_type_validator.valid?(@transaction_owner_type)
       return false if @merchant_name.nil?
       return false if @timestamp.nil?
       true
@@ -213,6 +243,16 @@ module FuseClient
       @event_type = event_type
     end
 
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] transaction_owner_type Object to be assigned
+    def transaction_owner_type=(transaction_owner_type)
+      validator = EnumAttributeValidator.new('String', ["consumer", "business"])
+      unless validator.valid?(transaction_owner_type)
+        fail ArgumentError, "invalid value for \"transaction_owner_type\", must be one of #{validator.allowable_values}."
+      end
+      @transaction_owner_type = transaction_owner_type
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -222,8 +262,11 @@ module FuseClient
           event_type == o.event_type &&
           status == o.status &&
           amount == o.amount &&
+          country_code == o.country_code &&
           iso_currency_code == o.iso_currency_code &&
           transaction_type == o.transaction_type &&
+          transaction_description == o.transaction_description &&
+          transaction_owner_type == o.transaction_owner_type &&
           merchant_name == o.merchant_name &&
           timestamp == o.timestamp &&
           balance == o.balance
@@ -238,7 +281,7 @@ module FuseClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, event_type, status, amount, iso_currency_code, transaction_type, merchant_name, timestamp, balance].hash
+      [id, event_type, status, amount, country_code, iso_currency_code, transaction_type, transaction_description, transaction_owner_type, merchant_name, timestamp, balance].hash
     end
 
     # Builds the object from hash

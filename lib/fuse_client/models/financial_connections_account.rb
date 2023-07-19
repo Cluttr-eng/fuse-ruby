@@ -18,6 +18,9 @@ module FuseClient
     # Remote Id of the account, ie Plaid or Teller account id
     attr_accessor :remote_id
 
+    # The ISO-4217 currency code of the account.
+    attr_accessor :currency
+
     # Uniquely identifies this account across all accounts for a single financial connection. Used for reconnection deduplication. See more information here: https://letsfuse.readme.io/docs/duplicate-accounts
     attr_accessor :fingerprint
 
@@ -63,6 +66,7 @@ module FuseClient
     def self.attribute_map
       {
         :'remote_id' => :'remote_id',
+        :'currency' => :'currency',
         :'fingerprint' => :'fingerprint',
         :'institution' => :'institution',
         :'mask' => :'mask',
@@ -83,6 +87,7 @@ module FuseClient
     def self.openapi_types
       {
         :'remote_id' => :'String',
+        :'currency' => :'String',
         :'fingerprint' => :'String',
         :'institution' => :'FinancialConnectionsAccountInstitution',
         :'mask' => :'String',
@@ -118,6 +123,10 @@ module FuseClient
 
       if attributes.key?(:'remote_id')
         self.remote_id = attributes[:'remote_id']
+      end
+
+      if attributes.key?(:'currency')
+        self.currency = attributes[:'currency']
       end
 
       if attributes.key?(:'fingerprint')
@@ -161,6 +170,10 @@ module FuseClient
         invalid_properties.push('invalid value for "remote_id", remote_id cannot be nil.')
       end
 
+      if @currency.nil?
+        invalid_properties.push('invalid value for "currency", currency cannot be nil.')
+      end
+
       if @fingerprint.nil?
         invalid_properties.push('invalid value for "fingerprint", fingerprint cannot be nil.')
       end
@@ -184,6 +197,7 @@ module FuseClient
     # @return true if the model is valid
     def valid?
       return false if @remote_id.nil?
+      return false if @currency.nil?
       return false if @fingerprint.nil?
       return false if @name.nil?
       return false if @type.nil?
@@ -197,6 +211,7 @@ module FuseClient
       return true if self.equal?(o)
       self.class == o.class &&
           remote_id == o.remote_id &&
+          currency == o.currency &&
           fingerprint == o.fingerprint &&
           institution == o.institution &&
           mask == o.mask &&
@@ -216,7 +231,7 @@ module FuseClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [remote_id, fingerprint, institution, mask, name, type, subtype, balance, remote_data].hash
+      [remote_id, currency, fingerprint, institution, mask, name, type, subtype, balance, remote_data].hash
     end
 
     # Builds the object from hash

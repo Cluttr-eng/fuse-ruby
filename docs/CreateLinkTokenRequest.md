@@ -12,6 +12,7 @@
 | **mx** | [**CreateLinkTokenRequestMx**](CreateLinkTokenRequestMx.md) |  | [optional] |
 | **plaid** | [**CreateLinkTokenRequestPlaid**](CreateLinkTokenRequestPlaid.md) |  | [optional] |
 | **teller** | [**CreateLinkTokenRequestTeller**](CreateLinkTokenRequestTeller.md) |  | [optional] |
+| **snaptrade** | [**CreateLinkTokenRequestSnaptrade**](CreateLinkTokenRequestSnaptrade.md) |  | [optional] |
 
 ## Example
 
@@ -26,7 +27,8 @@ instance = FuseClient::CreateLinkTokenRequest.new(
   webhook_url: null,
   mx: null,
   plaid: null,
-  teller: null
+  teller: null,
+  snaptrade: null
 )
 ```
 
