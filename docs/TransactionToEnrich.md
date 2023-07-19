@@ -11,7 +11,7 @@
 | **direction** | **String** | The direction of the transaction. |  |
 | **country_code** | **String** |  | [optional][default to &#39;US&#39;] |
 | **iso_currency_code** | **String** |  | [optional][default to &#39;USD&#39;] |
-| **date** | **String** |  | [optional][default to &#39;The date the transaction was posted.&#39;] |
+| **date** | **String** | The date the transaction was posted. | [optional] |
 | **owner_type** | **String** |  | [optional][default to &#39;consumer&#39;] |
 
 ## Example

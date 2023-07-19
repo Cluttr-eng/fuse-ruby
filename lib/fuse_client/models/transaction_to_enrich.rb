@@ -34,6 +34,7 @@ module FuseClient
 
     attr_accessor :iso_currency_code
 
+    # The date the transaction was posted.
     attr_accessor :date
 
     attr_accessor :owner_type
@@ -150,8 +151,6 @@ module FuseClient
 
       if attributes.key?(:'date')
         self.date = attributes[:'date']
-      else
-        self.date = 'The date the transaction was posted.'
       end
 
       if attributes.key?(:'owner_type')
