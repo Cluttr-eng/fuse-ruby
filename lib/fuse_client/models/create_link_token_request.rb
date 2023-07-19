@@ -35,6 +35,8 @@ module FuseClient
 
     attr_accessor :teller
 
+    attr_accessor :snaptrade
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -45,7 +47,8 @@ module FuseClient
         :'webhook_url' => :'webhook_url',
         :'mx' => :'mx',
         :'plaid' => :'plaid',
-        :'teller' => :'teller'
+        :'teller' => :'teller',
+        :'snaptrade' => :'snaptrade'
       }
     end
 
@@ -64,7 +67,8 @@ module FuseClient
         :'webhook_url' => :'String',
         :'mx' => :'CreateLinkTokenRequestMx',
         :'plaid' => :'CreateLinkTokenRequestPlaid',
-        :'teller' => :'CreateLinkTokenRequestTeller'
+        :'teller' => :'CreateLinkTokenRequestTeller',
+        :'snaptrade' => :'CreateLinkTokenRequestSnaptrade'
       }
     end
 
@@ -120,6 +124,10 @@ module FuseClient
       if attributes.key?(:'teller')
         self.teller = attributes[:'teller']
       end
+
+      if attributes.key?(:'snaptrade')
+        self.snaptrade = attributes[:'snaptrade']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -167,7 +175,8 @@ module FuseClient
           webhook_url == o.webhook_url &&
           mx == o.mx &&
           plaid == o.plaid &&
-          teller == o.teller
+          teller == o.teller &&
+          snaptrade == o.snaptrade
     end
 
     # @see the `==` method
@@ -179,7 +188,7 @@ module FuseClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [institution_id, entity, client_name, session_client_secret, webhook_url, mx, plaid, teller].hash
+      [institution_id, entity, client_name, session_client_secret, webhook_url, mx, plaid, teller, snaptrade].hash
     end
 
     # Builds the object from hash

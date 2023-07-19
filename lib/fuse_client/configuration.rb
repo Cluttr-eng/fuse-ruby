@@ -422,7 +422,11 @@ module FuseClient
       [
         {
           url: "https://sandbox-api.letsfuse.com",
-          description: "sandbox",
+          description: "Fuse sandbox API server",
+        },
+        {
+          url: "https://api.letsfuse.com",
+          description: "Fuse production API server",
         }
       ]
     end

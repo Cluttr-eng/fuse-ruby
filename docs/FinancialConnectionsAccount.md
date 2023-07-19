@@ -5,6 +5,7 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **remote_id** | **String** | Remote Id of the account, ie Plaid or Teller account id |  |
+| **currency** | **String** | The ISO-4217 currency code of the account. |  |
 | **fingerprint** | **String** | Uniquely identifies this account across all accounts for a single financial connection. Used for reconnection deduplication. See more information here: https://letsfuse.readme.io/docs/duplicate-accounts |  |
 | **institution** | [**FinancialConnectionsAccountInstitution**](FinancialConnectionsAccountInstitution.md) |  | [optional] |
 | **mask** | **String** | The partial account number. | [optional] |
@@ -21,6 +22,7 @@ require 'fuse_client'
 
 instance = FuseClient::FinancialConnectionsAccount.new(
   remote_id: null,
+  currency: null,
   fingerprint: null,
   institution: null,
   mask: null,

@@ -53,6 +53,12 @@ describe FuseClient::ExternalTransactionEvent do
     end
   end
 
+  describe 'test attribute "country_code"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   describe 'test attribute "iso_currency_code"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
@@ -62,6 +68,22 @@ describe FuseClient::ExternalTransactionEvent do
   describe 'test attribute "transaction_type"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  describe 'test attribute "transaction_description"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  describe 'test attribute "transaction_owner_type"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["consumer", "business"])
+      # validator.allowable_values.each do |value|
+      #   expect { instance.transaction_owner_type = value }.not_to raise_error
+      # end
     end
   end
 

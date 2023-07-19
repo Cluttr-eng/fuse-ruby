@@ -21,6 +21,9 @@ module FuseClient
     # The ISO-4217 currency code of the transaction
     attr_accessor :iso_currency_code
 
+    # The name of the end user associated with this consumer risk report.
+    attr_accessor :end_user_name
+
     # This is used to determine the timeframe and other metadata for the consumer risk report.
     attr_accessor :customization_id
 
@@ -29,6 +32,7 @@ module FuseClient
       {
         :'account_id' => :'account_id',
         :'iso_currency_code' => :'iso_currency_code',
+        :'end_user_name' => :'end_user_name',
         :'customization_id' => :'customization_id'
       }
     end
@@ -43,6 +47,7 @@ module FuseClient
       {
         :'account_id' => :'String',
         :'iso_currency_code' => :'String',
+        :'end_user_name' => :'String',
         :'customization_id' => :'String'
       }
     end
@@ -74,6 +79,10 @@ module FuseClient
 
       if attributes.key?(:'iso_currency_code')
         self.iso_currency_code = attributes[:'iso_currency_code']
+      end
+
+      if attributes.key?(:'end_user_name')
+        self.end_user_name = attributes[:'end_user_name']
       end
 
       if attributes.key?(:'customization_id')
@@ -116,6 +125,7 @@ module FuseClient
       self.class == o.class &&
           account_id == o.account_id &&
           iso_currency_code == o.iso_currency_code &&
+          end_user_name == o.end_user_name &&
           customization_id == o.customization_id
     end
 
@@ -128,7 +138,7 @@ module FuseClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, iso_currency_code, customization_id].hash
+      [account_id, iso_currency_code, end_user_name, customization_id].hash
     end
 
     # Builds the object from hash

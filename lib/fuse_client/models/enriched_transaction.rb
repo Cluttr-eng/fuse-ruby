@@ -21,87 +21,22 @@ module FuseClient
     # A Fuse defined, unique ID for the merchant associated with this transaction.
     attr_accessor :merchant_id
 
-    # The original or enhanced name of the merchant.
-    attr_accessor :name
+    # The name of the merchant.
+    attr_accessor :merchant_name
 
     attr_accessor :logo
 
-    # The amount of the transaction in cents, in the currency of the account.
-    attr_accessor :amount
-
-    attr_accessor :category
-
-    # Whether the transaction is a bill pay.
-    attr_accessor :is_bill_pay
-
-    # Whether the transaction is a direct deposit.
-    attr_accessor :is_direct_deposit
-
-    # Whether the transaction is a an expense
-    attr_accessor :is_expense
-
-    # Whether the transaction is a fee.
-    attr_accessor :is_fee
-
-    # Whether the transaction is income.
-    attr_accessor :is_income
-
-    # Whether the transaction is international.
-    attr_accessor :is_international
-
-    # This indicates whether the transaction represents an overdraft fee.
-    attr_accessor :is_overdraft_fee
-
-    # Whether the transaction is a payroll advance.
-    attr_accessor :is_payroll_advance
-
-    # Whether the transaction is a subscription.
-    attr_accessor :is_subscription
-
-    # The type of transaction
-    attr_accessor :type
-
-    class EnumAttributeValidator
-      attr_reader :datatype
-      attr_reader :allowable_values
-
-      def initialize(datatype, allowable_values)
-        @allowable_values = allowable_values.map do |value|
-          case datatype.to_s
-          when /Integer/i
-            value.to_i
-          when /Float/i
-            value.to_f
-          else
-            value
-          end
-        end
-      end
-
-      def valid?(value)
-        !value || allowable_values.include?(value)
-      end
-    end
+    # Hierarchical transaction categories: Each element narrows down from parent to nested sub-categories. Example: ['personnel', 'employee', 'payroll'].
+    attr_accessor :categories
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'id' => :'id',
         :'merchant_id' => :'merchant_id',
-        :'name' => :'name',
+        :'merchant_name' => :'merchant_name',
         :'logo' => :'logo',
-        :'amount' => :'amount',
-        :'category' => :'category',
-        :'is_bill_pay' => :'is_bill_pay',
-        :'is_direct_deposit' => :'is_direct_deposit',
-        :'is_expense' => :'is_expense',
-        :'is_fee' => :'is_fee',
-        :'is_income' => :'is_income',
-        :'is_international' => :'is_international',
-        :'is_overdraft_fee' => :'is_overdraft_fee',
-        :'is_payroll_advance' => :'is_payroll_advance',
-        :'is_subscription' => :'is_subscription',
-        :'type' => :'type'
+        :'categories' => :'categories'
       }
     end
 
@@ -115,20 +50,9 @@ module FuseClient
       {
         :'id' => :'String',
         :'merchant_id' => :'String',
-        :'name' => :'String',
+        :'merchant_name' => :'String',
         :'logo' => :'MerchantLogo',
-        :'amount' => :'Float',
-        :'category' => :'TransactionCategory',
-        :'is_bill_pay' => :'Boolean',
-        :'is_direct_deposit' => :'Boolean',
-        :'is_expense' => :'Boolean',
-        :'is_fee' => :'Boolean',
-        :'is_income' => :'Boolean',
-        :'is_international' => :'Boolean',
-        :'is_overdraft_fee' => :'Boolean',
-        :'is_payroll_advance' => :'Boolean',
-        :'is_subscription' => :'Boolean',
-        :'type' => :'String'
+        :'categories' => :'Array<String>'
       }
     end
 
@@ -161,60 +85,18 @@ module FuseClient
         self.merchant_id = attributes[:'merchant_id']
       end
 
-      if attributes.key?(:'name')
-        self.name = attributes[:'name']
+      if attributes.key?(:'merchant_name')
+        self.merchant_name = attributes[:'merchant_name']
       end
 
       if attributes.key?(:'logo')
         self.logo = attributes[:'logo']
       end
 
-      if attributes.key?(:'amount')
-        self.amount = attributes[:'amount']
-      end
-
-      if attributes.key?(:'category')
-        self.category = attributes[:'category']
-      end
-
-      if attributes.key?(:'is_bill_pay')
-        self.is_bill_pay = attributes[:'is_bill_pay']
-      end
-
-      if attributes.key?(:'is_direct_deposit')
-        self.is_direct_deposit = attributes[:'is_direct_deposit']
-      end
-
-      if attributes.key?(:'is_expense')
-        self.is_expense = attributes[:'is_expense']
-      end
-
-      if attributes.key?(:'is_fee')
-        self.is_fee = attributes[:'is_fee']
-      end
-
-      if attributes.key?(:'is_income')
-        self.is_income = attributes[:'is_income']
-      end
-
-      if attributes.key?(:'is_international')
-        self.is_international = attributes[:'is_international']
-      end
-
-      if attributes.key?(:'is_overdraft_fee')
-        self.is_overdraft_fee = attributes[:'is_overdraft_fee']
-      end
-
-      if attributes.key?(:'is_payroll_advance')
-        self.is_payroll_advance = attributes[:'is_payroll_advance']
-      end
-
-      if attributes.key?(:'is_subscription')
-        self.is_subscription = attributes[:'is_subscription']
-      end
-
-      if attributes.key?(:'type')
-        self.type = attributes[:'type']
+      if attributes.key?(:'categories')
+        if (value = attributes[:'categories']).is_a?(Array)
+          self.categories = value
+        end
       end
     end
 
@@ -233,19 +115,7 @@ module FuseClient
     # @return true if the model is valid
     def valid?
       return false if @id.nil?
-      type_validator = EnumAttributeValidator.new('String', ["debit", "credit"])
-      return false unless type_validator.valid?(@type)
       true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] type Object to be assigned
-    def type=(type)
-      validator = EnumAttributeValidator.new('String', ["debit", "credit"])
-      unless validator.valid?(type)
-        fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
-      end
-      @type = type
     end
 
     # Checks equality by comparing each attribute.
@@ -255,20 +125,9 @@ module FuseClient
       self.class == o.class &&
           id == o.id &&
           merchant_id == o.merchant_id &&
-          name == o.name &&
+          merchant_name == o.merchant_name &&
           logo == o.logo &&
-          amount == o.amount &&
-          category == o.category &&
-          is_bill_pay == o.is_bill_pay &&
-          is_direct_deposit == o.is_direct_deposit &&
-          is_expense == o.is_expense &&
-          is_fee == o.is_fee &&
-          is_income == o.is_income &&
-          is_international == o.is_international &&
-          is_overdraft_fee == o.is_overdraft_fee &&
-          is_payroll_advance == o.is_payroll_advance &&
-          is_subscription == o.is_subscription &&
-          type == o.type
+          categories == o.categories
     end
 
     # @see the `==` method
@@ -280,7 +139,7 @@ module FuseClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, merchant_id, name, logo, amount, category, is_bill_pay, is_direct_deposit, is_expense, is_fee, is_income, is_international, is_overdraft_fee, is_payroll_advance, is_subscription, type].hash
+      [id, merchant_id, merchant_name, logo, categories].hash
     end
 
     # Builds the object from hash

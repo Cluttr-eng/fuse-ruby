@@ -18,17 +18,25 @@ module FuseClient
     # A unique ID for the transaction that to help you tie data back to your systems.
     attr_accessor :id
 
-    # The name of the merchant.
-    attr_accessor :merchant_name
+    # The name of the merchant if available or a description of the transaction.
+    attr_accessor :description
 
     # The merchant category code.
     attr_accessor :mcc
 
-    # The amount of the transaction in cents, in the currency of the account. 
+    # The amount of the transaction in cents, in the currency of the account. Must be a positive value. Use the type field to indicate the direction.
     attr_accessor :amount
 
-    # The type of the transaction
-    attr_accessor :type
+    # The direction of the transaction.
+    attr_accessor :direction
+
+    attr_accessor :country_code
+
+    attr_accessor :iso_currency_code
+
+    attr_accessor :date
+
+    attr_accessor :owner_type
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -56,10 +64,14 @@ module FuseClient
     def self.attribute_map
       {
         :'id' => :'id',
-        :'merchant_name' => :'merchant_name',
+        :'description' => :'description',
         :'mcc' => :'mcc',
         :'amount' => :'amount',
-        :'type' => :'type'
+        :'direction' => :'direction',
+        :'country_code' => :'country_code',
+        :'iso_currency_code' => :'iso_currency_code',
+        :'date' => :'date',
+        :'owner_type' => :'owner_type'
       }
     end
 
@@ -72,10 +84,14 @@ module FuseClient
     def self.openapi_types
       {
         :'id' => :'String',
-        :'merchant_name' => :'String',
+        :'description' => :'String',
         :'mcc' => :'String',
         :'amount' => :'Float',
-        :'type' => :'String'
+        :'direction' => :'String',
+        :'country_code' => :'String',
+        :'iso_currency_code' => :'String',
+        :'date' => :'String',
+        :'owner_type' => :'String'
       }
     end
 
@@ -104,8 +120,8 @@ module FuseClient
         self.id = attributes[:'id']
       end
 
-      if attributes.key?(:'merchant_name')
-        self.merchant_name = attributes[:'merchant_name']
+      if attributes.key?(:'description')
+        self.description = attributes[:'description']
       end
 
       if attributes.key?(:'mcc')
@@ -116,8 +132,32 @@ module FuseClient
         self.amount = attributes[:'amount']
       end
 
-      if attributes.key?(:'type')
-        self.type = attributes[:'type']
+      if attributes.key?(:'direction')
+        self.direction = attributes[:'direction']
+      end
+
+      if attributes.key?(:'country_code')
+        self.country_code = attributes[:'country_code']
+      else
+        self.country_code = 'US'
+      end
+
+      if attributes.key?(:'iso_currency_code')
+        self.iso_currency_code = attributes[:'iso_currency_code']
+      else
+        self.iso_currency_code = 'USD'
+      end
+
+      if attributes.key?(:'date')
+        self.date = attributes[:'date']
+      else
+        self.date = 'The date the transaction was posted.'
+      end
+
+      if attributes.key?(:'owner_type')
+        self.owner_type = attributes[:'owner_type']
+      else
+        self.owner_type = 'consumer'
       end
     end
 
@@ -129,8 +169,24 @@ module FuseClient
         invalid_properties.push('invalid value for "id", id cannot be nil.')
       end
 
-      if @merchant_name.nil?
-        invalid_properties.push('invalid value for "merchant_name", merchant_name cannot be nil.')
+      if @description.nil?
+        invalid_properties.push('invalid value for "description", description cannot be nil.')
+      end
+
+      if @description.to_s.length < 1
+        invalid_properties.push('invalid value for "description", the character length must be great than or equal to 1.')
+      end
+
+      if @amount.nil?
+        invalid_properties.push('invalid value for "amount", amount cannot be nil.')
+      end
+
+      if @amount < 0
+        invalid_properties.push('invalid value for "amount", must be greater than or equal to 0.')
+      end
+
+      if @direction.nil?
+        invalid_properties.push('invalid value for "direction", direction cannot be nil.')
       end
 
       invalid_properties
@@ -140,20 +196,64 @@ module FuseClient
     # @return true if the model is valid
     def valid?
       return false if @id.nil?
-      return false if @merchant_name.nil?
-      type_validator = EnumAttributeValidator.new('String', ["debit", "credit"])
-      return false unless type_validator.valid?(@type)
+      return false if @description.nil?
+      return false if @description.to_s.length < 1
+      return false if @amount.nil?
+      return false if @amount < 0
+      return false if @direction.nil?
+      direction_validator = EnumAttributeValidator.new('String', ["incoming", "outgoing"])
+      return false unless direction_validator.valid?(@direction)
+      owner_type_validator = EnumAttributeValidator.new('String', ["consumer", "business"])
+      return false unless owner_type_validator.valid?(@owner_type)
       true
     end
 
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] type Object to be assigned
-    def type=(type)
-      validator = EnumAttributeValidator.new('String', ["debit", "credit"])
-      unless validator.valid?(type)
-        fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
+    # Custom attribute writer method with validation
+    # @param [Object] description Value to be assigned
+    def description=(description)
+      if description.nil?
+        fail ArgumentError, 'description cannot be nil'
       end
-      @type = type
+
+      if description.to_s.length < 1
+        fail ArgumentError, 'invalid value for "description", the character length must be great than or equal to 1.'
+      end
+
+      @description = description
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] amount Value to be assigned
+    def amount=(amount)
+      if amount.nil?
+        fail ArgumentError, 'amount cannot be nil'
+      end
+
+      if amount < 0
+        fail ArgumentError, 'invalid value for "amount", must be greater than or equal to 0.'
+      end
+
+      @amount = amount
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] direction Object to be assigned
+    def direction=(direction)
+      validator = EnumAttributeValidator.new('String', ["incoming", "outgoing"])
+      unless validator.valid?(direction)
+        fail ArgumentError, "invalid value for \"direction\", must be one of #{validator.allowable_values}."
+      end
+      @direction = direction
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] owner_type Object to be assigned
+    def owner_type=(owner_type)
+      validator = EnumAttributeValidator.new('String', ["consumer", "business"])
+      unless validator.valid?(owner_type)
+        fail ArgumentError, "invalid value for \"owner_type\", must be one of #{validator.allowable_values}."
+      end
+      @owner_type = owner_type
     end
 
     # Checks equality by comparing each attribute.
@@ -162,10 +262,14 @@ module FuseClient
       return true if self.equal?(o)
       self.class == o.class &&
           id == o.id &&
-          merchant_name == o.merchant_name &&
+          description == o.description &&
           mcc == o.mcc &&
           amount == o.amount &&
-          type == o.type
+          direction == o.direction &&
+          country_code == o.country_code &&
+          iso_currency_code == o.iso_currency_code &&
+          date == o.date &&
+          owner_type == o.owner_type
     end
 
     # @see the `==` method
@@ -177,7 +281,7 @@ module FuseClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, merchant_name, mcc, amount, type].hash
+      [id, description, mcc, amount, direction, country_code, iso_currency_code, date, owner_type].hash
     end
 
     # Builds the object from hash
