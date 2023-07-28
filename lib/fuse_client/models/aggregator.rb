@@ -15,19 +15,20 @@ require 'time'
 
 module FuseClient
   class Aggregator
-    PLAID = "plaid".freeze
-    TELLER = "teller".freeze
-    MX = "mx".freeze
-    SNAPTRADE = "snaptrade".freeze
-    FLINKS = "flinks".freeze
-    MONO = "mono".freeze
-    TRUELAYER = "truelayer".freeze
-    FINVERSE = "finverse".freeze
     BASIQ = "basiq".freeze
     BELVO = "belvo".freeze
+    FINICITY = "finicity".freeze
+    FINVERSE = "finverse".freeze
+    FLINKS = "flinks".freeze
+    MONO = "mono".freeze
+    MX = "mx".freeze
+    PLAID = "plaid".freeze
+    SNAPTRADE = "snaptrade".freeze
+    TELLER = "teller".freeze
+    TRUELAYER = "truelayer".freeze
 
     def self.all_vars
-      @all_vars ||= [PLAID, TELLER, MX, SNAPTRADE, FLINKS, MONO, TRUELAYER, FINVERSE, BASIQ, BELVO].freeze
+      @all_vars ||= [BASIQ, BELVO, FINICITY, FINVERSE, FLINKS, MONO, MX, PLAID, SNAPTRADE, TELLER, TRUELAYER].freeze
     end
 
     # Builds the enum from string

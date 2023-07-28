@@ -14,50 +14,19 @@ require 'date'
 require 'time'
 
 module FuseClient
-  class ExchangeFinancialConnectionsPublicTokenResponse
-    # Token used for querying data on the user, ie account details, balances etc. This does NOT expire and should be stored securely.
-    attr_accessor :access_token
+  # Data needed to query data from Finicity.
+  class FinancialConnectionDetailsFinicity
+    # The identifier of the customer for Finicity.
+    attr_accessor :customer_id
 
-    # The id of the new financial connection. Every webhook will be sent with this id. Use this id when calling the GET /financial_connection/${financial_connection_id} endpoint. 
-    attr_accessor :financial_connection_id
-
-    attr_accessor :institution
-
-    attr_accessor :aggregator
-
-    # An identifier that is exclusive to the request and can serve as a means for investigating and resolving issues.
-    attr_accessor :request_id
-
-    class EnumAttributeValidator
-      attr_reader :datatype
-      attr_reader :allowable_values
-
-      def initialize(datatype, allowable_values)
-        @allowable_values = allowable_values.map do |value|
-          case datatype.to_s
-          when /Integer/i
-            value.to_i
-          when /Float/i
-            value.to_f
-          else
-            value
-          end
-        end
-      end
-
-      def valid?(value)
-        !value || allowable_values.include?(value)
-      end
-    end
+    # The Finicity institution login id.
+    attr_accessor :institution_login_id
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'access_token' => :'access_token',
-        :'financial_connection_id' => :'financial_connection_id',
-        :'institution' => :'institution',
-        :'aggregator' => :'aggregator',
-        :'request_id' => :'request_id'
+        :'customer_id' => :'customer_id',
+        :'institution_login_id' => :'institution_login_id'
       }
     end
 
@@ -69,11 +38,8 @@ module FuseClient
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'access_token' => :'String',
-        :'financial_connection_id' => :'String',
-        :'institution' => :'FinancialInstitution',
-        :'aggregator' => :'Aggregator',
-        :'request_id' => :'String'
+        :'customer_id' => :'String',
+        :'institution_login_id' => :'String'
       }
     end
 
@@ -87,35 +53,23 @@ module FuseClient
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `FuseClient::ExchangeFinancialConnectionsPublicTokenResponse` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `FuseClient::FinancialConnectionDetailsFinicity` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `FuseClient::ExchangeFinancialConnectionsPublicTokenResponse`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `FuseClient::FinancialConnectionDetailsFinicity`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'access_token')
-        self.access_token = attributes[:'access_token']
+      if attributes.key?(:'customer_id')
+        self.customer_id = attributes[:'customer_id']
       end
 
-      if attributes.key?(:'financial_connection_id')
-        self.financial_connection_id = attributes[:'financial_connection_id']
-      end
-
-      if attributes.key?(:'institution')
-        self.institution = attributes[:'institution']
-      end
-
-      if attributes.key?(:'aggregator')
-        self.aggregator = attributes[:'aggregator']
-      end
-
-      if attributes.key?(:'request_id')
-        self.request_id = attributes[:'request_id']
+      if attributes.key?(:'institution_login_id')
+        self.institution_login_id = attributes[:'institution_login_id']
       end
     end
 
@@ -123,20 +77,12 @@ module FuseClient
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @access_token.nil?
-        invalid_properties.push('invalid value for "access_token", access_token cannot be nil.')
+      if @customer_id.nil?
+        invalid_properties.push('invalid value for "customer_id", customer_id cannot be nil.')
       end
 
-      if @financial_connection_id.nil?
-        invalid_properties.push('invalid value for "financial_connection_id", financial_connection_id cannot be nil.')
-      end
-
-      if @aggregator.nil?
-        invalid_properties.push('invalid value for "aggregator", aggregator cannot be nil.')
-      end
-
-      if @request_id.nil?
-        invalid_properties.push('invalid value for "request_id", request_id cannot be nil.')
+      if @institution_login_id.nil?
+        invalid_properties.push('invalid value for "institution_login_id", institution_login_id cannot be nil.')
       end
 
       invalid_properties
@@ -145,10 +91,8 @@ module FuseClient
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @access_token.nil?
-      return false if @financial_connection_id.nil?
-      return false if @aggregator.nil?
-      return false if @request_id.nil?
+      return false if @customer_id.nil?
+      return false if @institution_login_id.nil?
       true
     end
 
@@ -157,11 +101,8 @@ module FuseClient
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          access_token == o.access_token &&
-          financial_connection_id == o.financial_connection_id &&
-          institution == o.institution &&
-          aggregator == o.aggregator &&
-          request_id == o.request_id
+          customer_id == o.customer_id &&
+          institution_login_id == o.institution_login_id
     end
 
     # @see the `==` method
@@ -173,7 +114,7 @@ module FuseClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [access_token, financial_connection_id, institution, aggregator, request_id].hash
+      [customer_id, institution_login_id].hash
     end
 
     # Builds the object from hash

@@ -49,6 +49,8 @@ module FuseClient
 
     attr_accessor :belvo
 
+    attr_accessor :finicity
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -88,7 +90,8 @@ module FuseClient
         :'truelayer' => :'truelayer',
         :'finverse' => :'finverse',
         :'basiq' => :'basiq',
-        :'belvo' => :'belvo'
+        :'belvo' => :'belvo',
+        :'finicity' => :'finicity'
       }
     end
 
@@ -114,7 +117,8 @@ module FuseClient
         :'truelayer' => :'FinancialConnectionDetailsTruelayer',
         :'finverse' => :'FinancialConnectionDetailsFinverse',
         :'basiq' => :'FinancialConnectionDetailsBasiq',
-        :'belvo' => :'FinancialConnectionDetailsBelvo'
+        :'belvo' => :'FinancialConnectionDetailsBelvo',
+        :'finicity' => :'FinancialConnectionDetailsFinicity'
       }
     end
 
@@ -198,6 +202,10 @@ module FuseClient
       if attributes.key?(:'belvo')
         self.belvo = attributes[:'belvo']
       end
+
+      if attributes.key?(:'finicity')
+        self.finicity = attributes[:'finicity']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -269,7 +277,8 @@ module FuseClient
           truelayer == o.truelayer &&
           finverse == o.finverse &&
           basiq == o.basiq &&
-          belvo == o.belvo
+          belvo == o.belvo &&
+          finicity == o.finicity
     end
 
     # @see the `==` method
@@ -281,7 +290,7 @@ module FuseClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, connection_status, connection_status_updated_at, is_oauth, aggregator, plaid, teller, mx, snaptrade, flinks, mono, truelayer, finverse, basiq, belvo].hash
+      [id, connection_status, connection_status_updated_at, is_oauth, aggregator, plaid, teller, mx, snaptrade, flinks, mono, truelayer, finverse, basiq, belvo, finicity].hash
     end
 
     # Builds the object from hash

@@ -451,7 +451,7 @@ end
 
 api_instance = FuseClient::FuseApi.new
 opts = {
-  create_session_request: FuseClient::CreateSessionRequest.new({supported_financial_institution_aggregators: [FuseClient::Aggregator::PLAID], products: [FuseClient::Product::ACCOUNT_DETAILS], entity: FuseClient::Entity.new({id: 'id_example'})}) # CreateSessionRequest | 
+  create_session_request: FuseClient::CreateSessionRequest.new({supported_financial_institution_aggregators: [FuseClient::Aggregator::BASIQ], products: [FuseClient::Product::ACCOUNT_DETAILS], entity: FuseClient::Entity.new({id: 'id_example'})}) # CreateSessionRequest | 
 }
 
 begin
