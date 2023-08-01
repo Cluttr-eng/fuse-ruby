@@ -62,6 +62,8 @@ module FuseClient
       Set.new([
         :'available',
         :'current',
+        :'iso_currency_code',
+        :'last_updated_date'
       ])
     end
 

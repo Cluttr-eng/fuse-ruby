@@ -18,7 +18,7 @@ module FuseClient
     # Remote Id of the transaction, ie Plaid or Teller Id
     attr_accessor :remote_id
 
-    # Uniquely identifies this account across all transactions for a single financial connection. Used for reconnection deduplication. This field may or may not be present depending on if a transaction can be uniquely identified. See more information here: https://letsfuse.readme.io/docs/duplicate-accounts
+    # Uniquely identifies this transaction across all transactions for a single financial connection. Used for reconnection deduplication. This field may or may not be present depending on if a transaction can be uniquely identified. See more information here: https://letsfuse.readme.io/docs/duplicate-accounts
     attr_accessor :fingerprint
 
     # Remote Account Id of the transaction, ie Plaid Account Id
