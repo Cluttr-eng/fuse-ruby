@@ -320,7 +320,7 @@ module FuseClient
           {
             type: 'api_key',
             in: 'header',
-            key: 'Snaptrade-Consumer-Id',
+            key: 'Snaptrade-Consumer-Key',
             value: api_key_with_prefix('snaptradeConsumerKey')
           },
         'flinksCaCustomerIdKey' =>
@@ -386,13 +386,6 @@ module FuseClient
             key: 'TrueLayer-Client-Secret',
             value: api_key_with_prefix('trueLayerClientSecret')
           },
-        'trueLayerClientRedirectUri' =>
-          {
-            type: 'api_key',
-            in: 'header',
-            key: 'TrueLayer-Redirect-Uri',
-            value: api_key_with_prefix('trueLayerClientRedirectUri')
-          },
         'finverseClientId' =>
           {
             type: 'api_key',
@@ -407,12 +400,40 @@ module FuseClient
             key: 'Finverse-Client-Secret',
             value: api_key_with_prefix('finverseClientSecret')
           },
-        'finverseClientRedirectUri' =>
+        'belvoSecretId' =>
           {
             type: 'api_key',
             in: 'header',
-            key: 'Finverse-Redirect-Uri',
-            value: api_key_with_prefix('finverseClientRedirectUri')
+            key: 'Belvo-Secret-Id',
+            value: api_key_with_prefix('belvoSecretId')
+          },
+        'belvoSecretPassword' =>
+          {
+            type: 'api_key',
+            in: 'header',
+            key: 'Belvo-Secret-Password',
+            value: api_key_with_prefix('belvoSecretPassword')
+          },
+        'finicityPartnerSecret' =>
+          {
+            type: 'api_key',
+            in: 'header',
+            key: 'Finicity-Partner-Secret',
+            value: api_key_with_prefix('finicityPartnerSecret')
+          },
+        'finicityPartnerId' =>
+          {
+            type: 'api_key',
+            in: 'header',
+            key: 'Finicity-Partner-Id',
+            value: api_key_with_prefix('finicityPartnerId')
+          },
+        'finicityAppKey' =>
+          {
+            type: 'api_key',
+            in: 'header',
+            key: 'Finicity-App-Key',
+            value: api_key_with_prefix('finicityAppKey')
           },
       }
     end

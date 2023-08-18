@@ -45,6 +45,7 @@ module FuseClient
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'institution_id'
       ])
     end
 
@@ -80,10 +81,6 @@ module FuseClient
         invalid_properties.push('invalid value for "id", id cannot be nil.')
       end
 
-      if @institution_id.nil?
-        invalid_properties.push('invalid value for "institution_id", institution_id cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -91,7 +88,6 @@ module FuseClient
     # @return true if the model is valid
     def valid?
       return false if @id.nil?
-      return false if @institution_id.nil?
       true
     end
 
