@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    fuse_client (1.0.42)
+    fuse_client (2.0.0)
       typhoeus (~> 1.0, >= 1.0.1)
 
 GEM
