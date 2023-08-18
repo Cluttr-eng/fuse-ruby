@@ -131,18 +131,6 @@ describe 'FuseApi' do
     end
   end
 
-  # unit tests for fin_ql_prompt
-  # FinQL Prompt
-  # Retrieve information using finQL. Uses data submitted via the /events endpoint. This feature is being built and is not currently available.
-  # @param [Hash] opts the optional parameters
-  # @option opts [FinQLPromptRequest] :fin_ql_prompt_request 
-  # @return [FinQLPromptResponse]
-  describe 'fin_ql_prompt test' do
-    it 'should work' do
-      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-    end
-  end
-
   # unit tests for get_asset_report
   # Retrieves the Asset Report in JSON format. For Plaid, you will need to have the assets product enabled on your plaid account.
   # @param [Hash] opts the optional parameters
@@ -326,6 +314,7 @@ describe 'FuseApi' do
   # unit tests for sync_financial_connections_data
   # Sync financial connections data
   # Call this endpoint upon receiving a financial_connection.sync_data webhook. This will keep the financial connections data up to date.
+  # @param fuse_verification 
   # @param body 
   # @param [Hash] opts the optional parameters
   # @return [SyncFinancialConnectionsDataResponse]

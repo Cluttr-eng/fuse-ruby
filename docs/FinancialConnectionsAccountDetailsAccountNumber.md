@@ -4,7 +4,7 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **number** | **String** | Unique identifier representing the account, typically referred to as the account number. | [optional] |
+| **number** | **String** | Unique identifier representing the account, typically referred to as the account number. |  |
 | **sort_code** | **String** | A six-digit number used by banks in the United Kingdom and Ireland to identify the branch where the account is held. | [optional] |
 | **iban** | **String** | International Bank Account Number (IBAN) is an internationally agreed system of identifying bank accounts across national borders to facilitate the communication and processing of cross border transactions. | [optional] |
 | **swift_bic** | **String** | SWIFT/BIC code is an international identifier used to distinctively recognize a particular bank during financial transactions, such as money transfers. | [optional] |

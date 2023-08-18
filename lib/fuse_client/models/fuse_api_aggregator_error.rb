@@ -59,6 +59,11 @@ module FuseClient
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'request_id',
+        :'title',
+        :'details',
+        :'code',
+        :'type',
       ])
     end
 

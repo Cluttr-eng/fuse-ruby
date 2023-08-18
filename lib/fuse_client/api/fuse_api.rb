@@ -590,70 +590,6 @@ module FuseClient
       return data, status_code, headers
     end
 
-    # FinQL Prompt
-    # Retrieve information using finQL. Uses data submitted via the /events endpoint. This feature is being built and is not currently available.
-    # @param [Hash] opts the optional parameters
-    # @option opts [FinQLPromptRequest] :fin_ql_prompt_request 
-    # @return [FinQLPromptResponse]
-    def fin_ql_prompt(opts = {})
-      data, _status_code, _headers = fin_ql_prompt_with_http_info(opts)
-      data
-    end
-
-    # FinQL Prompt
-    # Retrieve information using finQL. Uses data submitted via the /events endpoint. This feature is being built and is not currently available.
-    # @param [Hash] opts the optional parameters
-    # @option opts [FinQLPromptRequest] :fin_ql_prompt_request 
-    # @return [Array<(FinQLPromptResponse, Integer, Hash)>] FinQLPromptResponse data, response status code and response headers
-    def fin_ql_prompt_with_http_info(opts = {})
-      if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: FuseApi.fin_ql_prompt ...'
-      end
-      # resource path
-      local_var_path = '/v1/finql/prompt'
-
-      # query parameters
-      query_params = opts[:query_params] || {}
-
-      # header parameters
-      header_params = opts[:header_params] || {}
-      # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
-      # HTTP header 'Content-Type'
-      content_type = @api_client.select_header_content_type(['application/json'])
-      if !content_type.nil?
-          header_params['Content-Type'] = content_type
-      end
-
-      # form parameters
-      form_params = opts[:form_params] || {}
-
-      # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'fin_ql_prompt_request'])
-
-      # return_type
-      return_type = opts[:debug_return_type] || 'FinQLPromptResponse'
-
-      # auth_names
-      auth_names = opts[:debug_auth_names] || ['fuseApiKey', 'fuseClientId']
-
-      new_options = opts.merge(
-        :operation => :"FuseApi.fin_ql_prompt",
-        :header_params => header_params,
-        :query_params => query_params,
-        :form_params => form_params,
-        :body => post_body,
-        :auth_names => auth_names,
-        :return_type => return_type
-      )
-
-      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: FuseApi#fin_ql_prompt\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-      end
-      return data, status_code, headers
-    end
-
     # Retrieves the Asset Report in JSON format. For Plaid, you will need to have the assets product enabled on your plaid account.
     # @param [Hash] opts the optional parameters
     # @option opts [GetAssetReportRequest] :get_asset_report_request 
@@ -1680,22 +1616,28 @@ module FuseClient
 
     # Sync financial connections data
     # Call this endpoint upon receiving a financial_connection.sync_data webhook. This will keep the financial connections data up to date.
+    # @param fuse_verification [String] 
     # @param body [Object] 
     # @param [Hash] opts the optional parameters
     # @return [SyncFinancialConnectionsDataResponse]
-    def sync_financial_connections_data(body, opts = {})
-      data, _status_code, _headers = sync_financial_connections_data_with_http_info(body, opts)
+    def sync_financial_connections_data(fuse_verification, body, opts = {})
+      data, _status_code, _headers = sync_financial_connections_data_with_http_info(fuse_verification, body, opts)
       data
     end
 
     # Sync financial connections data
     # Call this endpoint upon receiving a financial_connection.sync_data webhook. This will keep the financial connections data up to date.
+    # @param fuse_verification [String] 
     # @param body [Object] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(SyncFinancialConnectionsDataResponse, Integer, Hash)>] SyncFinancialConnectionsDataResponse data, response status code and response headers
-    def sync_financial_connections_data_with_http_info(body, opts = {})
+    def sync_financial_connections_data_with_http_info(fuse_verification, body, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: FuseApi.sync_financial_connections_data ...'
+      end
+      # verify the required parameter 'fuse_verification' is set
+      if @api_client.config.client_side_validation && fuse_verification.nil?
+        fail ArgumentError, "Missing the required parameter 'fuse_verification' when calling FuseApi.sync_financial_connections_data"
       end
       # verify the required parameter 'body' is set
       if @api_client.config.client_side_validation && body.nil?
@@ -1716,6 +1658,7 @@ module FuseClient
       if !content_type.nil?
           header_params['Content-Type'] = content_type
       end
+      header_params[:'Fuse-Verification'] = fuse_verification
 
       # form parameters
       form_params = opts[:form_params] || {}

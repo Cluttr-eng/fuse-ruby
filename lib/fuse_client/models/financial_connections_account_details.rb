@@ -96,10 +96,6 @@ module FuseClient
         invalid_properties.push('invalid value for "remote_id", remote_id cannot be nil.')
       end
 
-      if @ach.nil?
-        invalid_properties.push('invalid value for "ach", ach cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -107,7 +103,6 @@ module FuseClient
     # @return true if the model is valid
     def valid?
       return false if @remote_id.nil?
-      return false if @ach.nil?
       true
     end
 
