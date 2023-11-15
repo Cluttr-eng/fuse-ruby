@@ -37,6 +37,7 @@ class FuseService
 
   def create_session
     opts = {
+      #If you are using web SDKs, pass in the "is_web_view" property and set it to false, otherwise the Fuse frontend will not work. 
       create_session_request: FuseClient::CreateSessionRequest.new(
         supported_financial_institution_aggregators: %w[plaid teller mx],
         entity: {
