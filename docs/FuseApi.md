@@ -27,8 +27,11 @@ All URIs are relative to *https://sandbox-api.letsfuse.com*
 | [**get_financial_institution**](FuseApi.md#get_financial_institution) | **GET** /v1/financial_connections/institutions/{institution_id} | Get a financial institution |
 | [**get_investment_holdings**](FuseApi.md#get_investment_holdings) | **POST** /v1/financial_connections/investments/holdings | Get investment holdings |
 | [**get_investment_transactions**](FuseApi.md#get_investment_transactions) | **POST** /v1/financial_connections/investments/transactions | Get investment transactions |
+| [**get_recommended_financial_institutions**](FuseApi.md#get_recommended_financial_institutions) | **POST** /v1/financial_connections/institutions/recommended |  |
 | [**migrate_financial_connection**](FuseApi.md#migrate_financial_connection) | **POST** /v1/financial_connections/migrate | Migrate financial connection |
 | [**refresh_asset_report**](FuseApi.md#refresh_asset_report) | **POST** /v1/financial_connections/asset_report/refresh |  |
+| [**search_financial_institutions**](FuseApi.md#search_financial_institutions) | **POST** /v1/financial_connections/institutions/search |  |
+| [**select_financial_institutions**](FuseApi.md#select_financial_institutions) | **POST** /v1/financial_connections/institutions/select |  |
 | [**sync_financial_connections_data**](FuseApi.md#sync_financial_connections_data) | **POST** /v1/financial_connections/sync | Sync financial connections data |
 | [**update_consumer_risk_report_customization**](FuseApi.md#update_consumer_risk_report_customization) | **POST** /v1/risk_report/consumer/customization/{consumer_risk_report_customization_id} | Update consumer risk report customization |
 | [**v1_financial_connections_liabilities_post**](FuseApi.md#v1_financial_connections_liabilities_post) | **POST** /v1/financial_connections/liabilities | Get liabilities |
@@ -450,7 +453,7 @@ end
 
 api_instance = FuseClient::FuseApi.new
 opts = {
-  create_session_request: FuseClient::CreateSessionRequest.new({supported_financial_institution_aggregators: [FuseClient::Aggregator::BASIQ], products: [FuseClient::Product::ACCOUNT_DETAILS], entity: FuseClient::Entity.new({id: 'id_example'})}) # CreateSessionRequest | 
+  create_session_request: FuseClient::CreateSessionRequest.new({supported_financial_institution_aggregators: [FuseClient::Aggregator::AKOYA], products: [FuseClient::Product::ACCOUNT_DETAILS], entity: FuseClient::Entity.new({id: 'id_example'})}) # CreateSessionRequest | 
 }
 
 begin
@@ -734,7 +737,7 @@ end
 
 ## get_asset_report
 
-> <RefreshAssetReportResponse> get_asset_report(opts)
+> <AssetReportResponse> get_asset_report(opts)
 
 
 
@@ -776,7 +779,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<RefreshAssetReportResponse>, Integer, Hash)> get_asset_report_with_http_info(opts)
+> <Array(<AssetReportResponse>, Integer, Hash)> get_asset_report_with_http_info(opts)
 
 ```ruby
 begin
@@ -784,7 +787,7 @@ begin
   data, status_code, headers = api_instance.get_asset_report_with_http_info(opts)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <RefreshAssetReportResponse>
+  p data # => <AssetReportResponse>
 rescue FuseClient::ApiError => e
   puts "Error when calling FuseApi->get_asset_report_with_http_info: #{e}"
 end
@@ -798,7 +801,7 @@ end
 
 ### Return type
 
-[**RefreshAssetReportResponse**](RefreshAssetReportResponse.md)
+[**AssetReportResponse**](AssetReportResponse.md)
 
 ### Authorization
 
@@ -1784,6 +1787,84 @@ end
 - **Accept**: application/json
 
 
+## get_recommended_financial_institutions
+
+> <GetRecommendedFinancialInstitutionsResponse> get_recommended_financial_institutions(opts)
+
+
+
+Get the default recommended list of institutions that will be displayed when the user is not searching for anything
+
+### Examples
+
+```ruby
+require 'time'
+require 'fuse_client'
+# setup authorization
+FuseClient.configure do |config|
+  # Configure API key authorization: fuseApiKey
+  config.api_key['fuseApiKey'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['fuseApiKey'] = 'Bearer'
+
+  # Configure API key authorization: fuseClientId
+  config.api_key['fuseClientId'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['fuseClientId'] = 'Bearer'
+end
+
+api_instance = FuseClient::FuseApi.new
+opts = {
+  get_recommended_financial_institutions_request: FuseClient::GetRecommendedFinancialInstitutionsRequest.new({session_client_secret: 'session_client_secret_example'}) # GetRecommendedFinancialInstitutionsRequest | 
+}
+
+begin
+  
+  result = api_instance.get_recommended_financial_institutions(opts)
+  p result
+rescue FuseClient::ApiError => e
+  puts "Error when calling FuseApi->get_recommended_financial_institutions: #{e}"
+end
+```
+
+#### Using the get_recommended_financial_institutions_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetRecommendedFinancialInstitutionsResponse>, Integer, Hash)> get_recommended_financial_institutions_with_http_info(opts)
+
+```ruby
+begin
+  
+  data, status_code, headers = api_instance.get_recommended_financial_institutions_with_http_info(opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetRecommendedFinancialInstitutionsResponse>
+rescue FuseClient::ApiError => e
+  puts "Error when calling FuseApi->get_recommended_financial_institutions_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **get_recommended_financial_institutions_request** | [**GetRecommendedFinancialInstitutionsRequest**](GetRecommendedFinancialInstitutionsRequest.md) |  | [optional] |
+
+### Return type
+
+[**GetRecommendedFinancialInstitutionsResponse**](GetRecommendedFinancialInstitutionsResponse.md)
+
+### Authorization
+
+[fuseApiKey](../README.md#fuseApiKey), [fuseClientId](../README.md#fuseClientId)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
 ## migrate_financial_connection
 
 > <MigrateFinancialConnectionsTokenResponse> migrate_financial_connection(opts)
@@ -1864,7 +1945,7 @@ end
 
 ## refresh_asset_report
 
-> <AssetReportResponse> refresh_asset_report(opts)
+> <RefreshAssetReportResponse> refresh_asset_report(opts)
 
 
 
@@ -1906,7 +1987,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<AssetReportResponse>, Integer, Hash)> refresh_asset_report_with_http_info(opts)
+> <Array(<RefreshAssetReportResponse>, Integer, Hash)> refresh_asset_report_with_http_info(opts)
 
 ```ruby
 begin
@@ -1914,7 +1995,7 @@ begin
   data, status_code, headers = api_instance.refresh_asset_report_with_http_info(opts)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <AssetReportResponse>
+  p data # => <RefreshAssetReportResponse>
 rescue FuseClient::ApiError => e
   puts "Error when calling FuseApi->refresh_asset_report_with_http_info: #{e}"
 end
@@ -1928,7 +2009,163 @@ end
 
 ### Return type
 
-[**AssetReportResponse**](AssetReportResponse.md)
+[**RefreshAssetReportResponse**](RefreshAssetReportResponse.md)
+
+### Authorization
+
+[fuseApiKey](../README.md#fuseApiKey), [fuseClientId](../README.md#fuseClientId)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## search_financial_institutions
+
+> <SearchFinancialInstitutionsResponse> search_financial_institutions(opts)
+
+
+
+Search for financial institutions given a search term.
+
+### Examples
+
+```ruby
+require 'time'
+require 'fuse_client'
+# setup authorization
+FuseClient.configure do |config|
+  # Configure API key authorization: fuseApiKey
+  config.api_key['fuseApiKey'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['fuseApiKey'] = 'Bearer'
+
+  # Configure API key authorization: fuseClientId
+  config.api_key['fuseClientId'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['fuseClientId'] = 'Bearer'
+end
+
+api_instance = FuseClient::FuseApi.new
+opts = {
+  search_financial_institutions_request: FuseClient::SearchFinancialInstitutionsRequest.new({session_client_secret: 'session_client_secret_example', search_term: 'search_term_example'}) # SearchFinancialInstitutionsRequest | 
+}
+
+begin
+  
+  result = api_instance.search_financial_institutions(opts)
+  p result
+rescue FuseClient::ApiError => e
+  puts "Error when calling FuseApi->search_financial_institutions: #{e}"
+end
+```
+
+#### Using the search_financial_institutions_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<SearchFinancialInstitutionsResponse>, Integer, Hash)> search_financial_institutions_with_http_info(opts)
+
+```ruby
+begin
+  
+  data, status_code, headers = api_instance.search_financial_institutions_with_http_info(opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <SearchFinancialInstitutionsResponse>
+rescue FuseClient::ApiError => e
+  puts "Error when calling FuseApi->search_financial_institutions_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **search_financial_institutions_request** | [**SearchFinancialInstitutionsRequest**](SearchFinancialInstitutionsRequest.md) |  | [optional] |
+
+### Return type
+
+[**SearchFinancialInstitutionsResponse**](SearchFinancialInstitutionsResponse.md)
+
+### Authorization
+
+[fuseApiKey](../README.md#fuseApiKey), [fuseClientId](../README.md#fuseClientId)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## select_financial_institutions
+
+> <SelectFinancialInstitutionsResponse> select_financial_institutions(opts)
+
+
+
+Endpoint to call when the user has selected a financial institution.
+
+### Examples
+
+```ruby
+require 'time'
+require 'fuse_client'
+# setup authorization
+FuseClient.configure do |config|
+  # Configure API key authorization: fuseApiKey
+  config.api_key['fuseApiKey'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['fuseApiKey'] = 'Bearer'
+
+  # Configure API key authorization: fuseClientId
+  config.api_key['fuseClientId'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['fuseClientId'] = 'Bearer'
+end
+
+api_instance = FuseClient::FuseApi.new
+opts = {
+  select_financial_institutions_request: FuseClient::SelectFinancialInstitutionsRequest.new({session_client_secret: 'session_client_secret_example', financial_institution_id: 'financial_institution_id_example'}) # SelectFinancialInstitutionsRequest | 
+}
+
+begin
+  
+  result = api_instance.select_financial_institutions(opts)
+  p result
+rescue FuseClient::ApiError => e
+  puts "Error when calling FuseApi->select_financial_institutions: #{e}"
+end
+```
+
+#### Using the select_financial_institutions_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<SelectFinancialInstitutionsResponse>, Integer, Hash)> select_financial_institutions_with_http_info(opts)
+
+```ruby
+begin
+  
+  data, status_code, headers = api_instance.select_financial_institutions_with_http_info(opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <SelectFinancialInstitutionsResponse>
+rescue FuseClient::ApiError => e
+  puts "Error when calling FuseApi->select_financial_institutions_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **select_financial_institutions_request** | [**SelectFinancialInstitutionsRequest**](SelectFinancialInstitutionsRequest.md) |  | [optional] |
+
+### Return type
+
+[**SelectFinancialInstitutionsResponse**](SelectFinancialInstitutionsResponse.md)
 
 ### Authorization
 
