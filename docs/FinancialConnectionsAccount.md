@@ -13,6 +13,7 @@
 | **type** | [**AccountType**](AccountType.md) |  |  |
 | **subtype** | [**AccountSubtype**](AccountSubtype.md) |  | [optional] |
 | **balance** | [**FinancialConnectionsAccountCachedBalance**](FinancialConnectionsAccountCachedBalance.md) |  |  |
+| **additional_balances** | [**Array&lt;FinancialConnectionsAccountCachedBalance&gt;**](FinancialConnectionsAccountCachedBalance.md) | An array of additional balances. This may be used for investment type accounts where the user can have multiple balances across different currencies. | [optional] |
 | **remote_data** | **Object** |  |  |
 
 ## Example
@@ -30,6 +31,7 @@ instance = FuseClient::FinancialConnectionsAccount.new(
   type: null,
   subtype: null,
   balance: null,
+  additional_balances: null,
   remote_data: null
 )
 ```

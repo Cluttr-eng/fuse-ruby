@@ -20,6 +20,9 @@
 | **basiq** | [**FinancialConnectionDetailsBasiq**](FinancialConnectionDetailsBasiq.md) |  | [optional] |
 | **belvo** | [**FinancialConnectionDetailsBelvo**](FinancialConnectionDetailsBelvo.md) |  | [optional] |
 | **finicity** | [**FinancialConnectionDetailsFinicity**](FinancialConnectionDetailsFinicity.md) |  | [optional] |
+| **akoya** | [**FinancialConnectionDetailsAkoya**](FinancialConnectionDetailsAkoya.md) |  | [optional] |
+| **saltedge** | [**FinancialConnectionDetailsSaltedge**](FinancialConnectionDetailsSaltedge.md) |  | [optional] |
+| **sophtron** | [**FinancialConnectionDetailsSophtron**](FinancialConnectionDetailsSophtron.md) |  | [optional] |
 
 ## Example
 
@@ -42,7 +45,10 @@ instance = FuseClient::FinancialConnectionDetails.new(
   finverse: null,
   basiq: null,
   belvo: null,
-  finicity: null
+  finicity: null,
+  akoya: null,
+  saltedge: null,
+  sophtron: null
 )
 ```
 

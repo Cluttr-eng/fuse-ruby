@@ -13,6 +13,7 @@
 | **type** | [**AccountType**](AccountType.md) |  |  |
 | **subtype** | [**AccountSubtype**](AccountSubtype.md) |  | [optional] |
 | **balance** | [**FinancialConnectionsAccountCachedBalance**](FinancialConnectionsAccountCachedBalance.md) |  |  |
+| **additional_balances** | [**Array&lt;FinancialConnectionsAccountCachedBalance&gt;**](FinancialConnectionsAccountCachedBalance.md) | An array of additional balances. This may be used for investment type accounts where the user can have multiple balances across different currencies. | [optional] |
 | **remote_data** | **Object** |  |  |
 | **aprs** | [**Array&lt;FinancialConnectionsAccountLiabilityAllOfAprs&gt;**](FinancialConnectionsAccountLiabilityAllOfAprs.md) | The various interest rates that apply to the account. If APR data is not available, this array will be empty. | [optional] |
 | **interest_rate_percentage** | **Float** | The interest rate on the loan as a percentage. | [optional] |
@@ -37,6 +38,7 @@ instance = FuseClient::FinancialConnectionsAccountLiability.new(
   type: null,
   subtype: null,
   balance: null,
+  additional_balances: null,
   remote_data: null,
   aprs: null,
   interest_rate_percentage: null,
